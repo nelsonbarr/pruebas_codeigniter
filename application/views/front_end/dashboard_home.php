@@ -19,52 +19,12 @@
         <div class="row">
             <div class="col-lg-12 text-center m-t-md">
                 <h2>
-                    CMS Eventos
+                    Citas del Dia
                 </h2>
             </div>
         </div>
 
-        <div class="row">
-            <?php if ($total_pendiente == -1 && $total_activities == -1 && $activities == -1): ?>
-                <div class="col-lg-6 col-lg-offset-3" id="no_estadisticas">
-                    <h2 class="text-danger">NO HAY ESTADÍSTICAS PARA MOSTRAR</h2>
-                </div>
-            <?php endif; ?>
-
-            <?php //if ($state_activity != -1): ?>
-                <div class="col-lg-6" id="presupuesto" style="display: none;">
-                    <div class="hpanel hred">
-                        <div class="panel-heading">
-                            <div class="panel-tools">
-                                <a class="showhide"><i class="fa fa-chevron-up"></i></a>
-                            </div>
-                            <span class="text-danger">Presupuesto</span>
-                        </div>
-                        <div class="panel-body">
-                            <div class="state_activity">
-                                <div id="lineOptions" height="140"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php //endif; ?>
-            <?php if ($total_pendiente != -1): ?>
-                <div class="col-lg-6">
-                    <div class="hpanel hred">
-                        <div class="panel-heading">
-                            <div class="panel-tools">
-                                <a class="showhide"><i class="fa fa-chevron-up"></i></a>
-                            </div>
-                            <span class="text-danger">Eventos - Programado</span>
-                        </div>
-                        <div class="panel-body">
-                            <div>
-                                <div id="doughnutChart" height="140"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php endif; ?>
+        <div class="row">           
             <?php if ($activities != -1): ?>
                 <div class="col-lg-6">
                     <div class="hpanel hred">
@@ -79,27 +39,7 @@
                         </div>
                     </div>
                 </div>
-            <?php endif; ?>
-            <?php if ($total_activities != -1): ?>
-                <div class="col-lg-6">
-                    <div class="hpanel hred">
-                        <div class="panel-heading">
-                            <div class="panel-tools">
-                                <a class="showhide"><i class="fa fa-chevron-up"></i></a>
-                            </div>
-                            <span class="text-danger">Total de Eventos creados</span>
-                        </div>
-                        <div class="panel-body">
-                            <div>
-                                <div id="sharpLineOptions" height="140"></div>
-                                <div class="col-xs-12"><span>Mes con más Eventos creados:</span>
-                                    <div class="patrocinios" id="mes_patrocinio">NOVIENMBRE</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php endif; ?>
+            <?php endif; ?>            
         </div>
 
     </div>

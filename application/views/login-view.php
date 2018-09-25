@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width" />
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
         <link href="assets/css/styles.css" rel="stylesheet" />
-        <link href="assets/css/material-dashboard.css" rel="stylesheet"/>
+       
         <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <script src="assets/js/jquery.min.js" type="text/javascript"></script>
         <link href='assets/fullcalendar/fullcalendar.min.css' rel='stylesheet' />
@@ -19,41 +19,41 @@
         <script src='assets/fullcalendar/moment.min.js'></script>
         <script src='assets/fullcalendar/fullcalendar.min.js'></script>
     </head>
-    <body>
-		<div class="container bg_access">
-			<div class="row">
-				<div class="col-md-4 col-md-offset-4">
-					<div class="card">
-						<div class="card-header" data-background-color="">
-							<h4 class="title">Acceder</h4>
-						</div>
-						<div class="card-content table-responsive">
-							<form accept-charset="UTF-8" role="form" method="post" <form class="" action="<?php echo base_url(); ?>access/login_user" method="post">>
-								<fieldset>
-									<div class="form-group">
-										<input class="form-control" placeholder="Usuario" name="txtusr" type="text">
-									</div>
-									<div class="form-group">
-										<input class="form-control" placeholder="Contraseña" name="txtpwd" type="password" value="">
-									</div>
-									<input class="btn btn-primary btn-block" type="submit" value="Iniciar Sesion">
-								</fieldset>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+    <body id="LoginForm">	
+        <section class="login-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 login-sec">
+                        <h2 class="text-center">SISTEMA DE CONTROL DE CITAS</h2>
+                        <h3 class="text-center">Ingreso</h3>
+                        <form class="login-form" action="<?php base_url()?>access/login_user" method="post">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Usuario" name="txtusr" id="txtusr"  type="text"/>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Contraseña" id="txtpwd" name="txtpwd" type="password" value=""/>
+                            </div>
+                            <div class="forgot">
+                                <a href="reset.html">Olvido su contraseña</a>
+                            </div>
+                            <input class=" btn btn-login" type="submit" value="Iniciar Sesion"/>          
+                        </form>                
+                    </div>
+                    <div class="col-md-6 banner-sec">
+                    
+                    </div>
+                </div>
+            </div>
+        </section>
 	</body>
     <!--   Core JS Files   -->
     <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="assets/js/material.min.js" type="text/javascript"></script>
+   
     <!--  Charts Plugin -->
     <script src="assets/js/chartist.min.js"></script>
     <!--  Notifications Plugin    -->
     <script src="assets/js/bootstrap-notify.js"></script>
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
-    <!-- Material Dashboard javascript methods -->
-    <script src="assets/js/material-dashboard.js"></script>
+
 </html>
