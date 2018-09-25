@@ -28,13 +28,13 @@
 							<h4 class="title">Acceder</h4>
 						</div>
 						<div class="card-content table-responsive">
-							<form accept-charset="UTF-8" role="form" method="post" action="index.php?view=processlogin">
+							<form accept-charset="UTF-8" role="form" method="post" <form class="" action="<?php echo base_url(); ?>access/login_user" method="post">>
 								<fieldset>
 									<div class="form-group">
-										<input class="form-control" placeholder="Usuario" name="mail" type="text">
+										<input class="form-control" placeholder="Usuario" name="txtusr" type="text">
 									</div>
 									<div class="form-group">
-										<input class="form-control" placeholder="Contraseña" name="password" type="password" value="">
+										<input class="form-control" placeholder="Contraseña" name="txtpwd" type="password" value="">
 									</div>
 									<input class="btn btn-primary btn-block" type="submit" value="Iniciar Sesion">
 								</fieldset>

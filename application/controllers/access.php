@@ -6,7 +6,8 @@ class Access extends CI_Controller {
     
 
     public function __construct(){
-        parent::__construct();       
+        parent::__construct(); 
+        $this->load->model('access_model');      
         $this->id_user = !empty($this->session->userdata('id_user')) ? $this->session->userdata('id_user') : 0;
         $this->user_name = !empty($this->session->userdata('name_user')) ? $this->session->userdata('name_user') : '';       
 
@@ -16,13 +17,14 @@ class Access extends CI_Controller {
     public function index()
     {
         $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
+
         if (!empty($user_login)) {
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,
-                'budget_actual' => $this->budget_actual,
+               
             );
-            $this->load->view("home_view", $data);
+            $this->load->view("welcome_message", $data);
         }else {
             $data = array(
                 'user_login' => $user_login,
@@ -37,53 +39,24 @@ class Access extends CI_Controller {
             redirect('access', 'refresh');
         }
 
-        $usuario = $this->input->post('email_user');
-        $password = $this->input->post('pass_user');
+        $usuario = $this->input->post('txtusr');
+        $password = $this->input->post('txtpwd');
         $valid_user = $this->access_model->login($usuario,$password);
 
         if ($valid_user != -1 && !empty($valid_user)) {
 
             $datos_cookie['login'] = true;
-            $datos_cookie['id_user'] = intval($valid_user['id_user']);
-            $datos_cookie['name_user'] = $valid_user['name_user'];
-            $datos_cookie['budget_actual'] = $valid_user['budget_actual'];
-            $datos_cookie['budget_events_actual'] = $valid_user['budget_events_actual'];
-            $datos_cookie['budget_gif_premium_actual'] = $valid_user['budget_gif_premium_actual'];
-            $datos_cookie['budget_merchandising_actual'] = $valid_user['budget_merchandising_actual'];
-            $datos_cookie['job_user'] = $valid_user['job_user'];
-            $datos_cookie['address_user'] = $valid_user['address_user'];
-            $datos_cookie['city_user'] = $valid_user['city_user'];
-            $datos_cookie['department_user'] = $valid_user['department_user'];
-            $datos_cookie['email_user'] = $valid_user['email_user'];
-            $datos_cookie['id_profile'] = $valid_user['id_profile'];
-
+            $datos_cookie['id_user'] = intval($valid_user['idusr']);
+            $datos_cookie['name_user'] = $valid_user['name']." ".$valid_user['lastname'];           
+            $datos_cookie['email_user'] = $valid_user['email'];
+            
             $this->session->set_userdata($datos_cookie);
-
             $data = array(
-                'user_login' => $user_login,
+                'user_login' => $usuario,
                 'user_name' => $this->user_name,
-                'budget_actual' => $this->budget_actual,
+                'contenido' => 'dashboard_home'
             );
-
-            if ($this->session->userdata('id_profile') == 6) {
-                redirect('provider');
-            }
-
-            if ($this->session->userdata('id_profile') == 14) {
-                redirect('purchases/purchases_list');
-            }
-
-            $this->load->view("home_view", $data);
-
-            //     if ($profile == 6 || $profile == 9) {
-            //         return 2;
-            //     }elseif ($profile == 10 || $profile == 7) {
-            //         return 3;
-            //     }elseif ($profile == 11 || $profile == 8) {
-            //         return 4;
-            //     }
-            //
-            // return 1;
+            $this->load->view("plantillas/plantilla", $data);           
         }else {
             $data = array(
                 'user_login' => -1,
