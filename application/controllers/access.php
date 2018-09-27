@@ -4,14 +4,12 @@ class Access extends CI_Controller {
     private $id_user;
     private $user_name;
     
-
     public function __construct(){
         parent::__construct(); 
         $this->load->model('access_model');   
         $this->load->model('citas_model');     
         $this->id_user = !empty($this->session->userdata('id_user')) ? $this->session->userdata('id_user') : 0;
-        $this->user_name = !empty($this->session->userdata('name_user')) ? $this->session->userdata('name_user') : '';       
-
+        $this->user_name = !empty($this->session->userdata('name_user')) ? $this->session->userdata('name_user') : '';
     }
 
 
@@ -21,15 +19,11 @@ class Access extends CI_Controller {
 
         if (!empty($user_login)) {
             $citas=$this->citas_model->getCitas(date('m'));  
-            $replace_array = array("'", '"');
-            //var_dump($citas);
-            //print count($citas);
-            //die();
+            $replace_array = array("'", '"');            
             $replace_array=array();
             if ($citas != -1) {
                 $i=0;
-                foreach ($citas as $row) {
-                    var_dump($row);
+                foreach ($citas as $row) {                    
                     $citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
                     $citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
                     $citas[$i]['backgroundColor'] = "#DF0101";

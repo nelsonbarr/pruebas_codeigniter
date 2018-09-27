@@ -24,8 +24,7 @@
                 Locales:
               <select id='locale-selector'></select>
             </div>
-        </div>
-        <?php var_dump($this->session->userdata('profile'));?>
+        </div>        
         <?php if ( $citas == -1): ?>
                 <div class="col-lg-6 col-lg-offset-3" id="no_estadisticas">
                     <h2 class="text-danger">NO HAY CITAS PARA MOSTRAR</h2>
@@ -48,9 +47,7 @@
                 </div>
             <?php endif; ?>            
         </div>
-
     </div>
-
 
 <!-- Vendor scripts -->
 <script src="<?php echo base_url(); ?>assets/plugins/vendor/moment/min/moment.min.js"></script>
