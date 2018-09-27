@@ -24,17 +24,15 @@
                     </li>
                     <div class="menu">
                         <li>
-                            <a href="<?php print base_url();?>">Agenda <span class="glyphicon glyphicon-dashboard pull-right"></span></a>
+                            <a href="<?php print base_url();?>pacientes" class="active">Pacientes <span class="fa fa-users pull-right active"></span></a>
                         </li>
                         <li>
-                            <a href="#" class="active">Love snippet<span class="glyphicon glyphicon-heart pull-right"></span></a>
+                            <a href="#">Agenda Semanal <span class="fa fa-calendar pull-right"></span></a>
                         </li>
                         <li>
-                            <a href="#">Like it? <span class="glyphicon glyphicon-star pull-right"></span></a>
-                        </li>
-                        <li>
-                            <a href="#">Settings <span class="glyphicon glyphicon-cog pull-right"></span></a>
-                        </li>
+                            <a href="<?php print base_url();?>" class="pacientes">Agenda Diaria <span class="fa fa-list-alt pull-right"></span></a>
+                        </li>                   
+                        
                     </div>
                     
                 </ul>
@@ -51,7 +49,7 @@
                             <?php endif; ?>
                             <div class="row">           
                                 <?php if ($citas != -1): ?>
-                                    <div class="col-lg-6">
+                                    <div class="col-md-12">
                                         <div class="hpanel hred">
                                             <div class="panel-heading">
                                                 <div class="panel-tools">

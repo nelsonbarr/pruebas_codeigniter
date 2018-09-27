@@ -27,7 +27,10 @@
 {
     font-family: 'Lato', sans-serif;
     padding:20px;
+
 }
+
+
 
 
 .side-bar ul li.menu-head a
@@ -55,8 +58,18 @@
     padding-right:20px;
     padding-top:10px;
     padding-bottom:10px;
+    height: 200px;
 }
 
+.pacientes .side-bar ul .menu li  a{
+    
+    background: rgb(220, 228, 227)
+}
+
+.side-bar ul .menu li  a  .fa
+{
+    height: 200px;
+}
 .side-bar ul .menu li  a:hover
 {
     border-left:3px solid #ECECEA;    
@@ -66,7 +79,7 @@
 .side-bar ul .menu li  a.active
 {
     padding-left:17px;
-    background:#D9853B;
+    background:#DE6262;
     border-left:3px solid #ECECEA;
 }
 
@@ -78,7 +91,7 @@
    border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
 	
-	border-left: 7px solid #D9853B;
+	border-left: 7px solid #DE6262;
     margin-top: -10px;
     margin-left: 180px;
 }
