@@ -12,7 +12,6 @@ class Access extends CI_Controller {
         $this->user_name = !empty($this->session->userdata('name_user')) ? $this->session->userdata('name_user') : '';
     }
 
-
     public function index()
     {
         $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
