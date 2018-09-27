@@ -14,10 +14,14 @@ class Pacientes extends CI_Controller{
     {
         $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
         $pacientes=$this->pacientes_model->getPacientes();
+        $tiposDocs=$this->access_model->getTiposDocumentos();        
+        $estadosCiviles=$this->access_model->getEstadosCiviles();
         if (!empty($user_login)) {
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,
+                'tiposDocs'=>$tiposDocs,
+                'estadosCiviles'=>$estadosCiviles,
                 //'contenido' => 'pacientesList',  
                 'pacientes' =>$pacientes
             );

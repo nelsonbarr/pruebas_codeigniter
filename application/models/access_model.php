@@ -19,5 +19,28 @@ class Access_model extends CI_Model{
         return -1;
     }
 
+
+    public function getTiposDocumentos()
+    {
+        $this->db->select('*')->from('tiposdocumento');
+        
+        $query = $this->db->get();
+        $query = $query->result_array();
+        if (count($query) >= 1)
+            return $query;
+        return -1;
+    }
+
+    public function getEstadosCiviles()
+    {
+        $this->db->select('*')->from('estadosciviles');
+        
+        $query = $this->db->get();
+        $query = $query->result_array();
+        if (count($query) >= 1)
+            return $query;
+        return -1;
+    }
+
 }
 ?>

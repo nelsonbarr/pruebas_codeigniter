@@ -20,17 +20,17 @@
             <div class="side-bar">
                 <ul>
                     <li class="menu-head">
-                        Control de Citas <a href="#" class="push_menu"><span class="glyphicon glyphicon-align-justify pull-right"></span></a>
+                       CONTROL DE CITAS <a href="#" class="push_menu"><span class="fa fa-ellipsis-v pull-right"></span></a>
                     </li>
                     <div class="menu">
                         <li>
-                            <a href="<?php print base_url();?>pacientes" class="active">Pacientes <span class="fa fa-users pull-right active"></span></a>
+                            <a href="<?php print base_url();?>pacientes" >Pacientes </br><span class="fa fa-users pull-right active"></span></a>
                         </li>
                         <li>
-                            <a href="#">Agenda Semanal <span class="fa fa-calendar pull-right"></span></a>
+                            <a href="#" class="pacientes active">Agenda Semanal </br><span class="fa fa-calendar pull-right"></span></a>
                         </li>
                         <li>
-                            <a href="<?php print base_url();?>" class="pacientes">Agenda Diaria <span class="fa fa-list-alt pull-right"></span></a>
+                            <a href="<?php print base_url();?>" class="pacientes">Agenda Diaria </br><span class="fa fa-list-alt pull-right"></span></a>
                         </li>                   
                         
                     </div>

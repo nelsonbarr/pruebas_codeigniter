@@ -31,15 +31,27 @@
             <td><?php print $fila['apellidos'];?></td>
             <td><?php if($fila['genero']=='M'){print "MASCULINO";}else{print "FEMENINO";}?></td>
             <td><?php print $fila['fechanacimiento'];?></td>
-            <td><button onclick="<?php print base_url()."pacientes/edit/".$fila['id'];?>"><span class="fa fa-edit pull-right"></span></buttom></td>
+            <td><button id="btn_edit"><span class="fa fa-edit pull-right"></span></buttom></td>
             </tr>        
         <?php endforeach;?>
     </tbody>
     </table>
-</body>
 
+<?php 
+//INCLUYO LA VENTANA MODAL PARA EDICION DE PACIENTES, LA MISMA SE MOSTRARA AL PRESIONAR EL BOTON DE EDICION
+require_once("modalPacientes.php");
+?>
+
+
+</body>
 <!--   Core JS Files   -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+    $('#btn_edit').on('click', function() {
+        $('#modal_company').modal('show');
+        return false;
+    });
+</script>
 </html>

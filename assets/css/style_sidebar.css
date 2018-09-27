@@ -1,5 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Lato);
 
+#logo{
+    background:rgb(25, 78, 128); 
+}
 .container
 {   
     overflow:hidden;
@@ -7,11 +10,11 @@
 }
 .side-bar
 {
-    background:#74AFAD;
+    background:rgb(149, 213, 243);
     position:absolute;
     height:100%;
     width:200px;
-    color:#fff;
+    color:rgb(0, 0, 0);
     transition: margin-left 0.5s;
 }
 
@@ -35,7 +38,7 @@
 
 .side-bar ul li.menu-head a
 {
-    color:#fff;
+    color:rgb(0, 0, 0);
     text-decoration:none;
     /*height:50px;*/
 }
@@ -43,14 +46,14 @@
 
 .side-bar ul .menu-head  a
 {
-    color:#fff;
+    color:rgb(107, 107, 107);
     text-decoration:none;
     /*height:50px;*/
 }
 
 .side-bar ul .menu li  a 
 {
-    color:#fff;
+    color:rgb(117, 117, 117);
     text-decoration:none;
     display:inline-table;
     width:100%;
@@ -58,9 +61,12 @@
     padding-right:20px;
     padding-top:10px;
     padding-bottom:10px;
-    height: 200px;
+    height: 100px;
 }
-
+.side-bar ul .menu li  a span
+{
+font-size: 25px;
+}
 .pacientes .side-bar ul .menu li  a{
     
     background: rgb(220, 228, 227)
@@ -80,6 +86,7 @@
 {
     padding-left:17px;
     background:#DE6262;
+    color:black; 
     border-left:3px solid #ECECEA;
 }
 
