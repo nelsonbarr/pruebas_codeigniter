@@ -18,10 +18,10 @@ class Pacientes extends CI_Controller{
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,
-                'contenido' => 'pacientesList',  
+                //'contenido' => 'pacientesList',  
                 'pacientes' =>$pacientes
             );
-            $this->load->view("plantillas/plantilla", $data);
+            $this->load->view("front_end/pacientesList", $data);
         }    
     }
 
