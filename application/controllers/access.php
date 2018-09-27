@@ -28,8 +28,7 @@ class Access extends CI_Controller {
             $replace_array=array();
             if ($citas != -1) {
                 $i=0;
-                foreach ($citas as $row) {
-                    var_dump($row);
+                foreach ($citas as $row) {                    
                     $citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
                     $citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
                     $citas[$i]['backgroundColor'] = "#DF0101";
