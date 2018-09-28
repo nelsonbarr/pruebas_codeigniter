@@ -52,8 +52,7 @@
                                                     <td><?php print $fila['apellidos'];?></td>
                                                     <td><?php if($fila['genero']=='M'){print "MASCULINO";}else{print "FEMENINO";}?></td>
                                                     <td><?php print $fila['fechanacimiento'];?></td>
-                                                    <td><button id="btn btn_edit"><span class="fa fa-edit pull-right"></span></buttom></td>
-                                                    </tr>        
+                                                    <td><button type="button" class="btn btn_edit" data-toggle="modal" data-target="#modal_company"><span class="fa fa-edit pull-right"></span></button></td>                                                    </tr>        
                                                 <?php endforeach;?>
                                             </tbody>
                                             </table>
