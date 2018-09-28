@@ -8,13 +8,14 @@
         <title>CONTROL DE CITAS</title>
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
+
         <link href="<?php echo base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet" />
         <link href="<?php echo base_url() ?>assets/css/material-dashboard.css" rel="stylesheet"/>
         <link href="<?php echo base_url() ?>assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-        
-        
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/fullcalendar/fullcalendar.print.css" media='print'/>
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/fullcalendar/fullcalendar.min.css" />        
         <link href='<?php echo base_url() ?>assets/css/style_sidebar.css' rel='stylesheet' />
-        <link href='<?php echo base_url() ?>assets/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+        
     </head>
     <body>
         <div id="header">

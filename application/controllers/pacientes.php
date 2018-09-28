@@ -22,10 +22,12 @@ class Pacientes extends CI_Controller{
                 'user_name' => $this->user_name,
                 'tiposDocs'=>$tiposDocs,
                 'estadosCiviles'=>$estadosCiviles,
-                //'contenido' => 'pacientesList',  
-                'pacientes' =>$pacientes
+                'contenido' => 'pacientesList',  
+                'pacientes' =>$pacientes,
+                'citas'=>NULL,
+                'tipocalendar'=>NULL
             );
-            $this->load->view("front_end/pacientesList", $data);
+            $this->load->view("plantillas/plantilla", $data);
         }    
     }
 
