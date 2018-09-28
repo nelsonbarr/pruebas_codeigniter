@@ -19,7 +19,7 @@
     <script src="<?php echo base_url() ?>assets/js/material-dashboard.js"></script>
 <script>
 
-    <!--   Core JS Files   -->
+    
 
 
     $('#btn_edit').on('click', function() {
