@@ -119,7 +119,7 @@ tbody,
 
 /* in case there are no events, we still want some height */
 .fc-time-grid .fc-content-skeleton table {
-	height: 4em;
+	height: 5px !important;
 }
 
 /* kill the horizontal spacing made by the event container. event margins will be done below */
@@ -134,7 +134,7 @@ tbody,
 /* naturally position events, vertically stacking them */
 .fc-time-grid .fc-event {
 	position: static !important;
-	margin: 3px 2px !important;
+	margin: 2px 1px !important;
 }
 
 /* for events that continue to a future day, give the bottom border back */

@@ -35,6 +35,7 @@ class Access extends CI_Controller {
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,
                 'contenido' => 'dashboard_home',
+                'tipocalendar'=>'agendaWeek',
                 'citas'=>$citas
             );
             $this->load->view("plantillas/plantilla", $data);
@@ -86,6 +87,7 @@ class Access extends CI_Controller {
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,                
                 'contenido' => 'dashboard_home',
+                'tipocalendar'=>'agendaWeek',
                 'citas'=>$citas
             );
             $this->load->view("plantillas/plantilla", $data);           

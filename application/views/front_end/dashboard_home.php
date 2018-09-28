@@ -13,7 +13,6 @@
 
       }
     </style>
-
 <div class="container">
     <div class="row">
         <div class="wrapper">
@@ -24,13 +23,13 @@
                     </li>
                     <div class="menu">
                         <li>
-                            <a href="<?php print base_url();?>pacientes" >Pacientes </br><span class="fa fa-users pull-right active"></span></a>
+                            <a href="<?php print base_url();?>pacientes" >Pacientes </br><span class="fa fa-users pull-right"></span></a>
                         </li>
                         <li>
-                            <a href="#" class="pacientes active">Agenda Semanal </br><span class="fa fa-calendar pull-right"></span></a>
+                            <a href="<?php print base_url();?>home/semanal" class="pacientes  active">Agenda Semanal </br><span class="fa fa-calendar pull-right  active"></span></a>
                         </li>
                         <li>
-                            <a href="<?php print base_url();?>" class="pacientes">Agenda Diaria </br><span class="fa fa-list-alt pull-right"></span></a>
+                            <a href="<?php print base_url();?>home/diario" class="pacientes ">Agenda Diaria </br><span class="fa fa-list-alt pull-right "></span></a>
                         </li>                   
                         
                     </div>
@@ -40,7 +39,7 @@
             <div class="content">
                 <div class="col-md-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Agenda</div>
+                        <div class="panel-heading" id="tipoagenda">Agenda</div>
                         <div class="panel-body">
                            <?php if ( $citas == -1): ?>
                                     <div class="col-lg-6 col-lg-offset-3" id="no_estadisticas">
@@ -50,13 +49,7 @@
                             <div class="row">           
                                 <?php if ($citas != -1): ?>
                                     <div class="col-md-12">
-                                        <div class="hpanel hred">
-                                            <div class="panel-heading">
-                                                <div class="panel-tools">
-                                                    <a class="showhide"><i class="fa fa-chevron-up"></i></a>
-                                                </div>
-                                                <span class="text-danger">Agenda del dia</span>
-                                            </div>
+                                        <div class="hpanel hred">                                            
                                             <div class="panel-body">
                                                 <div id="calendar" class="calendar"></div>
                                             </div>
