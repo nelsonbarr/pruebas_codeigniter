@@ -1,4 +1,3 @@
-
 <div class="container">
     <div class="row">
         <div class="wrapper">
@@ -16,10 +15,8 @@
                         </li>
                         <li>
                             <a href="<?php print base_url();?>home/diario" class="pacientes ">Agenda Diaria </br><span class="fa fa-list-alt pull-right "></span></a>
-                        </li>                   
-                        
-                    </div>
-                    
+                        </li>                                           
+                    </div>                    
                 </ul>
             </div>
             <div class="content">
