@@ -31,7 +31,7 @@
             <td><?php print $fila['apellidos'];?></td>
             <td><?php if($fila['genero']=='M'){print "MASCULINO";}else{print "FEMENINO";}?></td>
             <td><?php print $fila['fechanacimiento'];?></td>
-            <td><button id="btn_edit"><span class="fa fa-edit pull-right"></span></buttom></td>
+            <td><button id="btn btn_edit"><span class="fa fa-edit pull-right"></span></buttom></td>
             </tr>        
         <?php endforeach;?>
     </tbody>

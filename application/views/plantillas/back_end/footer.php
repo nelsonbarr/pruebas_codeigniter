@@ -50,13 +50,36 @@
             navLinks: true, // can click day/week names to navigate views
             editable: true,
             eventLimit: true, // allow "more" link when too many events
+            allDay: false,
+            duration:'00:30:00',
             dayClick: function(date, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, MODIFICAR PARA LLAMAR A LA VENTANA REGISTRAR CITA
-                alert('Clicked on: ' + date.format());
+                /*alert('Clicked on: ' + date.format());
                 alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
                 alert('Current view: ' + view.name);
                 // change the day's background color just for fun
-                $(this).css('background-color', 'red');
-            }
+                $(this).css('background-color', 'red')`*/
+                console.log(date.format());
+                this.title = prompt('Event Title:');
+                this.start = date.format();
+                dateend=new Date(date.format());
+                dateend.setMinutes(dateend.getMinutes() + 30);
+                this.dateend = dateend;
+                alert(dateend);
+                this.eventData;
+                if (this.title) {
+                    this.eventData = {
+                        title: this.title,
+                        start: this.start,
+                        forceEventDuration:true,
+                        duration:'00:30:00',
+                        resourceId:['ResourceID1'] // Example  of resource ID
+                    };
+                    $('#calendar').fullCalendar('getResources')// This loads the resources your events are associated with(you have toload your resources as well )
+                    $('#calendar').fullCalendar('renderEvent', this.eventData, true); // stick? = true
+                }
+                $('#calendar').fullCalendar('unselect');
+            },
+            
         });        
         $('#calendar').fullCalendar('addEventSource', citas); 
 
