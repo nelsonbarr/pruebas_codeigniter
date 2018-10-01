@@ -23,9 +23,9 @@ class Home extends CI_Controller {
         if (!empty($user_login)) {            
             $citas=$this->citas_model->getCitas(date('m'));  
             $replace_array = array("'", '"');
-            var_dump($citas);
+            //var_dump($citas);
             //print count($citas);
-            die();
+            //die();
             $replace_array=array();
             if ($citas != -1) {
                 $i=0;
@@ -140,10 +140,10 @@ class Home extends CI_Controller {
     public function add_event() 
     {
         /* Our calendar data */
-        $idpaciente = $this->input->post("selPaciente", TRUE);
-        $desc = $this->input->post("description", TRUE);
-        $start_date = $this->input->post("start_date", TRUE);
-        $end_date = $this->input->post("end_date", TRUE);
+        $idpaciente = $this->input->post("selPaciente");
+        $motivocita = $this->input->post("txtmotivocita");
+        $start_date = $this->input->post("date", TRUE);
+        $end_date = $this->input->post("dateend", TRUE);
 
         if(!empty($start_date)) {
            $sd = DateTime::createFromFormat("Y/m/d H:i", $start_date);
@@ -163,11 +163,11 @@ class Home extends CI_Controller {
            $end_date_timestamp = time();
         }
 
-        $this->calendar_model->add_event(array(
-           "title" => $name,
-           "description" => $desc,
-           "start" => $start_date,
-           "end" => $end_date
+        $this->citas_model->setCitas(array(
+           "idpaciente" => $idpaciente,
+           "motivocita" => $motivocita,
+           "fechacita" => $start_date,
+           "fechafincita" => $end_date
            )
         );
 

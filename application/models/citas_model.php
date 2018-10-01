@@ -11,7 +11,8 @@ class Citas_model extends CI_Model{
     public function getCitas($mes)
     {
         $this->db->select("CONCAT(pacientes.nombres,' ',pacientes.apellidos) as title");
-        $this->db->select("fechacita as start");       
+        $this->db->select("fechacita as start");   
+        $this->db->select("fechafincita as end");    
         $this->db->select('idcita');
         $this->db->select('motivocita');
         $this->db->select("'idpaciente");
@@ -29,6 +30,10 @@ class Citas_model extends CI_Model{
         if (count($query) >= 1)
             return $query;
         return -1;
+    }
+
+    public function setCitas($datos){
+        $this->db->insert('citas',$datos);
     }
 
 }
