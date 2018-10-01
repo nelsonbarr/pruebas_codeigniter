@@ -12,6 +12,7 @@
 
       }
     </style>
+    <?php print date("m");var_dump($citas);?>
 <div class="container">
     <div class="row">
         <div class="wrapper">
@@ -46,7 +47,7 @@
                                     </div>
                             <?php endif; ?>
                             <div class="row">           
-                                <?php if ($citas != -1): ?>
+                                <?php //if ($citas != -1): ?>
                                     <div class="col-md-12">
                                         <div class="hpanel hred">                                            
                                             <div class="panel-body">
@@ -54,7 +55,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                <?php endif; ?>            
+                                <?php //endif; ?>            
                             </div>
                         </div>
                     </div>
@@ -64,12 +65,11 @@
     </div>
 </div>
 
-
+<?php 
+//INCLUYO LA VENTANA MODAL PARA EDICION DE PACIENTES, LA MISMA SE MOSTRARA AL PRESIONAR EL BOTON DE EDICION
+require_once("modalPacientesList.php");
+?>
     
 
 
-<!-- Vendor scripts -->
-<script src="<?php echo base_url(); ?>assets/plugins/vendor/moment/min/moment.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/fullcalendar/fullcalendar.js"></script>
-<script src="<?php echo base_url(); ?>assets/fullcalendar/locale-all.js"></script>
 

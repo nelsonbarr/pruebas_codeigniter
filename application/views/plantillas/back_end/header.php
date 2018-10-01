@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/fullcalendar/fullcalendar.print.css" media='print'/>
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/fullcalendar/fullcalendar.min.css" />        
         <link href='<?php echo base_url() ?>assets/css/style_sidebar.css' rel='stylesheet' />
-        
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
     </head>
     <body>
         <div id="header">

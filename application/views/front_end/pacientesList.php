@@ -18,13 +18,18 @@
                         </li>                                           
                     </div>                    
                 </ul>
-            </div>
+            </div>                        
             <div class="content">
                 <div class="col-md-12">
                 <div class="panel panel-default">
-                        <div class="panel-heading" id="tipoagenda">PACIENTES</div>
+                        <div class="panel-heading" id="tipoagenda">
+                            <div class="row">
+                            <div class="col-xs-6">PACIENTES</div>
+                            <div class="col-xs-6 text-right"><button type="button" class="btn btn_edit" data-toggle="modal" data-target="#modalPacientes"><span class="fa fa-new pull-right"></span>Agregar</button></div>
+                            </div>
+                        </div>
                         <div class="panel-body">
-                           <?php if ( $citas == -1): ?>
+                           <?php if ( $pacientes == -1): ?>
                                     <div class="col-lg-6 col-lg-offset-3" id="no_estadisticas">
                                         <h2 class="text-danger">NO HAY PACIENTES PARA MOSTRAR</h2>
                                     </div>
@@ -34,7 +39,7 @@
                                     <div class="hpanel hred">                                            
                                         <div class="panel-body">
                                             <table class="table">
-                                            <thead class="thead-dark">
+                                            <thead class="thead-inverse">
                                                 <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">Nombres</th>
@@ -45,14 +50,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach($pacientes AS $fila):?>
+                                                <?php foreach($pacientes AS $key=>$fila):?>    
                                                     <tr>
                                                     <th scope="row"><?php print $fila['id'];?></th>
                                                     <td><?php print $fila['nombres'];?></td>
                                                     <td><?php print $fila['apellidos'];?></td>
                                                     <td><?php if($fila['genero']=='M'){print "MASCULINO";}else{print "FEMENINO";}?></td>
                                                     <td><?php print $fila['fechanacimiento'];?></td>
-                                                    <td><button type="button" class="btn btn_edit" data-toggle="modal" data-target="#modal_company"><span class="fa fa-edit pull-right"></span></button></td>                                                    </tr>        
+                                                    <td><button type="button" id="btn_edit" class="btn btn_edit" data-toggle="modal" data-id="<?php print $key;?>" data-target="#modalPacientes"><span class="fa fa-edit pull-right"></span></button></td>                                                    </tr>        
                                                 <?php endforeach;?>
                                             </tbody>
                                             </table>

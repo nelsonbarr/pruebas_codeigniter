@@ -17,24 +17,66 @@
 
     <!-- Material Dashboard javascript methods -->
     <script src="<?php echo base_url() ?>assets/js/material-dashboard.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
 <script>
-
+var arrPacientes=new Array();
     
 
 
-    $('#btn_edit').on('click', function() {
-        $('#modal_company').modal('show');
-        return false;
+
+    $('#btn_procesar').on('click', function() {
+        //PROCESAR PARA LA SELECCION DE PACIENTES EN LA CITA 
+        paciente=$("#selPaciente option:selected").text(); 
+        var myCalendar = $('#calendar'); 
+        datestart = $("#date").val();
+        dateend=new Date(datestart);
+        dateend.setMinutes(dateend.getMinutes() + 15);
+        var myEvent = { title:paciente, allDay: false, start: datestart, end: dateend }; 
+        myCalendar.fullCalendar('getResources');
+        myCalendar.fullCalendar( 'renderEvent', myEvent );        
+        myCalendar.fullCalendar('unselect'); 
+        $('#modalPacientesList').modal('hide') 
+        $.ajax({
+               url: 'index.php',
+               data: 'action=add&title='+title+'&start='+startTime+'&end='+endTime,
+               type: "POST",
+               success: function(json) {
+                   $("#calendar").fullCalendar('renderEvent',
+                   {
+                       id: json.id,
+                       title: title,
+                       start: startTime,
+                       end: endTime,
+                   },
+                   true);
+               }
+           });    
     });
-    var citas='<?php echo $citas; ?>';
-    if(citas)
+
+    var citas='<?php echo is_array($citas); ?>';
+    if(citas!=-1)
     {
-        var citas = JSON.parse('<?php echo $citas; ?>'.split('\t').join(''));
+        var citas = JSON.parse('<?php echo $citas ?>'.split('\t').join(''));
         var meses = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
     }else
     {
         citas=new Array();
+        $('.datepicker').datepicker({
+            format: 'mm/dd/yyyy',
+            startDate: '-3d'
+        });        
+        arrPacientes=<?php print json_encode($pacientes);?>;
+
+        
     }
+    console.log(arrPacientes);
+    $('button[id=btn_edit]').on('click',function () {
+      id=$(this).data("id");
+      alert(id);
+      arrPacientes=JSON.parse(arrPacientes.split('\t').join(''));;
+      alert(arrPacientes.documento[id]);
+      $('#txtiddocumento').val("pUBES");
+    });
 
     $(function() {
 
@@ -52,9 +94,13 @@
             if(tipocalendar=='agendaWeek'){
                 $('#tipoagenda').text('Agenda Semanal');
             }
-            else{
+            else if(tipocalendar=='agendaDay'){
                 $('#tipoagenda').text('Agenda Diaria');
             }
+            else{
+
+            }
+
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next today',
@@ -84,11 +130,15 @@
                 allDay: false,
                 defaultTimedEventDuration:'00:15:00',
                 dayClick: function(date, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, MODIFICAR PARA LLAMAR A LA VENTANA REGISTRAR CITA
-                    this.title = prompt('Event Title:');
+
+                    /*this.title = prompt('Event Title:');*/
                     this.start = date.format();
                     dateend=new Date(date.format());
-                    dateend.setMinutes(dateend.getMinutes() + 30);
-                    this.dateend = dateend;               
+                    dateend.setMinutes(dateend.getMinutes() + 15);
+                    $("#date").val(this.start);
+                    $("#dateend").val(dateend);
+                    $('#modalPacientesList').modal('show')
+                    /*this.dateend = dateend;               
                     this.eventData;
                     if (this.title) {
                         this.eventData = {
@@ -100,7 +150,7 @@
                         $('#calendar').fullCalendar('getResources')// This loads the resources your events are associated with(you have toload your resources as well )
                         $('#calendar').fullCalendar('renderEvent', this.eventData, true); // stick? = true
                     }
-                    $('#calendar').fullCalendar('unselect');
+                    $('#calendar').fullCalendar('unselect');*/
                 },
                 
             });        

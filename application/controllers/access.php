@@ -30,12 +30,14 @@ class Access extends CI_Controller {
                 }               
                 $citas = json_encode($citas);
             }
-
+            $this->load->model('pacientes_model');
+            $pacientes=$this->pacientes_model->getPacientes();
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,
                 'contenido' => 'dashboard_home',
-                'tipocalendar'=>'agendaWeek',
+                'tipocalendar'=>'agendaWeek',  
+                'pacientes'=>$pacientes,              
                 'citas'=>$citas
             );
             $this->load->view("plantillas/plantilla", $data);
@@ -82,12 +84,14 @@ class Access extends CI_Controller {
                 }               
                 $citas = json_encode($citas);
             }
-
+            $this->load->model('pacientes_model');
+            $pacientes=$this->pacientes_model->getPacientes();
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,                
                 'contenido' => 'dashboard_home',
                 'tipocalendar'=>'agendaWeek',
+                'pacientes'=>$pacientes,                
                 'citas'=>$citas
             );
             $this->load->view("plantillas/plantilla", $data);           

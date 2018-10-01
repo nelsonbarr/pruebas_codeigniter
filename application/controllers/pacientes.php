@@ -24,13 +24,45 @@ class Pacientes extends CI_Controller{
                 'estadosCiviles'=>$estadosCiviles,
                 'contenido' => 'pacientesList',  
                 'pacientes' =>$pacientes,
-                'citas'=>NULL,
+                'citas'=>json_encode(array()),
                 'tipocalendar'=>NULL
             );
             $this->load->view("plantillas/plantilla", $data);
         }    
     }
 
+    public function savePaciente(){
+        $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
+
+        $datos=array();
+        $datos['idtipodocumento']=$this->input->post("idtipodoc");
+        $datos['documento']=$this->input->post("txtiddocumento");
+        $datos['nombres']=$this->input->post("txtnombres");
+        $datos['apellidos']=$this->input->post("txtapellidos");
+        $datos['genero']=$this->input->post("genero");
+        $datos['fechanacimiento']=$this->input->post("txtfechanacimiento");
+        $datos['email']=$this->input->post("txtemail");
+        $datos['telefono']=$this->input->post("txttelefonos");
+        $datos['direccion'] =$this->input->post("txtdireccion");
+        $datos['idestadocivil']=$this->input->post("estadocivil");
+        $datos['alergias']=$this->input->post("txtalergias");
+        $datos['enfermedadesprevias']=$this->input->post("txtenfermedades");
+        $datos['medicamentos']=$this->input->post("txtmedicinas");
+        var_dump($datos);
+        $this->pacientes_model->savePacientes($datos);
+
+        $pacientes=$this->pacientes_model->getPacientes();
+        $data = array(
+            'user_login' => $user_login,
+            'user_name' => $this->user_name,
+            'contenido' => 'pacientesList',
+            'tipocalendar'=>'agendaWeek',
+            'pacientes'=>$pacientes            
+        );
+        $this->load->view("plantillas/plantilla", $data);
+
+
+    }
 
 }
 ?>

@@ -23,10 +23,10 @@ class Citas_model extends CI_Model{
         $this->db->from('citas');
         $this->db->join('pacientes','citas.idpaciente=pacientes.id');
         $this->db->join('medicos','citas.idmedico=medicos.id');
-        $this->db->where("DATE_FORMAT(fechacita,'%m')", $mes);
+        //$this->db->where("DATE_FORMAT(fechacita,'%m')", $mes);
         $query = $this->db->get();
         $query = $query->result_array();
-        if (count($query) == 1)
+        if (count($query) >= 1)
             return $query;
         return -1;
     }

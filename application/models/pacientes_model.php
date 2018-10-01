@@ -14,10 +14,18 @@ class Pacientes_model extends CI_Model{
         $this->db->from('pacientes');        
         $query = $this->db->get();
         $query = $query->result_array();
-        if (count($query) == 1)
+        if (count($query) >= 1)
             return $query;
         return -1;
     }
 
+    public function savePacientes($datos){
+        $this->db->insert('pacientes',$datos);
+        if ($this->db->affected_rows() == 1)
+            return $this->db->insert_id();
+        
+        else
+            print "ERROR AL INSERTAR";
+    }
 }
 ?>
