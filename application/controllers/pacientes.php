@@ -16,25 +16,25 @@ class Pacientes extends CI_Controller{
         $pacientes=$this->pacientes_model->getPacientes();
         $tiposDocs=$this->access_model->getTiposDocumentos();        
         $estadosCiviles=$this->access_model->getEstadosCiviles();
-        if (!empty($user_login)) {
+        //if (!empty($user_login)) {
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,
                 'tiposDocs'=>$tiposDocs,
                 'estadosCiviles'=>$estadosCiviles,
                 'contenido' => 'pacientesList',  
-                'pacientes' =>$pacientes,
-                'citas'=>json_encode(array()),
-                'tipocalendar'=>NULL
+                'pacientes' =>$pacientes,                                
+                'vista'=>'paciente'
             );
             $this->load->view("plantillas/plantilla", $data);
-        }    
+       // }    
     }
 
     public function savePaciente(){
         $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
 
         $datos=array();
+        $datos['id']=$this->input->post("idpaciente");
         $datos['idtipodocumento']=$this->input->post("idtipodoc");
         $datos['documento']=$this->input->post("txtiddocumento");
         $datos['nombres']=$this->input->post("txtnombres");
@@ -48,16 +48,21 @@ class Pacientes extends CI_Controller{
         $datos['alergias']=$this->input->post("txtalergias");
         $datos['enfermedadesprevias']=$this->input->post("txtenfermedades");
         $datos['medicamentos']=$this->input->post("txtmedicinas");
-        var_dump($datos);
+        $datos['genero']=$this->input->post("genero");        
         $this->pacientes_model->savePacientes($datos);
 
         $pacientes=$this->pacientes_model->getPacientes();
+        $tiposDocs=$this->access_model->getTiposDocumentos();        
+        $estadosCiviles=$this->access_model->getEstadosCiviles();
         $data = array(
             'user_login' => $user_login,
             'user_name' => $this->user_name,
             'contenido' => 'pacientesList',
+            'tiposDocs'=>$tiposDocs,
+            'estadosCiviles'=>$estadosCiviles,
             'tipocalendar'=>'agendaWeek',
-            'pacientes'=>$pacientes            
+            'pacientes'=>$pacientes,
+            'vista'=>'paciente'            
         );
         $this->load->view("plantillas/plantilla", $data);
 

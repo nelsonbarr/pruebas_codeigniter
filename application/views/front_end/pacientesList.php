@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/datatables2/media/css/jquery.dataTables.css" />
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/datatables2/media/css/buttons.dataTables.css" />
 <div class="container">
     <div class="row">
         <div class="wrapper">
@@ -25,7 +27,7 @@
                         <div class="panel-heading" id="tipoagenda">
                             <div class="row">
                             <div class="col-xs-6">PACIENTES</div>
-                            <div class="col-xs-6 text-right"><button type="button" class="btn btn_edit" data-toggle="modal" data-target="#modalPacientes"><span class="fa fa-new pull-right"></span>Agregar</button></div>
+                            <div class="col-xs-6 text-right"><button type="button" class="btn btn_edit" id="btn_add" data-toggle="modal" data-target="#modalPacientes"><span class="fa fa-new pull-right"></span>Agregar</button></div>
                             </div>
                         </div>
                         <div class="panel-body">
@@ -38,7 +40,7 @@
                                 <div class="col-md-12">
                                     <div class="hpanel hred">                                            
                                         <div class="panel-body">
-                                            <table class="table">
+                                            <table class="table" id="tablecitas">
                                             <thead class="thead-inverse">
                                                 <tr>
                                                 <th scope="col">#</th>

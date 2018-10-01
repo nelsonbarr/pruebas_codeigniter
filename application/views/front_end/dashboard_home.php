@@ -11,8 +11,7 @@
         height: auto;
 
       }
-    </style>
-    <?php print date("m");var_dump($citas);?>
+    </style>    
 <div class="container">
     <div class="row">
         <div class="wrapper">
@@ -67,7 +66,7 @@
 
 <?php 
 //INCLUYO LA VENTANA MODAL PARA EDICION DE PACIENTES, LA MISMA SE MOSTRARA AL PRESIONAR EL BOTON DE EDICION
-require_once("modalPacientesList.php");
+require_once("modalCitaPaciente.php");
 ?>
     
 

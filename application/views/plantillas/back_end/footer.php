@@ -18,6 +18,7 @@
     <!-- Material Dashboard javascript methods -->
     <script src="<?php echo base_url() ?>assets/js/material-dashboard.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"?></script>
 <script>
 var arrPacientes=new Array();
     
@@ -61,15 +62,16 @@ var arrPacientes=new Array();
     }else
     {
         citas=new Array();
-        $('.datepicker').datepicker({
-            format: 'mm/dd/yyyy',
-            startDate: '-3d'
-        });        
+        // $('.datepicker').datepicker({
+        //     format: 'mm/dd/yyyy',
+        //     startDate: '-3d'
+        // });        
         arrPacientes=<?php print json_encode($pacientes);?>;
-
+         
         
     }
-    console.log(arrPacientes);
+  
+    
     $('button[id=btn_edit]').on('click',function () {
       id=$(this).data("id");
       alert(id);
@@ -80,7 +82,12 @@ var arrPacientes=new Array();
 
     $(function() {
 
-      
+      $('#fecha_comite_patrocinio').datepicker({
+            format: 'yyyy-mm-dd',
+            //startDate: '-Infinity',
+            todayHighlight: true,
+            autoclose: true
+        });
 
 
         //BLOQUE DE INICIALIZACION DE CALENDARIO
@@ -130,13 +137,15 @@ var arrPacientes=new Array();
                 allDay: false,
                 defaultTimedEventDuration:'00:15:00',
                 dayClick: function(date, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, MODIFICAR PARA LLAMAR A LA VENTANA REGISTRAR CITA
-
+                    console.log(jsEvent);   
+                    console.log(view); 
                     /*this.title = prompt('Event Title:');*/
                     this.start = date.format();
                     dateend=new Date(date.format());
                     dateend.setMinutes(dateend.getMinutes() + 15);
                     $("#date").val(this.start);
-                    $("#dateend").val(dateend);
+                    $("#dateend").val(dateend.getFullYear()+"-"+(dateend.getMonth() + 1) + "-" + dateend.getDate() + "-" +dateend.getHours() + ":" + dateend.getMinutes() + ":" + dateend.getSeconds() +
+":" + dateend.getMilliseconds() );
                     $('#modalPacientesList').modal('show')
                     /*this.dateend = dateend;               
                     this.eventData;

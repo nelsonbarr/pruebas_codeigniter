@@ -13,6 +13,7 @@
                         <div class="col-xs-6 text-center">
                             <div class="form-group">
                                 <label class="control-label">Tipo Documento</label>
+                                <input id="idpaciente" name="idpaciente" type="hidden" class="form-control" maxlength="12">
                                 <select id="idtipodoc" class="form-control" name="idtipodoc">
                                     <option value="">Seleccione..</option>
                                     <?php foreach($tiposDocs AS $item):?>
@@ -44,22 +45,29 @@
                             <div class="form-group">
                                 <label class=" control-label">Genero</label>
                                 <div class="form-check">
-                                    <input type="radio" class="form-check-input" id="checkbox1" name="check_agreement" value="M">
+                                    <input type="radio" class="form-check-input" id="checkbox1" name="genero" value="M">
                                     <label for="checkbox1"><small>Masculino</small></label>
-                                    <input type="radio" class="form-check-input" id="checkbox2" name="check_agreement" value="F" checked="">
+                                    <input type="radio" class="form-check-input" id="checkbox2" name="genero" value="F" >
                                     <label for="checkbox2"><small>Femenino</small></label>
                                 </div>                                  
                             </div>
                         </div>
-                        <div class="col-xs-4 text-center">
+                        <!--div class="col-xs-4 text-center">
                             <div class="input-group date" data-provide="datepicker">
                                 <input type="text" id="txtfechanacimiento" name="txtfechanacimiento" class="form-control">
                                 <div class="input-group-addon">
                                     <span class="fa fa-calendar"></span>
                                 </div>
                             </div>
+                        </div-->
+                        <div class="col-xs-4 form-group">
+                            <label class="control-label">Fecha</label>
+                            <div id="calendar_ini" class="input-group date" data-date-format="yyyy-dd-mm">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input class="form-control" id="txtfechanacimiento" name="txtfechanacimiento" type="text" readonly/>
+                            </div>                                               
                         </div>
-                                               
+                                                
                         
                         <div class="col-xs-4 text-center">
                             <div class="form-group"><label class=" control-label">Email</label>
@@ -80,7 +88,7 @@
                         </div>
                         <div class="col-xs-6 text-center">
                             <div class="form-group"><label class=" control-label">Telefonos</label>
-                                <input id="txttelefonos" type="text" class="form-control" maxlength="45">
+                                <input id="txttelefonos" name="txttelefonos" type="text" class="form-control" maxlength="45">
                             </div>
                         </div>
                     </div>

@@ -20,10 +20,13 @@ class Citas_model extends CI_Model{
         $this->db->select("enfermedadesprevias");
         $this->db->select("'medicinastomadas");
         $this->db->select("idmedico");
-        $this->db->select("CONCAT(medicos.nombres,' ',medicos.apellidos) AS nombremedico");        
+        $this->db->select("estadoscitas.descripcion AS estadocita");
+        $this->db->select("CONCAT(medicos.nombres,' ',medicos.apellidos) AS nombremedico");
+        $this->db->select("CONCAT(medicos.nombres,' ',medicos.apellidos) AS nombremedico");
         $this->db->from('citas');
         $this->db->join('pacientes','citas.idpaciente=pacientes.id');
-        $this->db->join('medicos','citas.idmedico=medicos.id');
+        $this->db->join('estadoscitas','citas.idestadocita=estadoscitas.id');
+        $this->db->join('medicos','citas.idmedico=medicos.id','left outer ');
         //$this->db->where("DATE_FORMAT(fechacita,'%m')", $mes);
         $query = $this->db->get();
         $query = $query->result_array();

@@ -14,17 +14,25 @@
                     <div class="col-xs-12 text-center">
                       
                         <div class="form-group">
+                            <label class="control-label">Paciente</label>
                             <select id="selPaciente" name="selPaciente" class="selectpicker form-control" data-show-subtext="true" data-live-search="true" >  
                                 <option value="" >Seleccione..</option>                 
                                 <?php foreach($pacientes AS $fila):?>        
                                 <option data-subtext="<?php print $fila["documento"];?>" value="<?php print $fila["id"];?>"><?php print $fila["nombres"]." ".$fila['apellidos'];?></option>
                                 <?php endforeach;?>   
-                            </select>
-                            <input type="text" id="date"/>
-                            <input type="text" id="dateend"/> 
+                            </select>                            
                         </div>
-                        <div class="form-group"><label class=" control-label">Motivo Cita</label>
-                            <input id="txtmotivocita" name="txtmotivocita" type="text" class="form-control" maxlength="12">
+                        <div class="form-group">
+                            <label class="control-label">Fecha Inicio</label>
+                            <input type="text" id="date" name="date" class="form-control" maxlength="12"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Fecha Fin</label>
+                            <input type="text" id="dateend" name="dateend" class="form-control" maxlength="12"/> 
+                        </div>                            
+                        <div class="form-group">
+                            <label class=" control-label">Motivo Cita</label>
+                            <input id="txtmotivocita" name="txtmotivocita" type="text" class="form-control" maxlength="100">
                         </div>
                         
                       
@@ -34,8 +42,7 @@
         </div>
         
         <div class="modal-footer">
-            <button type="submit" class="btn btn-danger" id="btn_procesa">Procesar</button>
-            <input type="submit" class="btn btn-primary" value="Add Event">
+            <button type="submit" class="btn btn-danger" id="btn_procesa">Procesar</button>            
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
