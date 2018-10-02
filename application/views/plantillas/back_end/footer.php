@@ -37,7 +37,7 @@ var arrPacientes=new Array();
 
 
         //BLOQUE DE INICIALIZACION DE CALENDARIO
-        
+
         var initialLocaleCode = 'en';
         //$('#calendar').fullCalendar({});
         var tipocalendar='<?php print $tipocalendar;?>';
@@ -83,7 +83,7 @@ var arrPacientes=new Array();
                 allDaySlot: false,
                 defaultTimedEventDuration:'00:15:00',
                 dayClick: function(date, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, MODIFICAR PARA LLAMAR A LA VENTANA REGISTRAR CITA
-                    /*this.title = prompt('Event Title:');*/
+                    
                     blanquearCita();
                     this.start = date.format('Y/M/D hh:mm');
                     dateend=new Date(date.format('Y/M/D hh:mm'));
@@ -91,6 +91,7 @@ var arrPacientes=new Array();
                     $("#date").val(this.start);
                     $("#dateend").val(dateend.getFullYear()+"-"+(dateend.getMonth() + 1) + "-" + dateend.getDate() + "-" +dateend.getHours() + ":" + dateend.getMinutes() + ":" + dateend.getSeconds());
                     $('#modalPacientesList').modal('show')
+                    /*this.title = prompt('Event Title:');*/
                     /*this.dateend = dateend;               
                     this.eventData;
                     if (this.title) {
@@ -120,9 +121,7 @@ var arrPacientes=new Array();
                 },
                 eventDrop: function(event, delta){ // event drag and drop
                     start=event.start.format();                                
-                    end=event.end.format();
-                    console.log(event)
-                    console.log(start+"     "+end)
+                    end=event.end.format();                   
                     $.ajax({
                         url:'<?php print base_url();?>home/saveCita/',                       
                         data: 'date='+start+'&dateend='+end+'&idcita='+event.idcita+"&action=NO",
