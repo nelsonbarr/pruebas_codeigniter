@@ -25,8 +25,8 @@ var arrPacientes=new Array();
     arrPacientes=<?php print json_encode($pacientes);?>;
     //HAGO SEGUIMIENTO AL onclick DEL BOTON AGREGAR DE LA VISTA LISTA PACIENTES   
     $('#btn_add').on('click',function () { 
-      $('#txtiddocumento').attr('readonly',false);  
-      $('#idtipodoc').attr('disabled',false);   
+      $('#txtiddocumento').attr('readonly',false);       
+      $('#idtipodoc').removeAttr('disabled'); 
       $('#idpaciente').val('');
       $('#idtipodoc').val('');
       $('#txtiddocumento').val('');
