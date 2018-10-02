@@ -194,7 +194,8 @@ class Home extends CI_Controller {
         $idcita     = $this->input->post("idcita");
         $motivocita = $this->input->post("txtmotivocita");
         $descripcion = $this->input->post("txtdescripcion");
-        $sintomas = $this->input->post("txtsintomas");        
+        $sintomas = $this->input->post("txtsintomas");     
+        $medicinastomadas = $this->input->post("txtmedicinastomadas");    
         $start_date = $this->input->post("date", TRUE);
         $end_date = $this->input->post("dateend", TRUE);
         $action=$this->input->post("action");
@@ -205,6 +206,7 @@ class Home extends CI_Controller {
            "motivocita" => $motivocita,
            "descripcion"=>$descripcion,
            "sintomas"=>$sintomas,
+           "medicinastomadas"=>$medicinastomadas,
            "fechacita" => $start_date,
            "fechafincita" => $end_date
         );

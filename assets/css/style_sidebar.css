@@ -78,7 +78,8 @@ font-size: 25px;
 }
 .side-bar ul .menu li  a:hover
 {
-    border-left:3px solid #ECECEA;    
+    background-color: beige;
+    border-left:3px solid #DE6262;    
     padding-left:17px;
 }
 

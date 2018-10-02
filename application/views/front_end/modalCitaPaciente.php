@@ -36,7 +36,7 @@
                             <input id="txtmotivocita" name="txtmotivocita" type="text" class="form-control" maxlength="100">
                         </div>
                         <div class="form-group">
-                            <label class=" control-label">Sintomas</label>
+                            <label class=" control-label">Medicinas o Tratamientos Actuales</label>
                             <input id="txtmedicinastomadas" name="txtmedicinastomadas" type="text" class="form-control" maxlength="100">
                         </div>
                         <div class="form-group">
@@ -44,7 +44,7 @@
                             <input id="txtsintomas" name="txtsintomas" type="text" class="form-control" maxlength="100">
                         </div>
                         <div class="form-group">
-                            <label class=" control-label">Descripcion</label>
+                            <label class=" control-label">Resultado Consulta</label>
                             <input id="txtdescripcion" name="txtdescripcion" type="text" class="form-control" maxlength="100">
                         </div>
                         

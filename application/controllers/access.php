@@ -113,13 +113,20 @@ class Access extends CI_Controller {
                 }               
                 $citas = json_encode($citas);
             }
+            if($valid_user['perfil']==1){
+                $tipocalendar="agendaDay";
+            }
+            else{
+                $tipocalendar="agendaWeek";
+            }
+            
             $this->load->model('pacientes_model');
             $pacientes=$this->pacientes_model->getPacientes();
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,                
                 'contenido' => 'dashboard_home',
-                'tipocalendar'=>'agendaWeek',   
+                'tipocalendar'=>$tipocalendar,   
                 'pacientes'=>$pacientes,                              
                 'citas'=>$citas,
                 'vista'=>'calendario'
