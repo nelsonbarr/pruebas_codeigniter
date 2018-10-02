@@ -13,7 +13,7 @@
                         <div class="col-xs-6 text-center">
                             <div class="form-group">
                                 <label class="control-label">Tipo Documento</label>
-                                <input id="idpaciente" name="idpaciente" type="hidden" class="form-control" maxlength="12">
+                                <input id="idpaciente" name="idpaciente" type="hidden"/>
                                 <select id="idtipodoc" class="form-control" name="idtipodoc">
                                     <option value="">Seleccione..</option>
                                     <?php foreach($tiposDocs AS $item):?>

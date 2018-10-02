@@ -1,7 +1,7 @@
 <!-- Modal -->
   <div class="modal fade" id="modalPacientesList" role="dialog">
     <div class="modal-dialog">
-      <form action="<?php print base_url();?>home/add_event" method="POST">
+      <form action="<?php print base_url();?>home/saveCita" method="POST">
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -12,9 +12,10 @@
             <div class="container col-xs-12">
                 <div class="row-fluid"> 
                     <div class="col-xs-12 text-center">
-                      
+
                         <div class="form-group">
                             <label class="control-label">Paciente</label>
+                            <input id="idcita" name="idcita" type="hidden"/>
                             <select id="selPaciente" name="selPaciente" class="selectpicker form-control" data-show-subtext="true" data-live-search="true" >  
                                 <option value="" >Seleccione..</option>                 
                                 <?php foreach($pacientes AS $fila):?>        
@@ -33,6 +34,18 @@
                         <div class="form-group">
                             <label class=" control-label">Motivo Cita</label>
                             <input id="txtmotivocita" name="txtmotivocita" type="text" class="form-control" maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label class=" control-label">Sintomas</label>
+                            <input id="txtmedicinastomadas" name="txtmedicinastomadas" type="text" class="form-control" maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label class=" control-label">Sintomas</label>
+                            <input id="txtsintomas" name="txtsintomas" type="text" class="form-control" maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <label class=" control-label">Descripcion</label>
+                            <input id="txtdescripcion" name="txtdescripcion" type="text" class="form-control" maxlength="100">
                         </div>
                         
                       

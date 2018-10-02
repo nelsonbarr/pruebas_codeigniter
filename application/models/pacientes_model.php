@@ -45,10 +45,8 @@ class Pacientes_model extends CI_Model{
             }
             else{
                 print "EXISTE INSERTAR";    
-            }
-            
-        }
-        
+            }            
+        }        
         if ($this->db->affected_rows() == 1)
             return $this->db->insert_id();
         
@@ -62,7 +60,8 @@ class Pacientes_model extends CI_Model{
         $this->db->select("CONCAT(pacientes.nombres,' ',pacientes.apellidos) AS nombre_paciente");            
         $this->db->from('citas');
         $this->db->join('pacientes','citas.idpaciente=pacientes.id');   
-        $this->db->where('idpaciente',$idpaciente) ;    
+        $this->db->where('idpaciente',$idpaciente) ;
+        $this->db->where('idestadocita',5) ;
         $query = $this->db->get();
         $query = $query->result();
         return $query;

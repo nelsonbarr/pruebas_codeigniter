@@ -24,8 +24,22 @@ class Access extends CI_Controller {
                 $i=0;
                 foreach ($citas as $row) {                    
                     $citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
-                    $citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
-                    $citas[$i]['backgroundColor'] = "#DF0101";
+                    //$citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
+                    if($row['estadocita']=='No Confirmada'){
+                        $citas[$i]['backgroundColor'] = "rgb(40, 40,60)";    
+                    } 
+                    elseif($row['estadocita']=='Cancelada'){
+                        $citas[$i]['backgroundColor'] = "#DF0101";
+                    }                  
+                    elseif($row['estadocita']=='En camino'){
+                        $citas[$i]['backgroundColor'] = "rgb(10, 170,90)";
+                    } 
+                    elseif($row['estadocita']=='En Sala'){
+                        $citas[$i]['backgroundColor'] = "#ffff00";
+                    } 
+                    elseif($row['estadocita']=='Visto'){
+                        $citas[$i]['backgroundColor'] = "#0066ff";
+                    }    
                     $i++;
                 }               
                 $citas = json_encode($citas);
@@ -79,8 +93,22 @@ class Access extends CI_Controller {
                 $i=0;
                 foreach ($citas as $row) {                   
                     $citas[$i]['title'] = str_replace($replace_array, "", $row['motivocita']);
-                    $citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
-                    $citas[$i]['backgroundColor'] = "#DF0101";
+                    //$citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
+                    if($row['estadocita']=='No Confirmada'){
+                        $citas[$i]['backgroundColor'] = "rgb(40, 40,60)";    
+                    } 
+                    elseif($row['estadocita']=='Cancelada'){
+                        $citas[$i]['backgroundColor'] = "#DF0101";
+                    }                  
+                    elseif($row['estadocita']=='En camino'){
+                        $citas[$i]['backgroundColor'] = "rgb(10, 170,90)";
+                    } 
+                    elseif($row['estadocita']=='En Sala'){
+                        $citas[$i]['backgroundColor'] = "#ffff00";
+                    } 
+                    elseif($row['estadocita']=='Visto'){
+                        $citas[$i]['backgroundColor'] = "#0066ff";
+                    }    
                     $i++;
                 }               
                 $citas = json_encode($citas);

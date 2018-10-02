@@ -25,7 +25,7 @@ var arrPacientes=new Array();
 
 
 
-    $('#btn_procesar').on('click', function() {
+    /*$('#btn_procesar').on('click', function() {
         //PROCESAR PARA LA SELECCION DE PACIENTES EN LA CITA 
         paciente=$("#selPaciente option:selected").text(); 
         var myCalendar = $('#calendar'); 
@@ -53,12 +53,12 @@ var arrPacientes=new Array();
                    true);
                }
            });    
-    });
+    });*/
 
     var citas='<?php echo is_array($citas); ?>';
     if(citas!=-1)
     {
-        var citas = JSON.parse('<?php echo $citas ?>'.split('\t').join(''));
+        var citas = JSON.parse('<?php echo $citas ?>'.split('\t').join(''));        
         var meses = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
     }else
     {
@@ -73,14 +73,7 @@ var arrPacientes=new Array();
     }
   
     
-    $('button[id=btn_edit]').on('click',function () {
-      id=$(this).data("id");
-      alert(id);
-      arrPacientes=JSON.parse(arrPacientes.split('\t').join(''));;
-      alert(arrPacientes.documento[id]);
-      $('#txtiddocumento').val("pUBES");
-    });
-
+   
     $(function() {
 
       $('#fecha_comite_patrocinio').datepicker({
@@ -96,7 +89,7 @@ var arrPacientes=new Array();
         var initialLocaleCode = 'en';
         //$('#calendar').fullCalendar({});
             var tipocalendar='<?php print $tipocalendar;?>';
-            console.log(tipocalendar);
+          
        /* if(tipocalendar!=''){
             console.log(tipocalendar);*/
             if(tipocalendar=='agendaWeek'){
@@ -138,11 +131,10 @@ var arrPacientes=new Array();
                 allDaySlot: false,
                 defaultTimedEventDuration:'00:15:00',
                 dayClick: function(date, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, MODIFICAR PARA LLAMAR A LA VENTANA REGISTRAR CITA
-                    console.log(jsEvent);   
-                    console.log(view); 
                     /*this.title = prompt('Event Title:');*/
-                    this.start = date.format();
-                    dateend=new Date(date.format());
+                    blanquearCita();
+                    this.start = date.format('Y/M/D hh:mm');
+                    dateend=new Date(date.format('Y/M/D hh:mm'));
                     dateend.setMinutes(dateend.getMinutes() + 15);
                     $("#date").val(this.start);
                     $("#dateend").val(dateend.getFullYear()+"-"+(dateend.getMonth() + 1) + "-" + dateend.getDate() + "-" +dateend.getHours() + ":" + dateend.getMinutes() + ":" + dateend.getSeconds() +
@@ -162,13 +154,62 @@ var arrPacientes=new Array();
                     }
                     $('#calendar').fullCalendar('unselect');*/
                 },
+                eventClick: function(event, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, MODIFICAR PARA LLAMAR A LA VENTANA REGISTRAR CITA
+                    blanquearCita();                                        
+                    $('select[name=selPaciente]').val(event.idpaciente);
+                    $('.selectpicker').selectpicker('refresh')  
+                    $("#idcita").val(event.idcita)                  
+                    $("#date").val(event.start.format('Y/M/D hh:mm'));
+                    $("#dateend").val(event.end.format('Y/M/D hh:mm'));
+                    $("#txtmotivocita").val(event.motivocita);
+                    $("#txtsintomas").val(event.sintomas);
+                    $("#txtdescripcion").val(event.descripcion);
+                    $("#txtmedicinastomadas").val(event.medicinastomadas);
+                    $('#modalPacientesList').modal('show')
+                },
+                eventDrop: function(event, delta){ // event drag and drop
+                    start=event.start.format();                                
+                    end=event.end.format();
+                    console.log(event)
+                    console.log(start+"     "+end)
+                    $.ajax({
+                        url:'<?php print base_url();?>home/saveCita/',                       
+                        data: 'date='+start+'&dateend='+end+'&idcita='+event.idcita+"&action=NO",
+                        type: "POST",
+                        success: function(json) {
+                        //alert(json);
+                        }
+                    });
+                },
+                eventResize: function(event) {  // resize to increase or decrease time of event
+                    start=event.start.format(); 
+                    end=event.end.format();
+                    $.ajax({
+                        url:'<?php print base_url();?>home/saveCita/',  
+                        data: 'action=NO&date='+start+'&dateend='+end+'&idcita='+event.idcita,
+                        type: "POST",
+                        success: function(json) {
+                            //alert(json);
+                        }
+                    });
+                }
                 
             });        
             $('#calendar').fullCalendar('addEventSource', citas); 
 
 
         //}    
-        
+        function blanquearCita(){
+            $('select[name=selPaciente]').val('');
+            $('.selectpicker').selectpicker('refresh') 
+            $("#date").val('');
+            $("#dateend").val('');
+            $("#txtmotivocita").val('');
+            $("#txtsintomas").val('');
+            $("#txtdescripcion").val('');
+            $("#txtmedicinastomadas").val('')
+           
+        }    
         
         
         $(".push_menu").click(function(){

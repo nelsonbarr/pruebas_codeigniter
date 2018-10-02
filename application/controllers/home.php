@@ -7,7 +7,7 @@ class Home extends CI_Controller {
     public function __construct() {
         parent::__construct();
         if ($this->session->userdata('login') == false) {
-            redirect('access/logout');
+           // redirect('access/logout');
         }
         $this->load->model('access_model');   
         $this->load->model('citas_model');     
@@ -46,7 +46,7 @@ class Home extends CI_Controller {
                         $citas[$i]['backgroundColor'] = "#0066ff";
                     }                  
                     $citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
-                    $citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
+                    //$citas[$i]['url'] = 'base_url('home_eventos/eventos_detalle')."/".$row['idcita']';
                     //$citas[$i]['backgroundColor'] = "#DF0101";
                     $i++;
                 }               
@@ -65,6 +65,8 @@ class Home extends CI_Controller {
                 'vista'=>'calendario'
 
             );
+
+            
             $this->load->view("plantillas/plantilla", $data);
        /* }else {
             $data = array(
@@ -90,7 +92,7 @@ class Home extends CI_Controller {
                 $i=0;
                 foreach ($citas as $row) {                    
                     $citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
-                    $citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
+                    //$citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
                     if($row['estadocita']=='No Confirmada'){
                         $citas[$i]['backgroundColor'] = "rgb(40, 40,60)";    
                     } 
@@ -145,7 +147,7 @@ class Home extends CI_Controller {
                 $i=0;
                 foreach ($citas as $row) {                    
                     $citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
-                    $citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
+                    //$citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
                     if($row['estadocita']=='No Confirmada'){
                         $citas[$i]['backgroundColor'] = "rgb(40, 40,60)";    
                     } 
@@ -185,14 +187,18 @@ class Home extends CI_Controller {
         }*/
     }
 
-    public function add_event() 
+    public function saveCita() 
     {
         /* Our calendar data */
         $idpaciente = $this->input->post("selPaciente");
+        $idcita     = $this->input->post("idcita");
         $motivocita = $this->input->post("txtmotivocita");
+        $descripcion = $this->input->post("txtdescripcion");
+        $sintomas = $this->input->post("txtsintomas");        
         $start_date = $this->input->post("date", TRUE);
         $end_date = $this->input->post("dateend", TRUE);
-        var_dump($start_date,$end_date);
+        $action=$this->input->post("action");
+       
         /*if(!empty($start_date)) {
            $sd = DateTime::createFromFormat("Y/m/d H:i", $start_date);
            /*$start_date = $sd->format('Y-m-d H:i:s');
@@ -204,23 +210,28 @@ class Home extends CI_Controller {
 
         if(!empty($end_date)) {
            //$ed = DateTime::createFromFormat("Y/m/d H:i", $end_date);
-           $end_date = date($end_date);
+          // $end_date = date($end_date);
         /*   $end_date_timestamp = $ed->getTimestamp();
         } else {
            $end_date = date("Y-m-d H:i:s", time());
            $end_date_timestamp = time();*/
         }
-        
-        
-        $this->citas_model->setCitas(array(
+        $citas=array(
+           "idcita"=>$idcita,
            "idpaciente" => $idpaciente,
            "motivocita" => $motivocita,
+           "descripcion"=>$descripcion,
+           "sintomas"=>$sintomas,
            "fechacita" => $start_date,
            "fechafincita" => $end_date
-           )
         );
-
-        redirect(base_url("home"));
+        if($action=="NO"){
+            unset($citas['idpaciente'],$citas["motivocita"],$citas["sintomas"],$citas["descripcion"]);
+        }
+        $this->citas_model->setCitas($citas);
+        if($action!="NO"){
+            $this->semanal();
+        }
     }
 
 }

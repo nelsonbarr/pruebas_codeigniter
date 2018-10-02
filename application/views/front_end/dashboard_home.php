@@ -18,7 +18,7 @@
             <div class="side-bar">
                 <ul>
                     <li class="menu-head">
-                       CONTROL DE CITAS <a href="#" class="push_menu"><span class="fa fa-ellipsis-v pull-right"></span></a>
+                       CONTROL DE CITAS <a href="#" class="push_menu"><span class="fa fa-exchange pull-right"></span></a>
                     </li>
                     <div class="menu">
                         <li>

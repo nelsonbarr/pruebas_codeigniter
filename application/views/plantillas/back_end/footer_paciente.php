@@ -59,18 +59,31 @@ var arrPacientes=new Array();
           html="";
           $("#historico").html('');
           if(json.length>0){
-            $('#txtnombrepaciente').val(json[1].nombre_paciente);
+            $('#txtnombrepaciente').val(json[0].nombre_paciente);
             for(i=0;i<json.length;i++){
-                fila=json[i];            
-                html+='<div>Fecha: '+fila.fechacita+'</div>'; 
-                html+='<div>Motivo Cita: '+fila.motivocita+'</div>';
-                html+='<div>Sintomas: '+fila.sintomas+'</div>';            
-                html+='<div>Descripcion: '+fila.descripcion+'</div><hr/>';
+                fila=json[i]; 
+                if(fila.sintomas==null)
+                    sintomas="";                
+                else
+                    sintomas=fila.sintomas;
+                if(fila.motivocita==null)
+                    motivocita="";                
+                else
+                    motivocita=fila.motivocita;
+                if(fila.descripcion==null)
+                    descripcion="";                
+                else
+                    descripcion=fila.descripcion;
+
+                html+='<small><div>Fecha: '+fila.fechacita+'</div>'; 
+                html+='<div>Motivo Cita: '+motivocita+'</div>';
+                html+='<div>Sintomas: '+sintomas+'</div>';            
+                html+='<div>Descripcion: '+descripcion+'</div></small><hr/>';
             }
           }
           else{
-            alert("Paciente aun no tiene Historia");
-            $('#modalPacienteHistory').modal('hide')
+            html+='<div>Paciente aun no tiene Historia</div>';
+            //$('#modalPacienteHistory').modal('hide')
           }
           $("#historico").html(html);         
         }

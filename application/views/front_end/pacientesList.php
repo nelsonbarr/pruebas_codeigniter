@@ -6,7 +6,7 @@
             <div class="side-bar">
                 <ul>
                     <li class="menu-head">
-                       CONTROL DE CITAS <a href="#" class="push_menu"><span class="fa fa-ellipsis-v pull-right"></span></a>
+                       CONTROL DE CITAS <a href="#" class="push_menu"><span class="fa fa-exchange pull-right"></span></a>
                     </li>
                     <div class="menu">
                         <li>
@@ -60,7 +60,7 @@
                                                     <td><?php if($fila['genero']=='M'){print "MASCULINO";}else{print "FEMENINO";}?></td>
                                                     <td><?php print $fila['fechanacimiento'];?></td>
                                                     <td><button type="button" id="btn_edit" alt="Editar" title="Editar" class="btn btn_edit" data-toggle="modal" data-id="<?php print $key;?>" data-target="#modalPacientes"><span class="fa fa-edit pull-right"></span></button>
-                                                        <button type="button" id="btn_history" alt="Historia" title="Historia" class="btn btn_default" data-toggle="modal" data-id="<?php print $fila['id'];?>" data-target="#modalPacienteHistory"><span class="fa fa-align-justify pull-right"></span></button></td>                                                    </tr>        
+                                                        <button type="button" id="btn_history" alt="Historia" title="Historia" class="btn btn-default" data-toggle="modal" data-id="<?php print $fila['id'];?>" data-target="#modalPacienteHistory"><span class="fa fa-align-justify pull-right"></span></button></td>                                                    </tr>        
                                                 <?php endforeach;?>
                                             </tbody>
                                             </table>

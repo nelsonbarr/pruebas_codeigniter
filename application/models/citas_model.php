@@ -15,10 +15,11 @@ class Citas_model extends CI_Model{
         $this->db->select("fechafincita as end");    
         $this->db->select('idcita');
         $this->db->select('motivocita');
-        $this->db->select("'idpaciente");
+        $this->db->select("idpaciente");
         $this->db->select("sintomas");
-        $this->db->select("enfermedadesprevias");
-        $this->db->select("'medicinastomadas");
+        $this->db->select("pacientes.enfermedadesprevias");
+        $this->db->select("medicinastomadas");
+        $this->db->select("citas.descripcion");
         $this->db->select("idmedico");
         $this->db->select("estadoscitas.descripcion AS estadocita");
         $this->db->select("CONCAT(medicos.nombres,' ',medicos.apellidos) AS nombremedico");
@@ -36,7 +37,17 @@ class Citas_model extends CI_Model{
     }
 
     public function setCitas($datos){
-        $this->db->insert('citas',$datos);
+        if($datos['idcita']!=""){
+            $id=$datos['idcita'];
+            unset($datos['idcita']);           
+            $this->db->where('idcita',$id);
+            $this->db->update("citas",$datos);
+        }
+        else{
+            $id=$datos['idcita'];
+            unset($datos['idcita']);           
+            $this->db->insert('citas',$datos);           
+        }
     }
 
 }

@@ -21,14 +21,16 @@
     <body>
         <div id="header">
             <div class="color-line">
-            </div>
-            
-                <a href="<?php echo base_url() ?>">
-                    <div id="logo" class="light-version">
+            </div>                 
+            <nav class="navbar">
+                <div class="container-fluid">
+                    <div class="navbar-header">
                         <img src="<?php echo base_url(); ?>assets/images/codeigniter_logo.png" alt="" class="img-responsive center-block" width="150">
-                    </div>
-                </a>   
-
-            
+                    </div>                   
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="<?php print base_url();?>access/logout"><span class="fa fa-user-times">&nbsp;</span>&nbsp;&nbsp;Cerrar Sesion</a></li>
+                    </ul>
+                </div>
+            </nav>                   
         </div>
 

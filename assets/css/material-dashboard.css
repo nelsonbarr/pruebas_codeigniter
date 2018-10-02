@@ -3068,8 +3068,10 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   line-height: 1.42857;
 }
 .navbar, .navbar.navbar-default {
-  background-color: #FFFFFF;
-  color: #555555;
+  
+  background: -webkit-linear-gradient(to bottom, rgb(100, 185, 206), #215394);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, rgb(100, 185, 206), #215394); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #ffffff;
 }
 .navbar .navbar-form .form-group input.form-control::-moz-placeholder,
 .navbar .navbar-form input.form-control::-moz-placeholder, .navbar.navbar-default .navbar-form .form-group input.form-control::-moz-placeholder,
