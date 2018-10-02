@@ -54,5 +54,18 @@ class Pacientes_model extends CI_Model{
         
        return true;
     }
+
+
+    public function getHistorico($idpaciente)
+    {        
+        $this->db->select("citas.*");
+        $this->db->select("CONCAT(pacientes.nombres,' ',pacientes.apellidos) AS nombre_paciente");            
+        $this->db->from('citas');
+        $this->db->join('pacientes','citas.idpaciente=pacientes.id');   
+        $this->db->where('idpaciente',$idpaciente) ;    
+        $query = $this->db->get();
+        $query = $query->result();
+        return $query;
+    }
 }
 ?>

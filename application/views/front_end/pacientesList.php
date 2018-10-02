@@ -10,10 +10,10 @@
                     </li>
                     <div class="menu">
                         <li>
-                            <a href="<?php print base_url();?>pacientes" >Pacientes </br><span class="fa fa-users pull-right"></span></a>
+                            <a href="<?php print base_url();?>pacientes" class="pacientes active ">Pacientes </br><span class="fa fa-users pull-right"></span></a>
                         </li>
                         <li>
-                            <a href="<?php print base_url();?>home/semanal" class="pacientes  active">Agenda Semanal </br><span class="fa fa-calendar pull-right  active"></span></a>
+                            <a href="<?php print base_url();?>home/semanal" class="pacientes  ">Agenda Semanal </br><span class="fa fa-calendar pull-right  active"></span></a>
                         </li>
                         <li>
                             <a href="<?php print base_url();?>home/diario" class="pacientes ">Agenda Diaria </br><span class="fa fa-list-alt pull-right "></span></a>
@@ -40,7 +40,7 @@
                                 <div class="col-md-12">
                                     <div class="hpanel hred">                                            
                                         <div class="panel-body">
-                                            <table class="table" id="tablecitas">
+                                            <table class="table table-responsive" id="tablepacientes">
                                             <thead class="thead-inverse">
                                                 <tr>
                                                 <th scope="col">#</th>
@@ -59,7 +59,8 @@
                                                     <td><?php print $fila['apellidos'];?></td>
                                                     <td><?php if($fila['genero']=='M'){print "MASCULINO";}else{print "FEMENINO";}?></td>
                                                     <td><?php print $fila['fechanacimiento'];?></td>
-                                                    <td><button type="button" id="btn_edit" class="btn btn_edit" data-toggle="modal" data-id="<?php print $key;?>" data-target="#modalPacientes"><span class="fa fa-edit pull-right"></span></button></td>                                                    </tr>        
+                                                    <td><button type="button" id="btn_edit" alt="Editar" title="Editar" class="btn btn_edit" data-toggle="modal" data-id="<?php print $key;?>" data-target="#modalPacientes"><span class="fa fa-edit pull-right"></span></button>
+                                                        <button type="button" id="btn_history" alt="Historia" title="Historia" class="btn btn_default" data-toggle="modal" data-id="<?php print $fila['id'];?>" data-target="#modalPacienteHistory"><span class="fa fa-align-justify pull-right"></span></button></td>                                                    </tr>        
                                                 <?php endforeach;?>
                                             </tbody>
                                             </table>
@@ -78,6 +79,8 @@
 <?php 
 //INCLUYO LA VENTANA MODAL PARA EDICION DE PACIENTES, LA MISMA SE MOSTRARA AL PRESIONAR EL BOTON DE EDICION
 require_once("modalPacientes.php");
+//INCLUYO LA VENTANA MODAL PARA VERHISTORICO EL PACIENTE, LA MISMA SE MOSTRARA AL PRESIONAR EL BOTON DE HISTORICO
+require_once("modalPacienteHistorico.php");
 ?>
 </body>
 </html>

@@ -33,7 +33,51 @@ var arrPacientes=new Array();
          
     $('#btn_add').on('click',function () {      
       $('#idpaciente').val('');
+      $('#idtipodoc').val('');
+      $('#txtiddocumento').val('');
+      $('#txtnombres').val(pacienteEdit.nombres);
+      $('#txtapellidos').val('');
+      $('#txtemail').val('');
+      $('#txtdireccion').val('');
+      $('#txtfechanacimiento').val('');
+      $('#txttelefonos').val('');   
+      $('#estadocivil').val('');
+      $('#txtalergias').val('');   
+      $('#txtenfermedades').val('');   
+      $('#txtmedicinas').val('');    
+      $('input:radio[name="genero"][value=M]').prop('checked', true);  
     });
+
+    $('button[id=btn_history]').on('click',function () {      
+        var idpaciente=$(this).data("id");               
+        $.ajax({
+        type:'POST',
+        url:'<?php print base_url();?>pacientes/carga_Historico/'+idpaciente,
+        success:function(data){
+          data=JSON.parse(data);
+          json=data.data;          
+          html="";
+          $("#historico").html('');
+          if(json.length>0){
+            $('#txtnombrepaciente').val(json[1].nombre_paciente);
+            for(i=0;i<json.length;i++){
+                fila=json[i];            
+                html+='<div>Fecha: '+fila.fechacita+'</div>'; 
+                html+='<div>Motivo Cita: '+fila.motivocita+'</div>';
+                html+='<div>Sintomas: '+fila.sintomas+'</div>';            
+                html+='<div>Descripcion: '+fila.descripcion+'</div><hr/>';
+            }
+          }
+          else{
+            alert("Paciente aun no tiene Historia");
+            $('#modalPacienteHistory').modal('hide')
+          }
+          $("#historico").html(html);         
+        }
+      })//end ajax
+
+    });
+    
     
     $('button[id=btn_edit]').on('click',function () {
       id=$(this).data("id");    
@@ -56,7 +100,7 @@ var arrPacientes=new Array();
     });
 
     $(function() {
-        $('#tablecitas').DataTable({
+        $('#tablepacientes').DataTable({
                 responsive: true,
                 'order': []
             });

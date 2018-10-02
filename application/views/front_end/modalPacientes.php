@@ -60,7 +60,7 @@
                                 </div>
                             </div>
                         </div-->
-                        <div class="col-xs-4 form-group">
+                        <div class="col-xs-4 form-group text-center">
                             <label class="control-label">Fecha</label>
                             <div id="calendar_ini" class="input-group date" data-date-format="yyyy-dd-mm">
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -149,3 +149,4 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+</div>

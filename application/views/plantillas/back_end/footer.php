@@ -48,6 +48,7 @@ var arrPacientes=new Array();
                        title: title,
                        start: startTime,
                        end: endTime,
+                       allDay: false
                    },
                    true);
                }
@@ -134,7 +135,7 @@ var arrPacientes=new Array();
                 navLinks: true, // can click day/week names to navigate views
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
-                allDay: false,
+                allDaySlot: false,
                 defaultTimedEventDuration:'00:15:00',
                 dayClick: function(date, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, MODIFICAR PARA LLAMAR A LA VENTANA REGISTRAR CITA
                     console.log(jsEvent);   

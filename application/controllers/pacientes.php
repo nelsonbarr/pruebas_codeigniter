@@ -69,5 +69,21 @@ class Pacientes extends CI_Controller{
 
     }
 
+    public function carga_Historico($id){
+        $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;        
+        $result=$this->pacientes_model->getHistorico($id);       
+        //se define un arreglo con la informacion de los clientes
+        $consulta=array('data'=>$result);
+
+        if(!$consulta){
+            die('Error');
+        }else{
+            //se codifica la data en formato json
+            echo json_encode($consulta);
+        }
+
+
+    }
+
 }
 ?>
