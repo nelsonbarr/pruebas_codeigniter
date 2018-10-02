@@ -1,78 +1,30 @@
     </body>
     <!--   Core JS Files   -->
-<!--   Core JS Files   -->
+    <!--   Core JS Files   -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    
-    
     <script src="<?php echo base_url() ?>assets/js/jquery.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="<?php echo base_url() ?>assets/js/material.min.js" type="text/javascript"></script>
-    
+    <script src="<?php echo base_url() ?>assets/js/material.min.js" type="text/javascript"></script>   
     <script src='<?php echo base_url() ?>assets/fullcalendar/moment.min.js'></script>    
     <script src='<?php echo base_url() ?>assets/fullcalendar/fullcalendar.min.js'></script>
-    
-
     <!--  Notifications Plugin    -->
     <script src="<?php echo base_url() ?>assets/js/bootstrap-notify.js"></script>
-
     <!-- Material Dashboard javascript methods -->
     <script src="<?php echo base_url() ?>assets/js/material-dashboard.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
     <script src="<?php echo base_url() ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"?></script>
 <script>
 var arrPacientes=new Array();
-    
-
-
-
-    /*$('#btn_procesar').on('click', function() {
-        //PROCESAR PARA LA SELECCION DE PACIENTES EN LA CITA 
-        paciente=$("#selPaciente option:selected").text(); 
-        var myCalendar = $('#calendar'); 
-        datestart = $("#date").val();
-        dateend=new Date(datestart);
-        dateend.setMinutes(dateend.getMinutes() + 15);
-        var myEvent = { title:paciente, allDay: false, start: datestart, end: dateend }; 
-        myCalendar.fullCalendar('getResources');
-        myCalendar.fullCalendar( 'renderEvent', myEvent );        
-        myCalendar.fullCalendar('unselect'); 
-        $('#modalPacientesList').modal('hide') 
-        $.ajax({
-               url: 'index.php',
-               data: 'action=add&title='+title+'&start='+startTime+'&end='+endTime,
-               type: "POST",
-               success: function(json) {
-                   $("#calendar").fullCalendar('renderEvent',
-                   {
-                       id: json.id,
-                       title: title,
-                       start: startTime,
-                       end: endTime,
-                       allDay: false
-                   },
-                   true);
-               }
-           });    
-    });*/
-
+    //TOMO EL ARREGLO DE CITAS DEL CONTROLADOR
     var citas='<?php echo is_array($citas); ?>';
-    if(citas!=-1)
-    {
+    if(citas!=-1){
         var citas = JSON.parse('<?php echo $citas ?>'.split('\t').join(''));        
         var meses = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
-    }else
-    {
-        citas=new Array();
-        // $('.datepicker').datepicker({
-        //     format: 'mm/dd/yyyy',
-        //     startDate: '-3d'
-        // });        
-        arrPacientes=<?php print json_encode($pacientes);?>;
-         
-        
     }
-  
-    
+    else{
+        citas=new Array();             
+        arrPacientes=<?php print json_encode($pacientes);?>;       
+    }    
    
     $(function() {
 
@@ -85,10 +37,10 @@ var arrPacientes=new Array();
 
 
         //BLOQUE DE INICIALIZACION DE CALENDARIO
-
+        
         var initialLocaleCode = 'en';
         //$('#calendar').fullCalendar({});
-            var tipocalendar='<?php print $tipocalendar;?>';
+        var tipocalendar='<?php print $tipocalendar;?>';
           
        /* if(tipocalendar!=''){
             console.log(tipocalendar);*/
@@ -137,8 +89,7 @@ var arrPacientes=new Array();
                     dateend=new Date(date.format('Y/M/D hh:mm'));
                     dateend.setMinutes(dateend.getMinutes() + 15);
                     $("#date").val(this.start);
-                    $("#dateend").val(dateend.getFullYear()+"-"+(dateend.getMonth() + 1) + "-" + dateend.getDate() + "-" +dateend.getHours() + ":" + dateend.getMinutes() + ":" + dateend.getSeconds() +
-":" + dateend.getMilliseconds() );
+                    $("#dateend").val(dateend.getFullYear()+"-"+(dateend.getMonth() + 1) + "-" + dateend.getDate() + "-" +dateend.getHours() + ":" + dateend.getMinutes() + ":" + dateend.getSeconds());
                     $('#modalPacientesList').modal('show')
                     /*this.dateend = dateend;               
                     this.eventData;

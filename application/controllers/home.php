@@ -198,24 +198,7 @@ class Home extends CI_Controller {
         $start_date = $this->input->post("date", TRUE);
         $end_date = $this->input->post("dateend", TRUE);
         $action=$this->input->post("action");
-       
-        /*if(!empty($start_date)) {
-           $sd = DateTime::createFromFormat("Y/m/d H:i", $start_date);
-           /*$start_date = $sd->format('Y-m-d H:i:s');
-           $start_date_timestamp = $sd->getTimestamp();
-        } else {
-           $start_date = date("Y-m-d H:i:s", time());
-           $start_date_timestamp = time();
-        }*/
-
-        if(!empty($end_date)) {
-           //$ed = DateTime::createFromFormat("Y/m/d H:i", $end_date);
-          // $end_date = date($end_date);
-        /*   $end_date_timestamp = $ed->getTimestamp();
-        } else {
-           $end_date = date("Y-m-d H:i:s", time());
-           $end_date_timestamp = time();*/
-        }
+               
         $citas=array(
            "idcita"=>$idcita,
            "idpaciente" => $idpaciente,
@@ -225,11 +208,13 @@ class Home extends CI_Controller {
            "fechacita" => $start_date,
            "fechafincita" => $end_date
         );
-        if($action=="NO"){
+        if($action=="NO"){//CUANDO PROVIENE EL LLAMADO DE DRAG O RESIZE DEL CALENDAR
             unset($citas['idpaciente'],$citas["motivocita"],$citas["sintomas"],$citas["descripcion"]);
         }
+        //METODO QUE PROCESA LOS DATOS
         $this->citas_model->setCitas($citas);
-        if($action!="NO"){
+
+        if($action!="NO"){//CUANDO NO PROVIENE EL LLAMADO DE DRAG O RESIZE DEL CALENDAR, LLAMO A LA VISTA CON LOS CAMBIOS
             $this->semanal();
         }
     }

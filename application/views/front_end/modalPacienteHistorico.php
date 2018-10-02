@@ -13,7 +13,7 @@
                         <div class="col-xs-12 text-center">
                             <div class="form-group">
                                 <label class=" control-label">Paciente</label>
-                                <input id="txtnombrepaciente" name="txtnombrepaciente" type="text" class="form-control" maxlength="255">
+                                <input id="txtnombrepaciente" name="txtnombrepaciente" type="text" class="form-control" readonly maxlength="255">
                             </div>
                         </div>                           
                     </div> 
