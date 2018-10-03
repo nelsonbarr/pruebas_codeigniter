@@ -22,6 +22,8 @@ class Home extends CI_Controller {
 
        //    if (!empty($user_login)) {            
             $citas=$this->citas_model->getCitas(date('m'));  
+            $estadoscitas=$this->access_model->getEstadosCita();
+
             $replace_array = array("'", '"');
             //var_dump($citas);
             //print count($citas);
@@ -59,7 +61,8 @@ class Home extends CI_Controller {
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,
                 'contenido' => 'dashboard_home',
-                'tipocalendar'=>'agendaWeek',                
+                'tipocalendar'=>'agendaWeek',
+                'estadoscitas'=>$estadoscitas,                
                 'citas'=>$citas,
                 'pacientes'=>$pacientes, 
                 'vista'=>'calendario'
@@ -82,7 +85,8 @@ class Home extends CI_Controller {
         $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
 
         //if (!empty($user_login)) {
-            $citas=$this->citas_model->getCitas(date('m'));  
+            $citas=$this->citas_model->getCitas(date('m')); 
+            $estadoscitas=$this->access_model->getEstadosCita(); 
             $replace_array = array("'", '"');
             //var_dump($citas);
             //print count($citas);
@@ -118,7 +122,8 @@ class Home extends CI_Controller {
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,
                 'contenido' => 'dashboard_home',
-                'tipocalendar'=>'agendaDay',                
+                'tipocalendar'=>'agendaDay', 
+                'estadoscitas'=>$estadoscitas,                
                 'citas'=>$citas,
                 'pacientes'=>$pacientes, 
                 'vista'=>'calendario'
@@ -137,7 +142,8 @@ class Home extends CI_Controller {
         $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
 
        // if (!empty($user_login)) {
-            $citas=$this->citas_model->getCitas(date('m'));  
+            $citas=$this->citas_model->getCitas(date('m')); 
+            $estadoscitas=$this->access_model->getEstadosCita(); 
             $replace_array = array("'", '"');
             //var_dump($citas);
             //print count($citas);
@@ -174,6 +180,7 @@ class Home extends CI_Controller {
                 'user_name' => $this->user_name,
                 'contenido' => 'dashboard_home',
                 'tipocalendar'=>'agendaWeek', 
+                'estadoscitas'=>$estadoscitas, 
                 'pacientes'=>$pacientes,                          
                 'citas'=>$citas,
                 'vista'=>'calendario'

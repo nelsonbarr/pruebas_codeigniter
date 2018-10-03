@@ -20,72 +20,23 @@
     <script src="<?php echo base_url(); ?>assets/datatables2/media/js/buttons.flash.js"></script>
     <!-- App scripts -->   
 <script>
-var arrPacientes=new Array();
+var arrUsuarios=new Array();
         
-    arrPacientes=<?php print json_encode($pacientes);?>;
+    arrUsuarios=<?php print json_encode($usuarios);?>;
     //HAGO SEGUIMIENTO AL onclick DEL BOTON AGREGAR DE LA VISTA LISTA PACIENTES   
     $('#btn_add').on('click',function () { 
-      $('#txtiddocumento').attr('readonly',false);       
-      $('#idtipodoc').removeAttr('disabled'); 
-      $('#idpaciente').val('');
+       
+      $('#id').val('');
       $('#idtipodoc').val('');
-      $('#txtiddocumento').val('');
       $('#txtnombres').val('');
       $('#txtapellidos').val('');
       $('#txtemail').val('');
-      $('#txtdireccion').val('');
-      $('#txtfechanacimiento').val('');
       $('#txttelefonos').val('');   
-      $('#estadocivil').val('');
-      $('#txtalergias').val('');   
-      $('#txtenfermedades').val('');   
-      $('#txtmedicinas').val('');    
-      $('input:radio[name="genero"][value=M]').prop('checked', true);  
+      $('#selPerfil').val('');   
+      
     });
 
-    //HAGO SEGUIMIENTO AL onclick DE CADA BOTON HISTORIA DEL LISTADO DE PACIENTES 
-    $('button[id=btn_history]').on('click',function () {      
-        var idpaciente=$(this).data("id");               
-        $.ajax({
-        type:'POST',
-        url:'<?php print base_url();?>pacientes/carga_Historico/'+idpaciente,
-        success:function(data){
-          data=JSON.parse(data);
-          json=data.data;          
-          html="";
-          $("#historico").html('');
-          if(json.length>0){
-            $('#txtnombrepaciente').val(json[0].nombre_paciente);
-            for(i=0;i<json.length;i++){
-                fila=json[i]; 
-                if(fila.sintomas==null)
-                    sintomas="";                
-                else
-                    sintomas=fila.sintomas;
-                if(fila.motivocita==null)
-                    motivocita="";                
-                else
-                    motivocita=fila.motivocita;
-                if(fila.descripcion==null)
-                    descripcion="";                
-                else
-                    descripcion=fila.descripcion;
-
-                html+='<small><div><b>Fecha:</b> '+fila.fechacita+'</div>'; 
-                html+='<div><b>Motivo Cita:</b> '+motivocita+'</div>';
-                html+='<div><b>Sintomas:</b> '+sintomas+'</div>';            
-                html+='<div><b>Descripcion:</b> '+descripcion+'</div></small><hr/>';
-            }
-          }
-          else{
-            html+='<div>Paciente aun no tiene Historia</div>';
-            //$('#modalPacienteHistory').modal('hide')
-          }
-          $("#historico").html(html);         
-        }
-      })//end ajax
-
-    });
+    
     
     //HAGO SEGUIMIENTO AL onclick DE CADA BOTON EDICION DEL LISTADO DE PACIENTES 
     $('button[id=btn_edit]').on('click',function () {
@@ -111,18 +62,12 @@ var arrPacientes=new Array();
     });
 
     $(function() {
-        $('#tablepacientes').DataTable({
+        $('#tableusuarios').DataTable({
             responsive: true,
             'order': []
         });
 
-        $('#txtfechanacimiento').datepicker({
-            format: 'yyyy-mm-dd',
-            //startDate: '-Infinity',
-            todayHighlight: true,
-            autoclose: true
-        });        
-        
+       
         $(".push_menu").click(function(){
              $(".wrapper").toggleClass("active");
         });

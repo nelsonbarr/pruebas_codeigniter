@@ -58,7 +58,7 @@ var arrPacientes=new Array();
                 header: {
                     left: 'prev,next today',
                     center: 'title',                
-                    right: 'month,agendaWeek,agendaDay,listMonth'//right: 'year,month,basicWeek,basicDay'
+                    right: 'month'//right: 'year,month,basicWeek,basicDay'
                 },
                 businessHours: {
                     start: '08:00', // hora final

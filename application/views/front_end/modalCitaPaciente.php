@@ -24,12 +24,25 @@
                             </select>                            
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Fecha Inicio</label>
-                            <input type="text" id="date" name="date" class="form-control" maxlength="12"/>
+                            <div class="row">
+                            <div class="col-xs-6">
+                                <label class="control-label">Fecha Inicio</label>                            
+                                <input type="text" id="date" name="date" class="form-control" maxlength="12"/>
+                            </div>                            
+                            <div class="col-xs-6">
+                                <label class="control-label">Fecha Fin</label>
+                                <input type="text" id="dateend" name="dateend" class="form-control" maxlength="12"/>  
+                            </div>  
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Fecha Fin</label>
-                            <input type="text" id="dateend" name="dateend" class="form-control" maxlength="12"/> 
+                            <label class="control-label">Estado Cita</label>                            
+                            <select id="selEstadoCita" name="selEstadoCita" class="form-control">  
+                                <option value="" >Seleccione..</option>                 
+                                <?php foreach($estadoscitas AS $fila):?>        
+                                <option value="<?php print $fila["id"];?>"><?php print $fila["descripcion"];?></option>
+                                <?php endforeach;?>   
+                            </select>                            
                         </div>                            
                         <div class="form-group">
                             <label class=" control-label">Motivo Cita</label>

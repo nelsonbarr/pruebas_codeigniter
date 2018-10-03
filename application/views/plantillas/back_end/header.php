@@ -22,15 +22,32 @@
         <div id="header">
             <div class="color-line">
             </div>                 
-            <nav class="navbar">
-                <div class="container-fluid">
-                    <div class="navbar-header">
+            <nav class="navbar ">
+                <div class="container-fluid collapse navbar-collapse">
+                    <div class="navbar-header ">
                         <img src="<?php echo base_url(); ?>assets/images/codeigniter_logo.png" alt="" class="img-responsive center-block" width="150">
                     </div>                   
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <span class="fa fa-gear">&nbsp;</span>Configuracion
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="<?php echo base_url();?>usuarios">Usuarios</a>
+                              <a class="dropdown-item" href="#">Medicos</a>                             
+                            </div>
+                          </li>
                         <li><a href="<?php print base_url();?>access/logout"><span class="fa fa-user-times">&nbsp;</span>&nbsp;&nbsp;Cerrar Sesion</a></li>
+
+                        
                     </ul>
                 </div>
-            </nav>                   
+            </nav> 
+
+
+
+
         </div>
+
+
 

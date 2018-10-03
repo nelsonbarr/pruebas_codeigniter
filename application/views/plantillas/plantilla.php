@@ -5,6 +5,9 @@
     if($vista=="paciente"){
         $this->load->view("plantillas/back_end/footer_paciente");
     }
+    elseif($vista=="usuarios"){
+        $this->load->view("plantillas/back_end/footer_usuario");
+    }
     else{
         $this->load->view("plantillas/back_end/footer");
     }
