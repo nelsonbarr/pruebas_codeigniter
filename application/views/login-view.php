@@ -53,7 +53,6 @@
     <script src="assets/js/chartist.min.js"></script>
     <!--  Notifications Plugin    -->
     <script src="assets/js/bootstrap-notify.js"></script>
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+    
 
 </html>
