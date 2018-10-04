@@ -8,6 +8,10 @@
     elseif($vista=="usuarios"){
         $this->load->view("plantillas/back_end/footer_usuario");
     }
+
+    if($tipocalendar=='agendaDay'){
+        $this->load->view("plantillas/back_end/footer_diario");
+    }
     else{
         $this->load->view("plantillas/back_end/footer");
     }

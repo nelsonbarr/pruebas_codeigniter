@@ -46,8 +46,20 @@ class Home extends CI_Controller {
                     } 
                     elseif($row['estadocita']=='Visto'){
                         $citas[$i]['backgroundColor'] = "#0066ff";
-                    }                  
-                    $citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
+                    }   
+                   // $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
+                   if($this->session->userdata('perfil') ==1){                  
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']."  ID: ".$row['documento'] );
+                        $citas[$i]['description'] = str_replace($replace_array, "","NAC.: ".$row['fechanacimiento']."  GEN: ".$row["genero"]);
+
+                    }
+                    else{
+                        //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']."  ID: ".$row['documento'] );
+                        $citas[$i]['description'] = str_replace($replace_array, "","NAC.: ".$row['fechanacimiento']."  GEN: ".$row["genero"]);
+                    } 
+
+                   //$citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
                     //$citas[$i]['url'] = 'base_url('home_eventos/eventos_detalle')."/".$row['idcita']';
                     //$citas[$i]['backgroundColor'] = "#DF0101";
                     $i++;
@@ -66,7 +78,6 @@ class Home extends CI_Controller {
                 'citas'=>$citas,
                 'pacientes'=>$pacientes, 
                 'vista'=>'calendario'
-
             );
 
             
@@ -94,8 +105,20 @@ class Home extends CI_Controller {
             $replace_array=array();
             if ($citas != -1) {
                 $i=0;
-                foreach ($citas as $row) {                    
-                    $citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
+                foreach ($citas as $row) { 
+                    //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
+                    if($this->session->userdata('perfil') ==1){                  
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']."  ID: ".$row['documento'] );
+                        $citas[$i]['description'] = str_replace($replace_array, "","NAC.: ".$row['fechanacimiento']."  GEN: ".$row["genero"]);
+
+                    }
+                    else{
+                        //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']."  ID: ".$row['documento'] );
+                        $citas[$i]['description'] = str_replace($replace_array, "","NAC.: ".$row['fechanacimiento']."  GEN: ".$row["genero"]);
+                    } 
+
+                    //$citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
                     //$citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
                     if($row['estadocita']=='No Confirmada'){
                         $citas[$i]['backgroundColor'] = "rgb(40, 40,60)";    
@@ -151,8 +174,20 @@ class Home extends CI_Controller {
             $replace_array=array();
             if ($citas != -1) {
                 $i=0;
-                foreach ($citas as $row) {                    
-                    $citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
+                foreach ($citas as $row) {      
+                    //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
+                    if($this->session->userdata('perfil') ==1){                  
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']."  ID: ".$row['documento'] );
+                        $citas[$i]['description'] = str_replace($replace_array, "","NAC.: ".$row['fechanacimiento']."  GEN: ".$row["genero"]);
+
+                    }
+                    else{
+                        //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']."  ID: ".$row['documento'] );
+                        $citas[$i]['description'] = str_replace($replace_array, "","NAC.: ".$row['fechanacimiento']."  GEN: ".$row["genero"]);
+                    } 
+
+                    //$citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
                     //$citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
                     if($row['estadocita']=='No Confirmada'){
                         $citas[$i]['backgroundColor'] = "rgb(40, 40,60)";    

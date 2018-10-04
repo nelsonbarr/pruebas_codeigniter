@@ -46,13 +46,13 @@ var arrPacientes=new Array();
             console.log(tipocalendar);*/
             if(tipocalendar=='agendaWeek'){
                 $('#tipoagenda').text('Agenda Semanal');
-                var propRight='month,agendaWeek,agendaDay,year';
+                var propRight='month,basicWeek,basicDay,year';
                 
             }
             else if(tipocalendar=='agendaDay'){
                 $('#tipoagenda').text('Agenda Diaria');
                 var propRight='listDay,listWeek,listMonth';
-                tipocalendar="listWeek";               
+                tipocalendar="listDay";                
             }
             else{
 
@@ -60,7 +60,7 @@ var arrPacientes=new Array();
 
             $('#calendar').fullCalendar({
                 header: {
-                    left: 'prev,next today',
+                    left: 'prev,next,today',
                     center: 'title',  //right: 'month'//right: 'year,month,basicWeek,basicDay'
                     right: propRight
                 },
@@ -74,7 +74,12 @@ var arrPacientes=new Array();
                 slotDuration: '00:15:00',
                 contentHeight:480,       //auto            
                 hiddenDays: [ 6,0 ], // hide Tuesdays and Thursdays //defaultView: tipocalendar,               
-                defaultView: tipocalendar,                
+                defaultView: tipocalendar,  
+                views: {
+                    listDay: { buttonText: 'Lista Dia' },
+                    listWeek: { buttonText: 'Lista Semana' },
+                    listMonth: { buttonText: 'Lista Mes' }
+                },
                 locale : 'es',
                 eventLimit: true, // allow "more" link when too many events*/               
                 buttonIcons: true, // show the prev/next text
@@ -92,21 +97,7 @@ var arrPacientes=new Array();
                     dateend.setMinutes(dateend.getMinutes() + 15);
                     $("#date").val(this.start);
                     $("#dateend").val(dateend.getFullYear()+"-"+(dateend.getMonth() + 1) + "-" + dateend.getDate() + "-" +dateend.getHours() + ":" + dateend.getMinutes() + ":" + dateend.getSeconds());
-                    $('#modalPacientesList').modal('show')
-                    /*this.title = prompt('Event Title:');*/
-                    /*this.dateend = dateend;               
-                    this.eventData;
-                    if (this.title) {
-                        this.eventData = {
-                            title: this.title,
-                            start: this.start,
-                            forceEventDuration:true,                       
-                            resourceId:['ResourceID1'] // Example  of resource ID
-                        };
-                        $('#calendar').fullCalendar('getResources')// This loads the resources your events are associated with(you have toload your resources as well )
-                        $('#calendar').fullCalendar('renderEvent', this.eventData, true); // stick? = true
-                    }
-                    $('#calendar').fullCalendar('unselect');*/
+                    $('#modalPacientesList').modal('show')                    
                 },
                 eventClick: function(event, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, MODIFICAR PARA LLAMAR A LA VENTANA REGISTRAR CITA
                     blanquearCita();                                        
@@ -146,10 +137,10 @@ var arrPacientes=new Array();
                     });
                 },
                 eventRender: function(event, element) { 
-                    element.find('.fc-title').append("<br/>" + event.description); 
+                    element.find('.fc-title').append(" - " + event.description); 
                 } 
                 
-            });           
+            });            
             
             $('#calendar').fullCalendar('addEventSource', citas); 
 

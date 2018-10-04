@@ -24,8 +24,22 @@ class Access extends CI_Controller {
             if ($citas != -1) {
                 $i=0;
                 foreach ($citas as $row) {                    
-                    $citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
-                    //$citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
+                        //$citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
+                    //   $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
+                    if($this->session->userdata('perfil') ==1){                  
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']."  ID: ".$row['documento'] );
+                        $citas[$i]['description'] = str_replace($replace_array, "","NAC.: ".$row['fechanacimiento']."  GEN: ".$row["genero"]);
+
+                    }
+                    else{
+                        //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']."  ID: ".$row['documento'] );
+                        $citas[$i]['description'] = str_replace($replace_array, "","NAC.: ".$row['fechanacimiento']."  GEN: ".$row["genero"]);
+                    }   
+                    /*$citas[$i]['title'] = str_replace($replace_array, "", $row['title']."  ID: ".$row['documento']." NAC.:");
+                     $citas[$i]['description'] = str_replace($replace_array, "",$row['fechanacimiento']."  ".$row["genero"]);*/
+
+                 //$citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
                     if($row['estadocita']=='No Confirmada'){
                         $citas[$i]['backgroundColor'] = "rgb(40, 40,60)";    
                     } 
@@ -85,50 +99,66 @@ class Access extends CI_Controller {
             $datos_cookie['profile']=$valid_user['perfil'];
             
             $this->session->set_userdata($datos_cookie);
-            $citas=$this->citas_model->getCitas(date('m'));
+            
             $estadoscitas=$this->access_model->getEstadosCita(); 
-            $replace_array = array("'", '"');
-            //var_dump($citas);
-            //print count($citas);
-            //die();
-            $replace_array=array();
-            if ($citas != -1) {
-                $i=0;
-                foreach ($citas as $row) {                   
-                    $citas[$i]['title'] = str_replace($replace_array, "", $row['motivocita']);
-                    //$citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
-                    if($row['estadocita']=='No Confirmada'){
-                        $citas[$i]['backgroundColor'] = "rgb(40, 40,60)";    
-                    } 
-                    elseif($row['estadocita']=='Cancelada'){
-                        $citas[$i]['backgroundColor'] = "#DF0101";
-                    }                  
-                    elseif($row['estadocita']=='En camino'){
-                        $citas[$i]['backgroundColor'] = "rgb(10, 170,90)";
-                    } 
-                    elseif($row['estadocita']=='En Sala'){
-                        $citas[$i]['backgroundColor'] = "#ffff00";
-                    } 
-                    elseif($row['estadocita']=='Visto'){
-                        $citas[$i]['backgroundColor'] = "#0066ff";
-                    }    
-                    $i++;
-                }               
-                $citas = json_encode($citas);
-            }
+            
             if($valid_user['perfil']==1){
                 $tipocalendar="agendaDay";
+                $contenido = 'dashboard_home';
+                $citas=$this->citas_model->getCitas(date('m'));
+                //$citas=$this->citas_model->getCitasDia(date('Y/m/d'));
+                
             }
             else{
                 $tipocalendar="agendaWeek";
-            }
+                $contenido = 'dashboard_home';
+                $citas=$this->citas_model->getCitas(date('m'));
+               
+            }   
+                $replace_array = array("'", '"');
+                //var_dump($citas);
+                //print count($citas);
+                //die();
+                $replace_array=array();
+                if ($citas != -1) {
+                    $i=0;
+                    foreach ($citas as $row) { 
+                        if($valid_user['perfil']==1){                  
+                            $citas[$i]['title'] = str_replace($replace_array, "", $row['title']."  ID: ".$row['documento'] );
+                            $citas[$i]['description'] = str_replace($replace_array, "","NAC.: ".$row['fechanacimiento']."  GEN: ".$row["genero"]);
+
+                        }
+                        else{
+                            $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
+                        }
+                        //$citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
+                        if($row['estadocita']=='No Confirmada'){
+                            $citas[$i]['backgroundColor'] = "rgb(40, 40,60)";    
+                        } 
+                        elseif($row['estadocita']=='Cancelada'){
+                            $citas[$i]['backgroundColor'] = "#DF0101";
+                        }                  
+                        elseif($row['estadocita']=='En camino'){
+                            $citas[$i]['backgroundColor'] = "rgb(10, 170,90)";
+                        } 
+                        elseif($row['estadocita']=='En Sala'){
+                            $citas[$i]['backgroundColor'] = "#ffff00";
+                        } 
+                        elseif($row['estadocita']=='Visto'){
+                            $citas[$i]['backgroundColor'] = "#0066ff";
+                        }    
+                        $i++;
+                    }               
+                    $citas = json_encode($citas);
+                }
+            
             
             $this->load->model('pacientes_model');
             $pacientes=$this->pacientes_model->getPacientes();
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,                
-                'contenido' => 'dashboard_home',
+                'contenido' => $contenido,
                 'tipocalendar'=>$tipocalendar, 
                 'estadoscitas'=>$estadoscitas,   
                 'pacientes'=>$pacientes,                              
