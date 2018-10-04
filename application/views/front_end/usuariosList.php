@@ -59,7 +59,7 @@
                                                     <td><?php print $fila['apellidos'];?></td>
                                                     <td><?php print $fila['email'];?></td>
                                                     <td><?php print $fila['telefono'];?></td>
-                                                    <td><button type="button" id="btn_edit" alt="Editar" title="Editar" class="btn btn_edit" data-toggle="modal" data-id="<?php print $key;?>" data-target="#modalUsuarios"><span class="fa fa-edit pull-right"></span></button>
+                                                    <td><button type="button" id="btn_edit" alt="Editar" title="Editar" class="btn btn_edit" data-toggle="modal" data-id="<?php print $key;?>" data-target="#modalUsuarios"><span class="fa fa-edit pull-right"></span></button></td>
                                                     </tr>        
                                                 <?php endforeach;?>
                                             </tbody>
