@@ -32,6 +32,15 @@ class Home extends CI_Controller {
             if ($citas != -1) {
                 $i=0;
                 foreach ($citas as $row) { 
+                    if($row['idestadocita']==1){
+                        $pago="Pendiente";    
+                    }
+                    else if($row['idestadocita']==2){
+                        $pago="Pagado";    
+                    }
+                    else{
+                        $pago="Transferencia";    
+                    }
                     if($row['estadocita']=='No Confirmada'){
                         $citas[$i]['backgroundColor'] = "rgb(40, 40,60)";    
                     } 
@@ -51,12 +60,12 @@ class Home extends CI_Controller {
                     }   
                    // $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
                    if($this->session->userdata('perfil') ==1){                  
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]."  |  PAGO: ".$pago);
 
                     }
                     else{
                         //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento'] );
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  PAGO: ".$pago );
                         $citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$row['fechanacimiento']." | GEN: ".$row["genero"]);
                     } 
 
@@ -108,9 +117,17 @@ class Home extends CI_Controller {
                 $i=0;
                 foreach ($citas as $row) { 
                     //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
-                    print "<script>console.log(".$this->session->userdata('perfil').");</script>";
+                    if($row['idestadocita']==1){
+                        $pago="Pendiente";    
+                    }
+                    else if($row['idestadocita']==2){
+                        $pago="Pagado";    
+                    }
+                    else{
+                        $pago="Transferencia";    
+                    }
                     //if($this->session->userdata('perfil') ==1){                  
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]."  |  PAGO: ".$pago);
 
                    /* }
                     else{
@@ -178,14 +195,23 @@ class Home extends CI_Controller {
             $replace_array=array();
             if ($citas != -1) {
                 $i=0;
-                foreach ($citas as $row) {      
+                foreach ($citas as $row) {  
+                    if($row['idestadocita']==1){
+                        $pago="Pendiente";    
+                    }
+                    else if($row['idestadocita']==2){
+                        $pago="Pagado";    
+                    }
+                    else{
+                        $pago="Transferencia";    
+                    }    
                     //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
                     if($this->session->userdata('perfil') ==1){                  
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]."  |  PAGO: ".$pago);
                     }
                     else{
                         //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento'] );
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  PAGO: ".$pago );
                         $citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$row['fechanacimiento']." | GEN: ".$row["genero"]);
                     } 
 

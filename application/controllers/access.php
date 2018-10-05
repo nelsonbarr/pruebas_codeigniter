@@ -22,16 +22,25 @@ class Access extends CI_Controller {
             $replace_array=array();
             if ($citas != -1) {
                 $i=0;
-                foreach ($citas as $row) {                    
+                foreach ($citas as $row) {  
+                    if($row['idestadocita']==1){
+                        $pago="Pendiente";    
+                    }
+                    else if($row['idestadocita']==2){
+                        $pago="Pagado";    
+                    }
+                    else{
+                        $pago="Transferencia";    
+                    }                   
                         //$citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
                     //   $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
                     if($this->session->userdata('perfil') ==1){                  
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]."  |  PAGO: ".$pago);
 
                     }
                     else{
                         //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento'] );
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  PAGO: ".$pago );
                         $citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$row['fechanacimiento']." | GEN: ".$row["genero"]);
                     }   
                     /*$citas[$i]['title'] = str_replace($replace_array, "", $row['title']."  ID: ".$row['documento']." NAC.:");
@@ -123,12 +132,21 @@ class Access extends CI_Controller {
                 if ($citas != -1) {
                     $i=0;
                     foreach ($citas as $row) { 
+                        if($row['idestadocita']==1){
+                            $pago="Pendiente";    
+                        }
+                        else if($row['idestadocita']==2){
+                            $pago="Pagado";    
+                        }
+                        else{
+                            $pago="Transferencia";    
+                        } 
                         if($valid_user['perfil']==1){                  
-                            $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]);                
+                            $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]."  |  PAGO: ".$pago);                
 
                         }
                         else{
-                            $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento'] );
+                            $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  PAGO: ".$pago );
                             $citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$row['fechanacimiento']." | GEN: ".$row["genero"]);
                         }
                         //$citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
