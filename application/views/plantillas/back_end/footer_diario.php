@@ -36,6 +36,49 @@ var arrPacientes=new Array();
             autoclose: true
         });
 
+//HAGO SEGUIMIENTO AL onclick DE CADA BOTON HISTORIA DEL LISTADO DE PACIENTES 
+    $('#btn_history').on('click',function () {      
+        var idpaciente=$('select[name=selPaciente]').val()              
+        $.ajax({
+        type:'POST',
+        url:'<?php print base_url();?>pacientes/carga_Historico/'+idpaciente,
+        success:function(data){
+          data=JSON.parse(data);
+          json=data.data;          
+          html="";
+          $("#historico").html('');
+          if(json.length>0){
+            $('#txtnombrepaciente').val(json[0].nombre_paciente);
+            for(i=0;i<json.length;i++){
+                fila=json[i]; 
+                if(fila.sintomas==null)
+                    sintomas="";                
+                else
+                    sintomas=fila.sintomas;
+                if(fila.motivocita==null)
+                    motivocita="";                
+                else
+                    motivocita=fila.motivocita;
+                if(fila.descripcion==null)
+                    descripcion="";                
+                else
+                    descripcion=fila.descripcion;
+
+                html+='<small><div><b>Fecha:</b> '+fila.fechacita+'</div>'; 
+                html+='<div><b>Motivo Cita:</b> '+motivocita+'</div>';
+                html+='<div><b>Sintomas:</b> '+sintomas+'</div>';            
+                html+='<div><b>Descripcion:</b> '+descripcion+'</div></small><hr/>';
+            }
+          }
+          else{
+            html+='<div>Paciente aun no tiene Historia</div>';
+            //$('#modalPacienteHistory').modal('hide')
+          }
+          $("#historico").html(html);         
+        }
+      })//end ajax
+
+    });
 
         //BLOQUE DE INICIALIZACION DE CALENDARIO
 
@@ -104,6 +147,8 @@ var arrPacientes=new Array();
                     blanquearCita();                                        
                     $('select[name=selPaciente]').val(event.idpaciente);
                     $('.selectpicker').selectpicker('refresh')  
+                    
+                    $("#txtnombrepaciente").val(event.nombre_paciente+"  ID: "+event.documento);
                     $("#idcita").val(event.idcita)                  
                     $("#date").val(event.start.format('Y/M/D hh:mm'));
                     $("#dateend").val(event.end.format('Y/M/D hh:mm'));

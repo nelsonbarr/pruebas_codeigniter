@@ -25,7 +25,7 @@ class Citas_model extends CI_Model{
         $this->db->select("citas.descripcion");
         $this->db->select("idmedico");
         $this->db->select("estadoscitas.descripcion AS estadocita");
-        $this->db->select("CONCAT(medicos.nombres,' ',medicos.apellidos) AS nombremedico");
+        $this->db->select("CONCAT(pacientes.nombres,' ',pacientes.apellidos) AS nombre_paciente");
         $this->db->select("CONCAT(medicos.nombres,' ',medicos.apellidos) AS nombremedico");
         $this->db->from('citas');
         $this->db->join('pacientes','citas.idpaciente=pacientes.id');
