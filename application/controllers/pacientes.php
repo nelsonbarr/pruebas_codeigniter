@@ -22,6 +22,7 @@ class Pacientes extends CI_Controller{
                 'user_name' => $this->user_name,
                 'tiposDocs'=>$tiposDocs,
                 'estadosCiviles'=>$estadosCiviles,
+                'tipocalendar'=>'',
                 'contenido' => 'pacientesList',  
                 'pacientes' =>$pacientes,                                
                 'vista'=>'paciente'

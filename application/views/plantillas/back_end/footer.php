@@ -1,12 +1,13 @@
     </body>
     <!--   Core JS Files   -->
     <!--   Core JS Files   -->
-    <script src="<?php echo base_url() ?>assets/js/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="<?php echo base_url() ?>assets/js/popper.min.js" ></script>
     <script src="<?php echo base_url() ?>assets/js/jquery.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url() ?>assets/js/material.min.js" type="text/javascript"></script>   
     <script src='<?php echo base_url() ?>assets/fullcalendar/moment.min.js'></script>    
     <script src='<?php echo base_url() ?>assets/fullcalendar/fullcalendar.min.js'></script>
+    <script src='<?php echo base_url() ?>assets/fullcalendar/locale-all.js'></script>
     <!--  Notifications Plugin    -->
     <script src="<?php echo base_url() ?>assets/js/bootstrap-notify.js"></script>
     <!-- Material Dashboard javascript methods -->
@@ -74,7 +75,7 @@ var arrPacientes=new Array();
                 slotDuration: '00:15:00',
                 contentHeight:480,       //auto            
                 hiddenDays: [ 6,0 ], // hide Tuesdays and Thursdays //defaultView: tipocalendar,               
-                defaultView: tipocalendar,                
+                defaultView: tipocalendar,                           
                 locale : 'es',
                 eventLimit: true, // allow "more" link when too many events*/               
                 buttonIcons: true, // show the prev/next text

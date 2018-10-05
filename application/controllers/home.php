@@ -49,14 +49,13 @@ class Home extends CI_Controller {
                     }   
                    // $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
                    if($this->session->userdata('perfil') ==1){                  
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']."  ID: ".$row['documento'] );
-                        $citas[$i]['description'] = str_replace($replace_array, "","NAC.: ".$row['fechanacimiento']."  GEN: ".$row["genero"]);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]);
 
                     }
                     else{
                         //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']."  ID: ".$row['documento'] );
-                        $citas[$i]['description'] = str_replace($replace_array, "","NAC.: ".$row['fechanacimiento']."  GEN: ".$row["genero"]);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento'] );
+                        $citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$row['fechanacimiento']." | GEN: ".$row["genero"]);
                     } 
 
                    //$citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
@@ -107,16 +106,16 @@ class Home extends CI_Controller {
                 $i=0;
                 foreach ($citas as $row) { 
                     //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
-                    if($this->session->userdata('perfil') ==1){                  
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']."  ID: ".$row['documento'] );
-                        $citas[$i]['description'] = str_replace($replace_array, "","NAC.: ".$row['fechanacimiento']."  GEN: ".$row["genero"]);
+                    print "<script>console.log(".$this->session->userdata('perfil').");</script>";
+                    //if($this->session->userdata('perfil') ==1){                  
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]);
 
-                    }
+                   /* }
                     else{
                         //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']."  ID: ".$row['documento'] );
-                        $citas[$i]['description'] = str_replace($replace_array, "","NAC.: ".$row['fechanacimiento']."  GEN: ".$row["genero"]);
-                    } 
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento'] );
+                        $citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$row['fechanacimiento']." | GEN: ".$row["genero"]);
+                    } */
 
                     //$citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
                     //$citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
@@ -177,14 +176,12 @@ class Home extends CI_Controller {
                 foreach ($citas as $row) {      
                     //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
                     if($this->session->userdata('perfil') ==1){                  
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']."  ID: ".$row['documento'] );
-                        $citas[$i]['description'] = str_replace($replace_array, "","NAC.: ".$row['fechanacimiento']."  GEN: ".$row["genero"]);
-
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]);
                     }
                     else{
                         //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']."  ID: ".$row['documento'] );
-                        $citas[$i]['description'] = str_replace($replace_array, "","NAC.: ".$row['fechanacimiento']."  GEN: ".$row["genero"]);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento'] );
+                        $citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$row['fechanacimiento']." | GEN: ".$row["genero"]);
                     } 
 
                     //$citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
@@ -236,7 +233,8 @@ class Home extends CI_Controller {
         $idcita     = $this->input->post("idcita");
         $motivocita = $this->input->post("txtmotivocita");
         $descripcion = $this->input->post("txtdescripcion");
-        $sintomas = $this->input->post("txtsintomas");     
+        $sintomas = $this->input->post("txtsintomas");  
+        $estadocita = $this->input->post("selEstadoCita");    
         $medicinastomadas = $this->input->post("txtmedicinastomadas");    
         $start_date = $this->input->post("date", TRUE);
         $end_date = $this->input->post("dateend", TRUE);
@@ -248,6 +246,7 @@ class Home extends CI_Controller {
            "motivocita" => $motivocita,
            "descripcion"=>$descripcion,
            "sintomas"=>$sintomas,
+           'idestadocita'=>$estadocita,
            "medicinastomadas"=>$medicinastomadas,
            "fechacita" => $start_date,
            "fechafincita" => $end_date

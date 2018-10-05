@@ -12,7 +12,7 @@
     if($tipocalendar=='agendaDay'){
         $this->load->view("plantillas/back_end/footer_diario");
     }
-    else{
+    elseif($tipocalendar=='agendaWeek'){
         $this->load->view("plantillas/back_end/footer");
     }
     

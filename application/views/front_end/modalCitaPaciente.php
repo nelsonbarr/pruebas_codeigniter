@@ -19,7 +19,7 @@
                             <select id="selPaciente" name="selPaciente" class="selectpicker form-control" data-show-subtext="true" data-live-search="true" >  
                                 <option value="" >Seleccione..</option>                 
                                 <?php foreach($pacientes AS $fila):?>        
-                                <option data-subtext="<?php print $fila["documento"];?>" value="<?php print $fila["id"];?>"><?php print $fila["nombres"]." ".$fila['apellidos'];?></option>
+                                <option data-subtext="<?php print $fila["documento"];?>" value="<?php print $fila["id"];?>"><?php print $fila["nombres"]." ".$fila['apellidos']." |  FEC.NAC.: ".$fila['fechanacimiento']."  |  SEXO: ".$fila['genero'];?></option>
                                 <?php endforeach;?>   
                             </select>                            
                         </div>
