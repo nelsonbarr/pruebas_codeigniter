@@ -46,9 +46,11 @@ class Access extends CI_Controller {
                     }                  
                     elseif($row['estadocita']=='En camino'){
                         $citas[$i]['backgroundColor'] = "rgb(10, 170,90)";
+                        $citas[$i]['textColor']="#000000";
                     } 
                     elseif($row['estadocita']=='En Sala'){
                         $citas[$i]['backgroundColor'] = "#ffff00";
+                        $citas[$i]['textColor']="#000000";
                     } 
                     elseif($row['estadocita']=='Visto'){
                         $citas[$i]['backgroundColor'] = "#0066ff";
@@ -138,9 +140,11 @@ class Access extends CI_Controller {
                         }                  
                         elseif($row['estadocita']=='En camino'){
                             $citas[$i]['backgroundColor'] = "rgb(10, 170,90)";
+                            $citas[$i]['textColor']="#000000";
                         } 
                         elseif($row['estadocita']=='En Sala'){
                             $citas[$i]['backgroundColor'] = "#ffff00";
+                            $citas[$i]['textColor']="#000000";
                         } 
                         elseif($row['estadocita']=='Visto'){
                             $citas[$i]['backgroundColor'] = "#0066ff";
