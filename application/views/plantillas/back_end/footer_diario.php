@@ -36,9 +36,10 @@ var arrPacientes=new Array();
             autoclose: true
         });
 
-//HAGO SEGUIMIENTO AL onclick DE CADA BOTON HISTORIA DEL LISTADO DE PACIENTES 
+//HAGO SEGUIMIENTO AL onclick DE BOTON HISTORIA DEL PACIENTE
     $('#btn_history').on('click',function () {      
-        var idpaciente=$('select[name=selPaciente]').val()              
+        var idpaciente=$('select[name=selPaciente]').val() 
+        $('#txtnombrepaciente').val($('select[name=selPaciente] option:selected').text());             
         $.ajax({
         type:'POST',
         url:'<?php print base_url();?>pacientes/carga_Historico/'+idpaciente,
@@ -48,7 +49,7 @@ var arrPacientes=new Array();
           html="";
           $("#historico").html('');
           if(json.length>0){
-            $('#txtnombrepaciente').val(json[0].nombre_paciente);
+            
             for(i=0;i<json.length;i++){
                 fila=json[i]; 
                 if(fila.sintomas==null)
@@ -141,22 +142,25 @@ var arrPacientes=new Array();
                     dateend.setMinutes(dateend.getMinutes() + 15);
                     $("#date").val(this.start);
                     $("#dateend").val(dateend.getFullYear()+"-"+(dateend.getMonth() + 1) + "-" + dateend.getDate() + "-" +dateend.getHours() + ":" + dateend.getMinutes() + ":" + dateend.getSeconds());
+                    $('#btn_add').show()
                     $('#modalPacientesList').modal('show')                    
                 },
                 eventClick: function(event, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, MODIFICAR PARA LLAMAR A LA VENTANA REGISTRAR CITA
                     blanquearCita();                                        
                     $('select[name=selPaciente]').val(event.idpaciente);
                     $('.selectpicker').selectpicker('refresh')  
-                    
+                    $('#btn_add').hide()
                     $("#txtnombrepaciente").val(event.nombre_paciente+"  ID: "+event.documento);
                     $("#idcita").val(event.idcita)                  
                     $("#date").val(event.start.format('Y/M/D hh:mm'));
                     $("#dateend").val(event.end.format('Y/M/D hh:mm'));
                     $("#txtmotivocita").val(event.motivocita);
+                    $("#selEstadoCita").val(event.idestadocita);
+                    $("#selEstadoPago").val(event.idestadopago);
                     $("#txtsintomas").val(event.sintomas);
                     $("#txtdescripcion").val(event.descripcion);
                     $("#txtmedicinastomadas").val(event.medicinastomadas);
-                    $('#modalPacientesList').modal('show')
+                    $('#modalPacienteCita').modal('show')
                 },
                 eventDrop: function(event, delta){ // event drag and drop
                     start=event.start.format();                                

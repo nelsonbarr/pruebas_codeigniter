@@ -2,15 +2,16 @@
     <div class="modal-dialog   ">
         <div class="modal-content ">
             <form action="<?php print base_url();?>pacientes/savePaciente" method="POST">
-            <div class="modal-header text-center">
-                <h4 class="modal-title text-danger"><strong>Historico de Paciente</strong>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title text-danger text-center"><strong>Historico de Paciente</strong>
                 </h4>
                 <small class="font-bold"></small>
             </div>            
             <div class="modal-body ">
                 <div class="container col-xs-12">                    
                     <div class="row">
-                        <div class="col-xs-12 text-center">
+                        <div class="col-xs-12">
                             <div class="form-group">
                                 <label class=" control-label">Paciente</label>
                                 <input id="txtnombrepaciente" name="txtnombrepaciente" type="text" class="form-control" readonly maxlength="255">

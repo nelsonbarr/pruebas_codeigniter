@@ -21,16 +21,19 @@ class Citas_model extends CI_Model{
         $this->db->select("pacientes.genero");
         $this->db->select("sintomas");
         $this->db->select("pacientes.enfermedadesprevias");
-        $this->db->select("medicinastomadas");
+        $this->db->select("pacientes.medicamentos");
+        $this->db->select("pacientes.alergias");
         $this->db->select("citas.descripcion");
         $this->db->select("idmedico");
         $this->db->select("estadoscitas.id AS idestadocita");
+        $this->db->select("estadospagos.id AS idestadopago");
         $this->db->select("estadoscitas.descripcion AS estadocita");
         $this->db->select("CONCAT(pacientes.nombres,' ',pacientes.apellidos) AS nombre_paciente");
         $this->db->select("CONCAT(medicos.nombres,' ',medicos.apellidos) AS nombremedico");
         $this->db->from('citas');
         $this->db->join('pacientes','citas.idpaciente=pacientes.id');
         $this->db->join('estadoscitas','citas.idestadocita=estadoscitas.id');
+        $this->db->join('estadospagos','citas.idestadopago=estadospagos.id');
         $this->db->join('medicos','citas.idmedico=medicos.id','left outer ');
         //$this->db->where("DATE_FORMAT(fechacita,'%m')", $mes);
         $query = $this->db->get();
@@ -44,14 +47,19 @@ class Citas_model extends CI_Model{
     public function setCitas($datos){
         if($datos['idcita']!=""){
             $id=$datos['idcita'];
-            unset($datos['idcita']);           
+            unset($datos['idcita'],$datos['idpaciente']);           
             $this->db->where('idcita',$id);
-            $this->db->update("citas",$datos);
+            $result=$this->db->update("citas",$datos);
+
         }
         else{
             $id=$datos['idcita'];
             unset($datos['idcita']);           
-            $this->db->insert('citas',$datos);           
+            $result=$this->db->insert('citas',$datos);           
+        }
+        $error = $this->db->error(); // Has keys 'code' and 'message')
+        if(!$result){
+            print $error->message;
         }
     }
 

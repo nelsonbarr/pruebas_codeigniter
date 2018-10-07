@@ -18,15 +18,18 @@ class Access extends CI_Controller {
         if (!empty($user_login)) {
             $citas=$this->citas_model->getCitas(date('m')); 
             $estadoscitas=$this->access_model->getEstadosCita();  
+            $estadospagos=$this->access_model->getEstadosPago();
+            $tiposDocs=$this->access_model->getTiposDocumentos();        
+            $estadosCiviles=$this->access_model->getEstadosCiviles();
             $replace_array = array("'", '"');            
             $replace_array=array();
             if ($citas != -1) {
                 $i=0;
                 foreach ($citas as $row) {  
-                    if($row['idestadocita']==1){
+                    if($row['idestadopago']==2){
                         $pago="Pendiente";    
                     }
-                    else if($row['idestadocita']==2){
+                    else if($row['idestadopago']==1){
                         $pago="Pagado";    
                     }
                     else{
@@ -75,7 +78,10 @@ class Access extends CI_Controller {
                 'user_name' => $this->user_name,
                 'contenido' => 'dashboard_home',
                 'tipocalendar'=>'agendaWeek', 
-                'estadoscitas'=>$estadoscitas,                               
+                'estadoscitas'=>$estadoscitas,
+                'estadospagos'=>$estadospagos,  
+                'tiposDocs'=>$tiposDocs,
+                'estadosCiviles'=>$estadosCiviles,                             
                 'citas'=>$citas,
                 'pacientes'=>$pacientes, 
                 'vista'=>'calendario'
@@ -110,7 +116,9 @@ class Access extends CI_Controller {
             $this->session->set_userdata($datos_cookie);
             
             $estadoscitas=$this->access_model->getEstadosCita(); 
-            
+            $estadospagos=$this->access_model->getEstadosPago();
+            $tiposDocs=$this->access_model->getTiposDocumentos();        
+            $estadosCiviles=$this->access_model->getEstadosCiviles();
             if($valid_user['perfil']==1){
                 $tipocalendar="agendaDay";
                 $contenido = 'dashboard_home';
@@ -132,10 +140,10 @@ class Access extends CI_Controller {
                 if ($citas != -1) {
                     $i=0;
                     foreach ($citas as $row) { 
-                        if($row['idestadocita']==1){
+                        if($row['idestadopago']==2){
                             $pago="Pendiente";    
                         }
-                        else if($row['idestadocita']==2){
+                        else if($row['idestadopago']==1){
                             $pago="Pagado";    
                         }
                         else{
@@ -180,7 +188,10 @@ class Access extends CI_Controller {
                 'user_name' => $this->user_name,                
                 'contenido' => $contenido,
                 'tipocalendar'=>$tipocalendar, 
-                'estadoscitas'=>$estadoscitas,   
+                'estadoscitas'=>$estadoscitas,
+                'estadospagos'=>$estadospagos, 
+                'tiposDocs'=>$tiposDocs,
+                'estadosCiviles'=>$estadosCiviles,  
                 'pacientes'=>$pacientes,                              
                 'citas'=>$citas,
                 'vista'=>'calendario'

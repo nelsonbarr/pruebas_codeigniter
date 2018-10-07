@@ -37,6 +37,50 @@ var arrPacientes=new Array();
         });
 
 
+    //HAGO SEGUIMIENTO AL onclick DE BOTON HISTORIA DEL PACIENTE
+    $('#btn_history').on('click',function () {      
+        var idpaciente=$('select[name=selPaciente]').val() 
+        $('#txtnombrepaciente').val($('select[name=selPaciente] option:selected').text());             
+        $.ajax({
+        type:'POST',
+        url:'<?php print base_url();?>pacientes/carga_Historico/'+idpaciente,
+        success:function(data){
+          data=JSON.parse(data);
+          json=data.data;          
+          html="";
+          $("#historico").html('');
+          if(json.length>0){
+            
+            for(i=0;i<json.length;i++){
+                fila=json[i]; 
+                if(fila.sintomas==null)
+                    sintomas="";                
+                else
+                    sintomas=fila.sintomas;
+                if(fila.motivocita==null)
+                    motivocita="";                
+                else
+                    motivocita=fila.motivocita;
+                if(fila.descripcion==null)
+                    descripcion="";                
+                else
+                    descripcion=fila.descripcion;
+
+                html+='<small><div><b>Fecha:</b> '+fila.fechacita+'</div>'; 
+                html+='<div><b>Motivo Cita:</b> '+motivocita+'</div>';
+                html+='<div><b>Sintomas:</b> '+sintomas+'</div>';            
+                html+='<div><b>Descripcion:</b> '+descripcion+'</div></small><hr/>';
+            }
+          }
+          else{
+            html+='<div>Paciente aun no tiene Historia</div>';
+            //$('#modalPacienteHistory').modal('hide')
+          }
+          $("#historico").html(html);         
+        }
+      })//end ajax
+
+    });
         //BLOQUE DE INICIALIZACION DE CALENDARIO
 
         var initialLocaleCode = 'en';
@@ -93,7 +137,8 @@ var arrPacientes=new Array();
                     dateend.setMinutes(dateend.getMinutes() + 15);
                     $("#date").val(this.start);
                     $("#dateend").val(dateend.getFullYear()+"-"+(dateend.getMonth() + 1) + "-" + dateend.getDate() + "-" +dateend.getHours() + ":" + dateend.getMinutes() + ":" + dateend.getSeconds());
-                    $('#modalPacientesList').modal('show')
+                    $('#btn_add').show()
+                    $('#modalPacienteCita').modal('show')
                     /*this.title = prompt('Event Title:');*/
                     /*this.dateend = dateend;               
                     this.eventData;
@@ -109,22 +154,26 @@ var arrPacientes=new Array();
                     }
                     $('#calendar').fullCalendar('unselect');*/
                 },
-                eventClick: function(event, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, MODIFICAR PARA LLAMAR A LA VENTANA REGISTRAR CITA
+                eventClick: function(event, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, MUESTRA LOS DATOS DELA CITA PARA EDICION
                     blanquearCita();                                        
                     $('select[name=selPaciente]').val(event.idpaciente);
-                    $('.selectpicker').selectpicker('refresh')  
+                    $('.selectpicker').selectpicker('refresh') 
+                    $('#btn_add').hide()
                     $("#idcita").val(event.idcita)                  
                     $("#date").val(event.start.format('Y/M/D hh:mm'));
                     $("#dateend").val(event.end.format('Y/M/D hh:mm'));
+                    $("#selEstadoCita").val(event.idestadocita);
+                    $("#selEstadoPago").val(event.idestadopago);
                     $("#txtmotivocita").val(event.motivocita);
                     $("#txtsintomas").val(event.sintomas);
                     $("#txtdescripcion").val(event.descripcion);
                     $("#txtmedicinastomadas").val(event.medicinastomadas);
-                    $('#modalPacientesList').modal('show')
+                    $('#modalPacienteCita').modal('show')
                 },
                 eventDrop: function(event, delta){ // event drag and drop
                     start=event.start.format();                                
-                    end=event.end.format();                   
+                    end=event.end.format(); 
+                    console.log(event)                  
                     $.ajax({
                         url:'<?php print base_url();?>home/saveCita/',                       
                         data: 'date='+start+'&dateend='+end+'&idcita='+event.idcita+"&action=NO",
@@ -137,6 +186,7 @@ var arrPacientes=new Array();
                 eventResize: function(event) {  // resize to increase or decrease time of event
                     start=event.start.format(); 
                     end=event.end.format();
+                    console.log(event)
                     $.ajax({
                         url:'<?php print base_url();?>home/saveCita/',  
                         data: 'action=NO&date='+start+'&dateend='+end+'&idcita='+event.idcita,

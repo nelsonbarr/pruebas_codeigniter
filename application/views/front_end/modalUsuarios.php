@@ -2,15 +2,15 @@
     <div class="modal-dialog   ">
         <div class="modal-content ">
             <form action="<?php print base_url();?>usuarios/saveUsuario" method="POST">
-            <div class="modal-header text-center">
-                <h4 class="modal-title text-danger"><strong>Registro de Usuarios</strong>
+            <div class="modal-header">
+                <h4 class="modal-title text-danger text-center"><strong>Registro de Usuarios</strong>
                 </h4>
                 <small class="font-bold"></small>
             </div>            
             <div class="modal-body ">
                 <div class="container col-xs-12">                    
                     <div class="row ">                        
-                        <div class="col-xs-12 text-center">
+                        <div class="col-xs-12">
                             <div class="form-group"><label class=" control-label">Nombre Usuario</label>
                                 <input id="id" name="id"  type="hidden" />
                                 <input id="txtnombreusuario" name="txtnombreusuario" type="text" class="form-control" maxlength="100"/>
@@ -18,32 +18,32 @@
                         </div>                        
                     </div>
                     <div class="row">
-                        <div class="col-xs-6 text-center">
+                        <div class="col-xs-6">
                             <div class="form-group"><label class=" control-label">Nombres</label>
                                 <input id="txtnombres" name="txtnombres" type="text" class="form-control" maxlength="255">
                             </div>
                         </div>   
-                        <div class="col-xs-6 text-center">
+                        <div class="col-xs-6">
                             <div class="form-group"><label class=" control-label">Apellidos</label>
                                 <input id="txtapellidos" name="txtapellidos" type="text" class="form-control" maxlength="255">
                             </div>
                         </div>  
                     </div>  
                     <div class="row">                       
-                         <div class="col-xs-6 text-center">
+                         <div class="col-xs-6">
                             <div class="form-group"><label class=" control-label">Telefonos</label>
                                 <input id="txttelefonos" name="txttelefonos" type="text" class="form-control" maxlength="45">
                             </div>
                         </div>       
                         
-                        <div class="col-xs-6 text-center">
+                        <div class="col-xs-6">
                             <div class="form-group"><label class=" control-label">Email</label>
                                 <input id="txtemail" name="txtemail" type="text" class="form-control" maxlength="45">
                             </div>                    
                         </div> 
                     </div>
                     <div class="row">
-                         <div class="col-xs-6 text-center">
+                         <div class="col-xs-6">
                             <div class="form-group"><label class=" control-label">Perfil</label>
                                 <select id="selPerfil" class="form-control" name="selPerfil">
                                     <option value="">Seleccione..</option>
