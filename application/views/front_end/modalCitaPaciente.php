@@ -39,11 +39,29 @@
                             <label class="control-label">Estado Cita</label>                            
                             <select id="selEstadoCita" name="selEstadoCita" class="form-control">  
                                 <option value="" >Seleccione..</option>                 
-                                <?php foreach($estadoscitas AS $fila):?>        
+                                <?php foreach($estadoscitas AS $fila):?>
+                                    <?php switch($fila["id"]): case 1:?>    
+                                    <option class="label-default" value="<?php print $fila["id"];?>"><?php print $fila["descripcion"];?></option>
+                                    <?php break; case 2:?>
+                                    <option class="label-danger" value="<?php print $fila["id"];?>"><?php print $fila["descripcion"];?></option>
+                                    <?php break; case 3:?>
+                                    <option class="label-success" value="<?php print $fila["id"];?>"><?php print $fila["descripcion"];?></option>
+                                    <?php break; case 4:?>
+                                    <option class="label-warning" value="<?php print $fila["id"];?>"><?php print $fila["descripcion"];?></option>
+                                    <?php break; case 5:?>
+                                    <option class="label-info" value="<?php print $fila["id"];?>"><?php print $fila["descripcion"];?></option>
+                                    <?php break; endswitch; ?>
+                                <?php endforeach;?>   
+                            </select>                            
+                        </div>  
+                        <div class="form-group">
+                            <label class="control-label">Estado Pago</label>                            
+                            <select id="selEstadoPago" name="selEstadoPago" class="form-control">                                             
+                                <?php foreach($estadospagos AS $fila):?>        
                                 <option value="<?php print $fila["id"];?>"><?php print $fila["descripcion"];?></option>
                                 <?php endforeach;?>   
                             </select>                            
-                        </div>                            
+                        </div>                          
                         <div class="form-group">
                             <label class=" control-label">Motivo Cita</label>
                             <input id="txtmotivocita" name="txtmotivocita" type="text" class="form-control" maxlength="100">
@@ -68,6 +86,7 @@
         </div>
         
         <div class="modal-footer">
+            <button type="button" id="btn_history" alt="Historia" title="Historia" class="btn btn-info" data-toggle="modal"  data-target="#modalPacienteHistory">Ver Historia</button>
             <button type="submit" class="btn btn-danger" id="btn_procesa">Procesar</button>            
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>

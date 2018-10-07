@@ -32,6 +32,15 @@ class Home extends CI_Controller {
             if ($citas != -1) {
                 $i=0;
                 foreach ($citas as $row) { 
+                    if($row['idestadocita']==1){
+                        $pago="Pendiente";    
+                    }
+                    else if($row['idestadocita']==2){
+                        $pago="Pagado";    
+                    }
+                    else{
+                        $pago="Transferencia";    
+                    }
                     if($row['estadocita']=='No Confirmada'){
                         $citas[$i]['backgroundColor'] = "rgb(40, 40,60)";    
                     } 
@@ -40,21 +49,23 @@ class Home extends CI_Controller {
                     }                  
                     elseif($row['estadocita']=='En camino'){
                         $citas[$i]['backgroundColor'] = "rgb(10, 170,90)";
+                        $citas[$i]['textColor']="#000000";
                     } 
                     elseif($row['estadocita']=='En Sala'){
                         $citas[$i]['backgroundColor'] = "#ffff00";
+                        $citas[$i]['textColor']="#000000";
                     } 
                     elseif($row['estadocita']=='Visto'){
                         $citas[$i]['backgroundColor'] = "#0066ff";
                     }   
                    // $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
                    if($this->session->userdata('perfil') ==1){                  
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]."  |  PAGO: ".$pago);
 
                     }
                     else{
                         //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento'] );
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  PAGO: ".$pago );
                         $citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$row['fechanacimiento']." | GEN: ".$row["genero"]);
                     } 
 
@@ -106,9 +117,17 @@ class Home extends CI_Controller {
                 $i=0;
                 foreach ($citas as $row) { 
                     //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
-                    print "<script>console.log(".$this->session->userdata('perfil').");</script>";
+                    if($row['idestadocita']==1){
+                        $pago="Pendiente";    
+                    }
+                    else if($row['idestadocita']==2){
+                        $pago="Pagado";    
+                    }
+                    else{
+                        $pago="Transferencia";    
+                    }
                     //if($this->session->userdata('perfil') ==1){                  
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]."  |  PAGO: ".$pago);
 
                    /* }
                     else{
@@ -127,9 +146,11 @@ class Home extends CI_Controller {
                     }                  
                     elseif($row['estadocita']=='En camino'){
                         $citas[$i]['backgroundColor'] = "rgb(10, 170,90)";
+                        $citas[$i]['textColor']="#000000";
                     } 
                     elseif($row['estadocita']=='En Sala'){
                         $citas[$i]['backgroundColor'] = "#ffff00";
+                        $citas[$i]['textColor']="#000000";
                     } 
                     elseif($row['estadocita']=='Visto'){
                         $citas[$i]['backgroundColor'] = "#0066ff";
@@ -166,6 +187,7 @@ class Home extends CI_Controller {
        // if (!empty($user_login)) {
             $citas=$this->citas_model->getCitas(date('m')); 
             $estadoscitas=$this->access_model->getEstadosCita(); 
+            $estadospagos=$this->access_model->getEstadosPago();
             $replace_array = array("'", '"');
             //var_dump($citas);
             //print count($citas);
@@ -173,14 +195,23 @@ class Home extends CI_Controller {
             $replace_array=array();
             if ($citas != -1) {
                 $i=0;
-                foreach ($citas as $row) {      
+                foreach ($citas as $row) {  
+                    if($row['idestadocita']==1){
+                        $pago="Pendiente";    
+                    }
+                    else if($row['idestadocita']==2){
+                        $pago="Pagado";    
+                    }
+                    else{
+                        $pago="Transferencia";    
+                    }    
                     //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
                     if($this->session->userdata('perfil') ==1){                  
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]."  |  PAGO: ".$pago);
                     }
                     else{
                         //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento'] );
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  PAGO: ".$pago );
                         $citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$row['fechanacimiento']." | GEN: ".$row["genero"]);
                     } 
 
@@ -194,10 +225,11 @@ class Home extends CI_Controller {
                     }                  
                     elseif($row['estadocita']=='En camino'){
                         $citas[$i]['backgroundColor'] = "rgb(10, 170,90)";
+                        $citas[$i]['textColor']="#000000";
                     } 
                     elseif($row['estadocita']=='En Sala'){
                         $citas[$i]['backgroundColor'] = "#ffff00";
-                        $citas[$i]['Color'] = "#000000";
+                        $citas[$i]['textColor']="#000000";
                     } 
                     elseif($row['estadocita']=='Visto'){
                         $citas[$i]['backgroundColor'] = "#0066ff";
@@ -214,6 +246,7 @@ class Home extends CI_Controller {
                 'contenido' => 'dashboard_home',
                 'tipocalendar'=>'agendaWeek', 
                 'estadoscitas'=>$estadoscitas, 
+                'estadospagos'=>$estadospagos,
                 'pacientes'=>$pacientes,                          
                 'citas'=>$citas,
                 'vista'=>'calendario'
@@ -235,7 +268,8 @@ class Home extends CI_Controller {
         $motivocita = $this->input->post("txtmotivocita");
         $descripcion = $this->input->post("txtdescripcion");
         $sintomas = $this->input->post("txtsintomas");  
-        $estadocita = $this->input->post("selEstadoCita");    
+        $estadocita = $this->input->post("selEstadoCita");   
+        $estadopago = $this->input->post("selEstadoPago");   
         $medicinastomadas = $this->input->post("txtmedicinastomadas");    
         $start_date = $this->input->post("date", TRUE);
         $end_date = $this->input->post("dateend", TRUE);
@@ -249,6 +283,7 @@ class Home extends CI_Controller {
            "sintomas"=>$sintomas,
            'idestadocita'=>$estadocita,
            "medicinastomadas"=>$medicinastomadas,
+           'idestadopago'=>$estadopago,
            "fechacita" => $start_date,
            "fechafincita" => $end_date
         );

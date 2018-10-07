@@ -53,5 +53,16 @@ class Access_model extends CI_Model{
         return -1;
     }
 
+    public function getEstadosPago()
+    {
+        $this->db->select('*')->from('estadospagos');
+        
+        $query = $this->db->get();
+        $query = $query->result_array();
+        if (count($query) >= 1)
+            return $query;
+        return -1;
+    }
+
 }
 ?>
