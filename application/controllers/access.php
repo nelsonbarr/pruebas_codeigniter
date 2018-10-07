@@ -49,6 +49,7 @@ class Access extends CI_Controller {
                     } 
                     elseif($row['estadocita']=='En Sala'){
                         $citas[$i]['backgroundColor'] = "#ffff00";
+                        $citas[$i]['Color'] = "#000000";
                     } 
                     elseif($row['estadocita']=='Visto'){
                         $citas[$i]['backgroundColor'] = "#0066ff";
