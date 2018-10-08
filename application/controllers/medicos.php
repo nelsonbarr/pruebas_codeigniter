@@ -1,10 +1,10 @@
 <?php 
-class Pacientes extends CI_Controller{
+class Medicos extends CI_Controller{
     
     public function __construct(){
         parent::__construct(); 
         $this->load->model('access_model');   
-        $this->load->model('pacientes_model');        
+        $this->load->model('medicos_model');        
         $this->id_user = !empty($this->session->userdata('id_user')) ? $this->session->userdata('id_user') : 0;
         $this->user_name = !empty($this->session->userdata('name_user')) ? $this->session->userdata('name_user') : '';
     }
@@ -13,29 +13,30 @@ class Pacientes extends CI_Controller{
     public function index()
     {
         $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
-        $pacientes=$this->pacientes_model->getPacientes();
+        $medicos=$this->medicos_model->getMedicos();
         $tiposDocs=$this->access_model->getTiposDocumentos();        
         $estadosCiviles=$this->access_model->getEstadosCiviles();
+		$especialidades=$this->access_model->getEspecialidades();
         //if (!empty($user_login)) {
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,
                 'tiposDocs'=>$tiposDocs,
                 'estadosCiviles'=>$estadosCiviles,
-                'tipocalendar'=>'',
-                'contenido' => 'pacientesList',  
-                'pacientes' =>$pacientes,                                
-                'vista'=>'paciente'
+				'especialidades'=>$especialidades,
+                'contenido' => 'medicosList',  
+                'medicos' =>$medicos,                                
+                'vista'=>'medicos'
             );
             $this->load->view("plantillas/plantilla", $data);
        // }    
     }
 
-    public function savePaciente(){
+    public function saveMedico(){
         $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
 
         $datos=array();
-        $datos['id']=$this->input->post("idpaciente");
+        $datos['id']=$this->input->post("idmedico");
         $datos['idtipodocumento']=$this->input->post("idtipodoc");
         $datos['documento']=$this->input->post("txtiddocumento");
         $datos['nombres']=$this->input->post("txtnombres");
@@ -45,46 +46,26 @@ class Pacientes extends CI_Controller{
         $datos['email']=$this->input->post("txtemail");
         $datos['telefono']=$this->input->post("txttelefonos");
         $datos['direccion'] =$this->input->post("txtdireccion");
-        $datos['idestadocivil']=$this->input->post("estadocivil");
-        $datos['alergias']=$this->input->post("txtalergias");
-        $datos['enfermedadesprevias']=$this->input->post("txtenfermedades");
-        $datos['medicamentos']=$this->input->post("txtmedicinas");
-        $datos['genero']=$this->input->post("genero"); 
-        $date = new DateTime($datos['fechanacimiento']);
-        $datos['fechanacimiento'] =$date->format('Y-m-d');
-              
-        $this->pacientes_model->savePacientes($datos);
-        
-        $pacientes=$this->pacientes_model->getPacientes();
+		$datos['idespecialidad'] =$this->input->post("idespecialidad");
+		$datos['activo'] =1;
+
+        $this->medicos_model->saveMedicos($datos);
+
+        $medicos=$this->medicos_model->getMedicos();
         $tiposDocs=$this->access_model->getTiposDocumentos();        
         $estadosCiviles=$this->access_model->getEstadosCiviles();
+		$especialidades=$this->access_model->getEspecialidades();
         $data = array(
-            'user_login' => $user_login,
-            'user_name' => $this->user_name,
-            'contenido' => 'pacientesList',
-            'tiposDocs'=>$tiposDocs,
-            'estadosCiviles'=>$estadosCiviles,
-            'tipocalendar'=>'agendaWeek',
-            'pacientes'=>$pacientes,
-            'vista'=>'paciente'            
+                'user_login' => $user_login,
+                'user_name' => $this->user_name,
+                'tiposDocs'=>$tiposDocs,
+                'estadosCiviles'=>$estadosCiviles,
+				'especialidades'=>$especialidades,
+                'contenido' => 'medicosList',  
+                'medicos' =>$medicos,                                
+                'vista'=>'medicos'
         );
         $this->load->view("plantillas/plantilla", $data);
-
-
-    }
-
-    public function carga_Historico($id){
-        $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;        
-        $result=$this->pacientes_model->getHistorico($id);       
-        //se define un arreglo con la informacion de los clientes
-        $consulta=array('data'=>$result);
-
-        if(!$consulta){
-            die('Error');
-        }else{
-            //se codifica la data en formato json
-            echo json_encode($consulta);
-        }
 
 
     }

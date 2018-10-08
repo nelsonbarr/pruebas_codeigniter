@@ -1,27 +1,25 @@
-<div class="modal fade" id="modalPacienteHistory" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modalEspecialidades" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog   ">
         <div class="modal-content ">
-            <form action="<?php print base_url();?>pacientes/savePaciente" method="POST">
+            <form action="<?php print base_url();?>especialidades/saveEspecialidad" method="POST">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title text-danger text-center"><strong>Historico de Paciente</strong>
+                <h4 class="modal-title text-danger text-center"><strong>Registro de Especialidades</strong>
                 </h4>
                 <small class="font-bold"></small>
             </div>            
             <div class="modal-body ">
                 <div class="container col-xs-12">                    
-                    <div class="row">
+                    <div class="row ">                        
                         <div class="col-xs-12">
-                            <div class="form-group">
-                                <label class=" control-label">Paciente</label>
-                                <input id="txtnombrepaciente" name="txtnombrepaciente" type="text" class="form-control" readonly maxlength="255">
+                            <div class="form-group"><label class=" control-label">Descripcion</label>
+                                <input id="id" name="id"  type="hidden" />
+								<input id="status" name="status"  type="hidden" />
+                                <input id="txtdescripcion" name="txtdescripcion" type="text" class="form-control" maxlength="100"/>
                             </div>
-                        </div>                           
-                    </div> 
-                    <div class="row">
-                        <div id="historico" style="overflow-y: true"><!--ACA SE CARGARA LA HISTORIA DEL PACIENTE--></div>
+                        </div>                        
                     </div>
-                </div>              
+                </div>
+               
 
                 <div class"row ">
                     <div class="col-lg-12">
@@ -32,13 +30,14 @@
                 </div>
             </div>
 
-            <div class="modal-footer">                
+            <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-danger" id="btn_send">Guardar</button>
             </div>
             </form>
         </div>
     </div>
-    <div class="modal fade" id="myModalH" tabindex="-1" role="dialog" aria-labelledby="myModalHistorico" aria-hidden="true" style="display: none;">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content" style="overflow: hidden;">
 
@@ -52,4 +51,4 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-</div>    
+</div>

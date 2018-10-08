@@ -1,7 +1,7 @@
     </body>
     <!--   Core JS Files   -->
     <!--   Core JS Files   -->
-    <script src="<?php echo base_url() ?>assets/js/popper.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="<?php echo base_url() ?>assets/js/jquery.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url() ?>assets/js/material.min.js" type="text/javascript"></script>
@@ -11,7 +11,7 @@
     <script src="<?php echo base_url() ?>assets/js/bootstrap-notify.js"></script>
     <!-- Material Dashboard javascript methods -->
     <script src="<?php echo base_url() ?>assets/js/material-dashboard.js"></script>
-    <script src="<?php echo base_url() ?>assets/js/bootstrap-select.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
     <script src="<?php echo base_url() ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"?></script>
     <script src="<?php echo base_url(); ?>assets/datatables2/media/js/jquery.dataTables.js"></script>
     <script src="<?php echo base_url(); ?>assets/datatables2/media/js/dataTables.buttons.js"></script>
@@ -20,45 +20,61 @@
     <script src="<?php echo base_url(); ?>assets/datatables2/media/js/buttons.flash.js"></script>
     <!-- App scripts -->   
 <script>
-var arrUsuarios=new Array();
+var arrMedicos=new Array();
         
-    arrUsuarios=<?php print json_encode($usuarios);?>;
+    arrMedicos=<?php print json_encode($medicos);?>;
     //HAGO SEGUIMIENTO AL onclick DEL BOTON AGREGAR DE LA VISTA LISTA PACIENTES   
     $('#btn_add').on('click',function () { 
-       
-      $('#id').val('');
-      $('#txtnombreusuario').val('');
-	    $('#txtnombres').val('');
+      $('#txtiddocumento').attr('readonly',false);       
+      $('#idtipodoc').removeAttr('disabled'); 
+      $('#idmedico').val('');
+      $('#idtipodoc').val('');
+      $('#txtiddocumento').val('');
+      $('#txtnombres').val('');
       $('#txtapellidos').val('');
       $('#txtemail').val('');
-      $('#txttelefonos').val('');   
-      $('#txtpassword').val('');   
-      $('#status').val('0');   
-      $('#selPerfil').val('');   
+      $('#txtdireccion').val('');
+      $('#txtfechanacimiento').val('');
+      $('#txttelefonos').val(''); 
+	  $('#txtdireccion').val('');
+	  $('#idespecialidad').removeAttr('disabled');   
+      $('input:radio[name="genero"][value=M]').prop('checked', true);  
     });
 
     //HAGO SEGUIMIENTO AL onclick DE CADA BOTON EDICION DEL LISTADO DE PACIENTES 
     $('button[id=btn_edit]').on('click',function () {
       id=$(this).data("id");    
-      //arrPacientes=JSON.parse(arrPacientes.split('\t').join(''));;
-      usuarioEdit=arrUsuarios[id];
-      $('#id').val(usuarioEdit.id);      
-      $('#txtnombreusuario').val(usuarioEdit.nombreusuario);
-      $('#txtnombres').val(usuarioEdit.nombres);
-      $('#txtapellidos').val(usuarioEdit.apellidos);
-      $('#txtemail').val(usuarioEdit.email);
-      $('#txttelefonos').val(usuarioEdit.telefono); 
-  	  $('#txtpassword').val(usuarioEdit.password); 
-  	  $('#selPerfil').val(usuarioEdit.perfil);   
+      //arrMedicos=JSON.parse(arrMedicos.split('\t').join(''));;
+      medicoEdit=arrMedicos[id];
+      $('#idmedico').val(medicoEdit.id);      
+      $('#idtipodoc').val(medicoEdit.idtipodocumento);
+      $('#idtipodoc').attr('disabled','disabled');
+      $('#txtiddocumento').val(medicoEdit.documento);
+      $('#txtiddocumento').attr('readonly',true);
+      $('#txtnombres').val(medicoEdit.nombres);
+      $('#txtapellidos').val(medicoEdit.apellidos);
+      $('#txtemail').val(medicoEdit.email);
+      $('#txtdireccion').val(medicoEdit.direccion);
+      $('#txtfechanacimiento').val(medicoEdit.fechanacimiento);
+      $('#txttelefonos').val(medicoEdit.telefono);   
+      $('#idespecialidad').val(medicoEdit.idespecialidad);
+      $('#idespecialidad').attr('disabled','disabled');
+      $('input:radio[name="genero"][value='+medicoEdit.genero+']').prop('checked', true);  
     });
 
     $(function() {
-        $('#tableusuarios').DataTable({
+        $('#tablemedicos').DataTable({
             responsive: true,
             'order': []
         });
 
-       
+        $('#txtfechanacimiento').datepicker({
+            format: 'yy-mm-dd',
+            //startDate: '-Infinity',
+            todayHighlight: true,
+            autoclose: true
+        });        
+        
         $(".push_menu").click(function(){
              $(".wrapper").toggleClass("active");
         });

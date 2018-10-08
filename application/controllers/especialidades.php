@@ -1,10 +1,10 @@
 <?php 
-class Usuarios extends CI_Controller{
+class Especialidades extends CI_Controller{
     
     public function __construct(){
         parent::__construct(); 
         $this->load->model('access_model');   
-        $this->load->model('usuarios_model');        
+        $this->load->model('especialidades_model');        
         $this->id_user = !empty($this->session->userdata('id_user')) ? $this->session->userdata('id_user') : 0;
         $this->user_name = !empty($this->session->userdata('name_user')) ? $this->session->userdata('name_user') : '';
     }
@@ -13,42 +13,35 @@ class Usuarios extends CI_Controller{
     public function index()
     {
         $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
-        $usuarios=$this->usuarios_model->getUsuarios();
+        $especialidades=$this->especialidades_model->getEspecialidades();
         //if (!empty($user_login)) {
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,
-                'contenido' => 'usuariosList',  
-                'usuarios' =>$usuarios,                                
-                'vista'=>'usuarios'
+                'contenido' => 'especialidadesList',  
+                'especialidades' =>$especialidades,                                
+                'vista'=>'especialidades'
             );
             $this->load->view("plantillas/plantilla", $data);
        // }    
     }
 
-    public function saveUsuario(){
+    public function saveEspecialidad(){
         $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
 
         $datos=array();
         $datos['id']=$this->input->post("id");
-        $datos['nombreusuario']=$this->input->post("txtnombreusuario");
-        $datos['nombres']=$this->input->post("txtnombres");
-        $datos['apellidos']=$this->input->post("txtapellidos");
-        $datos['email']=$this->input->post("txtemail");
-        $datos['telefono']=$this->input->post("txttelefonos");
-        $datos['password'] =$this->input->post("txtpassword");
-        $datos['status']=1;
-        $datos['perfil']=$this->input->post("selPerfil");;
-              
-        $this->usuarios_model->saveUsuarios($datos);
+        $datos['descripcion']=$this->input->post("txtdescripcion");
+                      
+        $this->especialidades_model->saveEspecialidades($datos);
 
-        $usuarios=$this->usuarios_model->getUsuarios();
+        $especialidades=$this->especialidades_model->getEspecialidades();
         $data = array(
             'user_login' => $user_login,
             'user_name' => $this->user_name,
-            'contenido' => 'usuariosList',
-            'usuarios'=>$usuarios,
-            'vista'=>'usuarios'            
+            'contenido' => 'especialidadesList',
+            'especialidades'=>$especialidades,
+            'vista'=>'especialidades'            
         );
         $this->load->view("plantillas/plantilla", $data);
 

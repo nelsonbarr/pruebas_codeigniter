@@ -44,8 +44,12 @@ var arrPacientes=new Array();
     });
 
     //HAGO SEGUIMIENTO AL onclick DE CADA BOTON HISTORIA DEL LISTADO DE PACIENTES 
-    $('button[id=btn_history]').on('click',function () {      
-        var idpaciente=$(this).data("id");               
+    $('button[id=btn_history]').on('click',function () {     
+        key=$(this).data("id");    
+        //arrPacientes=JSON.parse(arrPacientes.split('\t').join(''));;
+        pacienteEdit=arrPacientes[key];
+        idpaciente=pacienteEdit.id;
+        $('#txtnombrepaciente').val(pacienteEdit.nombres+" "+pacienteEdit.apellidos);                     
         $.ajax({
         type:'POST',
         url:'<?php print base_url();?>pacientes/carga_Historico/'+idpaciente,
@@ -55,7 +59,8 @@ var arrPacientes=new Array();
           html="";
           $("#historico").html('');
           if(json.length>0){
-            $('#txtnombrepaciente').val(json[0].nombre_paciente);
+            
+
             for(i=0;i<json.length;i++){
                 fila=json[i]; 
                 if(fila.sintomas==null)
@@ -89,9 +94,9 @@ var arrPacientes=new Array();
     
     //HAGO SEGUIMIENTO AL onclick DE CADA BOTON EDICION DEL LISTADO DE PACIENTES 
     $('button[id=btn_edit]').on('click',function () {
-      id=$(this).data("id");    
+      key=$(this).data("id");    
       //arrPacientes=JSON.parse(arrPacientes.split('\t').join(''));;
-      pacienteEdit=arrPacientes[id];
+      pacienteEdit=arrPacientes[key];
       $('#idpaciente').val(pacienteEdit.id);      
       $('#idtipodoc').val(pacienteEdit.idtipodocumento);
       $('#idtipodoc').attr('disabled','disabled');
@@ -117,7 +122,7 @@ var arrPacientes=new Array();
         });
 
         $('#txtfechanacimiento').datepicker({
-            format: 'yyyy-mm-dd',
+            format: 'dd-mm-yyyy',
             //startDate: '-Infinity',
             todayHighlight: true,
             autoclose: true

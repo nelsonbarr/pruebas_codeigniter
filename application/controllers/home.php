@@ -23,7 +23,10 @@ class Home extends CI_Controller {
        //    if (!empty($user_login)) {            
             $citas=$this->citas_model->getCitas(date('m'));  
             $estadoscitas=$this->access_model->getEstadosCita();
-
+            $estadospagos=$this->access_model->getEstadosPago();
+            $tiposDocs=$this->access_model->getTiposDocumentos();        
+            $estadosCiviles=$this->access_model->getEstadosCiviles();
+            $medicosEspecialidades=$this->access_model->getMedicosEspecialidades();
             $replace_array = array("'", '"');
             //var_dump($citas);
             //print count($citas);
@@ -32,10 +35,10 @@ class Home extends CI_Controller {
             if ($citas != -1) {
                 $i=0;
                 foreach ($citas as $row) { 
-                    if($row['idestadocita']==1){
+                    if($row['idestadopago']==1){
                         $pago="Pendiente";    
                     }
-                    else if($row['idestadocita']==2){
+                    else if($row['idestadopago']==2){
                         $pago="Pagado";    
                     }
                     else{
@@ -84,7 +87,11 @@ class Home extends CI_Controller {
                 'user_name' => $this->user_name,
                 'contenido' => 'dashboard_home',
                 'tipocalendar'=>'agendaWeek',
-                'estadoscitas'=>$estadoscitas,                
+                'estadoscitas'=>$estadoscitas,
+                'estadospagos'=>$estadospagos, 
+                'tiposDocs'=>$tiposDocs,
+                'estadosCiviles'=>$estadosCiviles,
+                'medicosEspecialidades'=>$medicosEspecialidades,               
                 'citas'=>$citas,
                 'pacientes'=>$pacientes, 
                 'vista'=>'calendario'
@@ -108,6 +115,10 @@ class Home extends CI_Controller {
         //if (!empty($user_login)) {
             $citas=$this->citas_model->getCitas(date('m')); 
             $estadoscitas=$this->access_model->getEstadosCita(); 
+            $estadospagos=$this->access_model->getEstadosPago();
+            $tiposDocs=$this->access_model->getTiposDocumentos();        
+            $estadosCiviles=$this->access_model->getEstadosCiviles();
+            $medicosEspecialidades=$this->access_model->getMedicosEspecialidades();
             $replace_array = array("'", '"');
             //var_dump($citas);
             //print count($citas);
@@ -117,10 +128,10 @@ class Home extends CI_Controller {
                 $i=0;
                 foreach ($citas as $row) { 
                     //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
-                    if($row['idestadocita']==1){
+                    if($row['idestadopago']==1){
                         $pago="Pendiente";    
                     }
-                    else if($row['idestadocita']==2){
+                    else if($row['idestadopago']==2){
                         $pago="Pagado";    
                     }
                     else{
@@ -166,7 +177,11 @@ class Home extends CI_Controller {
                 'user_name' => $this->user_name,
                 'contenido' => 'dashboard_home',
                 'tipocalendar'=>'agendaDay', 
-                'estadoscitas'=>$estadoscitas,                
+                'estadoscitas'=>$estadoscitas, 
+                'estadospagos'=>$estadospagos, 
+                'tiposDocs'=>$tiposDocs,
+                'estadosCiviles'=>$estadosCiviles, 
+                'medicosEspecialidades'=>$medicosEspecialidades,             
                 'citas'=>$citas,
                 'pacientes'=>$pacientes, 
                 'vista'=>'calendario'
@@ -188,6 +203,9 @@ class Home extends CI_Controller {
             $citas=$this->citas_model->getCitas(date('m')); 
             $estadoscitas=$this->access_model->getEstadosCita(); 
             $estadospagos=$this->access_model->getEstadosPago();
+            $tiposDocs=$this->access_model->getTiposDocumentos();        
+            $estadosCiviles=$this->access_model->getEstadosCiviles();
+            $medicosEspecialidades=$this->access_model->getMedicosEspecialidades();
             $replace_array = array("'", '"');
             //var_dump($citas);
             //print count($citas);
@@ -196,10 +214,10 @@ class Home extends CI_Controller {
             if ($citas != -1) {
                 $i=0;
                 foreach ($citas as $row) {  
-                    if($row['idestadocita']==1){
+                    if($row['idestadopago']==1){
                         $pago="Pendiente";    
                     }
-                    else if($row['idestadocita']==2){
+                    else if($row['idestadopago']==2){
                         $pago="Pagado";    
                     }
                     else{
@@ -247,6 +265,9 @@ class Home extends CI_Controller {
                 'tipocalendar'=>'agendaWeek', 
                 'estadoscitas'=>$estadoscitas, 
                 'estadospagos'=>$estadospagos,
+                'tiposDocs'=>$tiposDocs,
+                'estadosCiviles'=>$estadosCiviles,
+                'medicosEspecialidades'=>$medicosEspecialidades,
                 'pacientes'=>$pacientes,                          
                 'citas'=>$citas,
                 'vista'=>'calendario'
@@ -269,12 +290,20 @@ class Home extends CI_Controller {
         $descripcion = $this->input->post("txtdescripcion");
         $sintomas = $this->input->post("txtsintomas");  
         $estadocita = $this->input->post("selEstadoCita");   
-        $estadopago = $this->input->post("selEstadoPago");   
+        $estadopago = $this->input->post("selEstadoPago");
+        $idmedico = $this->input->post("selMedico");   
         $medicinastomadas = $this->input->post("txtmedicinastomadas");    
         $start_date = $this->input->post("date", TRUE);
         $end_date = $this->input->post("dateend", TRUE);
         $action=$this->input->post("action");
-               
+        
+        if($action!="NO"){
+            $start_date = new DateTime($start_date);
+            $start_date =$start_date->format('Y-d-m H:i:s');
+            $end_date = new DateTime($end_date);
+            $end_date =$end_date->format('Y-d-m H:i:s');
+        }
+        
         $citas=array(
            "idcita"=>$idcita,
            "idpaciente" => $idpaciente,
@@ -285,10 +314,11 @@ class Home extends CI_Controller {
            "medicinastomadas"=>$medicinastomadas,
            'idestadopago'=>$estadopago,
            "fechacita" => $start_date,
-           "fechafincita" => $end_date
+           "fechafincita" => $end_date,
+           "idmedico"=>$idmedico
         );
         if($action=="NO"){//CUANDO PROVIENE EL LLAMADO DE DRAG O RESIZE DEL CALENDAR
-            unset($citas['idpaciente'],$citas["motivocita"],$citas["sintomas"],$citas["descripcion"]);
+            unset($citas['idpaciente'],$citas["motivocita"],$citas["sintomas"],$citas["descripcion"],$citas['idestadocita'],$citas['idestadopago'],$datos['idmedico']);
         }
         //METODO QUE PROCESA LOS DATOS
         $this->citas_model->setCitas($citas);
