@@ -27,38 +27,29 @@ var arrUsuarios=new Array();
     $('#btn_add').on('click',function () { 
        
       $('#id').val('');
-      $('#idtipodoc').val('');
-      $('#txtnombres').val('');
+      $('#txtnombreusuario').val('');
+	  $('#txtnombres').val('');
       $('#txtapellidos').val('');
       $('#txtemail').val('');
       $('#txttelefonos').val('');   
+      $('#txtpassword').val('');   
+      $('#status').val('0');   
       $('#selPerfil').val('');   
-      
     });
 
-    
-    
     //HAGO SEGUIMIENTO AL onclick DE CADA BOTON EDICION DEL LISTADO DE PACIENTES 
     $('button[id=btn_edit]').on('click',function () {
       id=$(this).data("id");    
       //arrPacientes=JSON.parse(arrPacientes.split('\t').join(''));;
-      pacienteEdit=arrPacientes[id];
-      $('#idpaciente').val(pacienteEdit.id);      
-      $('#idtipodoc').val(pacienteEdit.idtipodocumento);
-      $('#idtipodoc').attr('disabled','disabled');
-      $('#txtiddocumento').val(pacienteEdit.documento);
-      $('#txtiddocumento').attr('readonly',true);
-      $('#txtnombres').val(pacienteEdit.nombres);
-      $('#txtapellidos').val(pacienteEdit.apellidos);
-      $('#txtemail').val(pacienteEdit.email);
-      $('#txtdireccion').val(pacienteEdit.direccion);
-      $('#txtfechanacimiento').val(pacienteEdit.fechanacimiento);
-      $('#txttelefonos').val(pacienteEdit.telefono);   
-      $('#estadocivil').val(pacienteEdit.idestadocivil);
-      $('#txtalergias').val(pacienteEdit.alergias);   
-      $('#txtenfermedades').val(pacienteEdit.enfermedadesprevias);   
-      $('#txtmedicinas').val(pacienteEdit.medicamentos);    
-      $('input:radio[name="genero"][value='+pacienteEdit.genero+']').prop('checked', true);  
+      usuarioEdit=arrUsuarios[id];
+      $('#id').val(usuarioEdit.id);      
+      $('#txtnombreusuario').val(usuarioEdit.nombreusuario);
+      $('#txtnombres').val(usuarioEdit.nombres);
+      $('#txtapellidos').val(usuarioEdit.apellidos);
+      $('#txtemail').val(usuarioEdit.email);
+      $('#txttelefonos').val(usuarioEdit.telefono); 
+	  $('#txtpassword').val(usuarioEdit.password); 
+	  $('#selPerfil').val(usuarioEdit.perfil);   
     });
 
     $(function() {

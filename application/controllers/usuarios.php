@@ -30,7 +30,7 @@ class Usuarios extends CI_Controller{
         $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
 
         $datos=array();
-        $datos['id']=$this->input->post("idusuario");
+        $datos['id']=$this->input->post("id");
         $datos['nombreusuario']=$this->input->post("txtnombreusuario");
         $datos['nombres']=$this->input->post("txtnombres");
         $datos['apellidos']=$this->input->post("txtapellidos");

@@ -10,13 +10,13 @@
                     </li>
                     <div class="menu">
                         <li>
-                            <a href="<?php print base_url();?>pacientes" class="pacientes ">Pacientes </br><span class="fa fa-users pull-right"></span></a>
+                            <a href="<?php print base_url();?>usuarios" class="usuarios active ">Usuarios </br><span class="fa fa-users pull-right"></span></a>
                         </li>
                         <li>
-                            <a href="<?php print base_url();?>home/semanal" class="pacientes  ">Agenda Semanal </br><span class="fa fa-calendar pull-right  active"></span></a>
+                            <a href="<?php print base_url();?>home/semanal" class="usuarios  ">Agenda Semanal </br><span class="fa fa-calendar pull-right  active"></span></a>
                         </li>
                         <li>
-                            <a href="<?php print base_url();?>home/diario" class="pacientes ">Agenda Diaria </br><span class="fa fa-list-alt pull-right "></span></a>
+                            <a href="<?php print base_url();?>home/diario" class="usuarios ">Agenda Diaria </br><span class="fa fa-list-alt pull-right "></span></a>
                         </li>                                           
                     </div>                    
                 </ul>
