@@ -32,9 +32,8 @@ class Usuarios_model extends CI_Model{
     }
 
     public function saveUsuarios($datos){        
-
-        if($datos['nombreusuario']!=""){
-            $id=$datos["nombreusuario"];
+        if($datos['id']!=""){
+            $id=$datos["id"];
             unset($datos['id']);
             $this->db->where('nombreusuario',$id);
             $this->db->update('usuarios',$datos);            
