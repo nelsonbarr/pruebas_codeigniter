@@ -63,7 +63,7 @@
                         </div-->
                         <div class="col-xs-4 form-group">
                             <label class="control-label">Fecha</label>
-                            <div id="calendar_ini" class="input-group date" data-date-format="yyyy-dd-mm">
+                            <div id="calendar_ini" class="input-group date" data-date-format="yy-mm-dd">
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 <input class="form-control" id="txtfechanacimiento" name="txtfechanacimiento" type="text" readonly/>
                             </div>                                               

@@ -122,7 +122,7 @@ var arrPacientes=new Array();
         });
 
         $('#txtfechanacimiento').datepicker({
-            format: 'yyyy-mm-dd',
+            format: 'yy-mm-dd',
             //startDate: '-Infinity',
             todayHighlight: true,
             autoclose: true
