@@ -93,7 +93,6 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">Especialista</label>                            
-                            <input id="idcita" name="idcita" type="hidden"/>
                             <select id="selMedico" name="selMedico" class="selectpicker form-control" data-show-subtext="true" data-live-search="true" >  
                                 <option value="" >Seleccione..</option>                 
                                 <?php foreach($medicosEspecialidades AS $fila):?>        

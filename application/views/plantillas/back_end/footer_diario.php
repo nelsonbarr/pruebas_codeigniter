@@ -145,8 +145,10 @@ var arrPacientes=new Array();
                     $('#modalPacientesList').modal('show')                    
                 },
                 eventClick: function(event, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR CITA,LLAMA A LA VENTANA REGISTRAR CITA PARA EDICION
-                    blanquearCita();                                        
+                    blanquearCita();    
+                    console.log(event);                                    
                     $('select[name=selPaciente]').val(event.idpaciente);
+                    $("select[name=selMedico]").val(event.idmedico);
                     $('.selectpicker').selectpicker('refresh')  
                     $('#btn_add').hide()
                     $("#txtnombrepaciente").val(event.nombre_paciente+"  ID: "+event.documento);
@@ -156,7 +158,6 @@ var arrPacientes=new Array();
                     $("#txtmotivocita").val(event.motivocita);
                     $("#selEstadoCita").val(event.idestadocita);
                     $("#selEstadoPago").val(event.idestadopago);
-                    $("#selMedico").val(event.idmedico);
                     $("#txtsintomas").val(event.sintomas);
                     $("#txtdescripcion").val(event.descripcion);
                     $("#txtmedicinastomadas").val(event.medicinastomadas);

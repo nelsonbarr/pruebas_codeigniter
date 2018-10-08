@@ -16,10 +16,7 @@
             $this->load->view("plantillas/back_end/footer_medico");
             break;
     }
-    elseif($vista=="medicos"){
-        $this->load->view("plantillas/back_end/footer_medico");
-    }
-    else{
+    
 	
     if($tipocalendar=='agendaDay'){
         $this->load->view("plantillas/back_end/footer_diario");
