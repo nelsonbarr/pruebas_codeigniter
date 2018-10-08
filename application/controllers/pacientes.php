@@ -12,7 +12,7 @@ class Pacientes extends CI_Controller{
 
     public function index()
     {
-        $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
+        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
         $pacientes=$this->pacientes_model->getPacientes();
         $tiposDocs=$this->access_model->getTiposDocumentos();        
         $estadosCiviles=$this->access_model->getEstadosCiviles();
@@ -32,7 +32,7 @@ class Pacientes extends CI_Controller{
     }
 
     public function savePaciente(){
-        $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
+        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
 
         $datos=array();
         $datos['id']=$this->input->post("idpaciente");
@@ -53,8 +53,13 @@ class Pacientes extends CI_Controller{
         $date = new DateTime($datos['fechanacimiento']);
         $datos['fechanacimiento'] =$date->format('Y-m-d');
               
-        $this->pacientes_model->savePacientes($datos);
-        
+        $result=$this->pacientes_model->savePacientes($datos);
+        if($result!=-1){
+            $this->session->set_flashdata('success', "Paciente registrado con exito");
+        }
+        else{
+            $this->session->set_flashdata('error', "Error al guardar paciente");
+        }
         $pacientes=$this->pacientes_model->getPacientes();
         $tiposDocs=$this->access_model->getTiposDocumentos();        
         $estadosCiviles=$this->access_model->getEstadosCiviles();
@@ -74,7 +79,7 @@ class Pacientes extends CI_Controller{
     }
 
     public function carga_Historico($id){
-        $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;        
+        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;        
         $result=$this->pacientes_model->getHistorico($id);       
         //se define un arreglo con la informacion de los clientes
         $consulta=array('data'=>$result);

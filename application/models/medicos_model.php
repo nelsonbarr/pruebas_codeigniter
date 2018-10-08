@@ -32,25 +32,25 @@ class Medicos_model extends CI_Model{
     }
 
     public function saveMedicos($datos){        
-
+        $result=false;
         if($datos['id']!=""){
             $id=$datos["id"];
             unset($datos['id']);
             $this->db->where('id',$id);
-            $this->db->update('medicos',$datos);            
+            $result=$this->db->update('medicos',$datos);            
         }
         else{
             if($this->getMedicosExiste($datos)==-1){
-                $this->db->insert('medicos',$datos);
+                $result=$this->db->insert('medicos',$datos);
             }
             else{
                 print "EXISTE INSERTAR";    
             }            
         }        
-        if ($this->db->affected_rows() == 1)
-            return $this->db->insert_id();
+        /*if ($this->db->affected_rows() == 1)
+            return $this->db->insert_id();*/
         
-       return true;
+       return $result;
     }
 
 }

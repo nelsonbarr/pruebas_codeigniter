@@ -12,7 +12,7 @@ class Medicos extends CI_Controller{
 
     public function index()
     {
-        $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
+        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
         $medicos=$this->medicos_model->getMedicos();
         $tiposDocs=$this->access_model->getTiposDocumentos();        
         $estadosCiviles=$this->access_model->getEstadosCiviles();
@@ -33,7 +33,7 @@ class Medicos extends CI_Controller{
     }
 
     public function saveMedico(){
-        $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
+        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
 
         $datos=array();
         $datos['id']=$this->input->post("idmedico");
@@ -49,7 +49,7 @@ class Medicos extends CI_Controller{
 		$datos['idespecialidad'] =$this->input->post("idespecialidad");
 		$datos['activo'] =1;
 
-        $this->medicos_model->saveMedicos($datos);
+        $result=$this->medicos_model->saveMedicos($datos);
 
         $medicos=$this->medicos_model->getMedicos();
         $tiposDocs=$this->access_model->getTiposDocumentos();        
@@ -65,6 +65,12 @@ class Medicos extends CI_Controller{
                 'medicos' =>$medicos,                                
                 'vista'=>'medicos'
         );
+        if($result!=-1){
+            $this->session->set_flashdata('success', "Medico Registrado");
+        }
+        else{
+            $this->session->set_flashdata('error', "Error al guardar medico");
+        }
         $this->load->view("plantillas/plantilla", $data);
 
 

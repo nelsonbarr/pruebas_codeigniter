@@ -5,9 +5,9 @@ class Home extends CI_Controller {
    
 
     public function __construct() {
-        parent::__construct();
-        if ($this->session->userdata('login') == false) {
-           // redirect('access/logout');
+        parent::__construct();        
+        if (!$this->session->userdata('login')) {
+            redirect('access/logout');
         }
         $this->load->model('access_model');   
         $this->load->model('citas_model');     
@@ -18,9 +18,8 @@ class Home extends CI_Controller {
 
     public function index() {
         
-        $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
-
-       //    if (!empty($user_login)) {            
+        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
+        if (!empty($user_login)) {            
             $citas=$this->citas_model->getCitas(date('m'));  
             $estadoscitas=$this->access_model->getEstadosCita();
             $estadospagos=$this->access_model->getEstadosPago();
@@ -99,20 +98,18 @@ class Home extends CI_Controller {
 
             
             $this->load->view("plantillas/plantilla", $data);
-       /* }else {
-            $data = array(
-                'user_login' => $user_login,
-            );
-            $this->load->view("login-view", $data);
-        }*/
+        }else {
+            $this->session->set_flashdata('error', "Sesion Vencida");
+            redirect('access', 'refresh');
+        }
        
 
     }
 
     public function diario(){
-        $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
-
-        //if (!empty($user_login)) {
+        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
+        
+      if (!empty($user_login)) {
             $citas=$this->citas_model->getCitas(date('m')); 
             $estadoscitas=$this->access_model->getEstadosCita(); 
             $estadospagos=$this->access_model->getEstadosPago();
@@ -187,19 +184,18 @@ class Home extends CI_Controller {
                 'vista'=>'calendario'
             );
             $this->load->view("plantillas/plantilla", $data);
-       /* }else {
-            $data = array(
-                'user_login' => $user_login,
-            );
-            $this->load->view("login-view", $data);
-        }*/
+        }else {
+            $this->session->set_flashdata('error', "Sesion Vencida");
+            redirect('access', 'refresh');
+        }
     }
     
 
     public function semanal(){
-        $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
-
-       // if (!empty($user_login)) {
+        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
+        
+        //var_dump($this->session->userdata('login'));die();
+        if (!empty($user_login)) {           
             $citas=$this->citas_model->getCitas(date('m')); 
             $estadoscitas=$this->access_model->getEstadosCita(); 
             $estadospagos=$this->access_model->getEstadosPago();
@@ -273,12 +269,10 @@ class Home extends CI_Controller {
                 'vista'=>'calendario'
             );
             $this->load->view("plantillas/plantilla", $data);
-        /*}else {
-            $data = array(
-                'user_login' => $user_login,
-            );
-            $this->load->view("login-view", $data);
-        }*/
+        }else {
+            $this->session->set_flashdata('error', "Sesion Vencida");
+            redirect('access', 'refresh');
+        }
     }
 
     public function saveCita() 
@@ -321,8 +315,13 @@ class Home extends CI_Controller {
             unset($citas['idpaciente'],$citas["motivocita"],$citas["sintomas"],$citas["descripcion"],$citas['idestadocita'],$citas['idestadopago'],$datos['idmedico']);
         }
         //METODO QUE PROCESA LOS DATOS
-        $this->citas_model->setCitas($citas);
-
+        $regCitas=$this->citas_model->setCitas($citas);
+        if($regCitas!=-1){
+            $this->session->set_flashdata('success', "Cita registrada con exito");
+        }
+        else{
+            $this->session->set_flashdata('error', "Error al guardar cita");
+        }
         if($action!="NO"){//CUANDO NO PROVIENE EL LLAMADO DE DRAG O RESIZE DEL CALENDAR, LLAMO A LA VISTA CON LOS CAMBIOS
             $this->semanal();
         }

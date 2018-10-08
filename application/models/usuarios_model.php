@@ -32,24 +32,25 @@ class Usuarios_model extends CI_Model{
     }
 
     public function saveUsuarios($datos){          
+        $result=false;
         if($datos['id']!=""){
             $id=$datos["id"];
             unset($datos['id']);
             $this->db->where('id',$id);
-            $this->db->update('usuarios',$datos);            
+            $result=$this->db->update('usuarios',$datos);            
         }
         else{
             if($this->getUsuarioExiste($datos)==-1){
-                $this->db->insert('usuarios',$datos);
+                $result=$this->db->insert('usuarios',$datos);
             }
             else{
                 print "EXISTE INSERTAR";    
             }            
         }        
-        if ($this->db->affected_rows() == 1)
-            return $this->db->insert_id();
+       /* if ($this->db->affected_rows() == 1)
+            return $this->db->insert_id();*/
         
-       return true;
+       return $result;
     }
 
 

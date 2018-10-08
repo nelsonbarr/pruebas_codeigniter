@@ -1,3 +1,9 @@
+<?php
+header("Expires: Fri, 14 Mar 1980 20:53:00 GMT"); //la pagina expira en fecha pasada
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); //ultima actualizacion ahora cuando la cargamos
+header("Cache-Control: no-cache, must-revalidate"); //no guardar en CACHE
+header("Pragma: no-cache"); //PARANOIA, NO GUARDAR EN CACHE
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,24 +30,28 @@
             </div>                 
             <nav class="navbar ">
                 <div class="container-fluid collapse navbar-collapse">
-                    <div class="navbar-header ">
-                        <img src="<?php echo base_url(); ?>assets/images/codeigniter_logo.png" alt="" class="img-responsive center-block" width="150">
+                    <div class="navbar-header ">                                   
+                        <img src="<?php print base_url();?>assets/images/logo.png" alt="" class="img img-responsive center-block" width="150">
                     </div>                   
                     <ul class="nav navbar-nav navbar-right mr-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <span class="fa fa-gear">&nbsp;</span>Configuracion
+                            <small>Configuracion</small><span class="fa fa-gear">&nbsp;</span>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="<?php echo base_url();?>usuarios">Usuarios</a>
-                              <a class="dropdown-item" href="<?php echo base_url();?>medicos">Medicos</a>
-                              <a class="dropdown-item" href="<?php echo base_url();?>especialidades">Especialidades</a>                                                           
-                            </div>
+                                <ul class="dropdown-menu animated flipInX m-t-xs">
+                                <li>
+                                <!--div class="dropdown-menu" aria-labelledby="navbarDropdown"-->
+                                <a class="dropdown-item" href="<?php echo base_url();?>usuarios">Usuarios</a>
+                                <a class="dropdown-item" href="<?php echo base_url();?>medicos">Medicos</a>
+                                <a class="dropdown-item" href="<?php echo base_url();?>especialidades">Especialidades</a>   
+                                </li>
+                                </ul>                                                        
+                            <!--/div-->
                           </li>
                         <li><a href="<?php print base_url();?>access/logout"><span class="fa fa-user-times">&nbsp;</span>&nbsp;&nbsp;Cerrar Sesion</a></li>
 
                         
-                    </ul>
+                    </ul>                    
                 </div>
             </nav> 
 

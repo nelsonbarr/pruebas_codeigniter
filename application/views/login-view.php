@@ -22,10 +22,13 @@
     <body id="LoginForm">	
         <section class="login-block">
             <div class="container">
-                <div class="row">
+                <div class="row">                   
                     <div class="col-md-6 login-sec">
-                        <h2 class="text-center">SISTEMA DE CONTROL DE CITAS</h2>
-                        <h3 class="text-center">Ingreso</h3>
+                        <!--h2 class="text-center">SISTEMA DE CONTROL DE CITAS</h2>
+                        <h3 class="text-center">Ingreso</h3-->
+                        <div class="col-sm-12 text-center">
+                        <img  width="300" src="<?php base_url();?>assets/images/logo.png"/>
+                        </div>
                         <form class="login-form" action="<?php base_url()?>access/login_user" method="post">
                             <div class="form-group">
                                 <input class="form-control" placeholder="Usuario" name="txtusr" id="txtusr"  type="text"/>
@@ -36,11 +39,19 @@
                             <div class="forgot">
                                 <a href="reset.html">Olvido su contraseña</a>
                             </div>
-                            <input class=" btn btn-login" type="submit" value="Iniciar Sesion"/>          
+                            <input class=" btn btn-login" type="submit" value="Iniciar Sesion"/> 
+                                    
                         </form>                
                     </div>
                     <div class="col-md-6 banner-sec">
-                    
+                        <div class="col-sm-12">
+                            <?php if ($this->session->flashdata('error')) { ?>
+                                <div class="alert alert-danger text-center"> <?php echo $this->session->flashdata('error') ?> </div>
+                            <?php } ?>
+                            <?php if ($this->session->flashdata('success')) { ?>
+                                <div class="alert alert-success text-center"> <?php echo $this->session->flashdata('success') ?> </div>
+                            <?php } ?>
+                        </div> 
                     </div>
                 </div>
             </div>

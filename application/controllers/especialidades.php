@@ -12,7 +12,7 @@ class Especialidades extends CI_Controller{
 
     public function index()
     {
-        $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
+        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
         $especialidades=$this->especialidades_model->getEspecialidades();
         //if (!empty($user_login)) {
             $data = array(
@@ -27,7 +27,7 @@ class Especialidades extends CI_Controller{
     }
 
     public function saveEspecialidad(){
-        $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
+        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
 
         $datos=array();
         $datos['id']=$this->input->post("id");
@@ -36,6 +36,12 @@ class Especialidades extends CI_Controller{
         $this->especialidades_model->saveEspecialidades($datos);
 
         $especialidades=$this->especialidades_model->getEspecialidades();
+        if($especialidades!=-1){
+            $this->session->set_flashdata('success', "Especialidad registrada");
+        }
+        else{
+            $this->session->set_flashdata('error', "Error al guardar especialidad");
+        }
         $data = array(
             'user_login' => $user_login,
             'user_name' => $this->user_name,

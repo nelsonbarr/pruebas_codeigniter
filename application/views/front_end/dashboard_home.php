@@ -40,6 +40,14 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" id="tipoagenda">Agenda</div>
                         <div class="panel-body">
+                            <div class="col-sm-12">
+                                <?php if ($this->session->flashdata('error')) { ?>
+                                    <div class="alert alert-danger text-center"> <?php echo $this->session->flashdata('error') ?> </div>
+                                <?php } ?>
+                                <?php if ($this->session->flashdata('success')) { ?>
+                                    <div class="alert alert-success text-center"> <?php echo $this->session->flashdata('success') ?> </div>
+                                <?php } ?>
+                            </div>
                            <?php if ( $citas == -1): ?>
                                     <div class="col-lg-6 col-lg-offset-3" id="no_estadisticas">
                                         <h2 class="text-danger">NO HAY CITAS PARA MOSTRAR</h2>

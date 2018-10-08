@@ -14,7 +14,7 @@ class Access extends CI_Controller {
 
     public function index()
     {
-        $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
+        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
         if (!empty($user_login)) {
             $citas=$this->citas_model->getCitas(date('m')); 
             $estadoscitas=$this->access_model->getEstadosCita();  
@@ -98,14 +98,14 @@ class Access extends CI_Controller {
     }
 
     public function login_user(){
-        $user_login = ($this->session->userdata('login')) ? $this->session->userdata('login') : false;
+        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
         if ($user_login) {
             redirect('access', 'refresh');
         }
 
         $usuario = $this->input->post('txtusr');
         $password = $this->input->post('txtpwd');
-        $valid_user = $this->access_model->login($usuario,$password);
+        $valid_user = $this->access_model->login($usuario,md5($password));
 
         if ($valid_user != -1 && !empty($valid_user)) {
 
@@ -116,7 +116,7 @@ class Access extends CI_Controller {
             $datos_cookie['profile']=$valid_user['perfil'];
             
             $this->session->set_userdata($datos_cookie);
-            
+           
             $estadoscitas=$this->access_model->getEstadosCita(); 
             $estadospagos=$this->access_model->getEstadosPago();
             $tiposDocs=$this->access_model->getTiposDocumentos();        
@@ -205,7 +205,8 @@ class Access extends CI_Controller {
             $data = array(
                 'user_login' => -1,
             );
-            $this->load->view("login", $data);
+            $this->session->set_flashdata('error', "Error de acceso");
+            redirect('access', 'refresh');
         }
 
     }

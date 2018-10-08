@@ -10,13 +10,13 @@
                     </li>
                     <div class="menu">
                         <li>
-                            <a href="<?php print base_url();?>medicos" class="medicos active ">Medicos </br><span class="fa fa-users pull-right"></span></a>
+                            <a href="<?php print base_url();?>pacientes" class="pacientes">Pacientes </br><span class="fa fa-users pull-right"></span></a>
                         </li>
                         <li>
-                            <a href="<?php print base_url();?>home/semanal" class="medicos  ">Agenda Semanal </br><span class="fa fa-calendar pull-right  active"></span></a>
+                            <a href="<?php print base_url();?>home/semanal" class="  ">Agenda Semanal </br><span class="fa fa-calendar pull-right  active"></span></a>
                         </li>
                         <li>
-                            <a href="<?php print base_url();?>home/diario" class="medicos ">Agenda Diaria </br><span class="fa fa-list-alt pull-right "></span></a>
+                            <a href="<?php print base_url();?>home/diario" class=" ">Agenda Diaria </br><span class="fa fa-list-alt pull-right "></span></a>
                         </li>                                           
                     </div>                    
                 </ul>
@@ -31,6 +31,14 @@
                             </div>
                         </div>
                         <div class="panel-body">
+                            <div class="col-sm-12">
+                                <?php if ($this->session->flashdata('error')) { ?>
+                                    <div class="alert alert-danger text-center"> <?php echo $this->session->flashdata('error') ?> </div>
+                                <?php } ?>
+                                <?php if ($this->session->flashdata('success')) { ?>
+                                    <div class="alert alert-success text-center"> <?php echo $this->session->flashdata('success') ?> </div>
+                                <?php } ?>
+                            </div>
                            <?php if ( $medicos == -1): ?>
                                     <div class="col-lg-6 col-lg-offset-3" id="no_estadisticas">
                                         <h2 class="text-danger">NO HAY MEDICOS PARA MOSTRAR</h2>
