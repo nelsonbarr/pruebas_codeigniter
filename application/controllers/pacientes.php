@@ -49,9 +49,12 @@ class Pacientes extends CI_Controller{
         $datos['alergias']=$this->input->post("txtalergias");
         $datos['enfermedadesprevias']=$this->input->post("txtenfermedades");
         $datos['medicamentos']=$this->input->post("txtmedicinas");
-        $datos['genero']=$this->input->post("genero");        
+        $datos['genero']=$this->input->post("genero"); 
+        $date = new DateTime($datos['fechanacimiento']);
+        $datos['fechanacimiento'] =$date->format('Y-m-d');
+              
         $this->pacientes_model->savePacientes($datos);
-
+        
         $pacientes=$this->pacientes_model->getPacientes();
         $tiposDocs=$this->access_model->getTiposDocumentos();        
         $estadosCiviles=$this->access_model->getEstadosCiviles();

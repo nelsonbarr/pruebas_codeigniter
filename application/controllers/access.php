@@ -26,10 +26,10 @@ class Access extends CI_Controller {
             if ($citas != -1) {
                 $i=0;
                 foreach ($citas as $row) {  
-                    if($row['idestadopago']==2){
+                    if($row['idestadopago']==1){
                         $pago="Pendiente";    
                     }
-                    else if($row['idestadopago']==1){
+                    else if($row['idestadopago']==2){
                         $pago="Pagado";    
                     }
                     else{
@@ -140,10 +140,10 @@ class Access extends CI_Controller {
                 if ($citas != -1) {
                     $i=0;
                     foreach ($citas as $row) { 
-                        if($row['idestadopago']==2){
+                        if($row['idestadopago']==1){
                             $pago="Pendiente";    
                         }
-                        else if($row['idestadopago']==1){
+                        else if($row['idestadopago']==2){
                             $pago="Pagado";    
                         }
                         else{

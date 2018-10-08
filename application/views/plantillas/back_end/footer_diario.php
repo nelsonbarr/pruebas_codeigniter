@@ -134,26 +134,25 @@ var arrPacientes=new Array();
                 eventLimit: true, // allow "more" link when too many events
                 allDaySlot: false,
                 defaultTimedEventDuration:'00:15:00',
-                dayClick: function(date, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, MODIFICAR PARA LLAMAR A LA VENTANA REGISTRAR CITA
-                    
+                dayClick: function(date, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, LLAMA A LA VENTANA REGISTRAR CITA                    
                     blanquearCita();
-                    this.start = date.format('Y/M/D hh:mm');
-                    dateend=new Date(date.format('Y/M/D hh:mm'));
+                    this.start = date.format('D/M/Y hh:mm');
+                    dateend=new Date(date.format('M/D/Y hh:mm'));
                     dateend.setMinutes(dateend.getMinutes() + 15);
                     $("#date").val(this.start);
-                    $("#dateend").val(dateend.getFullYear()+"-"+(dateend.getMonth() + 1) + "-" + dateend.getDate() + "-" +dateend.getHours() + ":" + dateend.getMinutes() + ":" + dateend.getSeconds());
+                    $("#dateend").val(dateend.getDate()+"/"+(dateend.getMonth() + 1) + "/" + dateend.getFullYear() + " " +dateend.getHours() + ":" + dateend.getMinutes() + ":" + dateend.getSeconds());                    
                     $('#btn_add').show()
                     $('#modalPacientesList').modal('show')                    
                 },
-                eventClick: function(event, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, MODIFICAR PARA LLAMAR A LA VENTANA REGISTRAR CITA
+                eventClick: function(event, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR CITA,LLAMA A LA VENTANA REGISTRAR CITA PARA EDICION
                     blanquearCita();                                        
                     $('select[name=selPaciente]').val(event.idpaciente);
                     $('.selectpicker').selectpicker('refresh')  
                     $('#btn_add').hide()
                     $("#txtnombrepaciente").val(event.nombre_paciente+"  ID: "+event.documento);
                     $("#idcita").val(event.idcita)                  
-                    $("#date").val(event.start.format('Y/M/D hh:mm'));
-                    $("#dateend").val(event.end.format('Y/M/D hh:mm'));
+                    $("#date").val(event.start.format('D/M/Y hh:mm'));
+                    $("#dateend").val(event.end.format('D/M/Y hh:mm'));
                     $("#txtmotivocita").val(event.motivocita);
                     $("#selEstadoCita").val(event.idestadocita);
                     $("#selEstadoPago").val(event.idestadopago);
@@ -162,9 +161,9 @@ var arrPacientes=new Array();
                     $("#txtmedicinastomadas").val(event.medicinastomadas);
                     $('#modalPacienteCita').modal('show')
                 },
-                eventDrop: function(event, delta){ // event drag and drop
-                    start=event.start.format();                                
-                    end=event.end.format();                   
+                eventDrop: function(event, delta){ // event drag and drop, MODIFICA LAS FECHAS Y HORAS DEPENDIENDO DE LA NUEVA SELECCION LUEGO DE ARRASTRAT Y SOLTAR
+                    start=event.start.format("Y-MM-DD HH:mm");                                
+                    end=event.end.format("Y-MM-DD HH:mm");                    
                     $.ajax({
                         url:'<?php print base_url();?>home/saveCita/',                       
                         data: 'date='+start+'&dateend='+end+'&idcita='+event.idcita+"&action=NO",
@@ -174,9 +173,9 @@ var arrPacientes=new Array();
                         }
                     });
                 },
-                eventResize: function(event) {  // resize to increase or decrease time of event
-                    start=event.start.format(); 
-                    end=event.end.format();
+                eventResize: function(event) {  // resize to increase or decrease time of event, MODIFICA LAS FECHAS Y HORAS DEPENDIENDO DE LA NUEVA SELECCION LUEGO DE MODIFICAR DURACION DE CITA
+                    start=event.start.format("Y-MM-DD HH:mm");                                
+                    end=event.end.format("Y-MM-DD HH:mm"); 
                     $.ajax({
                         url:'<?php print base_url();?>home/saveCita/',  
                         data: 'action=NO&date='+start+'&dateend='+end+'&idcita='+event.idcita,
@@ -199,6 +198,7 @@ var arrPacientes=new Array();
         function blanquearCita(){
             $('select[name=selPaciente]').val('');
             $('.selectpicker').selectpicker('refresh') 
+            $("#idcita").val('')
             $("#date").val('');
             $("#dateend").val('');
             $("#txtmotivocita").val('');

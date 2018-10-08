@@ -34,10 +34,10 @@ class Home extends CI_Controller {
             if ($citas != -1) {
                 $i=0;
                 foreach ($citas as $row) { 
-                    if($row['idestadopago']==2){
+                    if($row['idestadopago']==1){
                         $pago="Pendiente";    
                     }
-                    else if($row['idestadopago']==1){
+                    else if($row['idestadopago']==2){
                         $pago="Pagado";    
                     }
                     else{
@@ -125,10 +125,10 @@ class Home extends CI_Controller {
                 $i=0;
                 foreach ($citas as $row) { 
                     //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
-                    if($row['idestadopago']==2){
+                    if($row['idestadopago']==1){
                         $pago="Pendiente";    
                     }
-                    else if($row['idestadopago']==1){
+                    else if($row['idestadopago']==2){
                         $pago="Pagado";    
                     }
                     else{
@@ -209,10 +209,10 @@ class Home extends CI_Controller {
             if ($citas != -1) {
                 $i=0;
                 foreach ($citas as $row) {  
-                    if($row['idestadopago']==2){
+                    if($row['idestadopago']==1){
                         $pago="Pendiente";    
                     }
-                    else if($row['idestadopago']==1){
+                    else if($row['idestadopago']==2){
                         $pago="Pagado";    
                     }
                     else{
@@ -289,7 +289,14 @@ class Home extends CI_Controller {
         $start_date = $this->input->post("date", TRUE);
         $end_date = $this->input->post("dateend", TRUE);
         $action=$this->input->post("action");
-               
+        
+        if($action!="NO"){
+            $start_date = new DateTime($start_date);
+            $start_date =$start_date->format('Y-d-m H:i:s');
+            $end_date = new DateTime($end_date);
+            $end_date =$end_date->format('Y-d-m H:i:s');
+        }
+        
         $citas=array(
            "idcita"=>$idcita,
            "idpaciente" => $idpaciente,

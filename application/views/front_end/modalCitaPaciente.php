@@ -40,8 +40,7 @@
                             <div class="row">
                                 <div class="col-xs-6">
                                     <label class="control-label">Estado Cita</label>                          
-                                    <select id="selEstadoCita" name="selEstadoCita" class="form-control">  
-                                        <option value="" >Seleccione..</option>                 
+                                    <select id="selEstadoCita" name="selEstadoCita" class="form-control">
                                         <?php foreach($estadoscitas AS $fila):?>
                                             <?php switch($fila["id"]): case 1:?>    
                                             <option class="label-default" value="<?php print $fila["id"];?>"><?php print $fila["descripcion"];?></option>

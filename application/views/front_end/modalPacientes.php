@@ -53,22 +53,16 @@
                                 </div>                                  
                             </div>
                         </div>
-                        <!--div class="col-xs-4">
-                            <div class="input-group date" data-provide="datepicker">
+                        <div class="col-xs-4 form-group">
+                            <label class="control-label">Fecha Nacimiento</label>
+                            <div class="input-group date" data-provide="datepicker" data-date-format="dd-mm-yyyy">
                                 <input type="text" id="txtfechanacimiento" name="txtfechanacimiento" class="form-control">
                                 <div class="input-group-addon">
                                     <span class="fa fa-calendar"></span>
                                 </div>
                             </div>
-                        </div-->
-                        <div class="col-xs-4 form-group">
-                            <label class="control-label">Fecha</label>
-                            <div id="calendar_ini" class="input-group date" data-date-format="yyyy-dd-mm">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                <input class="form-control" id="txtfechanacimiento" name="txtfechanacimiento" type="text" readonly/>
-                            </div>                                               
                         </div>
-                                                
+                                                                 
                         
                         <div class="col-xs-4">
                             <div class="form-group"><label class=" control-label">Email</label>
