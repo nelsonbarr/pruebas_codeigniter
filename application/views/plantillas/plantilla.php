@@ -8,6 +8,9 @@
     elseif($vista=="usuarios"){
         $this->load->view("plantillas/back_end/footer_usuario");
     }
+    elseif($vista=="medicos"){
+        $this->load->view("plantillas/back_end/footer_medico");
+    }
     else{
         $this->load->view("plantillas/back_end/footer");
     }
