@@ -156,6 +156,7 @@ var arrPacientes=new Array();
                     $("#txtmotivocita").val(event.motivocita);
                     $("#selEstadoCita").val(event.idestadocita);
                     $("#selEstadoPago").val(event.idestadopago);
+                    $("#selMedico").val(event.idmedico);
                     $("#txtsintomas").val(event.sintomas);
                     $("#txtdescripcion").val(event.descripcion);
                     $("#txtmedicinastomadas").val(event.medicinastomadas);
@@ -205,7 +206,9 @@ var arrPacientes=new Array();
             $("#txtsintomas").val('');
             $("#txtdescripcion").val('');
             $("#txtmedicinastomadas").val('')
-           
+            $("#txtmedicinastomadas").val('')
+            $('select[name=selMedico]').val('');
+            $('.selectpicker').selectpicker('refresh') 
         }    
         
         

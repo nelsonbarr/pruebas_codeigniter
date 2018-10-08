@@ -290,7 +290,8 @@ class Home extends CI_Controller {
         $descripcion = $this->input->post("txtdescripcion");
         $sintomas = $this->input->post("txtsintomas");  
         $estadocita = $this->input->post("selEstadoCita");   
-        $estadopago = $this->input->post("selEstadoPago");   
+        $estadopago = $this->input->post("selEstadoPago");
+        $idmedico = $this->input->post("selMedico");   
         $medicinastomadas = $this->input->post("txtmedicinastomadas");    
         $start_date = $this->input->post("date", TRUE);
         $end_date = $this->input->post("dateend", TRUE);
@@ -313,10 +314,11 @@ class Home extends CI_Controller {
            "medicinastomadas"=>$medicinastomadas,
            'idestadopago'=>$estadopago,
            "fechacita" => $start_date,
-           "fechafincita" => $end_date
+           "fechafincita" => $end_date,
+           "idmedico"=>$idmedico
         );
         if($action=="NO"){//CUANDO PROVIENE EL LLAMADO DE DRAG O RESIZE DEL CALENDAR
-            unset($citas['idpaciente'],$citas["motivocita"],$citas["sintomas"],$citas["descripcion"],$citas['idestadocita'],$citas['idestadopago']);
+            unset($citas['idpaciente'],$citas["motivocita"],$citas["sintomas"],$citas["descripcion"],$citas['idestadocita'],$citas['idestadopago'],$datos['idmedico']);
         }
         //METODO QUE PROCESA LOS DATOS
         $this->citas_model->setCitas($citas);

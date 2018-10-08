@@ -44,7 +44,7 @@ class Access_model extends CI_Model{
 
     public function getMedicosEspecialidades()
     {
-        $this->db->select('*.medicos,especialidades.id,especialidades.descripcion')->from('medicos');
+        $this->db->select('medicos.nombres,medicos.apellidos,medicos.id,especialidades.id,especialidades.descripcion')->from('medicos');
         $this->db->join('especialidades','medicos.idespecialidad=especialidades.id');
         
         $query = $this->db->get();

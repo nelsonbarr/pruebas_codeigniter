@@ -149,6 +149,7 @@ var arrPacientes=new Array();
                     $("#dateend").val(event.end.format('D/M/Y hh:mm'));
                     $("#selEstadoCita").val(event.idestadocita);
                     $("#selEstadoPago").val(event.idestadopago);
+                    $("#selMedico").val(event.idmedico);
                     $("#txtmotivocita").val(event.motivocita);
                     $("#txtsintomas").val(event.sintomas);
                     $("#txtdescripcion").val(event.descripcion);
@@ -191,6 +192,7 @@ var arrPacientes=new Array();
         //}    
         function blanquearCita(){
             $('select[name=selPaciente]').val('');
+            $('select[name=selMedico]').val('');
             $('.selectpicker').selectpicker('refresh') 
             $("#idcita").val('')
             $("#date").val('');
