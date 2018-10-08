@@ -31,7 +31,7 @@ header("Pragma: no-cache"); //PARANOIA, NO GUARDAR EN CACHE
             <nav class="navbar ">
                 <div class="container-fluid collapse navbar-collapse">
                     <div class="navbar-header ">                                   
-                        <img src="<?php print base_url();?>assets/images/logo.png" alt="" class="img img-responsive center-block" width="150">
+                        <img src="<?php print base_url();?>assets/images/logo.png" alt="" class=" img-responsive center-block" style="border-radius: 20px;" width="150">
                     </div>                   
                     <ul class="nav navbar-nav navbar-right mr-auto">
                         <li class="nav-item dropdown">
