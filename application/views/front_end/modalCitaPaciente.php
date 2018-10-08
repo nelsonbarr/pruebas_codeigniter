@@ -68,8 +68,16 @@
                         </div>  
                                                   
                         <div class="form-group">
-                            <label class=" control-label">Motivo Cita</label>
-                            <input id="txtmotivocita" name="txtmotivocita" type="text" class="form-control" maxlength="100">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label class=" control-label">Motivo Cita</label>
+                                    <input id="txtmotivocita" name="txtmotivocita" type="text" class="form-control" maxlength="100">
+                                </div>                            
+                                <div class="col-xs-6">
+                                    <label class=" control-label">Sintomas</label>
+                                    <input id="txtsintomas" name="txtsintomas" type="text" class="form-control" maxlength="100">
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
@@ -84,8 +92,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class=" control-label">Sintomas</label>
-                            <input id="txtsintomas" name="txtsintomas" type="text" class="form-control" maxlength="100">
+                            <label class="control-label">Especialista</label>                            
+                            <input id="idcita" name="idcita" type="hidden"/>
+                            <select id="selMedico" name="selMedico" class="selectpicker form-control" data-show-subtext="true" data-live-search="true" >  
+                                <option value="" >Seleccione..</option>                 
+                                <?php foreach($medicosEspecialidades AS $fila):?>        
+                                <option data-subtext="<?php print $fila["descripcion"];?>" value="<?php print $fila["id"];?>"><?php print $fila["nombres"]." ".$fila['apellidos'];?></option>
+                                <?php endforeach;?>   
+                            </select>                            
                         </div>
                         <div class="form-group">
                             <label class=" control-label">Observaciones Cita</label>

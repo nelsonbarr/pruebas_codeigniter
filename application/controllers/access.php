@@ -21,6 +21,7 @@ class Access extends CI_Controller {
             $estadospagos=$this->access_model->getEstadosPago();
             $tiposDocs=$this->access_model->getTiposDocumentos();        
             $estadosCiviles=$this->access_model->getEstadosCiviles();
+            $medicosEspecialidades=$this->access_model->getMedicosEspecialidades();
             $replace_array = array("'", '"');            
             $replace_array=array();
             if ($citas != -1) {
@@ -81,7 +82,8 @@ class Access extends CI_Controller {
                 'estadoscitas'=>$estadoscitas,
                 'estadospagos'=>$estadospagos,  
                 'tiposDocs'=>$tiposDocs,
-                'estadosCiviles'=>$estadosCiviles,                             
+                'estadosCiviles'=>$estadosCiviles, 
+                'medicosEspecialidades'=>$medicosEspecialidades,                             
                 'citas'=>$citas,
                 'pacientes'=>$pacientes, 
                 'vista'=>'calendario'
@@ -119,6 +121,7 @@ class Access extends CI_Controller {
             $estadospagos=$this->access_model->getEstadosPago();
             $tiposDocs=$this->access_model->getTiposDocumentos();        
             $estadosCiviles=$this->access_model->getEstadosCiviles();
+            $medicosEspecialidades=$this->access_model->getMedicosEspecialidades();
             if($valid_user['perfil']==1){
                 $tipocalendar="agendaDay";
                 $contenido = 'dashboard_home';
@@ -191,7 +194,8 @@ class Access extends CI_Controller {
                 'estadoscitas'=>$estadoscitas,
                 'estadospagos'=>$estadospagos, 
                 'tiposDocs'=>$tiposDocs,
-                'estadosCiviles'=>$estadosCiviles,  
+                'estadosCiviles'=>$estadosCiviles,
+                'medicosEspecialidades'=>$medicosEspecialidades,
                 'pacientes'=>$pacientes,                              
                 'citas'=>$citas,
                 'vista'=>'calendario'

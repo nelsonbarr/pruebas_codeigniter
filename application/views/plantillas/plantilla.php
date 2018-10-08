@@ -2,11 +2,19 @@
     $this->load->view("plantillas/back_end/header");
     $this->load->view("plantillas/back_end/menu");
     $this->load->view("front_end/".$contenido);
-    if($vista=="paciente"){
-        $this->load->view("plantillas/back_end/footer_paciente");
-    }
-    elseif($vista=="usuarios"){
-        $this->load->view("plantillas/back_end/footer_usuario");
+    switch($vista){
+        case "paciente":
+            $this->load->view("plantillas/back_end/footer_paciente");
+            break;
+        case "usuarios":
+            $this->load->view("plantillas/back_end/footer_usuario");
+            break;
+        case "especialidades":
+            $this->load->view("plantillas/back_end/footer_especialidad");
+            break;
+        case "medicos":
+            $this->load->view("plantillas/back_end/footer_medico");
+            break;
     }
 
     if($tipocalendar=='agendaDay'){

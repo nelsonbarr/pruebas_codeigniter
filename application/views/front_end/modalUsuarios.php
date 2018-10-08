@@ -12,7 +12,7 @@
                     <div class="row ">                        
                         <div class="col-xs-12">
                             <div class="form-group"><label class=" control-label">Nombre Usuario</label>
-                                <input id="id" name="id"  type="hidden" />
+                                <input id="id" name="id"  type="text" />
 								<input id="status" name="status"  type="hidden" />
                                 <input id="txtnombreusuario" name="txtnombreusuario" type="text" class="form-control" maxlength="100"/>
                             </div>

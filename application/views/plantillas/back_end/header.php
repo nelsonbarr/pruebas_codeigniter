@@ -34,7 +34,8 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                               <a class="dropdown-item" href="<?php echo base_url();?>usuarios">Usuarios</a>
-                              <a class="dropdown-item" href="#">Medicos</a>                             
+                              <a class="dropdown-item" href="<?php echo base_url();?>medicos">Medicos</a>
+                              <a class="dropdown-item" href="<?php echo base_url();?>especialidades">Especialidades</a>                                                           
                             </div>
                           </li>
                         <li><a href="<?php print base_url();?>access/logout"><span class="fa fa-user-times">&nbsp;</span>&nbsp;&nbsp;Cerrar Sesion</a></li>
