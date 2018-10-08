@@ -36,8 +36,7 @@ var arrPacientes=new Array();
             autoclose: true
         });
 
-
-    //HAGO SEGUIMIENTO AL onclick DE BOTON HISTORIA DEL PACIENTE
+//HAGO SEGUIMIENTO AL onclick DE BOTON HISTORIA DEL PACIENTE
     $('#btn_history').on('click',function () {      
         var idpaciente=$('select[name=selPaciente]').val() 
         $('#txtnombrepaciente').val($('select[name=selPaciente] option:selected').text());             
@@ -81,6 +80,7 @@ var arrPacientes=new Array();
       })//end ajax
 
     });
+
         //BLOQUE DE INICIALIZACION DE CALENDARIO
 
         var initialLocaleCode = 'en';
@@ -91,13 +91,13 @@ var arrPacientes=new Array();
             console.log(tipocalendar);*/
             if(tipocalendar=='agendaWeek'){
                 $('#tipoagenda').text('Agenda Semanal');
-                var propRight='month,agendaWeek,agendaDay,year';
+                var propRight='month,basicWeek,basicDay,year';
                 
             }
             else if(tipocalendar=='agendaDay'){
                 $('#tipoagenda').text('Agenda Diaria');
                 var propRight='listDay,listWeek,listMonth';
-                tipocalendar="listWeek";               
+                tipocalendar="listDay";                
             }
             else{
 
@@ -105,7 +105,7 @@ var arrPacientes=new Array();
 
             $('#calendar').fullCalendar({
                 header: {
-                    left: 'prev,next today',
+                    left: 'prev,next,today',
                     center: 'title',  //right: 'month'//right: 'year,month,basicWeek,basicDay'
                     right: propRight
                 },
@@ -119,7 +119,12 @@ var arrPacientes=new Array();
                 slotDuration: '00:15:00',
                 contentHeight:480,       //auto            
                 hiddenDays: [ 6,0 ], // hide Tuesdays and Thursdays //defaultView: tipocalendar,               
-                defaultView: tipocalendar,                           
+                defaultView: tipocalendar,  
+                views: {
+                    listDay: { buttonText: 'Lista Dia' },
+                    listWeek: { buttonText: 'Lista Semana' },
+                    listMonth: { buttonText: 'Lista Mes' }
+                },
                 locale : 'es',
                 eventLimit: true, // allow "more" link when too many events*/               
                 buttonIcons: true, // show the prev/next text
@@ -138,33 +143,20 @@ var arrPacientes=new Array();
                     $("#date").val(this.start);
                     $("#dateend").val(dateend.getFullYear()+"-"+(dateend.getMonth() + 1) + "-" + dateend.getDate() + "-" +dateend.getHours() + ":" + dateend.getMinutes() + ":" + dateend.getSeconds());
                     $('#btn_add').show()
-                    $('#modalPacienteCita').modal('show')
-                    /*this.title = prompt('Event Title:');*/
-                    /*this.dateend = dateend;               
-                    this.eventData;
-                    if (this.title) {
-                        this.eventData = {
-                            title: this.title,
-                            start: this.start,
-                            forceEventDuration:true,                       
-                            resourceId:['ResourceID1'] // Example  of resource ID
-                        };
-                        $('#calendar').fullCalendar('getResources')// This loads the resources your events are associated with(you have toload your resources as well )
-                        $('#calendar').fullCalendar('renderEvent', this.eventData, true); // stick? = true
-                    }
-                    $('#calendar').fullCalendar('unselect');*/
+                    $('#modalPacientesList').modal('show')                    
                 },
-                eventClick: function(event, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, MUESTRA LOS DATOS DELA CITA PARA EDICION
+                eventClick: function(event, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, MODIFICAR PARA LLAMAR A LA VENTANA REGISTRAR CITA
                     blanquearCita();                                        
                     $('select[name=selPaciente]').val(event.idpaciente);
-                    $('.selectpicker').selectpicker('refresh') 
+                    $('.selectpicker').selectpicker('refresh')  
                     $('#btn_add').hide()
+                    $("#txtnombrepaciente").val(event.nombre_paciente+"  ID: "+event.documento);
                     $("#idcita").val(event.idcita)                  
                     $("#date").val(event.start.format('Y/M/D hh:mm'));
                     $("#dateend").val(event.end.format('Y/M/D hh:mm'));
+                    $("#txtmotivocita").val(event.motivocita);
                     $("#selEstadoCita").val(event.idestadocita);
                     $("#selEstadoPago").val(event.idestadopago);
-                    $("#txtmotivocita").val(event.motivocita);
                     $("#txtsintomas").val(event.sintomas);
                     $("#txtdescripcion").val(event.descripcion);
                     $("#txtmedicinastomadas").val(event.medicinastomadas);
@@ -172,8 +164,7 @@ var arrPacientes=new Array();
                 },
                 eventDrop: function(event, delta){ // event drag and drop
                     start=event.start.format();                                
-                    end=event.end.format(); 
-                    console.log(event)                  
+                    end=event.end.format();                   
                     $.ajax({
                         url:'<?php print base_url();?>home/saveCita/',                       
                         data: 'date='+start+'&dateend='+end+'&idcita='+event.idcita+"&action=NO",
@@ -186,7 +177,6 @@ var arrPacientes=new Array();
                 eventResize: function(event) {  // resize to increase or decrease time of event
                     start=event.start.format(); 
                     end=event.end.format();
-                    console.log(event)
                     $.ajax({
                         url:'<?php print base_url();?>home/saveCita/',  
                         data: 'action=NO&date='+start+'&dateend='+end+'&idcita='+event.idcita,
@@ -197,10 +187,10 @@ var arrPacientes=new Array();
                     });
                 },
                 eventRender: function(event, element) { 
-                    element.find('.fc-title').append("<br/>" + event.description); 
+                    element.find('.fc-title').append(" - " + event.description); 
                 } 
                 
-            });           
+            });            
             
             $('#calendar').fullCalendar('addEventSource', citas); 
 

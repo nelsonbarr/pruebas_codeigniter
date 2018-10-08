@@ -1,7 +1,7 @@
     </body>
     <!--   Core JS Files   -->
     <!--   Core JS Files   -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="<?php echo base_url() ?>assets/js/popper.min.js" ></script>
     <script src="<?php echo base_url() ?>assets/js/jquery.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url() ?>assets/js/material.min.js" type="text/javascript"></script>
@@ -11,7 +11,7 @@
     <script src="<?php echo base_url() ?>assets/js/bootstrap-notify.js"></script>
     <!-- Material Dashboard javascript methods -->
     <script src="<?php echo base_url() ?>assets/js/material-dashboard.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/bootstrap-select.min.js"></script>
     <script src="<?php echo base_url() ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"?></script>
     <script src="<?php echo base_url(); ?>assets/datatables2/media/js/jquery.dataTables.js"></script>
     <script src="<?php echo base_url(); ?>assets/datatables2/media/js/dataTables.buttons.js"></script>
@@ -44,8 +44,12 @@ var arrPacientes=new Array();
     });
 
     //HAGO SEGUIMIENTO AL onclick DE CADA BOTON HISTORIA DEL LISTADO DE PACIENTES 
-    $('button[id=btn_history]').on('click',function () {      
-        var idpaciente=$(this).data("id");               
+    $('button[id=btn_history]').on('click',function () {     
+        key=$(this).data("id");    
+        //arrPacientes=JSON.parse(arrPacientes.split('\t').join(''));;
+        pacienteEdit=arrPacientes[key];
+        idpaciente=pacienteEdit.id;
+        $('#txtnombrepaciente').val(pacienteEdit.nombres+" "+pacienteEdit.apellidos);                     
         $.ajax({
         type:'POST',
         url:'<?php print base_url();?>pacientes/carga_Historico/'+idpaciente,
@@ -55,7 +59,8 @@ var arrPacientes=new Array();
           html="";
           $("#historico").html('');
           if(json.length>0){
-            $('#txtnombrepaciente').val(json[0].nombre_paciente);
+            
+
             for(i=0;i<json.length;i++){
                 fila=json[i]; 
                 if(fila.sintomas==null)
@@ -89,9 +94,9 @@ var arrPacientes=new Array();
     
     //HAGO SEGUIMIENTO AL onclick DE CADA BOTON EDICION DEL LISTADO DE PACIENTES 
     $('button[id=btn_edit]').on('click',function () {
-      id=$(this).data("id");    
+      key=$(this).data("id");    
       //arrPacientes=JSON.parse(arrPacientes.split('\t').join(''));;
-      pacienteEdit=arrPacientes[id];
+      pacienteEdit=arrPacientes[key];
       $('#idpaciente').val(pacienteEdit.id);      
       $('#idtipodoc').val(pacienteEdit.idtipodocumento);
       $('#idtipodoc').attr('disabled','disabled');

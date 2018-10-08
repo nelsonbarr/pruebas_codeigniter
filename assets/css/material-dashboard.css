@@ -1995,7 +1995,7 @@ label.control-label {
 .form-group label.control-label {
   font-size: 11px;
   line-height: 1.07143;
-  color: #606060;
+  color: #06f;
   font-weight: 400;
   margin: 4px 0 0 0;
 }
@@ -2280,8 +2280,9 @@ select.form-control[multiple], .form-group.is-focused select.form-control[multip
   color: #ffffff;
 }
 .alert.alert-info {
-  background-color: #00d3ee;
-  color: #ffffff;
+  color:#31708f;
+  background-color:#d9f1fc;  
+  border-color:#bce8f1;
   border-radius: 3px;
   box-shadow: 0 12px 20px -10px rgba(0, 188, 212, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 188, 212, 0.2);
 }

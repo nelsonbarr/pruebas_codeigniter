@@ -12,7 +12,11 @@
         $this->load->view("plantillas/back_end/footer_medico");
     }
     else{
+	
+    if($tipocalendar=='agendaDay'){
+        $this->load->view("plantillas/back_end/footer_diario");
+    }
+    elseif($tipocalendar=='agendaWeek'){
         $this->load->view("plantillas/back_end/footer");
     }
-    
- ?>
+?>
