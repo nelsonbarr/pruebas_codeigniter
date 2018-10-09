@@ -26,7 +26,7 @@
                 <div class="panel panel-default">
                         <div class="panel-heading" id="tipoagenda">
                             <div class="row">
-                            <div class="col-xs-6">AGENDA DEL DIA <?php print date('Y/m/d' );?></div>
+                            <div class="col-xs-6 text-danger">AGENDA DEL DIA <?php print date('Y/m/d' );?></div>
                             <div class="col-xs-6 text-right"><button type="button" class="btn btn_edit" id="btn_add" data-toggle="modal" data-target="#modalPacientes"><span class="fa fa-new pull-right"></span>Agregar</button></div>
                             </div>
                         </div>

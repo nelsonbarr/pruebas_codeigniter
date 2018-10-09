@@ -24,13 +24,15 @@
     padding:0px;
     height: 20%;
     
+    
 }
+
 
 .side-bar ul li.menu-head
 {
     font-family: 'Lato', sans-serif;
     padding:20px;
-
+    background-color: white;
 }
 
 

@@ -1,3 +1,30 @@
+    
+<!--Footer-->
+<footer class="page-footer text-center font-small mt-4 wow fadeIn">
+<!-- Social icons -->
+<div class="pb-4">
+    <a href="https://www.facebook.com/mdbootstrap" target="_blank">
+        <i class="fa fa-facebook mr-3"></i>
+    </a>
+
+    <a href="https://twitter.com/MDBootstrap" target="_blank">
+        <i class="fa fa-twitter mr-3"></i>
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
+        <i class="fa fa-youtube mr-3"></i>
+    </a>
+    
+</div>
+<!-- Social icons -->
+
+<!--Copyright-->
+<div class="footer-copyright py-3">
+    © 2018 Copyright: Dr. Jorge Ulloa <a href="https://www.drjorgeulloa.com" target="_blank"> Dr Ulloa </a>
+    <br>Desarrollado por: Ing. Nelson Barraez. Instagram:<a href="https://www.instagram.com/nelsonbarrwebdesign" target="_blank">@nelsonbarrwebdesign</a>        
+</div>
+<!--/.Copyright-->
+</footer> 
     </body>
     <!--   Core JS Files   -->
     <!--   Core JS Files   -->
@@ -95,7 +122,7 @@ var arrPacientes=new Array();
                 
             }
             else if(tipocalendar=='agendaDay'){
-                $('#tipoagenda').text('Agenda Diaria');
+                $('#tipoagenda').text('AGENDA DIARIA');
                 var propRight='listDay,listWeek,listMonth';
                 tipocalendar="listDay";                
             }

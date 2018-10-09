@@ -69,7 +69,7 @@ class Pacientes extends CI_Controller{
             'contenido' => 'pacientesList',
             'tiposDocs'=>$tiposDocs,
             'estadosCiviles'=>$estadosCiviles,
-            'tipocalendar'=>'agendaWeek',
+            'tipocalendar'=>'',
             'pacientes'=>$pacientes,
             'vista'=>'paciente'            
         );

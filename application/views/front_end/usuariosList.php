@@ -6,7 +6,7 @@
             <div class="side-bar">
                 <ul>
                     <li class="menu-head">
-                       CONTROL DE CITAS <a href="#" class="push_menu"><span class="fa fa-exchange pull-right"></span></a>
+                       <a href="#" class="push_menu">CONTROL DE CITAS<span class="fa fa-exchange pull-right"></span></a>
                     </li>
                     <div class="menu">
                         <li>
@@ -26,8 +26,8 @@
                 <div class="panel panel-default">
                         <div class="panel-heading" id="tipoagenda">
                             <div class="row">
-                            <div class="col-xs-6">USUARIOS</div>
-                            <div class="col-xs-6 text-right"><button type="button" class="btn btn_edit" id="btn_add" data-toggle="modal" data-target="#modalUsuarios"><span class="fa fa-new pull-right"></span>Agregar</button></div>
+                            <div class="col-xs-6 text-danger"><strong>USUARIOS</strong></div>
+                            <div class="col-xs-6 text-right"><button type="button" class="btn btn-info btn_edit" id="btn_add" data-toggle="modal" data-target="#modalUsuarios"><span class="fa fa-new pull-right"></span>Agregar</button></div>
                             </div>
                         </div>
                         <div class="panel-body">
@@ -67,7 +67,7 @@
                                                     <td><?php print $fila['apellidos'];?></td>
                                                     <td><?php print $fila['email'];?></td>
                                                     <td><?php print $fila['telefono'];?></td>
-                                                    <td><button type="button" id="btn_edit" alt="Editar" title="Editar" class="btn btn_edit" data-toggle="modal" data-id="<?php print $key;?>" data-target="#modalUsuarios"><span class="fa fa-edit pull-right"></span></button></td>
+                                                    <td><button type="button" id="btn_edit" alt="Editar" title="Editar" class="btn btn-danger btn_edit" data-toggle="modal" data-id="<?php print $key;?>" data-target="#modalUsuarios"><span class="fa fa-edit pull-right"></span></button></td>
                                                     </tr>        
                                                 <?php endforeach;?>
                                             </tbody>

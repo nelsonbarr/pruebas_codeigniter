@@ -20,7 +20,8 @@ class Usuarios extends CI_Controller{
                 'user_name' => $this->user_name,
                 'contenido' => 'usuariosList',  
                 'usuarios' =>$usuarios,                                
-                'vista'=>'usuarios'
+                'vista'=>'usuarios',
+                'tipocalendar'=>'',
             );
             $this->load->view("plantillas/plantilla", $data);
         }    
@@ -41,10 +42,12 @@ class Usuarios extends CI_Controller{
         $datos['email']=$this->input->post("txtemail");
         $datos['telefono']=$this->input->post("txttelefonos");
         $datos['password'] =md5($this->input->post("txtpassword"));
+        $datos['preguntaseguridad'] =$this->input->post("txtpregunta");
+        $datos['respuestapregunta'] =md5($this->input->post("txtrespuesta"));
         $datos['status']=1;
         $datos['perfil']=$this->input->post("selPerfil");;
               
-        $rresult=$this->usuarios_model->saveUsuarios($datos);
+        $result=$this->usuarios_model->saveUsuarios($datos);
         if($result!=-1){
             $this->session->set_flashdata('success', "Usuario registrado con exito");
         }
@@ -57,6 +60,7 @@ class Usuarios extends CI_Controller{
             'user_name' => $this->user_name,
             'contenido' => 'usuariosList',
             'usuarios'=>$usuarios,
+            'tipocalendar'=>'',
             'vista'=>'usuarios'            
         );
         $this->load->view("plantillas/plantilla", $data);

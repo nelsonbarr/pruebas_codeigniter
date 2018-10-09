@@ -2,8 +2,6 @@
 <!--Footer-->
 <footer class="page-footer text-center font-small mt-4 wow fadeIn">
 
-    <hr class="my-4">
-
     <!-- Social icons -->
     <div class="pb-4">
         <a href="https://www.facebook.com/mdbootstrap" target="_blank">
@@ -23,8 +21,8 @@
 
     <!--Copyright-->
     <div class="footer-copyright py-3">
-        © 2018 Copyright: Dr. Jorge Ulloa <a href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank"> MDBootstrap.com </a>
-        <br>Desarrollado por: Ing. Nelson Barraez Instagram:<a href="https://www.instagram.com/nelsonbarrwebdesign" target="_blank">@nelsonbarrwebdesign</a>        
+        © 2018 Copyright: Dr. Jorge Ulloa <a href="https://www.drjorgeulloa.com" target="_blank"> Dr Ulloa </a>
+        <br>Desarrollado por: Ing. Nelson Barraez. Instagram:<a href="https://www.instagram.com/nelsonbarrwebdesign" target="_blank">@nelsonbarrwebdesign</a>        
     </div>
     <!--/.Copyright-->
  </footer>   
@@ -120,12 +118,13 @@ var arrPacientes=new Array();
        /* if(tipocalendar!=''){
             console.log(tipocalendar);*/
             if(tipocalendar=='agendaWeek'){
-                $('#tipoagenda').text('Agenda Semanal');
+                $('#tipoagenda').text('AGENDA SEMANAL');
+                $("#tipoagenda").addClass("text-danger");
                 var propRight='month,agendaWeek,agendaDay,year';
                 
             }
             else if(tipocalendar=='agendaDay'){
-                $('#tipoagenda').text('Agenda Diaria');
+                $('#tipoagenda').text('AGENDA DIARIA');                
                 var propRight='listDay,listWeek,listMonth';
                 tipocalendar="listWeek";               
             }

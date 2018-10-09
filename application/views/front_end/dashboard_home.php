@@ -18,7 +18,7 @@
             <div class="side-bar">
                 <ul>
                     <li class="menu-head">
-                       CONTROL DE CITAS <a href="#" class="push_menu"><span class="fa fa-exchange pull-right"></span></a>
+                        <a href="#" class="push_menu">CONTROL DE CITAS<span class="fa fa-exchange pull-right"></span></a>
                     </li>
                     <div class="menu">
                         <li>
@@ -38,7 +38,11 @@
             <div class="content">
                 <div class="col-md-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading" id="tipoagenda">Agenda</div>
+                        <div class="panel-heading" >
+                            <div class="row">
+                            <strong><div class="col-xs-6 text-danger" id="tipoagenda">AGENDA</div></strong>                           
+                            </div></div>
+
                         <div class="panel-body">
                             <div class="col-sm-12">
                                 <?php if ($this->session->flashdata('error')) { ?>

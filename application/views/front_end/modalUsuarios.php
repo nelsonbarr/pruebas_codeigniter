@@ -54,12 +54,26 @@
                             </div>
                         </div>                        
                         <div class="col-xs-6 text-center">
-                            <div class="form-group">
-                                <input id="txtpassword" name="txtpassword" type="password" class="form-control" placeholder="Contrase�a" type="password" maxlength="10" value="">
+                            <div class="form-group"><label class=" control-label">Contraseña</label>
+                                <input id="txtpassword" name="txtpassword" type="password" class="form-control" placeholder="Contraseña" type="password" maxlength="10" value="">
                             </div>                    
                         </div> 
                     </div>  
-
+                    <div class="col-xs-12 text-center">
+                        <div class="row">                       
+                            <div class="col-xs-6">
+                                <div class="form-group"><label class=" control-label">Pregunta de recuperacion</label>
+                                    <input id="txtpregunta" name="txtrespuesta" type="text" class="form-control" maxlength="45">
+                                </div>
+                            </div>       
+                            
+                            <div class="col-xs-6">
+                                <div class="form-group"><label class=" control-label">Respuesta pregunta recuperacion</label>
+                                    <input id="txtrespuesta" name="txtrespuesta" type="password" class="form-control" maxlength="45">
+                                </div>                    
+                            </div> 
+                        </div>
+                    </div>
                 </div>
                
 

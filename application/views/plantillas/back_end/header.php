@@ -9,6 +9,7 @@ header("Pragma: no-cache"); //PARANOIA, NO GUARDAR EN CACHE
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- Page title -->
         <title>CONTROL DE CITAS</title>
@@ -24,16 +25,16 @@ header("Pragma: no-cache"); //PARANOIA, NO GUARDAR EN CACHE
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/bootstrap-select.min.css" />
         <link rel="stylesheet" href="<?php print base_url();?>assets/bootstrap-datepicker/css/bootstrap-datepicker.min.css" />
     </head>
-    <body>
-        <div id="header">
+    <body>    
+        <div id="header" class="header">
             <div class="color-line">
             </div>                 
             <nav class="navbar ">
                 <div class="container-fluid collapse navbar-collapse">
                     <div class="navbar-header ">                                   
-                        <img src="<?php print base_url();?>assets/images/logo.png" alt="" class=" img-responsive center-block" style="border-radius: 20px;" width="150">
+                    <a href="<?php print base_url();?>" class="logo"><img src="<?php print base_url();?>assets/images/logo.png" alt=""  style="border-radius: 20px;" width="150"></a>
                     </div>                   
-                    <ul class="nav navbar-nav navbar-right mr-auto">
+                    <ul class="header-right nav navbar-nav navbar-right mr-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <small>Configuracion</small><span class="fa fa-gear">&nbsp;</span>
@@ -46,18 +47,13 @@ header("Pragma: no-cache"); //PARANOIA, NO GUARDAR EN CACHE
                                 <a class="dropdown-item" href="<?php echo base_url();?>especialidades">Especialidades</a>   
                                 </li>
                                 </ul>                                                        
-                            <!--/div-->
+                            <!--/div-->                            
                           </li>
-                        <li><a href="<?php print base_url();?>access/logout"><span class="fa fa-user-times">&nbsp;</span>&nbsp;&nbsp;Cerrar Sesion</a></li>
-
-                        
+                        <li><a href="<?php print base_url();?>access/logout"><span class="fa fa-user-times">&nbsp;</span><small>&nbsp;&nbsp;Cerrar Sesion</small></a></li>
+              
                     </ul>                    
                 </div>
             </nav> 
-
-
-
-
         </div>
 
 

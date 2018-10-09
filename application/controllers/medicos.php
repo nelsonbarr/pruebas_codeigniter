@@ -26,7 +26,8 @@ class Medicos extends CI_Controller{
 				'especialidades'=>$especialidades,
                 'contenido' => 'medicosList',  
                 'medicos' =>$medicos,                                
-                'vista'=>'medicos'
+                'vista'=>'medicos',
+                'tipocalendar'=>'',
             );
             $this->load->view("plantillas/plantilla", $data);
        // }    
@@ -63,7 +64,8 @@ class Medicos extends CI_Controller{
 				'especialidades'=>$especialidades,
                 'contenido' => 'medicosList',  
                 'medicos' =>$medicos,                                
-                'vista'=>'medicos'
+                'vista'=>'medicos',
+                'tipocalendar'=>'',
         );
         if($result!=-1){
             $this->session->set_flashdata('success', "Medico Registrado");

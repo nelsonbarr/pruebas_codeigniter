@@ -20,7 +20,8 @@ class Especialidades extends CI_Controller{
                 'user_name' => $this->user_name,
                 'contenido' => 'especialidadesList',  
                 'especialidades' =>$especialidades,                                
-                'vista'=>'especialidades'
+                'vista'=>'especialidades',
+                'tipocalendar'=>'',
             );
             $this->load->view("plantillas/plantilla", $data);
        // }    
@@ -47,7 +48,8 @@ class Especialidades extends CI_Controller{
             'user_name' => $this->user_name,
             'contenido' => 'especialidadesList',
             'especialidades'=>$especialidades,
-            'vista'=>'especialidades'            
+            'vista'=>'especialidades',
+            'tipocalendar'=>'',            
         );
         $this->load->view("plantillas/plantilla", $data);
 

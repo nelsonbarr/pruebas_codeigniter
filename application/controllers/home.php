@@ -312,18 +312,23 @@ class Home extends CI_Controller {
            "idmedico"=>$idmedico
         );
         if($action=="NO"){//CUANDO PROVIENE EL LLAMADO DE DRAG O RESIZE DEL CALENDAR
-            unset($citas['idpaciente'],$citas["motivocita"],$citas["sintomas"],$citas["descripcion"],$citas['idestadocita'],$citas['idestadopago'],$datos['idmedico']);
+            unset($citas['idpaciente'],$citas["motivocita"],$citas["sintomas"],$citas["descripcion"],$citas['idestadocita'],$citas['idestadopago'],$citas['idmedico']);
         }
         //METODO QUE PROCESA LOS DATOS
         $regCitas=$this->citas_model->setCitas($citas);
-        if($regCitas!=-1){
+        if($regCitas){
             $this->session->set_flashdata('success', "Cita registrada con exito");
         }
         else{
             $this->session->set_flashdata('error', "Error al guardar cita");
         }
         if($action!="NO"){//CUANDO NO PROVIENE EL LLAMADO DE DRAG O RESIZE DEL CALENDAR, LLAMO A LA VISTA CON LOS CAMBIOS
-            $this->semanal();
+            if($this->session->userdata('profile')==1){
+                $this->diario();                
+            }
+            else{
+                $this->semanal();               
+            }            
         }
     }
 

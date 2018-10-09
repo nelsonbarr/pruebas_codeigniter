@@ -6,7 +6,7 @@
             <div class="side-bar">
                 <ul>
                     <li class="menu-head">
-                       CONTROL DE CITAS <a href="#" class="push_menu"><span class="fa fa-exchange pull-right"></span></a>
+                       <a href="#" class="push_menu">CONTROL DE CITAS<span class="fa fa-exchange pull-right"></span></a>
                     </li>
                     <div class="menu">
                         <li>
@@ -26,7 +26,7 @@
                 <div class="panel panel-default">
                         <div class="panel-heading" id="tipoagenda">
                             <div class="row">
-                            <div class="col-xs-6">PACIENTES</div>
+                            <div class="col-xs-6 text-danger"><strong>PACIENTES</strong></div>
                             <div class="col-xs-6 text-right"><button type="button" class="btn btn-info btn_edit" id="btn_add" data-toggle="modal" data-target="#modalPacientes"><span class="fa fa-new pull-right"></span>Agregar</button></div>
                             </div>
                         </div>

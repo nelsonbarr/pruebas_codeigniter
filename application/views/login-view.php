@@ -37,7 +37,7 @@
                                 <input class="form-control" placeholder="Contraseña" id="txtpwd" name="txtpwd" type="password" value=""/>
                             </div>
                             <div class="forgot">
-                                <a href="reset.html">Olvido su contraseña</a>
+                                <a href="<?php print base_url();?>access/recuperacion">Olvido su contraseña</a>
                             </div>
                             <input class=" btn btn-login" type="submit" value="Iniciar Sesion"/> 
                                     

@@ -57,7 +57,7 @@ class Citas_model extends CI_Model{
             unset($datos['idcita']);           
             $result=$this->db->insert('citas',$datos);           
         }
-        $error = $this->db->error(); // Has keys 'code' and 'message')
+        $error = $this->db->error(); // Has keys 'code' and 'message')        
         return $result;
         
     }
