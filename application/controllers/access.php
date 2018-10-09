@@ -218,17 +218,24 @@ class Access extends CI_Controller {
 		redirect('access', 'refresh');
     }
     
-    public function recuperacion(){
+    public function recuperacion($user){
+        $result=$this->access_model->getUser($user);        
 		$this->session->sess_destroy();
         $this->session->set_userdata('login', false);
-		$datos = array(
-            'id_user' => $this->id_user,
-            'user_name' => $this->user_name,            
-            'contenido' => 'recuperacion',
-            'vista'=>'',
-            'tipocalendar'=>'', 
-        );
-        $this->load->view("plantillas/plantilla", $datos);
+        if($result!=-1){
+            $datos = array(
+                'id_user' => $this->id_user,
+                'user_name' => $this->user_name,                            
+                'vista'=>'',
+                'usuario'=>$result,
+                'tipocalendar'=>'', 
+            );
+            $this->load->view("front_end/recuperacion", $datos);
+        }
+        else{
+            $this->session->set_flashdata('error', "Debe Indicar un usuario correcto");
+            redirect('access', 'refresh');
+        }
 	}
 
     public function acceso_denegado()

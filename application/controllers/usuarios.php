@@ -48,7 +48,7 @@ class Usuarios extends CI_Controller{
         $datos['perfil']=$this->input->post("selPerfil");;
               
         $result=$this->usuarios_model->saveUsuarios($datos);
-        if($result!=-1){
+        if($result){
             $this->session->set_flashdata('success', "Usuario registrado con exito");
         }
         else{
@@ -65,6 +65,28 @@ class Usuarios extends CI_Controller{
         );
         $this->load->view("plantillas/plantilla", $data);
 
+
+    }
+
+    public function saveRenewPass(){
+        
+        $datos=array();        
+        $datos['nombreusuario']=$this->input->post("txtnombreusuario");        
+        $datos['email']=$this->input->post("txtemail");
+        $datos['password'] =md5($this->input->post("txtpassword"));
+        $datos['preguntaseguridad'] =$this->input->post("txtpregunta");
+        $datos['respuestapregunta'] =$this->input->post("txtrespuesta");         
+        
+              
+        $result=$this->usuarios_model->saveRenewPass($datos);
+
+        if($result){
+            $this->session->set_flashdata('success', "Password actualizado con exito");
+        }
+        else{
+            $this->session->set_flashdata('error', "Error al actualizar password");
+        }       
+        redirect('access', 'refresh');
 
     }
 

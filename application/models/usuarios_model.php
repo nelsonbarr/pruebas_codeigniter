@@ -31,6 +31,21 @@ class Usuarios_model extends CI_Model{
         return -1;
     }
 
+    public function getUsuarioValido($datos)
+    {        
+        $this->db->select("*");        
+        $this->db->from('usuarios'); 
+        $this->db->where('nombreusuario',$datos["nombreusuario"]);   
+        $this->db->where('email',$datos["email"]);   
+        $this->db->where('preguntaseguridad',$datos["preguntaseguridad"]);   
+        $this->db->where('respuestapregunta',md5($datos["respuestapregunta"]));  
+        $query = $this->db->get();
+        $query = $query->result_array();
+        if (count($query) >= 1)
+            return $query;
+        return -1;
+    }
+
     public function saveUsuarios($datos){          
         $result=false;
         if($datos['id']!=""){
@@ -47,6 +62,24 @@ class Usuarios_model extends CI_Model{
                 print "EXISTE INSERTAR";    
             }            
         }        
+       /* if ($this->db->affected_rows() == 1)
+            return $this->db->insert_id();*/
+        
+       return $result;
+    }
+
+
+    public function saveRenewPass($datos){          
+        $result=false;
+        $valido=$this->getUsuarioValido($datos);
+        
+        if($valido!=-1 && $datos['nombreusuario']!=""){
+                      
+            $this->db->where('nombreusuario',$datos['nombreusuario']);
+            unset($datos['nombreusuario'],$datos['email'],$datos['preguntaseguridad'],$datos['respuestapregunta']);
+            $result=$this->db->update('usuarios',$datos);            
+        }
+         
        /* if ($this->db->affected_rows() == 1)
             return $this->db->insert_id();*/
         

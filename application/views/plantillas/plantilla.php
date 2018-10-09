@@ -15,13 +15,15 @@
         case "medicos":
             $this->load->view("plantillas/back_end/footer_medico");
             break;
-    }
-    
-	
-    if($tipocalendar=='agendaDay'){
-        $this->load->view("plantillas/back_end/footer_diario");
-    }
-    elseif($tipocalendar=='agendaWeek'){
-        $this->load->view("plantillas/back_end/footer");
-    }
+        case "calendario":
+            if($tipocalendar=='agendaDay'){
+                $this->load->view("plantillas/back_end/footer_diario");
+            }
+            elseif($tipocalendar=='agendaWeek'){
+                $this->load->view("plantillas/back_end/footer");
+            }
+            break;
+        default:
+             $this->load->view("plantillas/back_end/footer_repass");
+    }  
 ?>

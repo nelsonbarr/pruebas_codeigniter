@@ -63,7 +63,7 @@
                         <div class="row">                       
                             <div class="col-xs-6">
                                 <div class="form-group"><label class=" control-label">Pregunta de recuperacion</label>
-                                    <input id="txtpregunta" name="txtrespuesta" type="text" class="form-control" maxlength="45">
+                                    <input id="txtpregunta" name="txtpregunta" type="text" class="form-control" maxlength="45">
                                 </div>
                             </div>       
                             

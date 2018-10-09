@@ -31,7 +31,6 @@
     <!--   Core JS Files   -->
     <!--   Core JS Files   -->
     <script src="<?php echo base_url() ?>assets/js/popper.min.js" ></script>
-    <script src="<?php echo base_url() ?>assets/js/md5.min.js" ></script>
     <script src="<?php echo base_url() ?>assets/js/jquery.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url() ?>assets/js/material.min.js" type="text/javascript"></script>
@@ -49,58 +48,22 @@
     <script src="<?php echo base_url(); ?>assets/datatables2/media/js/buttons.html5.js"></script>
     <script src="<?php echo base_url(); ?>assets/datatables2/media/js/buttons.flash.js"></script>
     <!-- App scripts -->   
-<script>
-var arrUsuarios=new Array();
-        
-    arrUsuarios=<?php print json_encode($usuarios);?>;
-    //HAGO SEGUIMIENTO AL onclick DEL BOTON AGREGAR DE LA VISTA LISTA PACIENTES   
-    $('#btn_add').on('click',function () { 
-       
-      $('#id').val('');
-      $('#txtnombreusuario').val('');
-	  $('#txtnombres').val('');
-      $('#txtapellidos').val('');
-      $('#txtemail').val('');
-      $('#txttelefonos').val('');   
-      $('#txtpassword').val('');   
-      $('#status').val('0');   
-      $('#selPerfil').val('');   
-      $('#txtpregunta').val('');   
-      $('#txtrespuesta').val('');
-    });
-
-    $('#txtpassword').on('change',function(){
-        $('#txtpassword').val(md5($('#txtpassword').val('')));  
-    });
-
-    //HAGO SEGUIMIENTO AL onclick DE CADA BOTON EDICION DEL LISTADO DE PACIENTES 
-    $('button[id=btn_edit]').on('click',function () {
-      id=$(this).data("id");    
-      //arrPacientes=JSON.parse(arrPacientes.split('\t').join(''));;
-      usuarioEdit=arrUsuarios[id];
-      $('#id').val(usuarioEdit.id);      
-      $('#txtnombreusuario').val(usuarioEdit.nombreusuario);
-      $('#txtnombres').val(usuarioEdit.nombres);
-      $('#txtapellidos').val(usuarioEdit.apellidos);
-      $('#txtemail').val(usuarioEdit.email);
-      $('#txttelefonos').val(usuarioEdit.telefono); 
-  	  $('#txtpassword').val(usuarioEdit.password); 
-  	  $('#selPerfil').val(usuarioEdit.perfil);  
-      $('#txtpregunta').val(usuarioEdit.preguntaseguridad);   
-      $('#txtrespuesta').val(usuarioEdit.respuestapregunta); 
-    });
-
-    $(function() {
-        $('#tableusuarios').DataTable({
-            responsive: true,
-            'order': []
+    <script language="javascript">
+        $('#btn_send').on('click',function () {      
+            pass=$("#txtpassword").val();
+            repass=$("#txtrepassword").val();
+           
+            if($("#txtrespuesta").val()==""){
+                $(".banner-sec").html('<div class="col-sm-12"><div class="alert alert-danger text-center">Deben indicar la respuesta a su pregunta de seguridad</div></div>' ); 
+                exit();
+            }
+            
+            if(pass===repass && pass!=""){
+                $( "#formRepass" ).submit();                
+            }
+            else{
+                $(".banner-sec").html('<div class="col-sm-12"><div class="alert alert-danger text-center">Deben coincidir los password, asegurese que no sea valors vacios</div></div>' );
+            }
         });
-
-       
-        $(".push_menu").click(function(){
-             $(".wrapper").toggleClass("active");
-        });
-
-    });          
-</script>
+    </script>
 </html>

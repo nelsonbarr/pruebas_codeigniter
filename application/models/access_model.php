@@ -19,6 +19,17 @@ class Access_model extends CI_Model{
         return -1;
     }
 
+    public function getUser($user)
+    {
+        $this->db->select('*')->from('usuarios');
+        $this->db->where('nombreusuario', $user)->where('status', 1);
+        $query = $this->db->get();
+        $query = $query->result_array();
+        if (count($query) == 1)
+            return $query[0];
+        return -1;
+    }
+
 
     public function getTiposDocumentos()
     {
