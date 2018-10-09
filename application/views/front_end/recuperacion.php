@@ -62,6 +62,7 @@
                         </div>   
                         <div class="row text-center">                  
                             <button type="button" class="btn btn-danger" id="btn_send">Enviar</button>
+                            <a href="<?php print base_url();?>access" class="btn btn-info">Cancelar</a>
                         </div>
                                     
                         </form>                
