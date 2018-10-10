@@ -34,10 +34,10 @@
                             <div class="col-sm-12">
                                 <?php if ($this->session->flashdata('error')) { ?>
                                     <div class="alert alert-danger text-center"> <?php echo $this->session->flashdata('error') ?> </div>
-                                <?php } ?>
+                                <?php unset($_SESSION["error"]);} ?>
                                 <?php if ($this->session->flashdata('success')) { ?>
                                     <div class="alert alert-success text-center"> <?php echo $this->session->flashdata('success') ?> </div>
-                                <?php } ?>
+                                <?php unset($_SESSION["success"]);} ?>
                             </div>
                            <?php if ( $especialidades == -1): ?>
                                     <div class="col-lg-6 col-lg-offset-3" id="no_estadisticas">

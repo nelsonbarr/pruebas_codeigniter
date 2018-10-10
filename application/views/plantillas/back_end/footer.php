@@ -64,7 +64,10 @@ var arrPacientes=new Array();
             autoclose: true
         });
 
+    //HAGO SEGUIMIENTO AL onclick DE BOTON HISTORIA DEL PACIENTE
+    $('#btn_delete').on('click',function(){
 
+    });
     //HAGO SEGUIMIENTO AL onclick DE BOTON HISTORIA DEL PACIENTE
     $('#btn_history').on('click',function () {      
         var idpaciente=$('select[name=selPaciente]').val() 
@@ -169,8 +172,7 @@ var arrPacientes=new Array();
                     $('#modalPacienteCita').modal('show')                    
                 },
                 eventClick: function(event, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR CITA,LLAMA A LA VENTANA REGISTRAR CITA PARA EDICION
-                    blanquearCita(); 
-                    console.log(event);                                       
+                    blanquearCita();                                                         
                     $('select[name=selPaciente]').val(event.idpaciente);
                     $("select[name=selMedico]").val(event.idmedico);
                     $('.selectpicker').selectpicker('refresh') 
@@ -211,8 +213,38 @@ var arrPacientes=new Array();
                         }
                     });
                 },
-                eventRender: function(event, element) { 
+                eventRender: function(event, element,view) { 
                     element.find('.fc-title').append("<br/>" + event.description); 
+                    if (view.name == 'listDay') {
+                        element.find(".fc-list-item-time").append("<span class='closeon'>&times;</span>");
+                    } else {
+                        element.find(".fc-content").prepend("<span class='closeon'>&times;</span>");
+                    }
+                    element.find(".closeon").on('click', function() {                         
+                                                       
+                           $.ajax({
+                                url:'<?php print base_url();?>home/deleteCita/',  
+                                data: {idcita:event.idcita},
+                                type: "POST",       
+                                dataType:'json',                         
+                                success: function(json) {
+                                    if(json.success){
+                                        $(".banner-sec").html('<div class="alert alert-success text-center">'+json.mensaje+'</div>' ) //alert(json);                                   
+                                        $('#calendar').fullCalendar('removeEvents',event._id);
+                                        return true;
+                                    }
+                                    else{
+                                        $(".banner-sec").html('<div class="alert alert-danger text-center">'+json.mensaje+'</div>' ) //alert(json);                                   
+                                        return false
+                                    }
+                                    
+                                },
+                                error: function(){
+                                    $(".banner-sec").html('<div class="alert alert-danger text-center">Problemas al ejecutar</div>' )
+                                    return false
+                                }
+                            });
+                    });
                 } 
                 
             });           

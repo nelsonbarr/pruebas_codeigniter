@@ -43,7 +43,18 @@ class Citas_model extends CI_Model{
         return -1;
     }
 
-    
+    public function getEstadoCita($idcita)
+    {
+        $this->db->select("*");        
+        $this->db->from('citas');        
+        $this->db->where("idestadocita",1)->where("idcita",$idcita);
+        $query = $this->db->get();
+        $query = $query->result_array();
+        if (count($query) >= 1)
+            return $query;
+        return -1;
+    }
+
     public function setCitas($datos){
         if($datos['idcita']!=""){
             $id=$datos['idcita'];
@@ -60,6 +71,19 @@ class Citas_model extends CI_Model{
         $error = $this->db->error(); // Has keys 'code' and 'message')        
         return $result;
         
+    }
+
+     public function deleteCita($idcita){
+        $result=$this->getEstadoCita($idcita);
+        if($result!=-1){             
+            $this->db->where('idcita',$idcita);
+            $result=$this->db->delete("citas");                            
+        }
+        else{
+            $result=-2;
+        }
+            
+        return $result;        
     }
 
 }

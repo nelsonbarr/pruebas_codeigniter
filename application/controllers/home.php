@@ -336,4 +336,27 @@ class Home extends CI_Controller {
         }
     }
 
+    public function deleteCita() {
+        $idcita     = $this->input->post("idcita");
+
+        //METODO QUE PROCESA LOS DATOS
+        $result=$this->citas_model->deleteCita($idcita);
+        if($result===-2){
+            $success=false;
+            $mensaje="Cita debe estar en estado No Confirmada para poder Eliminar";
+        }
+        elseif($result===-1){
+            $success=false;
+            $mensaje="Problemas el eliminar la cita";
+        }
+        else{
+            $success=true;
+            $mensaje="Cita eliminada con exito";
+        }
+        
+        echo json_encode(array('success'=>$success,"mensaje"=>$mensaje));
+    
+    }
+      
+
 }
