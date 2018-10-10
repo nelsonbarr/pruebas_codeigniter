@@ -180,11 +180,11 @@ var arrPacientes=new Array();
                     $("#dateend").val(event.end.format('D/M/Y hh:mm'));
                     $("#selEstadoCita").val(event.idestadocita);
                     $("#selEstadoPago").val(event.idestadopago);
-                    
                     $("#txtmotivocita").val(event.motivocita);
                     $("#txtsintomas").val(event.sintomas);
                     $("#txtdescripcion").val(event.descripcion);
-                    $("#txtmedicinastomadas").val(event.medicinastomadas);
+                    $("#txtmedicinastomadas").val(event.medicamentos);
+					$("#txtalergias").val(event.alergias);
                     $('#modalPacienteCita').modal('show')
                 },
                 eventDrop: function(event, delta){ // event drag and drop ,MODIFICA LAS FECHAS Y HORAS DEPENDIENDO DE LA NUEVA SELECCION LUEGO DE ARRASTRAT Y SOLTAR                   

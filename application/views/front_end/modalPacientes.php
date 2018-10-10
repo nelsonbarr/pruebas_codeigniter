@@ -18,7 +18,7 @@
                                 <select id="idtipodoc" class="form-control" name="idtipodoc">
                                     <option value="">Seleccione..</option>
                                     <?php foreach($tiposDocs AS $item):?>
-                                    <option value="<?php print $item["id"];?>"><?php print $item["descripcion"];?></option>
+                                          <option value="<?php print $item["id"];?>"><?php print $item["descripcion"];?></option>
                                     <?php endforeach;?>
                                 </select>
                             </div>
@@ -56,9 +56,8 @@
                         <div class="col-xs-4 form-group">
                             <label class="control-label">Fecha Nacimiento</label>
                             <div class="input-group date" data-provide="datepicker" data-date-format="dd-mm-yyyy">
-                                <input type="text" id="txtfechanacimiento" name="txtfechanacimiento" class="form-control">
-                                <div class="input-group-addon">
-                                    <span class="fa fa-calendar"></span>
+							    <div class="input-group-addon"><span class="fa fa-calendar"></span>
+                                <input type="text" id="txtfechanacimiento" name="txtfechanacimiento" class="form-control" readonly/>
                                 </div>
                             </div>
                         </div>

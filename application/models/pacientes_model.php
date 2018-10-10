@@ -36,6 +36,7 @@ class Pacientes_model extends CI_Model{
         if($datos['id']!=""){
             $id=$datos["id"];
             unset($datos['id']);
+			unset($datos['idtipodocumento']);
             $this->db->where('id',$id);
             $result=$this->db->update('pacientes',$datos);            
         }

@@ -14,7 +14,13 @@ class Pacientes extends CI_Controller{
     {
         $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
         $pacientes=$this->pacientes_model->getPacientes();
-        $tiposDocs=$this->access_model->getTiposDocumentos();        
+		if($pacientes!=-1){
+			foreach($pacientes AS &$fila){
+				$date = new DateTime($fila['fechanacimiento']);
+				$fila['fechanacimiento'] =$date->format('d-m-Y');		
+			}
+		}
+		$tiposDocs=$this->access_model->getTiposDocumentos();        
         $estadosCiviles=$this->access_model->getEstadosCiviles();
         //if (!empty($user_login)) {
             $data = array(
@@ -54,13 +60,17 @@ class Pacientes extends CI_Controller{
         $datos['fechanacimiento'] =$date->format('Y-m-d');
               
         $result=$this->pacientes_model->savePacientes($datos);
-        if($result!=-1){
+        if($result==-1){
             $this->session->set_flashdata('success', "Paciente registrado con exito");
         }
         else{
             $this->session->set_flashdata('error', "Error al guardar paciente");
         }
         $pacientes=$this->pacientes_model->getPacientes();
+        foreach($pacientes AS &$fila){
+	        $date = new DateTime($fila['fechanacimiento']);
+            $fila['fechanacimiento'] =$date->format('d-m-Y');		
+		}		
         $tiposDocs=$this->access_model->getTiposDocumentos();        
         $estadosCiviles=$this->access_model->getEstadosCiviles();
         $data = array(

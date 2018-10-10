@@ -134,8 +134,10 @@ class Home extends CI_Controller {
                     else{
                         $pago="Transferencia";    
                     }
-                    //if($this->session->userdata('perfil') ==1){                  
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]."  |  PAGO: ".$pago);
+                    //if($this->session->userdata('perfil') ==1){      
+					$date = new DateTime($row['fechanacimiento']);
+					$fechanacimiento =$date->format('d-m-Y');            
+                    $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$fechanacimiento."  |  GENERO: ".$row["genero"]."  |  PAGO: ".$pago);
 
                    /* }
                     else{
@@ -164,7 +166,7 @@ class Home extends CI_Controller {
                         $citas[$i]['backgroundColor'] = "#0066ff";
                     }      
                     $i++;
-                }               
+                }       
                 $citas = json_encode($citas);
             } 
             $this->load->model('pacientes_model');
@@ -220,13 +222,15 @@ class Home extends CI_Controller {
                         $pago="Transferencia";    
                     }    
                     //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
+					$date = new DateTime($row['fechanacimiento']);
+					$fechanacimiento =$date->format('d-m-Y');						
                     if($this->session->userdata('perfil') ==1){                  
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]."  |  PAGO: ".$pago);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$fechanacimiento."  |  GENERO: ".$row["genero"]."  |  PAGO: ".$pago);
                     }
                     else{
                         //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
                         $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  PAGO: ".$pago );
-                        $citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$row['fechanacimiento']." | GEN: ".$row["genero"]);
+                        $citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$fechanacimiento." | GEN: ".$row["genero"]);
                     } 
 
                     //$citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
@@ -286,7 +290,7 @@ class Home extends CI_Controller {
         $estadocita = $this->input->post("selEstadoCita");   
         $estadopago = $this->input->post("selEstadoPago");
         $idmedico = $this->input->post("selMedico");   
-        $medicinastomadas = $this->input->post("txtmedicinastomadas");    
+        $medicinastomadas = $this->input->post("txtmedicinastomadas");
         $start_date = $this->input->post("date", TRUE);
         $end_date = $this->input->post("dateend", TRUE);
         $action=$this->input->post("action");

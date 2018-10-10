@@ -98,7 +98,7 @@ var arrMedicos=new Array();
         });
 
         $('#txtfechanacimiento').datepicker({
-            format: 'yy-mm-dd',
+            format: 'dd-mm-yy',
             //startDate: '-Infinity',
             todayHighlight: true,
             autoclose: true

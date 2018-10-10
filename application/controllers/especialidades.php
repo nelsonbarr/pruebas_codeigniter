@@ -34,15 +34,15 @@ class Especialidades extends CI_Controller{
         $datos['id']=$this->input->post("id");
         $datos['descripcion']=$this->input->post("txtdescripcion");
                       
-        $this->especialidades_model->saveEspecialidades($datos);
-
-        $especialidades=$this->especialidades_model->getEspecialidades();
-        if($especialidades!=-1){
+        $result=$this->especialidades_model->saveEspecialidades($datos);
+        if($result==-1){
             $this->session->set_flashdata('success', "Especialidad registrada");
         }
         else{
             $this->session->set_flashdata('error', "Error al guardar especialidad");
         }
+
+        $especialidades=$this->especialidades_model->getEspecialidades();
         $data = array(
             'user_login' => $user_login,
             'user_name' => $this->user_name,

@@ -48,7 +48,7 @@ class Usuarios extends CI_Controller{
         $datos['perfil']=$this->input->post("selPerfil");;
               
         $result=$this->usuarios_model->saveUsuarios($datos);
-        if($result){
+        if($result==-1){
             $this->session->set_flashdata('success', "Usuario registrado con exito");
         }
         else{

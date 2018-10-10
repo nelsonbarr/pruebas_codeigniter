@@ -19,8 +19,10 @@
                             <input id="idcita" name="idcita" type="hidden"/>
                             <select id="selPaciente" name="selPaciente" class="selectpicker form-control" data-show-subtext="true" data-live-search="true" >  
                                 <option value="" >Seleccione..</option>                 
-                                <?php foreach($pacientes AS $fila):?>        
-                                <option data-subtext="<?php print $fila["documento"];?>" value="<?php print $fila["id"];?>"><?php print $fila["nombres"]." ".$fila['apellidos']." |  FEC.NAC.: ".$fila['fechanacimiento']."  |  SEXO: ".$fila['genero'];?></option>
+                                <?php foreach($pacientes AS $fila):
+   										$date = new DateTime($fila['fechanacimiento']);
+	                          			$fechanacimiento =$date->format('d-m-Y');	?> 
+								        <option data-subtext="<?php print $fila["documento"];?>" value="<?php print $fila["id"];?>"><?php print $fila["nombres"]." ".$fila['apellidos']." |  FEC.NAC.: ".$fechanacimiento."  |  SEXO: ".$fila['genero'];?></option>
                                 <?php endforeach;?>   
                             </select>                            
                         </div>
@@ -83,11 +85,11 @@
                             <div class="row">
                                 <div class="col-xs-6">
                                     <label class="control-label">Medicinas</label>                            
-                                    <input type="text" id="txtmedicinastomadas" name="txtmedicinastomadas" class="form-control" maxlength="100"/>
+                                    <input type="text" id="txtmedicinastomadas" name="txtmedicinastomadas" class="form-control" maxlength="100" readonly/>
                                 </div>                            
                                 <div class="col-xs-6">
                                     <label class="control-label">Alergias</label>
-                                    <input type="text" id="txtmedicinastomadas" name="txtmedicinastomadas" class="form-control" maxlength="100"/>  
+                                    <input type="text" id="txtalergias" name="txtalergias" class="form-control" maxlength="100" readonly/>  
                                 </div>  
                             </div>
                         </div>
@@ -114,7 +116,7 @@
         <div class="modal-footer">
             <button type="button" id="btn_history" alt="Historia" title="Historia" class="btn btn-info" data-toggle="modal"  data-target="#modalPacienteHistory">Ver Historia</button>
             <button type="submit" class="btn btn-danger" id="btn_procesa">Procesar</button>            
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         </div>
       </div>
       </form>

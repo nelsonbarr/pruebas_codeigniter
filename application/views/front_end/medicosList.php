@@ -60,7 +60,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach($medicos AS $key=>$fila):?>    
+                                                <?php  if($medicos!=-1){
+												          foreach($medicos AS $key=>$fila):?>    
                                                     <tr>
                                                     <th scope="row"><?php print $fila['id'];?></th>
                                                     <td><?php print $fila['nombres'];?></td>
@@ -69,7 +70,7 @@
                                                     <td><?php print $fila['fechanacimiento'];?></td>
                                                     <td><button type="button" id="btn_edit" alt="Editar" title="Editar" class="btn btn-danger btn_edit" data-toggle="modal" data-id="<?php print $key;?>" data-target="#modalMedicos"><span class="fa fa-edit pull-right"></span></button></td>
 												    </tr>        
-                                                <?php endforeach;?>
+                                                <?php endforeach; }?>
                                             </tbody>
                                             </table>
                                         </div>

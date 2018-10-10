@@ -14,6 +14,12 @@ class Medicos extends CI_Controller{
     {
         $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
         $medicos=$this->medicos_model->getMedicos();
+		if($medicos!=-1){		
+			foreach($medicos AS &$fila){
+				$date = new DateTime($fila['fechanacimiento']);
+				$fila['fechanacimiento'] =$date->format('d-m-Y');		
+			}	
+		}	
         $tiposDocs=$this->access_model->getTiposDocumentos();        
         $estadosCiviles=$this->access_model->getEstadosCiviles();
 		$especialidades=$this->access_model->getEspecialidades();
@@ -49,10 +55,22 @@ class Medicos extends CI_Controller{
         $datos['direccion'] =$this->input->post("txtdireccion");
 		$datos['idespecialidad'] =$this->input->post("idespecialidad");
 		$datos['activo'] =1;
+        $date = new DateTime($datos['fechanacimiento']);
+        $datos['fechanacimiento'] =$date->format('Y-m-d');		
 
         $result=$this->medicos_model->saveMedicos($datos);
-
+        if($result==-1){
+            $this->session->set_flashdata('success', "Medico registrado con exito");
+        }
+        else{
+            $this->session->set_flashdata('error', "Error al guardar Medico");
+        }
+		
         $medicos=$this->medicos_model->getMedicos();
+        foreach($medicos AS &$fila){
+	        $date = new DateTime($fila['fechanacimiento']);
+            $fila['fechanacimiento'] =$date->format('d-m-Y');		
+		}			
         $tiposDocs=$this->access_model->getTiposDocumentos();        
         $estadosCiviles=$this->access_model->getEstadosCiviles();
 		$especialidades=$this->access_model->getEspecialidades();
@@ -67,15 +85,7 @@ class Medicos extends CI_Controller{
                 'vista'=>'medicos',
                 'tipocalendar'=>'',
         );
-        if($result!=-1){
-            $this->session->set_flashdata('success', "Medico Registrado");
-        }
-        else{
-            $this->session->set_flashdata('error', "Error al guardar medico");
-        }
         $this->load->view("plantillas/plantilla", $data);
-
-
     }
 
 }

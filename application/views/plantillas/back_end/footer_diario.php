@@ -57,7 +57,7 @@ var arrPacientes=new Array();
     $(function() {
 
       $('#fecha_comite_patrocinio').datepicker({
-            format: 'yyyy-mm-dd',
+            format: 'dd-mm-yyyy',
             //startDate: '-Infinity',
             todayHighlight: true,
             autoclose: true
@@ -187,7 +187,8 @@ var arrPacientes=new Array();
                     $("#selEstadoPago").val(event.idestadopago);
                     $("#txtsintomas").val(event.sintomas);
                     $("#txtdescripcion").val(event.descripcion);
-                    $("#txtmedicinastomadas").val(event.medicinastomadas);
+                    $("#txtmedicinastomadas").val(event.medicamentos);
+					$("#txtalergias").val(event.alergias);
                     $('#modalPacienteCita').modal('show')
                 },
                 eventDrop: function(event, delta){ // event drag and drop, MODIFICA LAS FECHAS Y HORAS DEPENDIENDO DE LA NUEVA SELECCION LUEGO DE ARRASTRAT Y SOLTAR
@@ -233,7 +234,6 @@ var arrPacientes=new Array();
             $("#txtmotivocita").val('');
             $("#txtsintomas").val('');
             $("#txtdescripcion").val('');
-            $("#txtmedicinastomadas").val('')
             $("#txtmedicinastomadas").val('')
             $('select[name=selMedico]').val('');
             $('.selectpicker').selectpicker('refresh') 

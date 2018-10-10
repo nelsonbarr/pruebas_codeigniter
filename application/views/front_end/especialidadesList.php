@@ -57,13 +57,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach($especialidades AS $key=>$fila):?>    
+                                                <?php if($especialidades!=-1){
+												         foreach($especialidades AS $key=>$fila):?>    
                                                     <tr>
                                                     <th scope="row"><?php print $fila['id'];?></th>
                                                     <td><?php print $fila['descripcion'];?></td>
                                                     <td><button type="button" id="btn_edit" alt="Editar" title="Editar" class="btn btn-danger btn_edit" data-toggle="modal" data-id="<?php print $key;?>" data-target="#modalEspecialidades"><span class="fa fa-edit pull-right"></span></button></td>
                                                     </tr>        
-                                                <?php endforeach;?>
+                                                <?php endforeach; }?>
                                             </tbody>
                                             </table>
                                         </div>
