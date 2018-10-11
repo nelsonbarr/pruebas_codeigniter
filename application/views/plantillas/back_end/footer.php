@@ -168,9 +168,9 @@ var arrPacientes=new Array();
                     var diasAdicionales = 15;
                     //EN CASO DE RESTERINGIR CALENDARIO A LOS DIAS SIGUIENTES TAMBIEN, SE VALIDA CONTRA LA FECHA CON LOS DIAS SUMADOS
                     //myDate.setDate(myDate.getDate() + diasAdicionales);                    
-                    if ( myDate>dateAct) 
+                    if ( myDate>dateAct) //VALIDO QUE LA FECHA NO SEA INFERIOR A LA ACTUAL
                     {
-                        //VERDADERO Hiciste clic en una fecha menor a hoy + diasAdicionales
+                        //VERDADERO Hiciste clic en una fecha menor a hoy 
                         alert("No puedes agendar esta fecha!");
                     } 
                     else 
