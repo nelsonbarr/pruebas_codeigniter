@@ -47,7 +47,7 @@ class Citas_model extends CI_Model{
     {
         $this->db->select("*");        
         $this->db->from('citas');        
-        $this->db->where("idestadocita",1)->where("idcita",$idcita);
+        $this->db->where_in("idestadocita",array(1,2))->where("idcita",$idcita);
         $query = $this->db->get();
         $query = $query->result_array();
         if (count($query) >= 1)

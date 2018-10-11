@@ -343,7 +343,7 @@ class Home extends CI_Controller {
         $result=$this->citas_model->deleteCita($idcita);
         if($result===-2){
             $success=false;
-            $mensaje="Cita debe estar en estado No Confirmada para poder Eliminar";
+            $mensaje="Cita debe estar en estado No Confirmada ó Cancelada para poder Eliminar";
         }
         elseif($result===-1){
             $success=false;

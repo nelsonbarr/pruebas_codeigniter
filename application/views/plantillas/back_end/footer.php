@@ -220,8 +220,9 @@ var arrPacientes=new Array();
                     } else {
                         element.find(".fc-content").prepend("<span class='closeon'>&times;</span>");
                     }
-                    element.find(".closeon").on('click', function() {                         
-                                                       
+                    element.find(".closeon").on('click', function(revertFunc  ) {                         
+                        tmpEvent=event;
+                        $('#calendar').fullCalendar('removeEvents',event._id);                         
                            $.ajax({
                                 url:'<?php print base_url();?>home/deleteCita/',  
                                 data: {idcita:event.idcita},
@@ -229,21 +230,22 @@ var arrPacientes=new Array();
                                 dataType:'json',                         
                                 success: function(json) {
                                     if(json.success){
-                                        $(".banner-sec").html('<div class="alert alert-success text-center">'+json.mensaje+'</div>' ) //alert(json);                                   
-                                        $('#calendar').fullCalendar('removeEvents',event._id);
-                                        return true;
+                                        $(".banner-sec").html('<div class="alert alert-success text-center">'+json.mensaje+'</div>' )                                                                                                                  
                                     }
                                     else{
-                                        $(".banner-sec").html('<div class="alert alert-danger text-center">'+json.mensaje+'</div>' ) //alert(json);                                   
-                                        return false
+                                        $(".banner-sec").html('<div class="alert alert-danger text-center">'+json.mensaje+'</div>' ) 
+                                       //AL FALLAR LA ELIMINACION VUELVO A PINTAR EL EVENTO
+                                       $('#calendar').fullCalendar( 'renderEvent', tmpEvent, true);
                                     }
                                     
                                 },
                                 error: function(){
-                                    $(".banner-sec").html('<div class="alert alert-danger text-center">Problemas al ejecutar</div>' )
-                                    return false
+                                    $(".banner-sec").html('<div class="alert alert-danger text-center">Problemas al ejecutar</div>' )                                    
+                                     //AL FALLAR LA ELIMINACION VUELVO A PINTAR EL EVENTO
+                                    $('#calendar').fullCalendar( 'renderEvent', tmpEvent, true);
                                 }
                             });
+                            
                     });
                 } 
                 
