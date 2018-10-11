@@ -161,15 +161,30 @@ var arrPacientes=new Array();
                 eventLimit: true, // allow "more" link when too many events
                 allDaySlot: false,
                 defaultTimedEventDuration:'00:15:00',
-                dayClick: function(date, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, LLAMA A LA VENTANA REGISTRAR CITA                                   
-                    blanquearCita();
-                    this.start = date.format('D/M/Y hh:mm');
-                    dateend=new Date(date.format('M/D/Y hh:mm'));
-                    dateend.setMinutes(dateend.getMinutes() + 15);
-                    $("#date").val(this.start);
-                    $("#dateend").val(dateend.getDate()+"/"+(dateend.getMonth() + 1) + "/" + dateend.getFullYear() + " " +dateend.getHours() + ":" + dateend.getMinutes() + ":" + dateend.getSeconds());
-                    $('#btn_add').show()
-                    $('#modalPacienteCita').modal('show')                    
+                dayClick: function(date, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, LLAMA A LA VENTANA REGISTRAR CITA 
+                    dateAct=new Date(date.format("M/D/Y HH:mm"))
+                    var myDate = new Date();
+                    //Cuantos días se agregarán desde hoy?
+                    var diasAdicionales = 15;
+                    //EN CASO DE RESTERINGIR CALENDARIO A LOS DIAS SIGUIENTES TAMBIEN, SE VALIDA CONTRA LA FECHA CON LOS DIAS SUMADOS
+                    //myDate.setDate(myDate.getDate() + diasAdicionales);                    
+                    if ( myDate>dateAct) 
+                    {
+                        //VERDADERO Hiciste clic en una fecha menor a hoy + diasAdicionales
+                        alert("No puedes agendar esta fecha!");
+                    } 
+                    else 
+                    {
+                        //FALSO Hiciste clic en una fecha mayor a la de hoy + diasAdicionales
+                        blanquearCita();
+                        this.start = date.format('D/M/Y hh:mm');
+                        dateend=new Date(date.format('M/D/Y hh:mm'));
+                        dateend.setMinutes(dateend.getMinutes() + 15);
+                        $("#date").val(this.start);
+                        $("#dateend").val(dateend.getDate()+"/"+(dateend.getMonth() + 1) + "/" + dateend.getFullYear() + " " +dateend.getHours() + ":" + dateend.getMinutes() + ":" + dateend.getSeconds());
+                        $('#btn_add').show()
+                        $('#modalPacienteCita').modal('show')                    
+                    }
                 },
                 eventClick: function(event, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR CITA,LLAMA A LA VENTANA REGISTRAR CITA PARA EDICION
                     blanquearCita();                                                         
