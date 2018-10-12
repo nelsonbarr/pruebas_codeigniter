@@ -22,10 +22,9 @@ class Home extends CI_Controller {
 
     public function index() {
         
-        $user_login = $this->session->userdata('login')[0] ? $this->session->userdata('login')[0] : false;
-        $this->session->set_flashdata('error', "Sesion Vencida".$user_login); 
-        $user_login=true;  
-        if (!empty($user_login)) {            
+        $user_login = $this->session->userdata('login')[0] ? $this->session->userdata('login')[0] : false;        
+       //$user_login=true;  
+        if ($user_login=='t') {            
             $citas=$this->citas_model->getCitas(date('m'));  
             $estadoscitas=$this->access_model->getEstadosCita();
             $estadospagos=$this->access_model->getEstadosPago();
@@ -115,9 +114,9 @@ class Home extends CI_Controller {
 
     public function diario(){
         $user_login = $this->session->userdata('login')[0] ? $this->session->userdata('login')[0] : false;
-        $this->session->set_flashdata('error', "Sesion Vencida".$user_login); 
-        $user_login=true;
-        if (!empty($user_login)) {
+        
+        //$user_login=true;
+        if ($user_login=='t') {
             $citas=$this->citas_model->getCitas(date('m')); 
             $estadoscitas=$this->access_model->getEstadosCita(); 
             $estadospagos=$this->access_model->getEstadosPago();
@@ -203,12 +202,12 @@ class Home extends CI_Controller {
     
 
     public function semanal(){
-        var_dump($this->session->userdata('login')[0]);
+        
         $user_login = $this->session->userdata('login')[0] ? $this->session->userdata('login')[0] : false;
-        $this->session->set_flashdata('error', "Sesion Vencida".$user_login);    
-        $user_login=true;
+             
+        //$user_login=true;
         //var_dump($this->session->userdata('login'));die();
-        if (!empty($user_login)) {           
+        if ($user_login=='t') {           
             $citas=$this->citas_model->getCitas(date('m')); 
             $estadoscitas=$this->access_model->getEstadosCita(); 
             $estadospagos=$this->access_model->getEstadosPago();
