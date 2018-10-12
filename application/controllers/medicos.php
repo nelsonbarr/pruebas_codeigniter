@@ -13,13 +13,7 @@ class Medicos extends CI_Controller{
     public function index()
     {
         $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
-        $medicos=$this->medicos_model->getMedicos();
-		if($medicos!=-1){		
-			foreach($medicos AS &$fila){
-				$date = new DateTime($fila['fechanacimiento']);
-				$fila['fechanacimiento'] =$date->format('d-m-Y');		
-			}	
-		}	
+        $medicos=$this->medicos_model->getMedicos();		
         $tiposDocs=$this->access_model->getTiposDocumentos();        
         $estadosCiviles=$this->access_model->getEstadosCiviles();
 		$especialidades=$this->access_model->getEspecialidades();
@@ -66,11 +60,7 @@ class Medicos extends CI_Controller{
             $this->session->set_flashdata('error', "Error al guardar Medico");
         }
 		
-        $medicos=$this->medicos_model->getMedicos();
-        foreach($medicos AS &$fila){
-	        $date = new DateTime($fila['fechanacimiento']);
-            $fila['fechanacimiento'] =$date->format('d-m-Y');		
-		}			
+        $medicos=$this->medicos_model->getMedicos();        		
         $tiposDocs=$this->access_model->getTiposDocumentos();        
         $estadosCiviles=$this->access_model->getEstadosCiviles();
 		$especialidades=$this->access_model->getEspecialidades();

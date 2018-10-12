@@ -3,23 +3,21 @@ class Pacientes extends CI_Controller{
     
     public function __construct(){
         parent::__construct(); 
+        // load Session Library
+        $this->load->library('session');         
+        // load url helper
+        $this->load->helper('url');
         $this->load->model('access_model');   
         $this->load->model('pacientes_model');        
-        $this->id_user = !empty($this->session->userdata('id_user')) ? $this->session->userdata('id_user') : 0;
-        $this->user_name = !empty($this->session->userdata('name_user')) ? $this->session->userdata('name_user') : '';
+        $this->id_user = !empty($this->session->userdata('id_user')[0]) ? $this->session->userdata('id_user')[0] : 0;
+        $this->user_name = !empty($this->session->userdata('name_user')[0]) ? $this->session->userdata('name_user')[0] : '';
     }
 
 
     public function index()
     {
-        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
-        $pacientes=$this->pacientes_model->getPacientes();
-		if($pacientes!=-1){
-			foreach($pacientes AS &$fila){
-				$date = new DateTime($fila['fechanacimiento']);
-				$fila['fechanacimiento'] =$date->format('d-m-Y');		
-			}
-		}
+        $user_login = $this->session->userdata('login')[0] ? $this->session->userdata('login')[0] : false;
+        $pacientes=$this->pacientes_model->getPacientes();		
 		$tiposDocs=$this->access_model->getTiposDocumentos();        
         $estadosCiviles=$this->access_model->getEstadosCiviles();
         //if (!empty($user_login)) {
@@ -38,7 +36,7 @@ class Pacientes extends CI_Controller{
     }
 
     public function savePaciente(){
-        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
+        $user_login = $this->session->userdata('login')[0] ? $this->session->userdata('login')[0] : false;
 
         $datos=array();
         $datos['id']=$this->input->post("idpaciente");
@@ -66,11 +64,7 @@ class Pacientes extends CI_Controller{
         else{
             $this->session->set_flashdata('error', "Error al guardar paciente");
         }
-        $pacientes=$this->pacientes_model->getPacientes();
-        foreach($pacientes AS &$fila){
-	        $date = new DateTime($fila['fechanacimiento']);
-            $fila['fechanacimiento'] =$date->format('d-m-Y');		
-		}		
+        $pacientes=$this->pacientes_model->getPacientes();        	
         $tiposDocs=$this->access_model->getTiposDocumentos();        
         $estadosCiviles=$this->access_model->getEstadosCiviles();
         $data = array(
@@ -89,7 +83,7 @@ class Pacientes extends CI_Controller{
     }
 
     public function carga_Historico($id){
-        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;        
+        $user_login = $this->session->userdata('login')[0] ? $this->session->userdata('login')[0] : false;        
         $result=$this->pacientes_model->getHistorico($id);       
         //se define un arreglo con la informacion de los clientes
         $consulta=array('data'=>$result);

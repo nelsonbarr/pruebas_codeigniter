@@ -326,6 +326,7 @@ $config['cache_query_string'] = FALSE;
 |
 */
 $config['encryption_key'] = '';
+$config['sess_encrypt_cookie']	= TRUE;
 
 /*
 |--------------------------------------------------------------------------
@@ -391,6 +392,7 @@ $config['sess_regenerate_destroy'] = FALSE;
 */
 
 //COPIADA DE OTRO PROYECTO
+$config['sess_driver'] = 'files';
 $config['sess_cookie_name']		= 'ci_session';
 $config['sess_expiration']		= 3600;
 $config['sess_expire_on_close']	= FALSE;
@@ -400,6 +402,7 @@ $config['sess_table_name']		= 'ci_sessions';
 $config['sess_match_ip']		= FALSE;
 $config['sess_match_useragent']	= TRUE;
 $config['sess_time_to_update']	= 3000;
+$config['sess_regenerate_destroy'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

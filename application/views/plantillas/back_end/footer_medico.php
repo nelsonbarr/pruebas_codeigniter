@@ -52,43 +52,45 @@
 var arrMedicos=new Array();
         
     arrMedicos=<?php print json_encode($medicos);?>;
-    //HAGO SEGUIMIENTO AL onclick DEL BOTON AGREGAR DE LA VISTA LISTA PACIENTES   
+    //HAGO SEGUIMIENTO AL onclick DEL BOTON AGREGAR DE LA VISTA LISTA PACIENTES           
     $('#btn_add').on('click',function () { 
-      $('#txtiddocumento').attr('readonly',false);       
-      $('#idtipodoc').removeAttr('disabled'); 
-      $('#idmedico').val('');
-      $('#idtipodoc').val('');
-      $('#txtiddocumento').val('');
-      $('#txtnombres').val('');
-      $('#txtapellidos').val('');
-      $('#txtemail').val('');
-      $('#txtdireccion').val('');
-      $('#txtfechanacimiento').val('');
-      $('#txttelefonos').val(''); 
-	  $('#txtdireccion').val('');
-	  $('#idespecialidad').removeAttr('disabled');   
-      $('input:radio[name="genero"][value=M]').prop('checked', true);  
+        limpiarMensaje()
+        $('#txtiddocumento').attr('readonly',false);       
+        $('#idtipodoc').removeAttr('disabled'); 
+        $('#idmedico').val('');
+        $('#idtipodoc').val('');
+        $('#txtiddocumento').val('');
+        $('#txtnombres').val('');
+        $('#txtapellidos').val('');
+        $('#txtemail').val('');
+        $('#txtdireccion').val('');
+        $('#txtfechanacimiento').val('');
+        $('#txttelefonos').val(''); 
+        $('#txtdireccion').val('');
+        $('#idespecialidad').removeAttr('disabled');   
+        $('input:radio[name="genero"][value=M]').prop('checked', true);  
     });
 
     //HAGO SEGUIMIENTO AL onclick DE CADA BOTON EDICION DEL LISTADO DE PACIENTES 
     $('button[id=btn_edit]').on('click',function () {
-      id=$(this).data("id");    
-      //arrMedicos=JSON.parse(arrMedicos.split('\t').join(''));;
-      medicoEdit=arrMedicos[id];
-      $('#idmedico').val(medicoEdit.id);      
-      $('#idtipodoc').val(medicoEdit.idtipodocumento);
-      $('#idtipodoc').attr('disabled','disabled');
-      $('#txtiddocumento').val(medicoEdit.documento);
-      $('#txtiddocumento').attr('readonly',true);
-      $('#txtnombres').val(medicoEdit.nombres);
-      $('#txtapellidos').val(medicoEdit.apellidos);
-      $('#txtemail').val(medicoEdit.email);
-      $('#txtdireccion').val(medicoEdit.direccion);
-      $('#txtfechanacimiento').val(medicoEdit.fechanacimiento);
-      $('#txttelefonos').val(medicoEdit.telefono);   
-      $('#idespecialidad').val(medicoEdit.idespecialidad);
-      $('#idespecialidad').attr('disabled','disabled');
-      $('input:radio[name="genero"][value='+medicoEdit.genero+']').prop('checked', true);  
+        limpiarMensaje()
+        id=$(this).data("id");    
+        //arrMedicos=JSON.parse(arrMedicos.split('\t').join(''));;
+        medicoEdit=arrMedicos[id];
+        $('#idmedico').val(medicoEdit.id);      
+        $('#idtipodoc').val(medicoEdit.idtipodocumento);
+        $('#idtipodoc').attr('disabled','disabled');
+        $('#txtiddocumento').val(medicoEdit.documento);
+        $('#txtiddocumento').attr('readonly',true);
+        $('#txtnombres').val(medicoEdit.nombres);
+        $('#txtapellidos').val(medicoEdit.apellidos);
+        $('#txtemail').val(medicoEdit.email);
+        $('#txtdireccion').val(medicoEdit.direccion);
+        $('#txtfechanacimiento').val(medicoEdit.fechanacimiento);
+        $('#txttelefonos').val(medicoEdit.telefono);   
+        $('#idespecialidad').val(medicoEdit.idespecialidad);
+        $('#idespecialidad').attr('disabled','disabled');
+        $('input:radio[name="genero"][value='+medicoEdit.genero+']').prop('checked', true);  
     });
 
     $(function() {
@@ -107,6 +109,10 @@ var arrMedicos=new Array();
         $(".push_menu").click(function(){
              $(".wrapper").toggleClass("active");
         });
+        
+        function limpiarMensaje(){
+            $(".banner-sec").html('')
+        }
 
     });          
 </script>

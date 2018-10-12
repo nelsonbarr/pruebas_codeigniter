@@ -54,18 +54,19 @@ var arrEspecialidades=new Array();
     arrEspecialidades=<?php print json_encode($especialidades);?>;
     //HAGO SEGUIMIENTO AL onclick DEL BOTON AGREGAR DE LA VISTA LISTA PACIENTES   
     $('#btn_add').on('click',function () { 
-       
-      $('#id').val('');
-      $('#txtdescripcion').val('');	       
+        limpiarMensaje()
+        $('#id').val('');
+        $('#txtdescripcion').val('');	       
     });
 
     //HAGO SEGUIMIENTO AL onclick DE CADA BOTON EDICION DEL LISTADO DE PACIENTES 
     $('button[id=btn_edit]').on('click',function () {
-      id=$(this).data("id");    
-      //arrPacientes=JSON.parse(arrPacientes.split('\t').join(''));;
-      especialidadesEdit=arrEspecialidades[id];
-      $('#id').val(especialidadesEdit.id);      
-      $('#txtdescripcion').val(especialidadesEdit.descripcion);  
+        limpiarMensaje()
+        id=$(this).data("id");    
+        //arrPacientes=JSON.parse(arrPacientes.split('\t').join(''));;
+        especialidadesEdit=arrEspecialidades[id];
+        $('#id').val(especialidadesEdit.id);      
+        $('#txtdescripcion').val(especialidadesEdit.descripcion);  
     });
 
     $(function() {
@@ -79,6 +80,9 @@ var arrEspecialidades=new Array();
              $(".wrapper").toggleClass("active");
         });
 
+        function limpiarMensaje(){
+            $(".banner-sec").html('')
+        }
     });          
 </script>
 </html>

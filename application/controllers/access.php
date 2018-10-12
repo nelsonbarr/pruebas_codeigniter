@@ -6,15 +6,19 @@ class Access extends CI_Controller {
     
     public function __construct(){
         parent::__construct(); 
+        // load Session Library
+        $this->load->library('session');         
+        // load url helper
+        $this->load->helper('url');
         $this->load->model('access_model');   
         $this->load->model('citas_model');     
-        $this->id_user = !empty($this->session->userdata('id_user')) ? $this->session->userdata('id_user') : 0;
-        $this->user_name = !empty($this->session->userdata('name_user')) ? $this->session->userdata('name_user') : '';
+        $this->id_user = !empty($this->session->userdata('id_user')[0]) ? $this->session->userdata('id_user')[0] : 0;
+        $this->user_name = !empty($this->session->userdata('name_user')[0]) ? $this->session->userdata('name_user')[0] : '';
     }
 
     public function index()
     {
-        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
+        $user_login = $this->session->userdata('login')[0] ? $this->session->userdata('login')[0] : false;
         if (!empty($user_login)) {
             $citas=$this->citas_model->getCitas(date('m')); 
             $estadoscitas=$this->access_model->getEstadosCita();  
@@ -98,7 +102,7 @@ class Access extends CI_Controller {
     }
 
     public function login_user(){
-        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
+        $user_login = $this->session->userdata('login')[0] ? $this->session->userdata('login')[0] : false;
         if ($user_login) {
             redirect('access', 'refresh');
         }
@@ -109,7 +113,7 @@ class Access extends CI_Controller {
 
         if ($valid_user != -1 && !empty($valid_user)) {
 
-            $datos_cookie['login'] = true;
+            $datos_cookie['login'] = 'true';
             $datos_cookie['id_user'] = intval($valid_user['id']);
             $datos_cookie['name_user'] = $valid_user['nombres']." ".$valid_user['apellidos'];           
             $datos_cookie['email_user'] = $valid_user['email'];
@@ -214,14 +218,14 @@ class Access extends CI_Controller {
 
     public function logout(){
 		$this->session->sess_destroy();
-        $this->session->set_userdata('login', false);
+        $this->session->set_userdata('login', 'false');
 		redirect('access', 'refresh');
     }
     
     public function recuperacion($user){
         $result=$this->access_model->getUser($user);        
 		$this->session->sess_destroy();
-        $this->session->set_userdata('login', false);
+        $this->session->set_userdata('login', 'false');
         if($result!=-1){
             $datos = array(
                 'id_user' => $this->id_user,
@@ -250,8 +254,6 @@ class Access extends CI_Controller {
         $this->load->view("plantillas/plantilla", $datos);
 
     }
-
-
 
 }
 

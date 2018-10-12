@@ -113,10 +113,9 @@
             </div>    
         </div>
         
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" id="btn_delete">Eliminar</button>
+        <div class="modal-footer">    
             <button type="button" id="btn_history" alt="Historia" title="Historia" class="btn btn-info" data-toggle="modal"  data-target="#modalPacienteHistory">Ver Historia</button>
-            <button type="submit" class="btn btn-warning" id="btn_procesa">Procesar</button>            
+            <button type="submit" class="btn btn-danger" id="btn_procesa">Procesar</button>            
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         </div>
       </div>

@@ -35,6 +35,7 @@ class Citas_model extends CI_Model{
         $this->db->join('estadoscitas','citas.idestadocita=estadoscitas.id');
         $this->db->join('estadospagos','citas.idestadopago=estadospagos.id');
         $this->db->join('medicos','citas.idmedico=medicos.id','left outer ');
+        $this->db->where("statuscita", 1);
         //$this->db->where("DATE_FORMAT(fechacita,'%m')", $mes);
         $query = $this->db->get();
         $query = $query->result_array();
@@ -47,7 +48,7 @@ class Citas_model extends CI_Model{
     {
         $this->db->select("*");        
         $this->db->from('citas');        
-        $this->db->where_in("idestadocita",array(1,2))->where("idcita",$idcita);
+        $this->db->where_in("idestadocita",array(1,2,3,4))->where("idcita",$idcita);
         $query = $this->db->get();
         $query = $query->result_array();
         if (count($query) >= 1)
@@ -77,7 +78,7 @@ class Citas_model extends CI_Model{
         $result=$this->getEstadoCita($idcita);
         if($result!=-1){             
             $this->db->where('idcita',$idcita);
-            $result=$this->db->delete("citas");                            
+            $result=$this->db->update("citas",array('statuscita'=>0));                            
         }
         else{
             $result=-2;

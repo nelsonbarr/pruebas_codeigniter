@@ -64,12 +64,10 @@ var arrPacientes=new Array();
             autoclose: true
         });
 
+    
     //HAGO SEGUIMIENTO AL onclick DE BOTON HISTORIA DEL PACIENTE
-    $('#btn_delete').on('click',function(){
-
-    });
-    //HAGO SEGUIMIENTO AL onclick DE BOTON HISTORIA DEL PACIENTE
-    $('#btn_history').on('click',function () {      
+    $('#btn_history').on('click',function () { 
+        limpiarMensaje()     
         var idpaciente=$('select[name=selPaciente]').val() 
         $('#txtnombrepaciente').val($('select[name=selPaciente] option:selected').text());             
         $.ajax({
@@ -112,8 +110,7 @@ var arrPacientes=new Array();
       })//end ajax
 
     });
-        //BLOQUE DE INICIALIZACION DE CALENDARIO
-
+        //BLOQUE DE INICIALIZACION DE CALENDARIO        
         var initialLocaleCode = 'en';
         //$('#calendar').fullCalendar({});
         var tipocalendar='<?php print $tipocalendar;?>';
@@ -162,6 +159,7 @@ var arrPacientes=new Array();
                 allDaySlot: false,
                 defaultTimedEventDuration:'00:15:00',
                 dayClick: function(date, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, LLAMA A LA VENTANA REGISTRAR CITA 
+                    limpiarMensaje()
                     dateAct=new Date(date.format("M/D/Y HH:mm"))
                     var myDate = new Date();
                     //Cuantos días se agregarán desde hoy?
@@ -171,7 +169,7 @@ var arrPacientes=new Array();
                     if ( myDate>dateAct) //VALIDO QUE LA FECHA NO SEA INFERIOR A LA ACTUAL
                     {
                         //VERDADERO Hiciste clic en una fecha menor a hoy 
-                        alert("No puedes agendar esta fecha!");
+                        $(".banner-sec").html('<div class="alert alert-danger text-center">No puedes agendar en fechas anteriores a la actual</div>' )
                     } 
                     else 
                     {
@@ -187,6 +185,7 @@ var arrPacientes=new Array();
                     }
                 },
                 eventClick: function(event, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR CITA,LLAMA A LA VENTANA REGISTRAR CITA PARA EDICION
+                    limpiarMensaje()
                     blanquearCita();                                                         
                     $('select[name=selPaciente]').val(event.idpaciente);
                     $("select[name=selMedico]").val(event.idmedico);
@@ -205,6 +204,7 @@ var arrPacientes=new Array();
                     $('#modalPacienteCita').modal('show')
                 },
                 eventDrop: function(event, delta){ // event drag and drop ,MODIFICA LAS FECHAS Y HORAS DEPENDIENDO DE LA NUEVA SELECCION LUEGO DE ARRASTRAT Y SOLTAR                   
+                    limpiarMensaje()
                     start=event.start.format("Y-MM-DD HH:mm");                                
                     end=event.end.format("Y-MM-DD HH:mm");                                     
                     $.ajax({
@@ -217,6 +217,7 @@ var arrPacientes=new Array();
                     });
                 },
                 eventResize: function(event) {  // resize to increase or decrease time of event, MODIFICA LAS FECHAS Y HORAS DEPENDIENDO DE LA NUEVA SELECCION LUEGO DE MODIFICAR DURACION DE CITA
+                    limpiarMensaje()
                     start=event.start.format("Y-MM-DD HH:mm");                                
                     end=event.end.format("Y-MM-DD HH:mm");
                     $.ajax({
@@ -229,6 +230,7 @@ var arrPacientes=new Array();
                     });
                 },
                 eventRender: function(event, element,view) { 
+                    limpiarMensaje()
                     element.find('.fc-title').append("<br/>" + event.description); 
                     if (view.name == 'listDay') {
                         element.find(".fc-list-item-time").append("<span class='closeon'>&times;</span>");
@@ -237,22 +239,27 @@ var arrPacientes=new Array();
                     }
                     element.find(".closeon").on('click', function(revertFunc  ) {                         
                         tmpEvent=event;
-                        $('#calendar').fullCalendar('removeEvents',event._id);                         
-                           $.ajax({
+                        $('#calendar').fullCalendar('removeEvents',event._id); 
+                        if(event.idestadocita==5){                        
+                            $('#calendar').fullCalendar( 'renderEvent', tmpEvent, true);
+                            $(".banner-sec").html('<div class="alert alert-danger text-center">No puede eliminar citas en estatus Visto</div>' ) 
+                            //AL FALLAR LA ELIMINACION VUELVO A PINTAR EL EVENTO                           
+                        }
+                        else{                        
+                            $.ajax({
                                 url:'<?php print base_url();?>home/deleteCita/',  
                                 data: {idcita:event.idcita},
                                 type: "POST",       
                                 dataType:'json',                         
                                 success: function(json) {
-                                    if(json.success){
+                                    if(json.success){                                        
                                         $(".banner-sec").html('<div class="alert alert-success text-center">'+json.mensaje+'</div>' )                                                                                                                  
                                     }
                                     else{
                                         $(".banner-sec").html('<div class="alert alert-danger text-center">'+json.mensaje+'</div>' ) 
                                        //AL FALLAR LA ELIMINACION VUELVO A PINTAR EL EVENTO
                                        $('#calendar').fullCalendar( 'renderEvent', tmpEvent, true);
-                                    }
-                                    
+                                    }                                    
                                 },
                                 error: function(){
                                     $(".banner-sec").html('<div class="alert alert-danger text-center">Problemas al ejecutar</div>' )                                    
@@ -260,6 +267,7 @@ var arrPacientes=new Array();
                                     $('#calendar').fullCalendar( 'renderEvent', tmpEvent, true);
                                 }
                             });
+                        }                         
                             
                     });
                 } 
@@ -271,10 +279,12 @@ var arrPacientes=new Array();
 
         //}    
         function blanquearCita(){
+            limpiarMensaje()
             $('select[name=selPaciente]').val('');
             $('select[name=selMedico]').val('');
             $('.selectpicker').selectpicker('refresh') 
             $("#idcita").val('')
+            $("#selEstadoCita").val(1)
             $("#date").val('');
             $("#dateend").val('');
             $("#txtmotivocita").val('');
@@ -289,7 +299,11 @@ var arrPacientes=new Array();
              $(".wrapper").toggleClass("active");
         });
 
+        function limpiarMensaje(){
+            $(".banner-sec").html('')
+        }
     });
+
 
            
 

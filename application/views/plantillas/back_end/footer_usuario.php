@@ -53,41 +53,44 @@
 var arrUsuarios=new Array();
         
     arrUsuarios=<?php print json_encode($usuarios);?>;
+        
     //HAGO SEGUIMIENTO AL onclick DEL BOTON AGREGAR DE LA VISTA LISTA PACIENTES   
-    $('#btn_add').on('click',function () { 
-       
-      $('#id').val('');
-      $('#txtnombreusuario').val('');
-	  $('#txtnombres').val('');
-      $('#txtapellidos').val('');
-      $('#txtemail').val('');
-      $('#txttelefonos').val('');   
-      $('#txtpassword').val('');   
-      $('#status').val('0');   
-      $('#selPerfil').val('');   
-      $('#txtpregunta').val('');   
-      $('#txtrespuesta').val('');
+    $('#btn_add').on('click',function () {         
+        limpiarMensaje()
+        $('#id').val('');
+        $('#txtnombreusuario').val('');
+        $('#txtnombres').val('');
+        $('#txtapellidos').val('');
+        $('#txtemail').val('');
+        $('#txttelefonos').val('');   
+        $('#txtpassword').val('');   
+        $('#status').val('0');   
+        $('#selPerfil').val('');   
+        $('#txtpregunta').val('');   
+        $('#txtrespuesta').val('');
     });
 
     $('#txtpassword').on('change',function(){
+        limpiarMensaje()
         $('#txtpassword').val(md5($('#txtpassword').val('')));  
     });
 
     //HAGO SEGUIMIENTO AL onclick DE CADA BOTON EDICION DEL LISTADO DE PACIENTES 
     $('button[id=btn_edit]').on('click',function () {
-      id=$(this).data("id");    
-      //arrPacientes=JSON.parse(arrPacientes.split('\t').join(''));;
-      usuarioEdit=arrUsuarios[id];
-      $('#id').val(usuarioEdit.id);      
-      $('#txtnombreusuario').val(usuarioEdit.nombreusuario);
-      $('#txtnombres').val(usuarioEdit.nombres);
-      $('#txtapellidos').val(usuarioEdit.apellidos);
-      $('#txtemail').val(usuarioEdit.email);
-      $('#txttelefonos').val(usuarioEdit.telefono); 
-  	  $('#txtpassword').val(usuarioEdit.password); 
-  	  $('#selPerfil').val(usuarioEdit.perfil);  
-      $('#txtpregunta').val(usuarioEdit.preguntaseguridad);   
-      $('#txtrespuesta').val(usuarioEdit.respuestapregunta); 
+        limpiarMensaje()
+        id=$(this).data("id");    
+        //arrPacientes=JSON.parse(arrPacientes.split('\t').join(''));;
+        usuarioEdit=arrUsuarios[id];
+        $('#id').val(usuarioEdit.id);      
+        $('#txtnombreusuario').val(usuarioEdit.nombreusuario);
+        $('#txtnombres').val(usuarioEdit.nombres);
+        $('#txtapellidos').val(usuarioEdit.apellidos);
+        $('#txtemail').val(usuarioEdit.email);
+        $('#txttelefonos').val(usuarioEdit.telefono); 
+        $('#txtpassword').val(usuarioEdit.password); 
+        $('#selPerfil').val(usuarioEdit.perfil);  
+        $('#txtpregunta').val(usuarioEdit.preguntaseguridad);   
+        $('#txtrespuesta').val(usuarioEdit.respuestapregunta); 
     });
 
     $(function() {
@@ -100,6 +103,10 @@ var arrUsuarios=new Array();
         $(".push_menu").click(function(){
              $(".wrapper").toggleClass("active");
         });
+
+        function limpiarMensaje(){
+            $(".banner-sec").html('')
+        }
 
     });          
 </script>

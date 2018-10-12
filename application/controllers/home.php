@@ -5,20 +5,26 @@ class Home extends CI_Controller {
    
 
     public function __construct() {
-        parent::__construct();        
-        if (!$this->session->userdata('login')) {
-            redirect('access/logout');
+        parent::__construct();  
+        // load Session Library
+        $this->load->library('session');         
+        // load url helper
+        $this->load->helper('url');           
+        if ($this->session->userdata('login')[0]!='true') {
+            //redirect('access/logout');
         }
         $this->load->model('access_model');   
         $this->load->model('citas_model');     
-        $this->id_user = !empty($this->session->userdata('id_user')) ? $this->session->userdata('id_user') : 0;
-        $this->user_name = !empty($this->session->userdata('name_user')) ? $this->session->userdata('name_user') : '';  
+        $this->id_user = !empty($this->session->userdata('id_user')[0]) ? $this->session->userdata('id_user')[0] : 0;
+        $this->user_name = !empty($this->session->userdata('name_user')[0]) ? $this->session->userdata('name_user')[0] : '';  
 
     }
 
     public function index() {
         
-        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
+        $user_login = $this->session->userdata('login')[0] ? $this->session->userdata('login')[0] : false;
+        $this->session->set_flashdata('error', "Sesion Vencida".$user_login); 
+        $user_login=true;  
         if (!empty($user_login)) {            
             $citas=$this->citas_model->getCitas(date('m'));  
             $estadoscitas=$this->access_model->getEstadosCita();
@@ -99,17 +105,19 @@ class Home extends CI_Controller {
             
             $this->load->view("plantillas/plantilla", $data);
         }else {
+            var_dump($this->session->userdata('login')[0],"INDEX HOME");die();
             $this->session->set_flashdata('error', "Sesion Vencida");
-            redirect('access', 'refresh');
+            //redirect('access', 'refresh');
         }
        
 
     }
 
     public function diario(){
-        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
-        
-      if (!empty($user_login)) {
+        $user_login = $this->session->userdata('login')[0] ? $this->session->userdata('login')[0] : false;
+        $this->session->set_flashdata('error', "Sesion Vencida".$user_login); 
+        $user_login=true;
+        if (!empty($user_login)) {
             $citas=$this->citas_model->getCitas(date('m')); 
             $estadoscitas=$this->access_model->getEstadosCita(); 
             $estadospagos=$this->access_model->getEstadosPago();
@@ -187,15 +195,18 @@ class Home extends CI_Controller {
             );
             $this->load->view("plantillas/plantilla", $data);
         }else {
+            var_dump($this->session->userdata('login')[0],"DIARIO HOME");die();
             $this->session->set_flashdata('error', "Sesion Vencida");
-            redirect('access', 'refresh');
+            //redirect('access', 'refresh');
         }
     }
     
 
     public function semanal(){
-        $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
-        
+        var_dump($this->session->userdata('login')[0]);
+        $user_login = $this->session->userdata('login')[0] ? $this->session->userdata('login')[0] : false;
+        $this->session->set_flashdata('error', "Sesion Vencida".$user_login);    
+        $user_login=true;
         //var_dump($this->session->userdata('login'));die();
         if (!empty($user_login)) {           
             $citas=$this->citas_model->getCitas(date('m')); 
@@ -204,10 +215,7 @@ class Home extends CI_Controller {
             $tiposDocs=$this->access_model->getTiposDocumentos();        
             $estadosCiviles=$this->access_model->getEstadosCiviles();
             $medicosEspecialidades=$this->access_model->getMedicosEspecialidades();
-            $replace_array = array("'", '"');
-            //var_dump($citas);
-            //print count($citas);
-            //die();
+            $replace_array = array("'", '"');            
             $replace_array=array();
             if ($citas != -1) {
                 $i=0;
@@ -274,8 +282,9 @@ class Home extends CI_Controller {
             );
             $this->load->view("plantillas/plantilla", $data);
         }else {
+           var_dump($this->session->userdata('login')[0],"SEMANA HOME");die(); 
             $this->session->set_flashdata('error', "Sesion Vencida");
-            redirect('access', 'refresh');
+           // redirect('access', 'refresh');
         }
     }
 

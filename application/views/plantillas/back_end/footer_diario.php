@@ -64,7 +64,8 @@ var arrPacientes=new Array();
         });
 
 //HAGO SEGUIMIENTO AL onclick DE BOTON HISTORIA DEL PACIENTE
-    $('#btn_history').on('click',function () {      
+    $('#btn_history').on('click',function () { 
+        limpiarMensaje()      
         var idpaciente=$('select[name=selPaciente]').val() 
         $('#txtnombrepaciente').val($('select[name=selPaciente] option:selected').text());             
         $.ajax({
@@ -172,8 +173,7 @@ var arrPacientes=new Array();
                     $('#modalPacientesList').modal('show')                    
                 },
                 eventClick: function(event, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR CITA,LLAMA A LA VENTANA REGISTRAR CITA PARA EDICION
-                    blanquearCita();    
-                    console.log(event);                                    
+                    blanquearCita(); 
                     $('select[name=selPaciente]').val(event.idpaciente);
                     $("select[name=selMedico]").val(event.idmedico);
                     $('.selectpicker').selectpicker('refresh')  
@@ -192,6 +192,7 @@ var arrPacientes=new Array();
                     $('#modalPacienteCita').modal('show')
                 },
                 eventDrop: function(event, delta){ // event drag and drop, MODIFICA LAS FECHAS Y HORAS DEPENDIENDO DE LA NUEVA SELECCION LUEGO DE ARRASTRAT Y SOLTAR
+                    limpiarMensaje()
                     start=event.start.format("Y-MM-DD HH:mm");                                
                     end=event.end.format("Y-MM-DD HH:mm");                    
                     $.ajax({
@@ -204,6 +205,7 @@ var arrPacientes=new Array();
                     });
                 },
                 eventResize: function(event) {  // resize to increase or decrease time of event, MODIFICA LAS FECHAS Y HORAS DEPENDIENDO DE LA NUEVA SELECCION LUEGO DE MODIFICAR DURACION DE CITA
+                    limpiarMensaje()
                     start=event.start.format("Y-MM-DD HH:mm");                                
                     end=event.end.format("Y-MM-DD HH:mm"); 
                     $.ajax({
@@ -226,10 +228,12 @@ var arrPacientes=new Array();
 
         //}    
         function blanquearCita(){
+            limpiarMensaje()
             $('select[name=selPaciente]').val('');
             $('.selectpicker').selectpicker('refresh') 
             $("#idcita").val('')
             $("#date").val('');
+            $("#selEstadoCita").val(1)
             $("#dateend").val('');
             $("#txtmotivocita").val('');
             $("#txtsintomas").val('');
@@ -243,6 +247,10 @@ var arrPacientes=new Array();
         $(".push_menu").click(function(){
              $(".wrapper").toggleClass("active");
         });
+
+        function limpiarMensaje(){
+            $(".banner-sec").html('')
+        }
 
     });
 
