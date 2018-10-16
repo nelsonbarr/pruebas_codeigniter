@@ -104,9 +104,9 @@ class Home extends CI_Controller {
             
             $this->load->view("plantillas/plantilla", $data);
         }else {
-            var_dump($this->session->userdata('login')[0],"INDEX HOME");die();
-            $this->session->set_flashdata('error', "Sesion Vencida");
-            //redirect('access', 'refresh');
+            //var_dump($this->session->userdata('login')[0],"INDEX HOME");die();
+            //$this->session->set_flashdata('error', "Sesion Vencida");
+            redirect('access', 'refresh');
         }
        
 
@@ -177,7 +177,7 @@ class Home extends CI_Controller {
                 $citas = json_encode($citas);
             } 
             $this->load->model('pacientes_model');
-            $pacientes=$this->pacientes_model->getPacientes();           
+            //$pacientes=$this->pacientes_model->getPacientes();           
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,
@@ -189,7 +189,7 @@ class Home extends CI_Controller {
                 'estadosCiviles'=>$estadosCiviles, 
                 'medicosEspecialidades'=>$medicosEspecialidades,             
                 'citas'=>$citas,
-                'pacientes'=>$pacientes, 
+                //'pacientes'=>$pacientes, 
                 'vista'=>'calendario'
             );
             $this->load->view("plantillas/plantilla", $data);
@@ -264,7 +264,7 @@ class Home extends CI_Controller {
                 $citas = json_encode($citas);
             }
             $this->load->model('pacientes_model');
-            $pacientes=$this->pacientes_model->getPacientes();
+            //$pacientes=$this->pacientes_model->getPacientes();
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,
@@ -275,7 +275,7 @@ class Home extends CI_Controller {
                 'tiposDocs'=>$tiposDocs,
                 'estadosCiviles'=>$estadosCiviles,
                 'medicosEspecialidades'=>$medicosEspecialidades,
-                'pacientes'=>$pacientes,                          
+               // 'pacientes'=>$pacientes,                          
                 'citas'=>$citas,
                 'vista'=>'calendario'
             );
@@ -304,10 +304,10 @@ class Home extends CI_Controller {
         $action=$this->input->post("action");
         
         if($action!="NO"){
-            $start_date = new DateTime($start_date);
-            $start_date =$start_date->format('Y-d-m H:i:s');
-            $end_date = new DateTime($end_date);
-            $end_date =$end_date->format('Y-d-m H:i:s');
+            $start_date = new DateTime(str_replace("/","-",$start_date));
+            $start_date =$start_date->format('Y-m-d H:i:s');
+            $end_date = new DateTime(str_replace("/","-",$end_date));
+            $end_date =$end_date->format('Y-m-d H:i:s');
         }
         
         $citas=array(
@@ -321,7 +321,8 @@ class Home extends CI_Controller {
            'idestadopago'=>$estadopago,
            "fechacita" => $start_date,
            "fechafincita" => $end_date,
-           "idmedico"=>$idmedico
+           "idmedico"=>$idmedico,
+           'statuscita'=>1
         );
         if($action=="NO"){//CUANDO PROVIENE EL LLAMADO DE DRAG O RESIZE DEL CALENDAR
             unset($citas['idpaciente'],$citas["motivocita"],$citas["sintomas"],$citas["descripcion"],$citas['idestadocita'],$citas['idestadopago'],$citas['idmedico']);

@@ -23,7 +23,7 @@
 <!--Copyright-->
 <div class="footer-copyright py-3">
     © 2018 Copyright: Dr. Jorge Ulloa <a href="https://www.drjorgeulloa.com" target="_blank"> Dr Ulloa </a>
-    <br>Desarrollado por: Ing. Nelson Barraez. Instagram:<a href="https://www.instagram.com/nelsonbarrwebdesign" target="_blank">@nelsonbarrwebdesign</a>        
+    <br>Desarrollado por: DEVELO, en conjunto con <a href="https://www.instagram.com/nelsonbarrwebdesign" target="_blank">@nelsonbarrwebdesign</a>
 </div>
 <!--/.Copyright-->
 </footer> 
@@ -52,7 +52,9 @@
 var arrPacientes=new Array();
         
     arrPacientes=<?php print json_encode($pacientes);?>;
-       
+    function limpiarMensaje(){
+            $(".banner-sec").html('')
+        }
         //HAGO SEGUIMIENTO AL onclick DEL BOTON AGREGAR DE LA VISTA LISTA PACIENTES   
     $('#btn_add').on('click',function () { 
         limpiarMensaje()
@@ -165,9 +167,7 @@ var arrPacientes=new Array();
              $(".wrapper").toggleClass("active");
         });
         
-        function limpiarMensaje(){
-            $(".banner-sec").html('')
-        }
+        
 
     });          
 </script>

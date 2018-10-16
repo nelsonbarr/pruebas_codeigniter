@@ -37,8 +37,7 @@ class Medicos_model extends CI_Model{
             $id=$datos["id"];
             unset($datos['id']);
 			unset($datos['idtipodocumento']);
-			unset($datos['idespecialidad']);
-            $this->db->where('id',$id);
+			$this->db->where('id',$id);
             $result=$this->db->update('medicos',$datos);            
         }
         else{

@@ -23,7 +23,7 @@
     <!--Copyright-->
     <div class="footer-copyright py-3">
         © 2018 Copyright: Dr. Jorge Ulloa <a href="https://www.drjorgeulloa.com" target="_blank"> Dr Ulloa </a>
-        <br>Desarrollado por: Ing. Nelson Barraez. Instagram:<a href="https://www.instagram.com/nelsonbarrwebdesign" target="_blank">@nelsonbarrwebdesign</a>        
+        <br>Desarrollado por: DEVELO, en conjunto con <a href="https://www.instagram.com/nelsonbarrwebdesign" target="_blank">@nelsonbarrwebdesign</a>
     </div>
     <!--/.Copyright-->
  </footer> 
@@ -58,6 +58,9 @@ var arrEspecialidades=new Array();
         $('#id').val('');
         $('#txtdescripcion').val('');	       
     });
+    function limpiarMensaje(){
+            $(".banner-sec").html('')
+        }
 
     //HAGO SEGUIMIENTO AL onclick DE CADA BOTON EDICION DEL LISTADO DE PACIENTES 
     $('button[id=btn_edit]').on('click',function () {
@@ -80,9 +83,7 @@ var arrEspecialidades=new Array();
              $(".wrapper").toggleClass("active");
         });
 
-        function limpiarMensaje(){
-            $(".banner-sec").html('')
-        }
+        
     });          
 </script>
 </html>
