@@ -20,12 +20,12 @@ class Access extends CI_Controller {
     {
         $user_login = $this->session->userdata('login')[0] ? $this->session->userdata('login')[0] : false;
         if (!empty($user_login)) {
-            $citas=$this->citas_model->getCitas(date('m')); 
-            $estadoscitas=$this->access_model->getEstadosCita();  
-            $estadospagos=$this->access_model->getEstadosPago();
-            $tiposDocs=$this->access_model->getTiposDocumentos();        
-            $estadosCiviles=$this->access_model->getEstadosCiviles();
-            $medicosEspecialidades=$this->access_model->getMedicosEspecialidades();
+            $citas=$this->Citas_model->getCitas(date('m')); 
+            $estadoscitas=$this->Access_model->getEstadosCita();  
+            $estadospagos=$this->Access_model->getEstadosPago();
+            $tiposDocs=$this->Access_model->getTiposDocumentos();        
+            $estadosCiviles=$this->Access_model->getEstadosCiviles();
+            $medicosEspecialidades=$this->Access_model->getMedicosEspecialidades();
             $replace_array = array("'", '"');            
             $replace_array=array();
             if ($citas != -1) {
@@ -76,8 +76,8 @@ class Access extends CI_Controller {
                 }               
                 $citas = json_encode($citas);
             }
-            $this->load->model('pacientes_model');
-            //$pacientes=$this->pacientes_model->getPacientes();
+            $this->load->model('Pacientes_model');
+            //$pacientes=$this->Pacientes_model->getPacientes();
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,
@@ -109,7 +109,7 @@ class Access extends CI_Controller {
 
         $usuario = $this->input->post('txtusr');
         $password = $this->input->post('txtpwd');
-        $valid_user = $this->access_model->login($usuario,md5($password));
+        $valid_user = $this->Access_model->login($usuario,md5($password));
 
         if ($valid_user != -1 && !empty($valid_user)) {
 
@@ -121,22 +121,22 @@ class Access extends CI_Controller {
             
             $this->session->set_userdata($datos_cookie);
            
-            $estadoscitas=$this->access_model->getEstadosCita(); 
-            $estadospagos=$this->access_model->getEstadosPago();
-            $tiposDocs=$this->access_model->getTiposDocumentos();        
-            $estadosCiviles=$this->access_model->getEstadosCiviles();
-            $medicosEspecialidades=$this->access_model->getMedicosEspecialidades();
+            $estadoscitas=$this->Access_model->getEstadosCita(); 
+            $estadospagos=$this->Access_model->getEstadosPago();
+            $tiposDocs=$this->Access_model->getTiposDocumentos();        
+            $estadosCiviles=$this->Access_model->getEstadosCiviles();
+            $medicosEspecialidades=$this->Access_model->getMedicosEspecialidades();
             if($valid_user['perfil']==1){
                 $tipocalendar="agendaDay";
                 $contenido = 'dashboard_home';
-                $citas=$this->citas_model->getCitas(date('m'));
-                //$citas=$this->citas_model->getCitasDia(date('Y/m/d'));
+                $citas=$this->Citas_model->getCitas(date('m'));
+                //$citas=$this->Citas_model->getCitasDia(date('Y/m/d'));
                 
             }
             else{
                 $tipocalendar="agendaWeek";
                 $contenido = 'dashboard_home';
-                $citas=$this->citas_model->getCitas(date('m'));
+                $citas=$this->Citas_model->getCitas(date('m'));
                
             }   
                 $replace_array = array("'", '"');
@@ -188,8 +188,8 @@ class Access extends CI_Controller {
                 }
             
             
-            $this->load->model('pacientes_model');
-            //$pacientes=$this->pacientes_model->getPacientes();
+            $this->load->model('Pacientes_model');
+            //$pacientes=$this->Pacientes_model->getPacientes();
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,                
@@ -223,7 +223,7 @@ class Access extends CI_Controller {
     }
     
     public function recuperacion($user){
-        $result=$this->access_model->getUser($user);        
+        $result=$this->Access_model->getUser($user);        
 		$this->session->sess_destroy();
         $this->session->set_userdata('login', 'false');
         if($result!=-1){

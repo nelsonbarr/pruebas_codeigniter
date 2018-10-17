@@ -41,6 +41,9 @@
     <script src="<?php echo base_url() ?>assets/js/material-dashboard.js"></script>
     <script src="<?php echo base_url() ?>assets/js/bootstrap-select.min.js"></script>
     <script src="<?php echo base_url() ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"?></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script>
 var arrPacientes=new Array();
     //TOMO EL ARREGLO DE CITAS DEL CONTROLADOR
@@ -58,7 +61,20 @@ var arrPacientes=new Array();
         $(".banner-sec").html('')
     }    
        
-    
+    $('#selPaciente').select2({
+        placeholder: '--- Select Item ---',
+        ajax: {
+          url: '<?php print base_url();?>pacientes/buscarPaciente/',
+          dataType: 'json',
+          delay: 250,
+          processResults: function (data) {
+            return {
+              results: data
+            };
+          },
+          cache: true
+        }
+      });
 
   
     $(function() {
@@ -74,6 +90,7 @@ var arrPacientes=new Array();
     $('#btn_history').on('click',function () { 
         limpiarMensaje()      
         var idpaciente=$('select[name=selPaciente]').val() 
+        console.log(idpaciente);
         $('#txtnombrepaciente').val($('select[name=selPaciente] option:selected').text());             
         $.ajax({
         type:'POST',
@@ -181,7 +198,8 @@ var arrPacientes=new Array();
                 },
                 eventClick: function(event, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR CITA,LLAMA A LA VENTANA REGISTRAR CITA PARA EDICION
                     blanquearCita(); 
-                    $('select[name=selPaciente]').val(event.idpaciente);
+                    $("#selPaciente").empty().append('<option value='+event.idpaciente+'>'+event.title+'</option>').val(event.idpaciente).trigger('change');
+                    $("#selPaciente").prop("disabled", true);
                     $("select[name=selMedico]").val(event.idmedico);
                     $('.selectpicker').selectpicker('refresh')  
                     $('#btn_add').hide()
@@ -236,8 +254,8 @@ var arrPacientes=new Array();
         //}    
         function blanquearCita(){
             limpiarMensaje()
-            $('select[name=selPaciente]').val('');
-            $('.selectpicker').selectpicker('refresh') 
+            $("#selPaciente").val('').trigger('change');            
+            $("#selPaciente").prop("disabled", false);
             $("#idcita").val('')
             $("#date").val('');
             $("#selEstadoCita").val(1)

@@ -3,8 +3,8 @@ class Medicos extends CI_Controller{
     
     public function __construct(){
         parent::__construct(); 
-        $this->load->model('access_model');   
-        $this->load->model('medicos_model');        
+        $this->load->model('Access_model');   
+        $this->load->model('Medicos_model');        
         $this->id_user = !empty($this->session->userdata('id_user')) ? $this->session->userdata('id_user') : 0;
         $this->user_name = !empty($this->session->userdata('name_user')) ? $this->session->userdata('name_user') : '';
     }
@@ -13,10 +13,10 @@ class Medicos extends CI_Controller{
     public function index()
     {
         $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
-        $medicos=$this->medicos_model->getMedicos();		
-        $tiposDocs=$this->access_model->getTiposDocumentos();        
-        $estadosCiviles=$this->access_model->getEstadosCiviles();
-		$especialidades=$this->access_model->getEspecialidades();
+        $medicos=$this->Medicos_model->getMedicos();		
+        $tiposDocs=$this->Access_model->getTiposDocumentos();        
+        $estadosCiviles=$this->Access_model->getEstadosCiviles();
+		$especialidades=$this->Access_model->getEspecialidades();
         //if (!empty($user_login)) {
             $data = array(
                 'user_login' => $user_login,
@@ -52,7 +52,7 @@ class Medicos extends CI_Controller{
         $date = new DateTime($datos['fechanacimiento']);
         $datos['fechanacimiento'] =$date->format('Y-m-d');		
 
-        $result=$this->medicos_model->saveMedicos($datos);
+        $result=$this->Medicos_model->saveMedicos($datos);
         if($result==-1){
             $this->session->set_flashdata('success', "Medico registrado con exito");
         }
@@ -60,10 +60,10 @@ class Medicos extends CI_Controller{
             $this->session->set_flashdata('error', "Error al guardar Medico");
         }
 		
-        $medicos=$this->medicos_model->getMedicos();        		
-        $tiposDocs=$this->access_model->getTiposDocumentos();        
-        $estadosCiviles=$this->access_model->getEstadosCiviles();
-		$especialidades=$this->access_model->getEspecialidades();
+        $medicos=$this->Medicos_model->getMedicos();        		
+        $tiposDocs=$this->Access_model->getTiposDocumentos();        
+        $estadosCiviles=$this->Access_model->getEstadosCiviles();
+		$especialidades=$this->Access_model->getEspecialidades();
         $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,

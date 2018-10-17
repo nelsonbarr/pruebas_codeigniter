@@ -45,6 +45,8 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/ajax-bootstrap-select.css">
     <script src="<?php echo base_url() ?>assets/js/ajax-bootstrap-select.js"></script>
     <script src="<?php echo base_url() ?>assets/js/typeahead.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 <script>
 var arrPacientes=new Array();
@@ -62,51 +64,22 @@ var arrPacientes=new Array();
         $(".banner-sec").html('')
     }  
     
-    $('#txtCountry').typeahead({
-            source: function (query, result) {
-                $.ajax({
-                    url: "<?php print base_url();?>pacientes/buscarPaciente/",
-					data: 'query=' + query,                                
-                    type: "POST",
-                    success: function (data) {                        
-                        data=JSON.parse(data);                        
-						result($.map(data, function (item) {                            
-							return item;
-                        }));
-                    },error: function(){
-                        alert("error petición ajax");
-                    },
-                });
-            }
-        });
-
-
-    function buscarPaciente(){
-        var paciente=$('#paciente').val() 
-                   
-        $.ajax({
-        type:'POST',
-        url:'<?php print base_url();?>pacientes/buscarPaciente/'+paciente,
-        success:function(data){
-          data=JSON.parse(data);
-          json=data.data;          
-          html="";
-          $("#paciente").html('');
-          if(json.length>0){
-            
-            for(i=0;i<json.length;i++){
-                
-            }
-          }
-          else{
-            html+='<div>Paciente aun no tiene Historia</div>';
-            //$('#modalPacienteHistory').modal('hide')
-          }
-          $("#historico").html(html);         
+    
+    $('#selPaciente').select2({
+        placeholder: '--- Select Item ---',
+        ajax: {
+          url: '<?php print base_url();?>pacientes/buscarPaciente/',
+          dataType: 'json',
+          delay: 250,
+          processResults: function (data) {
+            return {
+              results: data
+            };
+          },
+          cache: true
         }
-      })//end ajax
-
-    }
+      });
+  
 
    
     $(function() {
@@ -241,7 +214,10 @@ var arrPacientes=new Array();
                 eventClick: function(event, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR CITA,LLAMA A LA VENTANA REGISTRAR CITA PARA EDICION
                     limpiarMensaje()
                     blanquearCita();                                                         
-                    $('select[name=selPaciente]').val(event.idpaciente);
+                    //$('select[name=selPaciente]').val(event.idpaciente);
+                    //$('#selPaciente').val(event.idpaciente).trigger('change.select2');
+                    $("#selPaciente").empty().append('<option value='+event.idpaciente+'>'+event.title+'</option>').val(event.idpaciente).trigger('change');
+                    $("#selPaciente").prop("disabled", true);
                     $("select[name=selMedico]").val(event.idmedico);
                     $('.selectpicker').selectpicker('refresh') 
                     $('#btn_add').hide()
@@ -334,7 +310,9 @@ var arrPacientes=new Array();
         //}    
         function blanquearCita(){
             limpiarMensaje()
-            $('select[name=selPaciente]').val('');
+            $("#selPaciente").val('').trigger('change');
+            
+            $("#selPaciente").prop("disabled", false);
             $('select[name=selMedico]').val('');
             $('.selectpicker').selectpicker('refresh') 
             $("#idcita").val('')
