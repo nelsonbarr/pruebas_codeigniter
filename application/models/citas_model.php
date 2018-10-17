@@ -37,6 +37,7 @@ class Citas_model extends CI_Model{
         $this->db->join('medicos','citas.idmedico=medicos.id','left outer ');
         $this->db->where("statuscita", 1);
         //$this->db->where("DATE_FORMAT(fechacita,'%m')", $mes);
+
         $query = $this->db->get();
         $query = $query->result_array();
         if (count($query) >= 1)
@@ -69,7 +70,7 @@ class Citas_model extends CI_Model{
             unset($datos['idcita']);           
             $result=$this->db->insert('citas',$datos);           
         }
-        $error = $this->db->error(); // Has keys 'code' and 'message')        
+        $error = $this->db->error(); // Has keys 'code' and 'message')  
         return $result;
         
     }

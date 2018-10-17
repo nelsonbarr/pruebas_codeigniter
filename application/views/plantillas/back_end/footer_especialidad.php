@@ -69,6 +69,10 @@ var arrEspecialidades=new Array();
         $('#txtdescripcion').val(especialidadesEdit.descripcion);  
     });
 
+    function limpiarMensaje(){
+        $(".banner-sec").html('')
+    }
+
     $(function() {
         $('#tableespecialidades').DataTable({
             responsive: true,
@@ -78,11 +82,7 @@ var arrEspecialidades=new Array();
        
         $(".push_menu").click(function(){
              $(".wrapper").toggleClass("active");
-        });
-
-        function limpiarMensaje(){
-            $(".banner-sec").html('')
-        }
+        });       
     });          
 </script>
 </html>

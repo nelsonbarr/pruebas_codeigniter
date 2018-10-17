@@ -10,10 +10,10 @@ class Access extends CI_Controller {
         $this->load->library('session');         
         // load url helper
         $this->load->helper('url');
-        $this->load->model('access_model');   
-        $this->load->model('citas_model');     
+        $this->load->model('Access_model');   
+        $this->load->model('Citas_model');     
         $this->id_user = !empty($this->session->userdata('id_user')[0]) ? $this->session->userdata('id_user')[0] : 0;
-        $this->user_name = !empty($this->session->userdata('name_user')[0]) ? $this->session->userdata('name_user')[0] : '';
+        $this->user_name = !empty($this->session->userdata('name_user')[0]) ? $this->session->userdata('name_user')[0] : '';        
     }
 
     public function index()

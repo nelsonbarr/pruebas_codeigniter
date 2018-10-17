@@ -52,6 +52,9 @@ var arrPacientes=new Array();
     else{
         citas=new Array();             
         arrPacientes=<?php print json_encode($pacientes);?>;       
+    }
+    function limpiarMensaje(){
+        $(".banner-sec").html('')
     }    
    
     $(function() {
@@ -246,11 +249,7 @@ var arrPacientes=new Array();
         
         $(".push_menu").click(function(){
              $(".wrapper").toggleClass("active");
-        });
-
-        function limpiarMensaje(){
-            $(".banner-sec").html('')
-        }
+        });       
 
     });
 

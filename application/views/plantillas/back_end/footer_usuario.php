@@ -93,6 +93,11 @@ var arrUsuarios=new Array();
         $('#txtrespuesta').val(usuarioEdit.respuestapregunta); 
     });
 
+     function limpiarMensaje(){
+        $(".banner-sec").html('')
+    }
+
+
     $(function() {
         $('#tableusuarios').DataTable({
             responsive: true,
@@ -104,10 +109,7 @@ var arrUsuarios=new Array();
              $(".wrapper").toggleClass("active");
         });
 
-        function limpiarMensaje(){
-            $(".banner-sec").html('')
-        }
-
+       
     });          
 </script>
 </html>

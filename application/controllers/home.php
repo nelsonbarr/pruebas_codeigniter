@@ -104,9 +104,9 @@ class Home extends CI_Controller {
             
             $this->load->view("plantillas/plantilla", $data);
         }else {
-            var_dump($this->session->userdata('login')[0],"INDEX HOME");die();
+            
             $this->session->set_flashdata('error', "Sesion Vencida");
-            //redirect('access', 'refresh');
+            redirect('access', 'refresh');
         }
        
 
@@ -194,9 +194,9 @@ class Home extends CI_Controller {
             );
             $this->load->view("plantillas/plantilla", $data);
         }else {
-            var_dump($this->session->userdata('login')[0],"DIARIO HOME");die();
+            //var_dump($this->session->userdata('login')[0],"DIARIO HOME");die();
             $this->session->set_flashdata('error', "Sesion Vencida");
-            //redirect('access', 'refresh');
+            redirect('access', 'refresh');
         }
     }
     
@@ -281,9 +281,9 @@ class Home extends CI_Controller {
             );
             $this->load->view("plantillas/plantilla", $data);
         }else {
-           var_dump($this->session->userdata('login')[0],"SEMANA HOME");die(); 
+           
             $this->session->set_flashdata('error', "Sesion Vencida");
-           // redirect('access', 'refresh');
+            redirect('access', 'refresh');
         }
     }
 
@@ -299,15 +299,15 @@ class Home extends CI_Controller {
         $estadopago = $this->input->post("selEstadoPago");
         $idmedico = $this->input->post("selMedico");   
         $medicinastomadas = $this->input->post("txtmedicinastomadas");
-        $start_date = $this->input->post("date", TRUE);
-        $end_date = $this->input->post("dateend", TRUE);
+        $start_date = $this->input->post("date");
+        $end_date = $this->input->post("dateend");
         $action=$this->input->post("action");
         
         if($action!="NO"){
-            $start_date = new DateTime($start_date);
-            $start_date =$start_date->format('Y-d-m H:i:s');
-            $end_date = new DateTime($end_date);
-            $end_date =$end_date->format('Y-d-m H:i:s');
+            $start_date = new DateTime(str_replace("/","-",$start_date));
+            $start_date =$start_date->format('Y-m-d H:i:s');
+            $end_date = new DateTime(str_replace("/","-",$end_date));
+            $end_date =$end_date->format('Y-m-d H:i:s');
         }
         
         $citas=array(
@@ -321,7 +321,8 @@ class Home extends CI_Controller {
            'idestadopago'=>$estadopago,
            "fechacita" => $start_date,
            "fechafincita" => $end_date,
-           "idmedico"=>$idmedico
+           "idmedico"=>$idmedico,
+           'statuscita'=>1
         );
         if($action=="NO"){//CUANDO PROVIENE EL LLAMADO DE DRAG O RESIZE DEL CALENDAR
             unset($citas['idpaciente'],$citas["motivocita"],$citas["sintomas"],$citas["descripcion"],$citas['idestadocita'],$citas['idestadopago'],$citas['idmedico']);

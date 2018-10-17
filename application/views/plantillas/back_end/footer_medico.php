@@ -93,6 +93,10 @@ var arrMedicos=new Array();
         $('input:radio[name="genero"][value='+medicoEdit.genero+']').prop('checked', true);  
     });
 
+    function limpiarMensaje(){
+        $(".banner-sec").html('')
+    }
+
     $(function() {
         $('#tablemedicos').DataTable({
             responsive: true,
@@ -108,11 +112,7 @@ var arrMedicos=new Array();
         
         $(".push_menu").click(function(){
              $(".wrapper").toggleClass("active");
-        });
-        
-        function limpiarMensaje(){
-            $(".banner-sec").html('')
-        }
+        });     
 
     });          
 </script>
