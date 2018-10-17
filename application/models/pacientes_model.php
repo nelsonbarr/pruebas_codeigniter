@@ -31,6 +31,25 @@ class Pacientes_model extends CI_Model{
         return -1;
     }
 
+    public function getPacientesFiltrado($datos)
+    {        
+        $this->db->select("nombres");        
+        $this->db->from('pacientes'); 
+        $this->db->like('documento',$datos["documento"]);   
+        /*$query = $this->db->get();
+        $query = $query->result_array();*/
+        
+        $query = $this->db->get();
+        $query = $query->result();
+        foreach ($query as $hsl)
+        {
+            $data[] = $hsl->nombres;
+        }
+        /*if (count($query) >= 1)//*/
+            return $data;
+        
+    }
+
     public function savePacientes($datos){        
         $result=false;
         if($datos['id']!=""){

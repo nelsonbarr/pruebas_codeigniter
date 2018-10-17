@@ -23,7 +23,7 @@
 <!--Copyright-->
 <div class="footer-copyright py-3">
     © 2018 Copyright: Dr. Jorge Ulloa <a href="https://www.drjorgeulloa.com" target="_blank"> Dr Ulloa </a>
-    <br>Desarrollado por: Ing. Nelson Barraez. Instagram:<a href="https://www.instagram.com/nelsonbarrwebdesign" target="_blank">@nelsonbarrwebdesign</a>        
+    <br>Desarrollado por: DEVELO, en conjunto con <a href="https://www.instagram.com/nelsonbarrwebdesign" target="_blank">@nelsonbarrwebdesign</a>
 </div>
 <!--/.Copyright-->
 </footer> 
@@ -50,7 +50,9 @@
     <!-- App scripts -->   
 <script>
 var arrMedicos=new Array();
-        
+    function limpiarMensaje(){
+            $(".banner-sec").html('')
+        }   
     arrMedicos=<?php print json_encode($medicos);?>;
     //HAGO SEGUIMIENTO AL onclick DEL BOTON AGREGAR DE LA VISTA LISTA PACIENTES           
     $('#btn_add').on('click',function () { 
@@ -66,8 +68,7 @@ var arrMedicos=new Array();
         $('#txtdireccion').val('');
         $('#txtfechanacimiento').val('');
         $('#txttelefonos').val(''); 
-        $('#txtdireccion').val('');
-        $('#idespecialidad').removeAttr('disabled');   
+        $('#txtdireccion').val('');          
         $('input:radio[name="genero"][value=M]').prop('checked', true);  
     });
 
@@ -88,8 +89,8 @@ var arrMedicos=new Array();
         $('#txtdireccion').val(medicoEdit.direccion);
         $('#txtfechanacimiento').val(medicoEdit.fechanacimiento);
         $('#txttelefonos').val(medicoEdit.telefono);   
-        $('#idespecialidad').val(medicoEdit.idespecialidad);
-        $('#idespecialidad').attr('disabled','disabled');
+        console.log(medicoEdit.idespecialidad);
+        $('#idespecialidad').val(medicoEdit.idespecialidad);       
         $('input:radio[name="genero"][value='+medicoEdit.genero+']').prop('checked', true);  
     });
 
@@ -113,6 +114,7 @@ var arrMedicos=new Array();
         $(".push_menu").click(function(){
              $(".wrapper").toggleClass("active");
         });     
+
 
     });          
 </script>

@@ -17,13 +17,11 @@
                             <label class="control-label">Paciente</label>
                             <small><button type="button" class="btn btn-info hiden btn_edit" id="btn_add" data-toggle="modal" data-target="#modalPacientes"><span class="fa fa-new pull-right"></span>Nuevo Paciente</button></small>
                             <input id="idcita" name="idcita" type="hidden"/>
+                            <input id="idpaciente" name="idpaciente" type="hidden"/>
+                            <input type="text" name="txtCountry" id="txtCountry" class="typeahead"/>
+                            <input id="paciente" name="paciente" type="text" class="form-control" onKeyPress="javascript:buscarPaciente();"/>
                             <select id="selPaciente" name="selPaciente" class="selectpicker form-control" data-show-subtext="true" data-live-search="true" >  
-                                <option value="" >Seleccione..</option>                 
-                                <?php foreach($pacientes AS $fila):
-   										$date = new DateTime($fila['fechanacimiento']);
-	                          			$fechanacimiento =$date->format('d-m-Y');	?> 
-								        <option data-subtext="<?php print $fila["documento"];?>" value="<?php print $fila["id"];?>"><?php print $fila["nombres"]." ".$fila['apellidos']." |  FEC.NAC.: ".$fechanacimiento."  |  SEXO: ".$fila['genero'];?></option>
-                                <?php endforeach;?>   
+                                   
                             </select>                            
                         </div>
                         <div class="form-group">

@@ -104,8 +104,7 @@ class Home extends CI_Controller {
             
             $this->load->view("plantillas/plantilla", $data);
         }else {
-            
-            $this->session->set_flashdata('error', "Sesion Vencida");
+
             redirect('access', 'refresh');
         }
        
@@ -177,7 +176,7 @@ class Home extends CI_Controller {
                 $citas = json_encode($citas);
             } 
             $this->load->model('pacientes_model');
-            $pacientes=$this->pacientes_model->getPacientes();           
+            //$pacientes=$this->pacientes_model->getPacientes();           
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,
@@ -189,7 +188,7 @@ class Home extends CI_Controller {
                 'estadosCiviles'=>$estadosCiviles, 
                 'medicosEspecialidades'=>$medicosEspecialidades,             
                 'citas'=>$citas,
-                'pacientes'=>$pacientes, 
+                //'pacientes'=>$pacientes, 
                 'vista'=>'calendario'
             );
             $this->load->view("plantillas/plantilla", $data);
@@ -264,7 +263,7 @@ class Home extends CI_Controller {
                 $citas = json_encode($citas);
             }
             $this->load->model('pacientes_model');
-            $pacientes=$this->pacientes_model->getPacientes();
+            //$pacientes=$this->pacientes_model->getPacientes();
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,
@@ -275,7 +274,7 @@ class Home extends CI_Controller {
                 'tiposDocs'=>$tiposDocs,
                 'estadosCiviles'=>$estadosCiviles,
                 'medicosEspecialidades'=>$medicosEspecialidades,
-                'pacientes'=>$pacientes,                          
+               // 'pacientes'=>$pacientes,                          
                 'citas'=>$citas,
                 'vista'=>'calendario'
             );

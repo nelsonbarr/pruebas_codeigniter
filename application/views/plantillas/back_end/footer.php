@@ -22,7 +22,7 @@
     <!--Copyright-->
     <div class="footer-copyright py-3">
         © 2018 Copyright: Dr. Jorge Ulloa <a href="https://www.drjorgeulloa.com" target="_blank"> Dr Ulloa </a>
-        <br>Desarrollado por: Ing. Nelson Barraez. Instagram:<a href="https://www.instagram.com/nelsonbarrwebdesign" target="_blank">@nelsonbarrwebdesign</a>        
+        <br>Desarrollado por: DEVELO, en conjunto con <a href="https://www.instagram.com/nelsonbarrwebdesign" target="_blank">@nelsonbarrwebdesign</a>        
     </div>
     <!--/.Copyright-->
  </footer>   
@@ -42,6 +42,10 @@
     <script src="<?php echo base_url() ?>assets/js/material-dashboard.js"></script>
     <script src="<?php echo base_url() ?>assets/js/bootstrap-select.min.js"></script>
     <script src="<?php echo base_url() ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"?></script>
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/ajax-bootstrap-select.css">
+    <script src="<?php echo base_url() ?>assets/js/ajax-bootstrap-select.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/typeahead.js"></script>
+
 <script>
 var arrPacientes=new Array();
     //TOMO EL ARREGLO DE CITAS DEL CONTROLADOR
@@ -52,8 +56,58 @@ var arrPacientes=new Array();
     }
     else{
         citas=new Array();             
-        arrPacientes=<?php print json_encode($pacientes);?>;       
-    }    
+        //arrPacientes=<?php //print json_encode($pacientes);?>;       
+    }  
+    function limpiarMensaje(){
+        $(".banner-sec").html('')
+    }  
+    
+    $('#txtCountry').typeahead({
+            source: function (query, result) {
+                $.ajax({
+                    url: "<?php print base_url();?>pacientes/buscarPaciente/",
+					data: 'query=' + query,                                
+                    type: "POST",
+                    success: function (data) {                        
+                        data=JSON.parse(data);                        
+						result($.map(data, function (item) {                            
+							return item;
+                        }));
+                    },error: function(){
+                        alert("error petición ajax");
+                    },
+                });
+            }
+        });
+
+
+    function buscarPaciente(){
+        var paciente=$('#paciente').val() 
+                   
+        $.ajax({
+        type:'POST',
+        url:'<?php print base_url();?>pacientes/buscarPaciente/'+paciente,
+        success:function(data){
+          data=JSON.parse(data);
+          json=data.data;          
+          html="";
+          $("#paciente").html('');
+          if(json.length>0){
+            
+            for(i=0;i<json.length;i++){
+                
+            }
+          }
+          else{
+            html+='<div>Paciente aun no tiene Historia</div>';
+            //$('#modalPacienteHistory').modal('hide')
+          }
+          $("#historico").html(html);         
+        }
+      })//end ajax
+
+    }
+
    
     $(function() {
 
@@ -299,9 +353,7 @@ var arrPacientes=new Array();
              $(".wrapper").toggleClass("active");
         });
 
-        function limpiarMensaje(){
-            $(".banner-sec").html('')
-        }
+        
     });
 
 
