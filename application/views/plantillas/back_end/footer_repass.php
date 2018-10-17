@@ -65,5 +65,13 @@
                 $(".banner-sec").html('<div class="col-sm-12"><div class="alert alert-danger text-center">Deben coincidir los password, asegurese que no sea valors vacios</div></div>' );
             }
         });
+
+        $(function() {
+            $("#formulario").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"
+                if (e.which == 13) {
+                return false;
+                }
+            });
+        });
     </script>
 </html>

@@ -1,7 +1,7 @@
 <!-- Modal -->
   <div class="modal fade" id="modalPacienteCita" role="dialog">
     <div class="modal-dialog">
-      <form action="<?php print base_url();?>home/saveCita" method="POST">
+      <form action="<?php print base_url();?>home/saveCita" id="formulario" name="formulario" method="POST">
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">

@@ -1,7 +1,7 @@
 <div class="modal fade" id="modalMedicos" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog   ">
         <div class="modal-content ">
-            <form action="<?php print base_url();?>medicos/saveMedico" method="POST">
+            <form action="<?php print base_url();?>medicos/saveMedico" id="formulario" name="formulario" method="POST">
             <div class="modal-header text-center">
                 <h4 class="modal-title text-danger"><strong>Registro de Medicos</strong>
                 </h4>

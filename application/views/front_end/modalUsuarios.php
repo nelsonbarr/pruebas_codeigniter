@@ -1,7 +1,7 @@
 <div class="modal fade" id="modalUsuarios" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog   ">
         <div class="modal-content ">
-            <form action="<?php print base_url();?>usuarios/saveUsuario" method="POST">
+            <form action="<?php print base_url();?>usuarios/saveUsuario" id="formulario" name="formulario" method="POST">
             <div class="modal-header">
                 <h4 class="modal-title text-danger text-center"><strong>Registro de Usuarios</strong>
                 </h4>

@@ -96,6 +96,11 @@ var arrUsuarios=new Array();
     });
 
     $(function() {
+        $("#formulario").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"
+            if (e.which == 13) {
+            return false;
+            }
+        });
         $('#tableusuarios').DataTable({
             responsive: true,
             'order': []

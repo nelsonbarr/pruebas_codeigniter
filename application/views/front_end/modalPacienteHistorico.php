@@ -1,7 +1,7 @@
 <div class="modal fade" id="modalPacienteHistory" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog   ">
         <div class="modal-content ">
-            <form action="<?php print base_url();?>pacientes/savePaciente" method="POST">
+            <form id="formulario" name="formulario" onsubmit="return false;" method="POST">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title text-danger text-center"><strong>Historico de Paciente</strong>

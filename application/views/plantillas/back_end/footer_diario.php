@@ -60,6 +60,11 @@ var arrPacientes=new Array();
 
    
     $(function() {
+        $("#formulario").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"
+            if (e.which == 13) {
+            return false;
+            }
+        });
 
       $('#fecha_comite_patrocinio').datepicker({
             format: 'dd-mm-yyyy',
