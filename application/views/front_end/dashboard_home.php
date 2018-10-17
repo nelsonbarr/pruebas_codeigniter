@@ -62,7 +62,7 @@
                                     <div class="col-md-12">
                                         <div class="hpanel hred">                                            
                                             <div class="panel-body">
-                                                <div id="calendar" class="calendar"></div>
+                                                <div id="calendar" class="calendar "></div>
                                             </div>
                                         </div>
                                     </div>
