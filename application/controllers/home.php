@@ -13,8 +13,8 @@ class Home extends CI_Controller {
         if ($this->session->userdata('login')[0]!='true') {
             //redirect('access/logout');
         }
-        $this->load->model('access_model');   
-        $this->load->model('citas_model');     
+        $this->load->model('Access_model');   
+        $this->load->model('Citas_model');     
         $this->id_user = !empty($this->session->userdata('id_user')[0]) ? $this->session->userdata('id_user')[0] : 0;
         $this->user_name = !empty($this->session->userdata('name_user')[0]) ? $this->session->userdata('name_user')[0] : '';  
 
@@ -25,12 +25,12 @@ class Home extends CI_Controller {
         $user_login = $this->session->userdata('login')[0] ? $this->session->userdata('login')[0] : false;        
        //$user_login=true;  
         if ($user_login=='t') {            
-            $citas=$this->citas_model->getCitas(date('m'));  
-            $estadoscitas=$this->access_model->getEstadosCita();
-            $estadospagos=$this->access_model->getEstadosPago();
-            $tiposDocs=$this->access_model->getTiposDocumentos();        
-            $estadosCiviles=$this->access_model->getEstadosCiviles();
-            $medicosEspecialidades=$this->access_model->getMedicosEspecialidades();
+            $citas=$this->Citas_model->getCitas(date('m'));  
+            $estadoscitas=$this->Access_model->getEstadosCita();
+            $estadospagos=$this->Access_model->getEstadosPago();
+            $tiposDocs=$this->Access_model->getTiposDocumentos();        
+            $estadosCiviles=$this->Access_model->getEstadosCiviles();
+            $medicosEspecialidades=$this->Access_model->getMedicosEspecialidades();
             $replace_array = array("'", '"');
             //var_dump($citas);
             //print count($citas);
@@ -83,8 +83,8 @@ class Home extends CI_Controller {
                 }               
                 $citas = json_encode($citas);
             }
-            $this->load->model('pacientes_model');
-            $pacientes=$this->pacientes_model->getPacientes();
+            $this->load->model('Pacientes_model');
+            $pacientes=$this->Pacientes_model->getPacientes();
           
             $data = array(
                 'user_login' => $user_login,
@@ -104,8 +104,7 @@ class Home extends CI_Controller {
             
             $this->load->view("plantillas/plantilla", $data);
         }else {
-            //var_dump($this->session->userdata('login')[0],"INDEX HOME");die();
-            //$this->session->set_flashdata('error', "Sesion Vencida");
+
             redirect('access', 'refresh');
         }
        
@@ -117,12 +116,12 @@ class Home extends CI_Controller {
         
         //$user_login=true;
         if ($user_login=='t') {
-            $citas=$this->citas_model->getCitas(date('m')); 
-            $estadoscitas=$this->access_model->getEstadosCita(); 
-            $estadospagos=$this->access_model->getEstadosPago();
-            $tiposDocs=$this->access_model->getTiposDocumentos();        
-            $estadosCiviles=$this->access_model->getEstadosCiviles();
-            $medicosEspecialidades=$this->access_model->getMedicosEspecialidades();
+            $citas=$this->Citas_model->getCitas(date('m')); 
+            $estadoscitas=$this->Access_model->getEstadosCita(); 
+            $estadospagos=$this->Access_model->getEstadosPago();
+            $tiposDocs=$this->Access_model->getTiposDocumentos();        
+            $estadosCiviles=$this->Access_model->getEstadosCiviles();
+            $medicosEspecialidades=$this->Access_model->getMedicosEspecialidades();
             $replace_array = array("'", '"');
             //var_dump($citas);
             //print count($citas);
@@ -176,8 +175,8 @@ class Home extends CI_Controller {
                 }       
                 $citas = json_encode($citas);
             } 
-            $this->load->model('pacientes_model');
-            //$pacientes=$this->pacientes_model->getPacientes();           
+            $this->load->model('Pacientes_model');
+            //$pacientes=$this->Pacientes_model->getPacientes();           
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,
@@ -194,9 +193,9 @@ class Home extends CI_Controller {
             );
             $this->load->view("plantillas/plantilla", $data);
         }else {
-            var_dump($this->session->userdata('login')[0],"DIARIO HOME");die();
+            //var_dump($this->session->userdata('login')[0],"DIARIO HOME");die();
             $this->session->set_flashdata('error', "Sesion Vencida");
-            //redirect('access', 'refresh');
+            redirect('access', 'refresh');
         }
     }
     
@@ -208,12 +207,12 @@ class Home extends CI_Controller {
         //$user_login=true;
         //var_dump($this->session->userdata('login'));die();
         if ($user_login=='t') {           
-            $citas=$this->citas_model->getCitas(date('m')); 
-            $estadoscitas=$this->access_model->getEstadosCita(); 
-            $estadospagos=$this->access_model->getEstadosPago();
-            $tiposDocs=$this->access_model->getTiposDocumentos();        
-            $estadosCiviles=$this->access_model->getEstadosCiviles();
-            $medicosEspecialidades=$this->access_model->getMedicosEspecialidades();
+            $citas=$this->Citas_model->getCitas(date('m')); 
+            $estadoscitas=$this->Access_model->getEstadosCita(); 
+            $estadospagos=$this->Access_model->getEstadosPago();
+            $tiposDocs=$this->Access_model->getTiposDocumentos();        
+            $estadosCiviles=$this->Access_model->getEstadosCiviles();
+            $medicosEspecialidades=$this->Access_model->getMedicosEspecialidades();
             $replace_array = array("'", '"');            
             $replace_array=array();
             if ($citas != -1) {
@@ -263,8 +262,8 @@ class Home extends CI_Controller {
                 }               
                 $citas = json_encode($citas);
             }
-            $this->load->model('pacientes_model');
-            //$pacientes=$this->pacientes_model->getPacientes();
+            $this->load->model('Pacientes_model');
+            //$pacientes=$this->Pacientes_model->getPacientes();
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,
@@ -281,9 +280,9 @@ class Home extends CI_Controller {
             );
             $this->load->view("plantillas/plantilla", $data);
         }else {
-           var_dump($this->session->userdata('login')[0],"SEMANA HOME");die(); 
+           
             $this->session->set_flashdata('error', "Sesion Vencida");
-           // redirect('access', 'refresh');
+            redirect('access', 'refresh');
         }
     }
 
@@ -299,8 +298,8 @@ class Home extends CI_Controller {
         $estadopago = $this->input->post("selEstadoPago");
         $idmedico = $this->input->post("selMedico");   
         $medicinastomadas = $this->input->post("txtmedicinastomadas");
-        $start_date = $this->input->post("date", TRUE);
-        $end_date = $this->input->post("dateend", TRUE);
+        $start_date = $this->input->post("date");
+        $end_date = $this->input->post("dateend");
         $action=$this->input->post("action");
         
         if($action!="NO"){
@@ -328,7 +327,7 @@ class Home extends CI_Controller {
             unset($citas['idpaciente'],$citas["motivocita"],$citas["sintomas"],$citas["descripcion"],$citas['idestadocita'],$citas['idestadopago'],$citas['idmedico']);
         }
         //METODO QUE PROCESA LOS DATOS
-        $regCitas=$this->citas_model->setCitas($citas);
+        $regCitas=$this->Citas_model->setCitas($citas);
         if($regCitas){
             $this->session->set_flashdata('success', "Cita registrada con exito");
         }
@@ -349,7 +348,7 @@ class Home extends CI_Controller {
         $idcita     = $this->input->post("idcita");
 
         //METODO QUE PROCESA LOS DATOS
-        $result=$this->citas_model->deleteCita($idcita);
+        $result=$this->Citas_model->deleteCita($idcita);
         if($result===-2){
             $success=false;
             $mensaje="Cita debe estar en estado No Confirmada ó Cancelada para poder Eliminar";

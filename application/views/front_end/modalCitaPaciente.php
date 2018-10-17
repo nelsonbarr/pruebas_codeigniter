@@ -16,11 +16,8 @@
                         <div class="form-group">
                             <label class="control-label">Paciente</label>
                             <small><button type="button" class="btn btn-info hiden btn_edit" id="btn_add" data-toggle="modal" data-target="#modalPacientes"><span class="fa fa-new pull-right"></span>Nuevo Paciente</button></small>
-                            <input id="idcita" name="idcita" type="hidden"/>
-                            <input id="idpaciente" name="idpaciente" type="hidden"/>
-                            <input type="text" name="txtCountry" id="txtCountry" class="typeahead"/>
-                            <input id="paciente" name="paciente" type="text" class="form-control" onKeyPress="javascript:buscarPaciente();"/>
-                            <select id="selPaciente" name="selPaciente" class="selectpicker form-control" data-show-subtext="true" data-live-search="true" >  
+                            <input id="idcita" name="idcita" type="hidden"/>                            
+                            <select id="selPaciente" name="selPaciente" class=" form-control" data-show-subtext="true" data-live-search="true" style="width:100%" >  
                                    
                             </select>                            
                         </div>

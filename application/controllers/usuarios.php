@@ -3,8 +3,8 @@ class Usuarios extends CI_Controller{
     
     public function __construct(){
         parent::__construct(); 
-        $this->load->model('access_model');   
-        $this->load->model('usuarios_model');        
+        $this->load->model('Access_model');   
+        $this->load->model('Usuarios_model');        
         $this->id_user = !empty($this->session->userdata('id_user')) ? $this->session->userdata('id_user') : 0;
         $this->user_name = !empty($this->session->userdata('name_user')) ? $this->session->userdata('name_user') : '';
     }
@@ -13,7 +13,7 @@ class Usuarios extends CI_Controller{
     public function index()
     {
         $user_login = $this->session->userdata('login') ? $this->session->userdata('login') : false;
-        $usuarios=$this->usuarios_model->getUsuarios();
+        $usuarios=$this->Usuarios_model->getUsuarios();
         if (!empty($user_login)) {
             $data = array(
                 'user_login' => $user_login,
@@ -47,14 +47,14 @@ class Usuarios extends CI_Controller{
         $datos['status']=1;
         $datos['perfil']=$this->input->post("selPerfil");;
               
-        $result=$this->usuarios_model->saveUsuarios($datos);
+        $result=$this->Usuarios_model->saveUsuarios($datos);
         if($result==-1){
             $this->session->set_flashdata('success', "Usuario registrado con exito");
         }
         else{
             $this->session->set_flashdata('error', "Error al guardar usuario");
         }
-        $usuarios=$this->usuarios_model->getUsuarios();
+        $usuarios=$this->Usuarios_model->getUsuarios();
         $data = array(
             'user_login' => $user_login,
             'user_name' => $this->user_name,
@@ -78,7 +78,7 @@ class Usuarios extends CI_Controller{
         $datos['respuestapregunta'] =$this->input->post("txtrespuesta");         
         
               
-        $result=$this->usuarios_model->saveRenewPass($datos);
+        $result=$this->Usuarios_model->saveRenewPass($datos);
 
         if($result){
             $this->session->set_flashdata('success', "Password actualizado con exito");

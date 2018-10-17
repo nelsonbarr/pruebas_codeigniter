@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12  banner-sec">
                                 <?php if ($this->session->flashdata('error')) { ?>
                                     <div class="alert alert-danger text-center"> <?php echo $this->session->flashdata('error') ?> </div>
                                 <?php unset($_SESSION["error"]);} ?>

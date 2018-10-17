@@ -72,6 +72,10 @@ var arrEspecialidades=new Array();
         $('#txtdescripcion').val(especialidadesEdit.descripcion);  
     });
 
+    function limpiarMensaje(){
+        $(".banner-sec").html('')
+    }
+
     $(function() {
         $("#formulario").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"
             if (e.which == 13) {
@@ -86,9 +90,9 @@ var arrEspecialidades=new Array();
        
         $(".push_menu").click(function(){
              $(".wrapper").toggleClass("active");
-        });
 
-        
+        });       
+
     });          
 </script>
 </html>

@@ -95,6 +95,11 @@ var arrUsuarios=new Array();
         $('#txtrespuesta').val(usuarioEdit.respuestapregunta); 
     });
 
+     function limpiarMensaje(){
+        $(".banner-sec").html('')
+    }
+
+
     $(function() {
         $("#formulario").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"
             if (e.which == 13) {
@@ -110,8 +115,6 @@ var arrUsuarios=new Array();
         $(".push_menu").click(function(){
              $(".wrapper").toggleClass("active");
         });
-
-        
 
     });          
 </script>

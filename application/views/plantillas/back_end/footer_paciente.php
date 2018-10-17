@@ -51,10 +51,11 @@
 <script>
 var arrPacientes=new Array();
         
-    arrPacientes=<?php print json_encode($pacientes);?>;
+    //arrPacientes=<?php print json_encode($pacientes);?>;
     function limpiarMensaje(){
             $(".banner-sec").html('')
         }
+
         //HAGO SEGUIMIENTO AL onclick DEL BOTON AGREGAR DE LA VISTA LISTA PACIENTES   
     $('#btn_add').on('click',function () { 
         limpiarMensaje()
