@@ -91,7 +91,11 @@ var arrPacientes=new Array();
             todayHighlight: true,
             autoclose: true
         });
-
+        $("#formulario").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"
+            if (e.which == 13) {
+            return false;
+            }
+        });
     
     //HAGO SEGUIMIENTO AL onclick DE BOTON HISTORIA DEL PACIENTE
     $('#btn_history').on('click',function () { 

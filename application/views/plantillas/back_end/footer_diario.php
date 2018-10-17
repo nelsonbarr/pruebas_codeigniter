@@ -41,9 +41,6 @@
     <script src="<?php echo base_url() ?>assets/js/material-dashboard.js"></script>
     <script src="<?php echo base_url() ?>assets/js/bootstrap-select.min.js"></script>
     <script src="<?php echo base_url() ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"?></script>
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script>
 var arrPacientes=new Array();
     //TOMO EL ARREGLO DE CITAS DEL CONTROLADOR
@@ -54,36 +51,20 @@ var arrPacientes=new Array();
     }
     else{
         citas=new Array();             
-
-        //arrPacientes=<?php //print json_encode($pacientes);?>;      
-    }
+        //arrPacientes=<?php //print json_encode($pacientes);?>;       
+    } 
     function limpiarMensaje(){
-        $(".banner-sec").html('')
-    }    
-       
-    $('#selPaciente').select2({
-        placeholder: '--- Seleccione Paciente ---',
-        minimumInputLength: 2,
-        ajax: {
-          url: '<?php print base_url();?>pacientes/buscarPaciente/',
-          dataType: 'json',
-          delay: 250,
-          processResults: function (data) {
-            return {
-              results: data
-            };
-          },
-          cache: true
-        }
-      });
+            $(".banner-sec").html('')
+        }   
+   
 
-  
+   
     $(function() {
         $("#formulario").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"
             if (e.which == 13) {
-            return false;
+                return false;
             }
-        });
+         });
 
       $('#fecha_comite_patrocinio').datepicker({
             format: 'dd-mm-yyyy',
@@ -96,7 +77,6 @@ var arrPacientes=new Array();
     $('#btn_history').on('click',function () { 
         limpiarMensaje()      
         var idpaciente=$('select[name=selPaciente]').val() 
-        console.log(idpaciente);
         $('#txtnombrepaciente').val($('select[name=selPaciente] option:selected').text());             
         $.ajax({
         type:'POST',
@@ -206,6 +186,7 @@ var arrPacientes=new Array();
                     blanquearCita(); 
                     $("#selPaciente").empty().append('<option value='+event.idpaciente+'>'+event.title+'</option>').val(event.idpaciente).trigger('change');
                     $("#selPaciente").prop("disabled", true);
+                    
                     $("select[name=selMedico]").val(event.idmedico);
                     $('.selectpicker').selectpicker('refresh')  
                     $('#btn_add').hide()
@@ -260,8 +241,8 @@ var arrPacientes=new Array();
         //}    
         function blanquearCita(){
             limpiarMensaje()
-            $("#selPaciente").val('').trigger('change');            
-            $("#selPaciente").prop("disabled", false);
+            $('select[name=selPaciente]').val('');
+            $('.selectpicker').selectpicker('refresh') 
             $("#idcita").val('')
             $("#date").val('');
             $("#selEstadoCita").val(1)
@@ -280,7 +261,6 @@ var arrPacientes=new Array();
         });
 
         
-
 
     });
 
