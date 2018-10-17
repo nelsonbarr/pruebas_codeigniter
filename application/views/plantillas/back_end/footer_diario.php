@@ -62,7 +62,8 @@ var arrPacientes=new Array();
     }    
        
     $('#selPaciente').select2({
-        placeholder: '--- Select Item ---',
+        placeholder: '--- Seleccione Paciente ---',
+        minimumInputLength: 2,
         ajax: {
           url: '<?php print base_url();?>pacientes/buscarPaciente/',
           dataType: 'json',
