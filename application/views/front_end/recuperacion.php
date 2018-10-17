@@ -83,13 +83,21 @@
 	</body>
     <!--   Core JS Files   -->
     <script src="<?php print base_url();?>assets/js/bootstrap.min.js" type="text/javascript"></script>
-   
+    <script src="<?php echo base_url() ?>assets/js/md5.js" ></script>
     <!--  Charts Plugin -->
     <script src="<?php print base_url();?>assets/js/chartist.min.js"></script>
     <!--  Notifications Plugin    -->
     <script src="<?php print base_url();?>assets/js/bootstrap-notify.js"></script>
     
     <script language="javascript">
+        $('#txtpassword').on('change',function(){
+            limpiarMensaje()
+            $('#txtpassword').val(hex_md5($('#txtpassword').val()));  
+        });
+        $('#txtrepassword').on('change',function(){
+            limpiarMensaje()
+            $('#txtrepassword').val(hex_md5($('#txtrepassword').val()));  
+        });
          $('#btn_send').on('click',function () {      
             pass=$("#txtpassword").val();
             repass=$("#txtrepassword").val();

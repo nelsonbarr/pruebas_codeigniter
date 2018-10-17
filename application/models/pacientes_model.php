@@ -89,5 +89,17 @@ class Pacientes_model extends CI_Model{
         $query = $query->result();
         return $query;
     }
+
+
+    public function getPacientePorId($idpaciente)
+    {        
+        $this->db->select("CONCAT(pacientes.nombres,' ',pacientes.apellidos) AS nombre_paciente,pacientes.*");            
+        $this->db->from('pacientes');
+        $this->db->where('id',$idpaciente) ;
+        
+        $query = $this->db->get();
+        $query = $query->result();
+        return $query;
+    }
 }
 ?>

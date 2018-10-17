@@ -41,7 +41,7 @@ class Usuarios extends CI_Controller{
         $datos['apellidos']=$this->input->post("txtapellidos");
         $datos['email']=$this->input->post("txtemail");
         $datos['telefono']=$this->input->post("txttelefonos");
-        $datos['password'] =md5($this->input->post("txtpassword"));
+        $datos['password'] =$this->input->post("txtpassword");
         $datos['preguntaseguridad'] =$this->input->post("txtpregunta");
         $datos['respuestapregunta'] =md5($this->input->post("txtrespuesta"));
         $datos['status']=1;
@@ -73,7 +73,7 @@ class Usuarios extends CI_Controller{
         $datos=array();        
         $datos['nombreusuario']=$this->input->post("txtnombreusuario");        
         $datos['email']=$this->input->post("txtemail");
-        $datos['password'] =md5($this->input->post("txtpassword"));
+        $datos['password'] =$this->input->post("txtpassword");
         $datos['preguntaseguridad'] =$this->input->post("txtpregunta");
         $datos['respuestapregunta'] =$this->input->post("txtrespuesta");         
         

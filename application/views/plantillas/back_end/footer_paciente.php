@@ -59,6 +59,12 @@ var arrPacientes=new Array();
         //HAGO SEGUIMIENTO AL onclick DEL BOTON AGREGAR DE LA VISTA LISTA PACIENTES   
     $('#btn_add').on('click',function () { 
         limpiarMensaje()
+        blanquear()  
+    });
+
+
+    function blanquear() { 
+        limpiarMensaje()
         $('#txtiddocumento').attr('readonly',false);       
         $('#idtipodoc').removeAttr('disabled'); 
         $('#idpaciente').val('');
@@ -75,7 +81,7 @@ var arrPacientes=new Array();
         $('#txtenfermedades').val('');   
         $('#txtmedicinas').val('');    
         $('input:radio[name="genero"][value=M]').prop('checked', true);  
-    });
+    }
 
     //HAGO SEGUIMIENTO AL onclick DE CADA BOTON HISTORIA DEL LISTADO DE PACIENTES 
     $('button[id=btn_history]').on('click',function () {     
@@ -130,25 +136,40 @@ var arrPacientes=new Array();
     //HAGO SEGUIMIENTO AL onclick DE CADA BOTON EDICION DEL LISTADO DE PACIENTES 
     $('button[id=btn_edit]').on('click',function () {
         limpiarMensaje()
-        key=$(this).data("id");    
-        //arrPacientes=JSON.parse(arrPacientes.split('\t').join(''));;
-        pacienteEdit=arrPacientes[key];
-        $('#idpaciente').val(pacienteEdit.id);      
-        $('#idtipodoc').val(pacienteEdit.idtipodocumento);
-        $('#idtipodoc').attr('disabled','disabled');
-        $('#txtiddocumento').val(pacienteEdit.documento);
-        $('#txtiddocumento').attr('readonly',true);
-        $('#txtnombres').val(pacienteEdit.nombres);
-        $('#txtapellidos').val(pacienteEdit.apellidos);
-        $('#txtemail').val(pacienteEdit.email);
-        $('#txtdireccion').val(pacienteEdit.direccion);
-        $('#txtfechanacimiento').val(pacienteEdit.fechanacimiento);
-        $('#txttelefonos').val(pacienteEdit.telefono);   
-        $('#estadocivil').val(pacienteEdit.idestadocivil);
-        $('#txtalergias').val(pacienteEdit.alergias);   
-        $('#txtenfermedades').val(pacienteEdit.enfermedadesprevias);   
-        $('#txtmedicinas').val(pacienteEdit.medicamentos);    
-        $('input:radio[name="genero"][value='+pacienteEdit.genero+']').prop('checked', true);  
+        key=$(this).data("id");   
+        $.ajax({
+            type:'POST',
+            url:'<?php print base_url();?>pacientes/carga_Paciente/'+key,
+            success:function(data){                
+                data=JSON.parse(data);   
+                json=data.data;  
+                if(json.length>0){
+                    //arrPacientes=JSON.parse(arrPacientes.split('\t').join(''));;
+                    for(i=0;i<json.length;i++){
+                        pacienteEdit=json[i];                         
+                        blanquear()
+                        $('#idpaciente').val(pacienteEdit.id);      
+                        $('#idtipodoc').val(pacienteEdit.idtipodocumento);
+                        $('#idtipodoc').attr('disabled','disabled');
+                        $('#txtiddocumento').val(pacienteEdit.documento);                        
+                        if(pacienteEdit.documento.trim()!=""){
+                            $('#txtiddocumento').attr('readonly',true);
+                        }                                            
+                        $('#txtnombres').val(pacienteEdit.nombres);
+                        $('#txtapellidos').val(pacienteEdit.apellidos);
+                        $('#txtemail').val(pacienteEdit.email);
+                        $('#txtdireccion').val(pacienteEdit.direccion);
+                        $('#txtfechanacimiento').val(pacienteEdit.fechanacimiento);
+                        $('#txttelefonos').val(pacienteEdit.telefono);   
+                        $('#estadocivil').val(pacienteEdit.idestadocivil);
+                        $('#txtalergias').val(pacienteEdit.alergias);   
+                        $('#txtenfermedades').val(pacienteEdit.enfermedadesprevias);   
+                        $('#txtmedicinas').val(pacienteEdit.medicamentos);    
+                        $('input:radio[name="genero"][value='+pacienteEdit.genero+']').prop('checked', true); 
+                    }     
+                }
+            }
+        });    
     });
 
     $(function() {

@@ -31,7 +31,7 @@
     <!--   Core JS Files   -->
     <!--   Core JS Files   -->
     <script src="<?php echo base_url() ?>assets/js/popper.min.js" ></script>
-    <script src="<?php echo base_url() ?>assets/js/md5.min.js" ></script>
+    <script src="<?php echo base_url() ?>assets/js/md5.js" ></script>
     <script src="<?php echo base_url() ?>assets/js/jquery.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url() ?>assets/js/material.min.js" type="text/javascript"></script>
@@ -74,7 +74,7 @@ var arrUsuarios=new Array();
 
     $('#txtpassword').on('change',function(){
         limpiarMensaje()
-        $('#txtpassword').val(md5($('#txtpassword').val('')));  
+        $('#txtpassword').val(hex_md5($('#txtpassword').val()));  
     });
 
     //HAGO SEGUIMIENTO AL onclick DE CADA BOTON EDICION DEL LISTADO DE PACIENTES 

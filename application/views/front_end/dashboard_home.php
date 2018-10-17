@@ -81,7 +81,7 @@
 require_once("modalCitaPaciente.php");
 require_once("modalPacienteHistorico.php");
 //INCLUYO LA VENTANA MODAL PARA EDICION DE PACIENTES, LA MISMA SE MOSTRARA AL PRESIONAR EL BOTON DE EDICION
-require_once("modalPacientes.php");
+require_once("modalPacienteCita.php");
 ?>
     
 
