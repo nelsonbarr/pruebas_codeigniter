@@ -302,9 +302,9 @@ class Home extends CI_Controller {
         $end_date = $this->input->post("dateend");
         $action=$this->input->post("action");
         
-        if($action!="NO"){
+        if($action!="NO"){            
             $start_date = new DateTime(str_replace("/","-",$start_date));
-            $start_date =$start_date->format('Y-m-d H:i:s');
+            $start_date =$start_date->format('Y-m-d H:i:s');            
             $end_date = new DateTime(str_replace("/","-",$end_date));
             $end_date =$end_date->format('Y-m-d H:i:s');
         }

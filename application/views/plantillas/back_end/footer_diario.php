@@ -45,6 +45,7 @@
 var arrPacientes=new Array();
     //TOMO EL ARREGLO DE CITAS DEL CONTROLADOR
     var citas='<?php echo is_array($citas); ?>';
+    
     if(citas!=-1){
         var citas = JSON.parse('<?php echo $citas ?>'.split('\t').join(''));        
         var meses = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
@@ -53,6 +54,7 @@ var arrPacientes=new Array();
         citas=new Array();             
         //arrPacientes=<?php //print json_encode($pacientes);?>;       
     } 
+    console.log(citas);
     function limpiarMensaje(){
             $(".banner-sec").html('')
         }   
@@ -125,8 +127,8 @@ var arrPacientes=new Array();
         //$('#calendar').fullCalendar({});
         var tipocalendar='<?php print $tipocalendar;?>';
           
-       /* if(tipocalendar!=''){
-            console.log(tipocalendar);*/
+       /* if(tipocalendar!=''){*/
+            console.log(tipocalendar);
             if(tipocalendar=='agendaWeek'){
                 $('#tipoagenda').text('Agenda Semanal');
                 var propRight='month,basicWeek,basicDay,year';
@@ -150,13 +152,10 @@ var arrPacientes=new Array();
                 businessHours: {
                     start: '08:00', // hora final
                     end: '18:00', // hora inicial
-                    dow: [ 1, 2, 3, 4, 5 ] // dias de semana, 0=Domingo
-                },
-                minTime: "07:00:00", 
-                maxTime: "20:00:00",           
+                    dow: [ 1, 2, 3, 4, 5,6,0 ] // dias de semana, 0=Domingo
+                },//minTime: "07:00:00", maxTime: "20:00:00",                           
                 slotDuration: '00:15:00',
-                contentHeight:480,       //auto            
-                hiddenDays: [ 6,0 ], // hide Tuesdays and Thursdays //defaultView: tipocalendar,               
+                contentHeight:480,       //auto                           
                 defaultView: tipocalendar,  
                 views: {
                     listDay: { buttonText: 'Lista Dia' },
@@ -174,8 +173,8 @@ var arrPacientes=new Array();
                 defaultTimedEventDuration:'00:15:00',
                 dayClick: function(date, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, LLAMA A LA VENTANA REGISTRAR CITA                    
                     blanquearCita();
-                    this.start = date.format('D/M/Y hh:mm');
-                    dateend=new Date(date.format('M/D/Y hh:mm'));
+                    this.start = date.format('D/M/Y HH:mm');
+                    dateend=new Date(date.format('M/D/Y HH:mm'));
                     dateend.setMinutes(dateend.getMinutes() + 15);
                     $("#date").val(this.start);
                     $("#dateend").val(dateend.getDate()+"/"+(dateend.getMonth() + 1) + "/" + dateend.getFullYear() + " " +dateend.getHours() + ":" + dateend.getMinutes() + ":" + dateend.getSeconds());                    
@@ -192,8 +191,8 @@ var arrPacientes=new Array();
                     $('#btn_add').hide()
                     $("#txtnombrepaciente").val(event.nombre_paciente+"  ID: "+event.documento);
                     $("#idcita").val(event.idcita)                  
-                    $("#date").val(event.start.format('D/M/Y hh:mm'));
-                    $("#dateend").val(event.end.format('D/M/Y hh:mm'));
+                    $("#date").val(event.start.format('D/M/Y HH:mm'));
+                    $("#dateend").val(event.end.format('D/M/Y HH:mm'));
                     $("#txtmotivocita").val(event.motivocita);
                     $("#selEstadoCita").val(event.idestadocita);
                     $("#selEstadoPago").val(event.idestadopago);
@@ -234,7 +233,7 @@ var arrPacientes=new Array();
                 } 
                 
             });            
-            
+            console.log(citas)
             $('#calendar').fullCalendar('addEventSource', citas); 
 
 

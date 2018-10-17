@@ -60,6 +60,7 @@ var arrPacientes=new Array();
         citas=new Array();             
         //arrPacientes=<?php //print json_encode($pacientes);?>;       
     }  
+    console.log(citas);
     function limpiarMensaje(){
         $(".banner-sec").html('')
     }  
@@ -147,8 +148,8 @@ var arrPacientes=new Array();
         //$('#calendar').fullCalendar({});
         var tipocalendar='<?php print $tipocalendar;?>';
           
-       /* if(tipocalendar!=''){
-            console.log(tipocalendar);*/
+       /* if(tipocalendar!=''){*/
+            console.log(tipocalendar);
             if(tipocalendar=='agendaWeek'){
                 $('#tipoagenda').text('AGENDA SEMANAL');
                 $("#tipoagenda").addClass("text-danger");
@@ -173,13 +174,10 @@ var arrPacientes=new Array();
                 businessHours: {
                     start: '08:00', // hora final
                     end: '18:00', // hora inicial
-                    dow: [ 1, 2, 3, 4, 5 ] // dias de semana, 0=Domingo
-                },
-                minTime: "07:00:00", 
-                maxTime: "20:00:00",           
+                    dow: [ 1, 2, 3, 4, 5,6,0 ] // dias de semana, 0=Domingo
+                },                           
                 slotDuration: '00:15:00',
-                contentHeight:480,       //auto            
-                hiddenDays: [ 6,0 ], // hide Tuesdays and Thursdays //defaultView: tipocalendar,               
+                contentHeight:480,       //auto                            
                 defaultView: tipocalendar,                           
                 locale : 'es',
                 eventLimit: true, // allow "more" link when too many events*/               
@@ -189,7 +187,7 @@ var arrPacientes=new Array();
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
                 allDaySlot: false,
-                defaultTimedEventDuration:'00:15:00',
+                defaultTimedEventDuration:'00:15:00',               
                 dayClick: function(date, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, LLAMA A LA VENTANA REGISTRAR CITA 
                     limpiarMensaje()
                     dateAct=new Date(date.format("M/D/Y HH:mm"))
@@ -207,8 +205,8 @@ var arrPacientes=new Array();
                     {
                         //FALSO Hiciste clic en una fecha mayor a la de hoy + diasAdicionales
                         blanquearCita();
-                        this.start = date.format('D/M/Y hh:mm');
-                        dateend=new Date(date.format('M/D/Y hh:mm'));
+                        this.start = date.format('D/M/Y HH:mm');
+                        dateend=new Date(date.format('M/D/Y HH:mm'));
                         dateend.setMinutes(dateend.getMinutes() + 15);
                         $("#date").val(this.start);
                         $("#dateend").val(dateend.getDate()+"/"+(dateend.getMonth() + 1) + "/" + dateend.getFullYear() + " " +dateend.getHours() + ":" + dateend.getMinutes() + ":" + dateend.getSeconds());
@@ -227,8 +225,8 @@ var arrPacientes=new Array();
                     $('.selectpicker').selectpicker('refresh') 
                     $('#btn_add').hide()
                     $("#idcita").val(event.idcita)                  
-                    $("#date").val(event.start.format('D/M/Y hh:mm'));
-                    $("#dateend").val(event.end.format('D/M/Y hh:mm'));
+                    $("#date").val(event.start.format('D/M/Y HH:mm'));
+                    $("#dateend").val(event.end.format('D/M/Y HH:mm'));
                     $("#selEstadoCita").val(event.idestadocita);
                     $("#selEstadoPago").val(event.idestadopago);
                     $("#txtmotivocita").val(event.motivocita);
@@ -280,35 +278,40 @@ var arrPacientes=new Array();
                             $(".banner-sec").html('<div class="alert alert-danger text-center">No puede eliminar citas en estatus Visto</div>' ) 
                             //AL FALLAR LA ELIMINACION VUELVO A PINTAR EL EVENTO                           
                         }
-                        else{                        
-                            $.ajax({
-                                url:'<?php print base_url();?>home/deleteCita/',  
-                                data: {idcita:event.idcita},
-                                type: "POST",       
-                                dataType:'json',                         
-                                success: function(json) {
-                                    if(json.success){                                        
-                                        $(".banner-sec").html('<div class="alert alert-success text-center">'+json.mensaje+'</div>' )                                                                                                                  
+                        else{ 
+                            if(confirm("Seguro desea Eliminar la cita para el paciente "+tmpEvent.nombre_paciente)) {                     
+                                $.ajax({
+                                    url:'<?php print base_url();?>home/deleteCita/',  
+                                    data: {idcita:event.idcita},
+                                    type: "POST",       
+                                    dataType:'json',                         
+                                    success: function(json) {
+                                        if(json.success){                                        
+                                            $(".banner-sec").html('<div class="alert alert-success text-center">'+json.mensaje+'</div>' )                                                                                                                  
+                                        }
+                                        else{
+                                            $(".banner-sec").html('<div class="alert alert-danger text-center">'+json.mensaje+'</div>' ) 
+                                        //AL FALLAR LA ELIMINACION VUELVO A PINTAR EL EVENTO
+                                        $('#calendar').fullCalendar( 'renderEvent', tmpEvent, true);
+                                        }                                    
+                                    },
+                                    error: function(){
+                                        $(".banner-sec").html('<div class="alert alert-danger text-center">Problemas al ejecutar</div>' )                                    
+                                        //AL FALLAR LA ELIMINACION VUELVO A PINTAR EL EVENTO
+                                        $('#calendar').fullCalendar( 'renderEvent', tmpEvent, true);
                                     }
-                                    else{
-                                        $(".banner-sec").html('<div class="alert alert-danger text-center">'+json.mensaje+'</div>' ) 
-                                       //AL FALLAR LA ELIMINACION VUELVO A PINTAR EL EVENTO
-                                       $('#calendar').fullCalendar( 'renderEvent', tmpEvent, true);
-                                    }                                    
-                                },
-                                error: function(){
-                                    $(".banner-sec").html('<div class="alert alert-danger text-center">Problemas al ejecutar</div>' )                                    
-                                     //AL FALLAR LA ELIMINACION VUELVO A PINTAR EL EVENTO
-                                    $('#calendar').fullCalendar( 'renderEvent', tmpEvent, true);
-                                }
-                            });
+                                });
+                            }
+                            else{
+                                $('#calendar').fullCalendar( 'renderEvent', tmpEvent, true);
+                            }
                         }                         
                             
                     });
                 } 
                 
             });           
-            
+            console.log(citas)
             $('#calendar').fullCalendar('addEventSource', citas); 
 
 

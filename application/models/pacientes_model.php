@@ -38,7 +38,8 @@ class Pacientes_model extends CI_Model{
         $this->db->select("id,CONCAT(nombres,' ',apellidos,'| Fecha Nac:',fechanacimiento,'| Id:',documento,'| Genero:',genero) as text");        
         $this->db->from('pacientes');
         $this->db->limit(40); 
-        $this->db->like('documento',$datos);   
+        if($datos!="")
+            $this->db->like('documento',$datos);   
        /* $query = $this->db->get();
         $query = $query->result_array();*/
         
@@ -50,6 +51,27 @@ class Pacientes_model extends CI_Model{
         }*/
         /*if (count($query) >= 1)//*/
             return $query;
+        
+    }
+
+    public function getPacientesList($datos)
+    {   
+        $this->db->select("*");        
+        $this->db->from('pacientes');
+        //$this->db->limit(40); 
+        if($datos['documento']!="")
+            $this->db->like('documento',$datos);   
+        $query = $this->db->get();
+        $query = $query->result_array();
+        
+        /*$query = $this->db->get();
+        $query = $query->result();*/
+        foreach ($query as $hsl)
+        {
+            $data[] = $hsl;
+        }
+        /*if (count($query) >= 1)//*/
+        return $query;
         
     }
 

@@ -168,6 +168,31 @@ class Pacientes extends CI_Controller{
 
     }
 
+    public function buscarPacienteList(){
+
+        $q = $_GET['q'];
+        $user_login = $this->session->userdata('login')[0] ? $this->session->userdata('login')[0] : false;   
+
+             
+        $result=$this->Pacientes_model->getPacientesList(array('documento'=>$q));       
+        //se define un arreglo con la informacion de los clientes
+        
+        //$consulta=array('data'=>$result);
+       
+        /*if(!$result){
+            die('Error');
+        }else{*/
+            //se codifica la data en formato json    
+            
+            echo json_encode($result);
+        //}
+
+                // DB table to use
+        
+
+
+    }
+
     public function buscarPaciente(){
 
         $q = $_GET['q'];
@@ -187,7 +212,6 @@ class Pacientes extends CI_Controller{
         //}
 
                 // DB table to use
-        
 
 
     }

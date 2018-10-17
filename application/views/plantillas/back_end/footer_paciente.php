@@ -180,8 +180,21 @@ var arrPacientes=new Array();
         });
         $('#tablepacientes').DataTable({
             responsive: true,
-            'order': []
+            'order': [],
+            "bProcessing": true,
+            "serverSide": true,
+            "ajax":{
+                url :"<?php print base_url();?>pacientes/buscarPacienteList/", // json datasource
+                data:{q:''},
+                dataType:'json'
+                type: "get",  // type of method  ,GET/POST/DELETE
+                error: function(){
+                $("#tablepacientes").css("display","none");
+                }
+            }    
         });
+        
+
 
         $('#txtfechanacimiento').datepicker({
             format: 'dd-mm-yyyy',

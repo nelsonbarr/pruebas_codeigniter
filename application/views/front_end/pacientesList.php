@@ -48,7 +48,7 @@
                                 <div class="col-md-12">
                                     <div class="hpanel hred">                                            
                                         <div class="panel-body">
-                                            <table class="table table-responsive" id="tablepacientes">
+                                            <table class="table table-responsive display" id="tablepacientes">
                                             <thead class="thead-inverse">
                                                 <tr>
                                                 <th scope="col">#</th>
@@ -61,7 +61,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php if($pacientes!=-1){
+                                                <?php if($pacientes==-1){
 												        foreach($pacientes AS $key=>$fila):?>    
                                                         <tr>
                                                         <th scope="row"><?php print $fila['id'];?></th>
