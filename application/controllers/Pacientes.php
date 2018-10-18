@@ -209,10 +209,10 @@ class Pacientes extends CI_Controller{
     // check search value exist
     if( !empty($params['search']['value']) ) {   
         
-        $where .=" ( employee_name LIKE '".$params['search']['value']."%' ";    
-        $where .=" OR employee_salary LIKE '".$params['search']['value']."%' ";
-
-        $where .=" OR employee_age LIKE '".$params['search']['value']."%' )";
+        $where .=" ( id LIKE '%".$params['search']['value']."%' ";    
+        $where .=" OR documento LIKE '%".$params['search']['value']."%' ";
+        $where .=" OR nombres LIKE '%".$params['search']['value']."%' ";
+        $where .=" OR apellidos LIKE '%".$params['search']['value']."%'  )";
     }
 
     $this->db->select('*');

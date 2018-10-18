@@ -41,7 +41,7 @@
     <!-- Material Dashboard javascript methods -->
     <script src="<?php echo base_url() ?>assets/js/material-dashboard.js"></script>
     <script src="<?php echo base_url() ?>assets/js/bootstrap-select.min.js"></script>
-    <script src="<?php echo base_url() ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"?></script>
+    <script src="<?php echo base_url() ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"?></script>    
     <script src="<?php echo base_url(); ?>assets/datatables2/media/js/jquery.dataTables.js"></script>
     <script src="<?php echo base_url(); ?>assets/datatables2/media/js/dataTables.buttons.js"></script>
     <script src="<?php echo base_url(); ?>assets/datatables2/media/js/buttons.print.js"></script>
