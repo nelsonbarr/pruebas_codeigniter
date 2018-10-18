@@ -58,7 +58,7 @@ class Pacientes_model extends CI_Model{
     {   
         $this->db->select("*");        
         $this->db->from('pacientes');
-        //$this->db->limit(40); 
+        $this->db->limit(40); 
         if($datos['documento']!="")
             $this->db->like('documento',$datos);   
         $query = $this->db->get();
