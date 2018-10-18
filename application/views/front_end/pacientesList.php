@@ -51,7 +51,7 @@
                                             <table class="table table-responsive display" id="tablepacientes">
                                             <thead class="thead-inverse">
                                                 <tr>
-                                                <th scope="col">#</th>
+                                                <th scope="col">Id</th>
                                                 <th scope="col">Documento</th>
                                                 <th scope="col">Nombres</th>
                                                 <th scope="col">Apellidos</th>
