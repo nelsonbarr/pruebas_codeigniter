@@ -162,6 +162,9 @@ var arrPacientes=new Array();
                         '<button type="button" id="btn_history" alt="Historia" title="Historia" class="btn btn-default" data-toggle="modal" data-id="'+row[0]+'" data-target="#modalPacienteHistory"><span class="fa fa-align-justify pull-right"></span></button>'
                 }}], 
         });
+        //ORGANIZO INICIALMENTE POR NOMBRES
+        table.order( [ 2, 'asc' ] ).draw();
+        //ACTIVO LAS ACCIONES PARA LOS BOTONES EDIT E HISTORIA
         $('#tablepacientes tbody').on( 'click', 'button', function () {            
             if(this.id=="btn_edit"){
                 limpiarMensaje()
