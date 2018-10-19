@@ -1757,6 +1757,7 @@ output {
 .label.label-info {
   background-color: #00bcd4;
 }
+
 .label.label-warning {
   background-color: #ff9800;
 }
@@ -1765,6 +1766,10 @@ output {
 }
 .label.label-rose {
   background-color: #e91e63;
+}
+.label-confirm{
+  background-color: green;
+  color: white;
 }
 
 .form-control,

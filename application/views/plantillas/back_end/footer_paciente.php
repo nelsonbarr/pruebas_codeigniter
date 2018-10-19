@@ -144,7 +144,7 @@ var arrPacientes=new Array();
         });
         var table=$('#tablepacientes').DataTable({
             responsive: true,
-            'order': [],
+            'order':  [[ 2, "asc" ]] ,
             "bProcessing": true,
             "serverSide": true,
             "ajax":{
@@ -160,10 +160,10 @@ var arrPacientes=new Array();
                     return '<button type="button" id="btn_edit" alt="Editar" title="Editar" class="btn btn-danger btn_edit" data-toggle="modal" data-id="'+row[0]+'" data-target="#modalPacientes"><span class="fa fa-edit pull-right"></span></button>'
                     +
                         '<button type="button" id="btn_history" alt="Historia" title="Historia" class="btn btn-default" data-toggle="modal" data-id="'+row[0]+'" data-target="#modalPacienteHistory"><span class="fa fa-align-justify pull-right"></span></button>'
-                }}], 
+                }}],
+            columnDefs: [ { orderable: false, targets: [6] } ],
         });
-        //ORGANIZO INICIALMENTE POR NOMBRES
-        table.order( [ 2, 'asc' ] ).draw();
+        
         //ACTIVO LAS ACCIONES PARA LOS BOTONES EDIT E HISTORIA
         $('#tablepacientes tbody').on( 'click', 'button', function () {            
             if(this.id=="btn_edit"){

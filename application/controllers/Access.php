@@ -62,7 +62,7 @@ class Access extends CI_Controller {
                         $citas[$i]['backgroundColor'] = "#DF0101";
                     }                  
                     elseif($row['estadocita']=='En camino'){
-                        $citas[$i]['backgroundColor'] = "rgb(10, 170,90)";
+                        $citas[$i]['backgroundColor'] = "rgb(102, 255, 153)";
                         $citas[$i]['textColor']="#000000";
                     } 
                     elseif($row['estadocita']=='En Sala'){
@@ -71,7 +71,10 @@ class Access extends CI_Controller {
                     } 
                     elseif($row['estadocita']=='Visto'){
                         $citas[$i]['backgroundColor'] = "#0066ff";
-                    }    
+                    } 
+                    elseif($row['estadocita']=='Confirmado'){
+                        $citas[$i]['backgroundColor'] = "green";
+                    }   
                     $i++;
                 }               
                 $citas = json_encode($citas);
@@ -172,7 +175,7 @@ class Access extends CI_Controller {
                             $citas[$i]['backgroundColor'] = "#DF0101";
                         }                  
                         elseif($row['estadocita']=='En camino'){
-                            $citas[$i]['backgroundColor'] = "rgb(10, 170,90)";
+                            $citas[$i]['backgroundColor'] = "rgb(102, 255, 153)";
                             $citas[$i]['textColor']="#000000";
                         } 
                         elseif($row['estadocita']=='En Sala'){
@@ -181,6 +184,9 @@ class Access extends CI_Controller {
                         } 
                         elseif($row['estadocita']=='Visto'){
                             $citas[$i]['backgroundColor'] = "#0066ff";
+                        } 
+                        elseif($row['estadocita']=='Confirmado'){
+                            $citas[$i]['backgroundColor'] = "green";
                         }    
                         $i++;
                     }               

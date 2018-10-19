@@ -181,7 +181,7 @@ var arrPacientes=new Array();
                     } else {
                         $('#calendar').fullCalendar( 'changeView', 'agendaDay' );
                     }
-                } ,
+                } ,                
                 dayClick: function(date, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, LLAMA A LA VENTANA REGISTRAR CITA                    
                     blanquearCita();
                     this.start = date.format('D/M/Y HH:mm');
@@ -240,8 +240,11 @@ var arrPacientes=new Array();
                     });
                 },
                 eventRender: function(event, element) { 
-                    element.find('.fc-title').append(" - " + event.description); 
-                } 
+                    element.find('.fc-title').append(" - " + event.description);                    
+                } ,
+                eventAfterAllRender:function(){
+                    $("#calendar").find('.fc-widget-header').append("-   (Leyenda:Paciente | Id | Estatus de pago | Motivo Cita | Observacion)")
+                }                
                 
             });            
             console.log(citas)

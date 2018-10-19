@@ -55,7 +55,7 @@ class Home extends CI_Controller {
                         $citas[$i]['backgroundColor'] = "#DF0101";
                     }                  
                     elseif($row['estadocita']=='En camino'){
-                        $citas[$i]['backgroundColor'] = "rgb(10, 170,90)";
+                        $citas[$i]['backgroundColor'] = "rgb(102, 255, 153)";
                         $citas[$i]['textColor']="#000000";
                     } 
                     elseif($row['estadocita']=='En Sala'){
@@ -64,7 +64,10 @@ class Home extends CI_Controller {
                     } 
                     elseif($row['estadocita']=='Visto'){
                         $citas[$i]['backgroundColor'] = "#0066ff";
-                    }   
+                    } 
+                    elseif($row['estadocita']=='Confirmado'){
+                        $citas[$i]['backgroundColor'] = "green";
+                    }
                    // $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
                    if($this->session->userdata('perfil') ==1){                  
                         $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]."  |  PAGO: ".$pago);
@@ -143,7 +146,7 @@ class Home extends CI_Controller {
                     //if($this->session->userdata('perfil') ==1){      
 					$date = new DateTime($row['fechanacimiento']);
 					$fechanacimiento =$date->format('d-m-Y');            
-                    $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$fechanacimiento."  |  GENERO: ".$row["genero"]."  |  PAGO: ".$pago);
+                    $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ".$row['documento']."  | PAGO: ".$pago." | ".$row['motivocita']." | ".$row['descripcion']);
 
                    /* }
                     else{
@@ -161,7 +164,7 @@ class Home extends CI_Controller {
                         $citas[$i]['backgroundColor'] = "#DF0101";
                     }                  
                     elseif($row['estadocita']=='En camino'){
-                        $citas[$i]['backgroundColor'] = "rgb(10, 170,90)";
+                        $citas[$i]['backgroundColor'] = "rgb(102, 255, 153)";
                         $citas[$i]['textColor']="#000000";
                     } 
                     elseif($row['estadocita']=='En Sala'){
@@ -170,7 +173,10 @@ class Home extends CI_Controller {
                     } 
                     elseif($row['estadocita']=='Visto'){
                         $citas[$i]['backgroundColor'] = "#0066ff";
-                    }      
+                    } 
+                    elseif($row['estadocita']=='Confirmado'){
+                        $citas[$i]['backgroundColor'] = "green";
+                    }     
                     $i++;
                 }       
                 $citas = json_encode($citas);
@@ -248,7 +254,7 @@ class Home extends CI_Controller {
                         $citas[$i]['backgroundColor'] = "#DF0101";
                     }                  
                     elseif($row['estadocita']=='En camino'){
-                        $citas[$i]['backgroundColor'] = "rgb(10, 170,90)";
+                        $citas[$i]['backgroundColor'] = "rgb(102, 255, 153)";
                         $citas[$i]['textColor']="#000000";
                     } 
                     elseif($row['estadocita']=='En Sala'){
@@ -257,6 +263,9 @@ class Home extends CI_Controller {
                     } 
                     elseif($row['estadocita']=='Visto'){
                         $citas[$i]['backgroundColor'] = "#0066ff";
+                    } 
+                    elseif($row['estadocita']=='Confirmado'){
+                        $citas[$i]['backgroundColor'] = "green";
                     }      
                     $i++;
                 }               

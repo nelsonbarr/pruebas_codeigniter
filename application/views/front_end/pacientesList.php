@@ -57,7 +57,7 @@
                                                 <th scope="col">Apellidos</th>
                                                 <th scope="col">Sexo</th>
                                                 <th scope="col">Fecha Nacimiento</th> 
-                                                <th>Acciones</th>     
+                                                <th class="no-sort">Acciones</th>     
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -74,6 +74,17 @@
                                                             <button type="button" id="btn_history" alt="Historia" title="Historia" class="btn btn-default" data-toggle="modal" data-id="<?php print $fila['id'];?>" data-target="#modalPacienteHistory"><span class="fa fa-align-justify pull-right"></span></button></td>                                                    </tr>        
                                                 <?php endforeach; }?>
                                             </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                <th scope="col">Id</th>
+                                                <th scope="col">Documento</th>
+                                                <th scope="col">Nombres</th>
+                                                <th scope="col">Apellidos</th>
+                                                <th scope="col">Sexo</th>
+                                                <th scope="col">Fecha Nacimiento</th> 
+                                                <th class="no-sort">Acciones</th>     
+                                                </tr>
+                                            </tfoot>
                                             </table>
                                         </div>
                                     </div>
