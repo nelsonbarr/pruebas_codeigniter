@@ -243,7 +243,7 @@ var arrPacientes=new Array();
                     element.find('.fc-title').append(" - " + event.description);                    
                 } ,
                 eventAfterAllRender:function(){
-                    $("#calendar").find('.fc-widget-header').append("-   (Leyenda:Paciente | Id | Estatus de pago | Motivo Cita | Observacion)")
+                    $("#calendar").find('.fc-widget-header').append("<div class='text-center'><span style='font-size:11px;'>&nbsp;&nbsp;&nbsp;Id &nbsp;&nbsp; |&nbsp;&nbsp; Paciente  &nbsp;&nbsp;| &nbsp;&nbsp;Estatus de pago&nbsp;&nbsp; |&nbsp;&nbsp; Motivo Cita&nbsp;&nbsp; | &nbsp;&nbsp;Observacion</span></div>")
                 }                
                 
             });            

@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/datatables2/media/css/jquery.dataTables.css" />
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/datatables2/media/css/buttons.dataTables.css" />
 <div class="container">
@@ -100,7 +101,7 @@
 
 <?php 
 //INCLUYO LA VENTANA MODAL PARA EDICION DE PACIENTES, LA MISMA SE MOSTRARA AL PRESIONAR EL BOTON DE EDICION
-require_once("modalPacientes.php");
+require_once("modalPacienteRegistro.php");
 //INCLUYO LA VENTANA MODAL PARA VERHISTORICO EL PACIENTE, LA MISMA SE MOSTRARA AL PRESIONAR EL BOTON DE HISTORICO
 require_once("modalPacienteHistorico.php");
 ?>

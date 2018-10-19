@@ -56,10 +56,60 @@ class Pacientes extends CI_Controller{
         $datos['genero']=$this->input->post("genero"); 
         $date = new DateTime($datos['fechanacimiento']);
         $datos['fechanacimiento'] =$date->format('Y-m-d');
-              
+         //METODO ENCARGADO DE REALIZAR EL LA SUBIDA DE LOS ARCHIVOS EN FISICO Y DE EL REGISTRO DEL NOMBRE DEL ARCHIVO EN EL CAMPO files_inspection TABLA inspection_files
+        
+        if (empty($_FILES['avatar-1'])) {
+            // Devolvemos un array asociativo con la clave error en formato JSON como respuesta	
+            echo json_encode(['error'=>'No hay ficheros para realizar upload.']); 
+            // Cancelamos el resto del script
+            //return false; 
+        }
+        else{
+            
+            // DEFINICIÓN DE LAS VARIABLES DE TRABAJO (CONSTANTES, ARRAYS Y VARIABLES)
+            // ************************************************************************
+
+            // Definimos la constante con el directorio de destino de las descargas
+            
+            //define('DIR_DESCARGAS',__DIR__.DIRECTORY_SEPARATOR .'descargas');      
+
+            $dirapp=substr($_SERVER["SCRIPT_NAME"],0,strripos($_SERVER["SCRIPT_NAME"],"/"));        
+
+            $dir_subida = $_SERVER['DOCUMENT_ROOT'].$dirapp.'/assets/plugins/server/php/img_pacientes/';        
+        
+            // Obtenemos el array de ficheros enviados
+            $ficheros = $_FILES['avatar-1'];
+            // Establecemos el indicador de proceso correcto (simplemente no indicando nada)
+            $estado_proceso = NULL;
+            // Paths para almacenar
+            $paths= array();
+            // Obtenemos los nombres de los ficheros
+            $nombres_ficheros = $ficheros['name'];
+            $mi_archivo = 'avatar-1';
+            $config['upload_path'] = "assets/images/";
+            $config['file_name'] = $nombres_ficheros;
+            $config['allowed_types'] = "*";
+            $config['max_size'] = "50000";
+            $config['max_width'] = "2000";
+            $config['max_height'] = "2000";
+            $config['overwrite']=true;
+
+            $this->load->library('upload', $config);
+            
+            if (!$this->upload->do_upload($mi_archivo)) {
+                //*** ocurrio un error
+                $data['uploadError'] = $this->upload->display_errors();
+                echo $this->upload->display_errors();
+                return;
+            }
+
+            $data['uploadSuccess'] = $this->upload->data();
+            $datos['photo'] =$data['uploadSuccess']['file_name'];
+        }
         $result=$this->Pacientes_model->savePacientes($datos);
-        if($result==-1){
+        if($result==-1){                       
             $this->session->set_flashdata('success', "Paciente registrado con exito");
+            //$this->session->set_flashdata('success', "Paciente registrado con exito");
         }
         else{
             $this->session->set_flashdata('error', "Error al guardar paciente");
@@ -103,14 +153,65 @@ class Pacientes extends CI_Controller{
         $datos['genero']=$this->input->post("genero"); 
         $date = new DateTime($datos['fechanacimiento']);
         $datos['fechanacimiento'] =$date->format('Y-m-d');
+
+        //METODO ENCARGADO DE REALIZAR EL LA SUBIDA DE LOS ARCHIVOS EN FISICO Y DE EL REGISTRO DEL NOMBRE DEL ARCHIVO EN EL CAMPO files_inspection TABLA inspection_files
+        
+        if (empty($_FILES['avatar-1'])) {
+            // Devolvemos un array asociativo con la clave error en formato JSON como respuesta	
+            echo json_encode(['error'=>'No hay ficheros para realizar upload.']); 
+            // Cancelamos el resto del script
+            return false; 
+        }
+        
+        // DEFINICIÓN DE LAS VARIABLES DE TRABAJO (CONSTANTES, ARRAYS Y VARIABLES)
+        // ************************************************************************
+
+        // Definimos la constante con el directorio de destino de las descargas
+        
+        //define('DIR_DESCARGAS',__DIR__.DIRECTORY_SEPARATOR .'descargas');      
+
+        $dirapp=substr($_SERVER["SCRIPT_NAME"],0,strripos($_SERVER["SCRIPT_NAME"],"/"));        
+
+        $dir_subida = base_url().'assets/images/';        
+       
+        // Obtenemos el array de ficheros enviados
+        $ficheros = $_FILES['avatar-1'];
+        // Establecemos el indicador de proceso correcto (simplemente no indicando nada)
+        $estado_proceso = NULL;
+        // Paths para almacenar
+        $paths= array();
+        // Obtenemos los nombres de los ficheros
+        $nombres_ficheros = $ficheros['name'];
+       
               
         $result=$this->Pacientes_model->savePacientes($datos);
         if($result==-1){
-            $this->session->set_flashdata('success', "Paciente registrado con exito");
+            $mi_archivo = $nombres_ficheros[0];
+            $config['upload_path'] = "assets/images/";
+            $config['file_name'] = 'test';
+            $config['allowed_types'] = "*";
+            $config['max_size'] = "50000";
+            $config['max_width'] = "2000";
+            $config['max_height'] = "2000";
+
+            $this->load->library('upload', $config);
+            
+            if (!$this->upload->do_upload($mi_archivo)) {
+                //*** ocurrio un error
+                $data['uploadError'] = $this->upload->display_errors();
+                echo $this->upload->display_errors();
+                return;
+            }
+
+            $data['uploadSuccess'] = $this->upload->data();
+            $this->session->set_flashdata('success', "Paciente registrado con exito".$data['uploadSuccess']);
         }
         else{
             $this->session->set_flashdata('error', "Error al guardar paciente");
         }
+
+
+
         //$pacientes=$this->Pacientes_model->getPacientes();
         $this->load->model("Citas_model");
         $citas=$this->Citas_model->getCitas(date('m'));       
@@ -132,7 +233,7 @@ class Pacientes extends CI_Controller{
             'tipocalendar'=>'agendaWeek',            
             'vista'=>'calendario'          
         );
-        $this->load->view("plantillas/plantilla", $data);
+        //$this->load->view("plantillas/plantilla", $data);
 
 
     }

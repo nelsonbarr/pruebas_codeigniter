@@ -47,7 +47,15 @@
     <script src="<?php echo base_url(); ?>assets/datatables2/media/js/buttons.print.js"></script>
     <script src="<?php echo base_url(); ?>assets/datatables2/media/js/buttons.html5.js"></script>
     <script src="<?php echo base_url(); ?>assets/datatables2/media/js/buttons.flash.js"></script>
-    <!-- App scripts -->   
+    <!-- App scripts -->  
+    <!--REQUIRES FOR BOOTSTRAP FILEINPUT MASTER-->
+    <link  href="<?php echo base_url('assets/bootstrap_file_input/css/fileinput.css');?>" media="all" rel="stylesheet" type="text/css"/>
+    <link  href="<?php echo base_url('assets/bootstrap_file_input/themes/explorer-fa/theme.css');?>" media="all" rel="stylesheet" type="text/css"/>
+    <script src="<?php echo base_url('assets/bootstrap_file_input/js/plugins/sortable.js');?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/bootstrap_file_input/js/fileinput.js');?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/bootstrap_file_input/js/locales/es.js');?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/bootstrap_file_input/themes/explorer-fa/theme.js');?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/bootstrap_file_input/themes/fa/theme.js');?>" type="text/javascript"></script> 
 <script>
 var arrPacientes=new Array();
         
@@ -83,59 +91,9 @@ var arrPacientes=new Array();
         $('input:radio[name="genero"][value=M]').prop('checked', true);  
     }
 
-    //HAGO SEGUIMIENTO AL onclick DE CADA BOTON HISTORIA DEL LISTADO DE PACIENTES 
-    $('button[id=btn_history]').on('click',function () {     
-        limpiarMensaje()
-        key=$(this).data("id");    
-        //arrPacientes=JSON.parse(arrPacientes.split('\t').join(''));;
-        pacienteEdit=arrPacientes[key];
-        idpaciente=pacienteEdit.id;
-        $('#txtnombrepaciente').val(pacienteEdit.nombres+" "+pacienteEdit.apellidos);                     
-        $.ajax({
-        type:'POST',
-        url:'<?php print base_url();?>pacientes/carga_Historico/'+idpaciente,
-        success:function(data){
-          data=JSON.parse(data);
-          json=data.data;          
-          html="";
-          $("#historico").html('');
-          if(json.length>0){
-            
-
-            for(i=0;i<json.length;i++){
-                fila=json[i]; 
-                if(fila.sintomas==null)
-                    sintomas="";                
-                else
-                    sintomas=fila.sintomas;
-                if(fila.motivocita==null)
-                    motivocita="";                
-                else
-                    motivocita=fila.motivocita;
-                if(fila.descripcion==null)
-                    descripcion="";                
-                else
-                    descripcion=fila.descripcion;
-
-                html+='<small><div><b>Fecha:</b> '+fila.fechacita+'</div>'; 
-                html+='<div><b>Motivo Cita:</b> '+motivocita+'</div>';
-                html+='<div><b>Sintomas:</b> '+sintomas+'</div>';            
-                html+='<div><b>Descripcion:</b> '+descripcion+'</div></small><hr/>';
-            }
-          }
-          else{
-            html+='<div>Paciente aun no tiene Historia</div>';
-            //$('#modalPacienteHistory').modal('hide')
-          }
-          $("#historico").html(html);         
-        }
-      })//end ajax
-
-    });
+   
     
-    //HAGO SEGUIMIENTO AL onclick DE CADA BOTON EDICION DEL LISTADO DE PACIENTES 
-
-
+   
     $(function() {
         $("#formulario").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"
             if (e.which == 13) {
@@ -195,8 +153,52 @@ var arrPacientes=new Array();
                             $('#estadocivil').val(pacienteEdit.idestadocivil);
                             $('#txtalergias').val(pacienteEdit.alergias);   
                             $('#txtenfermedades').val(pacienteEdit.enfermedadesprevias);   
-                            $('#txtmedicinas').val(pacienteEdit.medicamentos);    
-                            $('input:radio[name="genero"][value='+pacienteEdit.genero+']').prop('checked', true); 
+                            $('#txtmedicinas').val(pacienteEdit.medicamentos);                                
+                            if(pacienteEdit.genero.trim()!=""){
+                                $('input:radio[name="genero"][value="'+pacienteEdit.genero+'"]').prop('checked', true); 
+                            }
+                            console.log("antes de fileinput"+pacienteEdit.photo);
+                            if(pacienteEdit.photo==""){
+                                foto="<?php print base_url();?>assets/images/profile-2.png";
+                            }
+                            else{
+                                foto="<?php print base_url();?>assets/images/"+pacienteEdit.photo;
+                            }
+                                                                                   
+
+                            $("#avatar-1").fileinput({
+                                overwriteInitial: false,
+                                maxFileSize: 1500,
+                                showClose: false,
+                                showCaption: false,
+                                validateInitialCount: false,
+                                browseLabel: '',
+                                removeLabel: '',   
+                                browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+                                removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+                                removeTitle: 'Cancel or reset changes',
+                                elErrorContainer: '#kv-avatar-errors-1',
+                                msgErrorClass: 'alert alert-block alert-danger',
+                                defaultPreviewContent: '<img src="'+foto+'" width="120" alt="Your Avatar">',
+                                layoutTemplates: {main2: '{preview} ' + ' {remove} {browse}'},
+                                allowedFileExtensions: ["jpg", "png", "gif"],
+                                initialPreviewAsData: true,  
+                                initialPreviewFileType: 'image', // image is the default and can be overridden in config below  
+                                initialPreview: [ foto],                                    
+                                previewFileIconSettings: {                                    
+                                    'jpg': '<i class="fa fa-file-photo-o text-warning"></i>',
+                                    },
+                                previewFileExtSettings: {
+                                        'jpg': function(ext) {
+                                            return ext.match(/(jp?g|png|gif|bmp)$/i);
+                                        },
+                                    },                          
+                            });
+                            
+                            
+                            
+
+                            
                         }     
                        
                     }
@@ -260,7 +262,7 @@ var arrPacientes=new Array();
             }  
 
         } );
-
+       
 
         $('#txtfechanacimiento').datepicker({
             format: 'dd-mm-yyyy',
@@ -275,6 +277,12 @@ var arrPacientes=new Array();
         
         
 
-    });          
+    });  
+
+    
+
+
+
+       
 </script>
 </html>
