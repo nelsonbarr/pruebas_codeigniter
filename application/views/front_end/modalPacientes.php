@@ -136,9 +136,9 @@
                 </div>
             </div>
 
-            <div class="modal-footer">
+            <div class="modal-footer">                
+                <button type="submit" class="btn btn-info" id="btn_send">Guardar</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-danger" id="btn_send">Guardar</button>
             </div>
             </form>
         </div>

@@ -62,18 +62,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php if($pacientes==-1){
-												        foreach($pacientes AS $key=>$fila):?>    
-                                                        <tr>
-                                                        <th scope="row"><?php print $fila['id'];?></th>
-                                                        <td><?php print $fila['documento'];?></td>
-                                                        <td><?php print $fila['nombres'];?></td>
-                                                        <td><?php print $fila['apellidos'];?></td>
-                                                        <td><?php if($fila['genero']=='M'){print "MASCULINO";}else{print "FEMENINO";}?></td>                                                        
-                                                        <td><?php $date=new DateTime($fila['fechanacimiento']); print $date->format('d-m-Y');?></td>
-                                                        <td><button type="button" id="btn_edit" alt="Editar" title="Editar" class="btn btn-danger btn_edit" data-toggle="modal" data-id="<?php print $fila['id'];?>" data-target="#modalPacientes"><span class="fa fa-edit pull-right"></span></button>
-                                                            <button type="button" id="btn_history" alt="Historia" title="Historia" class="btn btn-default" data-toggle="modal" data-id="<?php print $fila['id'];?>" data-target="#modalPacienteHistory"><span class="fa fa-align-justify pull-right"></span></button></td>                                                    </tr>        
-                                                <?php endforeach; }?>
+                                                
                                             </tbody>
                                             <tfoot>
                                                 <tr>

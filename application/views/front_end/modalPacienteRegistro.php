@@ -108,7 +108,7 @@
                                             </div> 
                                         </div>
                                         <div class="row">
-                                            <div class="col-xs-6">
+                                            <div class="col-xs-4">
                                                 <div class="form-group"><label class=" control-label">Estado Civil</label>
                                                     <select id="estadocivil" class="form-control" name="estadocivil">
                                                         <option value="">Seleccione..</option>
@@ -118,9 +118,14 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-6">
+                                            <div class="col-xs-4">
                                                 <div class="form-group"><label class=" control-label">Telefonos</label>
                                                     <input id="txttelefonos" name="txttelefonos" type="text" class="form-control" maxlength="45">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <div class="form-group"><label class=" control-label">Ciudad</label>
+                                                    <input id="txtciudad" name="txtciudad" type="text" class="form-control" maxlength="45">
                                                 </div>
                                             </div>
                                         </div>
@@ -131,26 +136,49 @@
                                                     <input id="txtdireccion" name="txtdireccion" type="text" class="form-control" maxlength="45">
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12">
-                                                <div class="row ">
-                                                    <div class="col-xs-6">
-                                                        <div class="form-group"><label class=" control-label">Alergias</label>
-                                                            <input id="txtalergias" name="txtalergias" type="text" class="form-control" maxlength="45">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        <div class="form-group"><label class=" control-label">Enfermedades</label>
-                                                            <input id="txtenfermedades" name="txtenfermedades" type="text" class="form-control" maxlength="45">
-                                                        </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">                         
+                                                <div class="col-xs-6">
+                                                    <div class="form-group"><label class=" control-label">Lugar Nacimiento</label>
+                                                        <input id="txtlugarnacimiento" name="txtlugarnacimiento" type="text" class="form-control" maxlength="255">
                                                     </div>
                                                 </div>
-                                            </div>                        
+                                                <div class="col-xs-6">
+                                                    <div class="form-group"><label class=" control-label">Enfermedades</label>
+                                                        <input id="txtenfermedades" name="txtenfermedades" type="text" class="form-control" maxlength="45">
+                                                    </div>
+                                                </div>                                                
+                                            </div>
+                                        </div>  
+                                        <div class="row">                      
                                             <div class="col-xs-12">
-                                                <div class="form-group"><label class=" control-label">Medicinas</label>
-                                                    <input id="txtmedicinas" name="txtmedicinas" type="text" class="form-control" maxlength="45">
+                                                <div class="col-xs-6">
+                                                    <div class="form-group"><label class=" control-label">Alergias</label>
+                                                        <input id="txtalergias" name="txtalergias" type="text" class="form-control" maxlength="45">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <div class="form-group"><label class=" control-label">Medicinas</label>
+                                                        <input id="txtenfermedades" name="txtenfermedades" type="text" class="form-control" maxlength="45">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>                            
+                                        </div>       
+                                        <div class="row">                      
+                                            <div class="col-xs-12">
+                                                <div class="col-xs-6">
+                                                    <div class="form-group"><label class=" control-label">Acudiente</label>
+                                                        <input id="txtacudiente" name="txtacudiente" type="text" class="form-control" maxlength="45">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <div class="form-group"><label class=" control-label">Telefono Acudiente</label>
+                                                        <input id="txttelfacudiente name="txttelfacudiente" type="text" class="form-control" maxlength="45">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                         
                                     </div>
                                 </div>
                             </div>                        

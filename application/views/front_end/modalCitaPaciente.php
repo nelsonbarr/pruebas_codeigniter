@@ -90,7 +90,7 @@
                                 </div>  
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="display:none;">
                             <label class="control-label">Especialista</label>                            
                             <select id="selMedico" name="selMedico" class="selectpicker form-control" data-show-subtext="true" data-live-search="true" >  
                                 <option value="" >Seleccione..</option>                 
@@ -103,7 +103,10 @@
                             <label class=" control-label">Observaciones Cita</label>
                             <input id="txtdescripcion" name="txtdescripcion" type="text" class="form-control" maxlength="255">
                         </div>
-                        
+                        <div class="form-group">
+                            <label class=" control-label">Historia Medica</label>                            
+                            <textarea id="txthistoria" name="txthistoria" class="form-control" maxlength="500" ></textarea>
+                        </div>               
                       
                     </div>                        
                 </div>

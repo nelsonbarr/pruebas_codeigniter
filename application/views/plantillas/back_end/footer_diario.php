@@ -208,7 +208,8 @@ var arrPacientes=new Array();
                     $("#selEstadoCita").val(event.idestadocita);
                     $("#selEstadoPago").val(event.idestadopago);
                     $("#txtsintomas").val(event.sintomas);
-                    $("#txtdescripcion").val(event.descripcion);
+                    $("#txtdescripcion").val(event.descripcion);                    
+                    $("#txthistoria").val(event.historiamedica);
                     $("#txtmedicinastomadas").val(event.medicamentos);
 					$("#txtalergias").val(event.alergias);
                     $('#modalPacienteCita').modal('show')
@@ -240,10 +241,14 @@ var arrPacientes=new Array();
                     });
                 },
                 eventRender: function(event, element) { 
-                    element.find('.fc-title').append(" - " + event.description);                    
+                    element.find('.fc-title').append(" - " + event.description);  
+                    element.find('.fc-list-item-title fc-widget-content a').append("- "+event.historiamedica);   
+                    
+
                 } ,
                 eventAfterAllRender:function(){
                     $("#calendar").find('.fc-widget-header').append("<div class='text-center'><span style='font-size:11px;'>&nbsp;&nbsp;&nbsp;Id &nbsp;&nbsp; |&nbsp;&nbsp; Paciente  &nbsp;&nbsp;| &nbsp;&nbsp;Estatus de pago&nbsp;&nbsp; |&nbsp;&nbsp; Motivo Cita&nbsp;&nbsp; | &nbsp;&nbsp;Observacion</span></div>")
+                    
                 }                
                 
             });            

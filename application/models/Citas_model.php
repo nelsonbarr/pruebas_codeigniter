@@ -24,6 +24,7 @@ class Citas_model extends CI_Model{
         $this->db->select("pacientes.medicamentos");
         $this->db->select("pacientes.alergias");
         $this->db->select("citas.descripcion");
+        $this->db->select("citas.historiamedica");
         $this->db->select("idmedico");
         $this->db->select("estadoscitas.id AS idestadocita");
         $this->db->select("estadospagos.id AS idestadopago");

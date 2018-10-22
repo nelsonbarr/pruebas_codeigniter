@@ -99,7 +99,7 @@ class Home extends CI_Controller {
                 'estadosCiviles'=>$estadosCiviles,
                 'medicosEspecialidades'=>$medicosEspecialidades,               
                 'citas'=>$citas,
-                'pacientes'=>$pacientes, 
+                'pacientes'=>array(), 
                 'vista'=>'calendario'
             );
 
@@ -301,6 +301,7 @@ class Home extends CI_Controller {
         $idcita     = $this->input->post("idcita");
         $motivocita = $this->input->post("txtmotivocita");
         $descripcion = $this->input->post("txtdescripcion");
+        $historia = $this->input->post("txthistoria");
         $sintomas = $this->input->post("txtsintomas");  
         $estadocita = $this->input->post("selEstadoCita");   
         $estadopago = $this->input->post("selEstadoPago");
@@ -322,6 +323,7 @@ class Home extends CI_Controller {
            "idpaciente" => $idpaciente,
            "motivocita" => $motivocita,
            "descripcion"=>$descripcion,
+           "historiamedica"=>$historia,
            "sintomas"=>$sintomas,
            'idestadocita'=>$estadocita,
            "medicinastomadas"=>$medicinastomadas,

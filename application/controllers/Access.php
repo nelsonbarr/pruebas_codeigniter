@@ -91,7 +91,7 @@ class Access extends CI_Controller {
                 'estadosCiviles'=>$estadosCiviles, 
                 'medicosEspecialidades'=>$medicosEspecialidades,                             
                 'citas'=>$citas,
-                //'pacientes'=>$pacientes, 
+                'pacientes'=>array(), 
                 'vista'=>'calendario'
             );
             $this->load->view("plantillas/plantilla", $data);
@@ -204,7 +204,7 @@ class Access extends CI_Controller {
                 'tiposDocs'=>$tiposDocs,
                 'estadosCiviles'=>$estadosCiviles,
                 'medicosEspecialidades'=>$medicosEspecialidades,
-               // 'pacientes'=>$pacientes,                              
+                'pacientes'=>array(),                              
                 'citas'=>$citas,
                 'vista'=>'calendario'
             );

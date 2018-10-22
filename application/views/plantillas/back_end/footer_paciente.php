@@ -87,8 +87,47 @@ var arrPacientes=new Array();
         $('#estadocivil').val('');
         $('#txtalergias').val('');   
         $('#txtenfermedades').val('');   
-        $('#txtmedicinas').val('');    
+        $('#txtmedicinas').val(''); 
+        $("#txtlugarnacimiento").val("");
+        $("#txtacudiente").val("");
+        $("#txttelfacudiente").val("");  
         $('input:radio[name="genero"][value=M]').prop('checked', true);  
+        foto="<?php print base_url();?>assets/images/profile-2.png";
+                                  
+        //$("#avatar-1").fileinput('refresh'); 
+        // refresh plugin with new options 
+        if ($("#avatar-1").data('fileinput')) {
+            $("#avatar-1").fileinput('destroy');
+        }
+        
+        $("#avatar-1").fileinput({
+            overwriteInitial: true,
+            maxFileSize: 1500,
+            showClose: false,
+            showCaption: false,
+            validateInitialCount: false,
+            browseLabel: '',                                 
+            browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+            removeTitle: 'Cancel or reset changes',
+            elErrorContainer: '#kv-avatar-errors-1',
+            msgErrorClass: 'alert alert-block alert-danger',
+            layoutTemplates: {main2: '{preview} ' + ' {browse}'},
+            allowedFileExtensions: ["jpg", "png", "gif"],
+            initialPreviewAsData: true,  
+            initialPreviewFileType: 'image', // image is the default and can be overridden in config below  
+            initialPreview: [ foto], 
+            uploadUrl:"C:\fakepath\escudo-xxx-lata.jpg",
+            previewFileIconSettings: {                                    
+                'jpg': '<i class="fa fa-file-photo-o text-warning"></i>',
+                },
+            previewFileExtSettings: {
+                    'jpg': function(ext) {
+                        return ext.match(/(jp?g|png|gif|bmp)$/i);
+                    },
+                }, 
+            initialPreviewConfig: [ {caption: '',type:"image",  height: "120px", url: "", key:''}],                                                         
+            } 
+        ); 
     }
 
    
@@ -115,9 +154,11 @@ var arrPacientes=new Array();
             "columns": [{'data':'0'},{'data':'1'},{'data':'2'},{'data':'3'},{'data':'4'},{'data':'5'},
                     {
                     "render": function (data, type, row) {
-                    return '<button type="button" id="btn_edit" alt="Editar" title="Editar" class="btn btn-danger btn_edit" data-toggle="modal" data-id="'+row[0]+'" data-target="#modalPacientes"><span class="fa fa-edit pull-right"></span></button>'
+                    return '<button type="button" id="btn_edit" alt="Editar" title="Editar" class="btn btn-info btn_edit" data-toggle="modal" data-id="'+row[0]+'" data-target="#modalPacientes"><span class="fa fa-edit pull-right"></span></button>'
                     +
                         '<button type="button" id="btn_history" alt="Historia" title="Historia" class="btn btn-default" data-toggle="modal" data-id="'+row[0]+'" data-target="#modalPacienteHistory"><span class="fa fa-align-justify pull-right"></span></button>'
+                    +
+                        '<button type="button" id="btn_delete" alt="Borrar" title="Borrar" class="btn btn-danger" data-id="'+row[0]+'" ><span class="fa fa-close pull-right"></span></button>'    
                 }}],
             columnDefs: [ { orderable: false, targets: [6] } ],
         });
@@ -153,35 +194,46 @@ var arrPacientes=new Array();
                             $('#estadocivil').val(pacienteEdit.idestadocivil);
                             $('#txtalergias').val(pacienteEdit.alergias);   
                             $('#txtenfermedades').val(pacienteEdit.enfermedadesprevias);   
-                            $('#txtmedicinas').val(pacienteEdit.medicamentos);                                
+                            $('#txtmedicinas').val(pacienteEdit.medicamentos);   
+                            $('#txtlugarnacimiento').val(pacienteEdit.lugarnacimiento);
+                            $('#txtacudiente').val(pacienteEdit.acudiente);   
+                            $('#txttelfacudiente').val(pacienteEdit.telfacudiente);                             
                             if(pacienteEdit.genero.trim()!=""){
                                 $('input:radio[name="genero"][value="'+pacienteEdit.genero+'"]').prop('checked', true); 
                             }
-                            console.log("antes de fileinput"+pacienteEdit.photo);
-                            if(pacienteEdit.photo==""){
+                            
+                            if(pacienteEdit.photo==null){
                                 foto="<?php print base_url();?>assets/images/profile-2.png";
                             }
                             else{
                                 foto="<?php print base_url();?>assets/images/"+pacienteEdit.photo;
                             }
-                                                                                   
-
+                                                                                 
+                            console.log("antes 2 de fileinput"+pacienteEdit.photo);
+                            
+                            //$("#avatar-1").fileinput('refresh'); 
+                            // refresh plugin with new options 
+                            if ($("#avatar-1").data('fileinput')) {
+                                $("#avatar-1").fileinput('destroy');
+                            }
+                            
                             $("#avatar-1").fileinput({
-                                overwriteInitial: false,
+                                overwriteInitial: true,
                                 maxFileSize: 1500,
                                 showClose: false,
                                 showCaption: false,
                                 validateInitialCount: false,
                                 browseLabel: '',                                 
-                                browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',                       
+                                browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
                                 removeTitle: 'Cancel or reset changes',
                                 elErrorContainer: '#kv-avatar-errors-1',
-                                msgErrorClass: 'alert alert-block alert-danger',                                
-                                layoutTemplates: {main2: '{preview} ' + ' {remove} {browse}'},
+                                msgErrorClass: 'alert alert-block alert-danger',
+                                layoutTemplates: {main2: '{preview} ' + ' {browse}'},
                                 allowedFileExtensions: ["jpg", "png", "gif"],
                                 initialPreviewAsData: true,  
                                 initialPreviewFileType: 'image', // image is the default and can be overridden in config below  
-                                initialPreview: [ foto],                                    
+                                initialPreview: [ foto], 
+                                uploadUrl:"C:\fakepath\escudo-xxx-lata.jpg",
                                 previewFileIconSettings: {                                    
                                     'jpg': '<i class="fa fa-file-photo-o text-warning"></i>',
                                     },
@@ -191,8 +243,11 @@ var arrPacientes=new Array();
                                         },
                                     }, 
                                 initialPreviewConfig: [ {caption: '',type:"image",  height: "120px", url: "", key:''}],                                                         
-                            });
-                            
+                                } 
+                            ); 
+
+
+       
                             
                             
 
@@ -202,7 +257,7 @@ var arrPacientes=new Array();
                     }
                 }); 
             } 
-            else if(this.id=="btn_history"){
+            else if(this.id=="btn_history"){                
                 key=$(this).data("id"); 
                 $.ajax({
                     type:'POST',
@@ -258,7 +313,27 @@ var arrPacientes=new Array();
                     }   
                 });                  
             }  
-
+            else if(this.id=="btn_delete"){                
+                key=$(this).data("id"); 
+                $.ajax({
+                    type:'POST',
+                    url:'<?php print base_url();?>pacientes/carga_Paciente/'+key,
+                    success:function(data){                
+                        data=JSON.parse(data);   
+                        json=data.data;  
+                        if(json.length>0){                    
+                           
+                            pacienteEdit=json[0];                         
+                            blanquear()
+                            
+                            if(confirm("Seguro desea eliminar el paciente "+json[0].nombres+"  "+json[0].apellidos)){
+                                  console.log("ACCION A ELIMINAR")  
+                                
+                            }
+                        }
+                    }
+                });
+            }  
         } );
        
 

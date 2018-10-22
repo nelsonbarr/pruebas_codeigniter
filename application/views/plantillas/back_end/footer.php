@@ -245,6 +245,7 @@ var arrPacientes=new Array();
                     $("#txtmotivocita").val(event.motivocita);
                     $("#txtsintomas").val(event.sintomas);
                     $("#txtdescripcion").val(event.descripcion);
+                    $("#txthistoria").val(event.historiamedica);
                     $("#txtmedicinastomadas").val(event.medicamentos);
 					$("#txtalergias").val(event.alergias);
                     $('#modalPacienteCita').modal('show')

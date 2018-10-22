@@ -28,7 +28,7 @@ class Pacientes extends CI_Controller{
                 'estadosCiviles'=>$estadosCiviles,
                 'tipocalendar'=>'',
                 'contenido' => 'pacientesList',  
-                'pacientes' =>$pacientes,                                
+                'pacientes'=>array(),                                 
                 'vista'=>'paciente'
             );
             $this->load->view("plantillas/plantilla", $data);
@@ -54,8 +54,12 @@ class Pacientes extends CI_Controller{
         $datos['enfermedadesprevias']=$this->input->post("txtenfermedades");
         $datos['medicamentos']=$this->input->post("txtmedicinas");
         $datos['genero']=$this->input->post("genero"); 
-        $date = new DateTime($datos['fechanacimiento']);
+        $date = new DateTime($datos['fechanacimiento']);        
         $datos['fechanacimiento'] =$date->format('Y-m-d');
+        $datos['lugarnacimiento'] =$this->input->post("txtlugarnacimiento");
+        $datos['ciudad'] =$this->input->post("txtciudad");
+        $datos['acudiente'] =$this->input->post("txtacudiente");
+        $datos['telfacudiente'] =$this->input->post("txttelfacudiente");
          //METODO ENCARGADO DE REALIZAR EL LA SUBIDA DE LOS ARCHIVOS EN FISICO Y DE EL REGISTRO DEL NOMBRE DEL ARCHIVO EN EL CAMPO files_inspection TABLA inspection_files
         
         if (empty($_FILES['avatar-1'])) {
@@ -153,37 +157,60 @@ class Pacientes extends CI_Controller{
         $datos['genero']=$this->input->post("genero"); 
         $date = new DateTime($datos['fechanacimiento']);
         $datos['fechanacimiento'] =$date->format('Y-m-d');
-
-        //METODO ENCARGADO DE REALIZAR EL LA SUBIDA DE LOS ARCHIVOS EN FISICO Y DE EL REGISTRO DEL NOMBRE DEL ARCHIVO EN EL CAMPO files_inspection TABLA inspection_files
+        $datos['lugarnacimiento'] =$this->input->post("txtlugarnacimiento");
+        $datos['ciudad'] =$this->input->post("txtciudad");
+        $datos['acudiente'] =$this->input->post("txtacudiente");
+        $datos['telfacudiente'] =$this->input->post("txttelfacudiente");
+         //METODO ENCARGADO DE REALIZAR EL LA SUBIDA DE LOS ARCHIVOS EN FISICO Y DE EL REGISTRO DEL NOMBRE DEL ARCHIVO EN EL CAMPO files_inspection TABLA inspection_files
         
         if (empty($_FILES['avatar-1'])) {
-            // Devolvemos un array asociativo con la clave error en formato JSON como respuesta	
+            // Devolvemos un array asociativo con la clave error en formato JSON como respuesta 
             echo json_encode(['error'=>'No hay ficheros para realizar upload.']); 
             // Cancelamos el resto del script
-            return false; 
+            //return false; 
         }
+        else{
+            
+            // DEFINICIÓN DE LAS VARIABLES DE TRABAJO (CONSTANTES, ARRAYS Y VARIABLES)
+            // ************************************************************************
+
+            // Definimos la constante con el directorio de destino de las descargas
+            
+            //define('DIR_DESCARGAS',__DIR__.DIRECTORY_SEPARATOR .'descargas');      
+
+            $dirapp=substr($_SERVER["SCRIPT_NAME"],0,strripos($_SERVER["SCRIPT_NAME"],"/"));        
+
+            $dir_subida = $_SERVER['DOCUMENT_ROOT'].$dirapp.'/assets/plugins/server/php/img_pacientes/';        
         
-        // DEFINICIÓN DE LAS VARIABLES DE TRABAJO (CONSTANTES, ARRAYS Y VARIABLES)
-        // ************************************************************************
+            // Obtenemos el array de ficheros enviados
+            $ficheros = $_FILES['avatar-1'];
+            // Establecemos el indicador de proceso correcto (simplemente no indicando nada)
+            $estado_proceso = NULL;
+            // Paths para almacenar
+            $paths= array();
+            // Obtenemos los nombres de los ficheros
+            $nombres_ficheros = $ficheros['name'];
+            $mi_archivo = 'avatar-1';
+            $config['upload_path'] = "assets/images/";
+            $config['file_name'] = $nombres_ficheros;
+            $config['allowed_types'] = "*";
+            $config['max_size'] = "50000";
+            $config['max_width'] = "2000";
+            $config['max_height'] = "2000";
+            $config['overwrite']=true;
 
-        // Definimos la constante con el directorio de destino de las descargas
-        
-        //define('DIR_DESCARGAS',__DIR__.DIRECTORY_SEPARATOR .'descargas');      
+            $this->load->library('upload', $config);
+            
+            if (!$this->upload->do_upload($mi_archivo)) {
+                //*** ocurrio un error
+                $data['uploadError'] = $this->upload->display_errors();
+                echo $this->upload->display_errors();
+                return;
+            }
 
-        $dirapp=substr($_SERVER["SCRIPT_NAME"],0,strripos($_SERVER["SCRIPT_NAME"],"/"));        
-
-        $dir_subida = base_url().'assets/images/';        
-       
-        // Obtenemos el array de ficheros enviados
-        $ficheros = $_FILES['avatar-1'];
-        // Establecemos el indicador de proceso correcto (simplemente no indicando nada)
-        $estado_proceso = NULL;
-        // Paths para almacenar
-        $paths= array();
-        // Obtenemos los nombres de los ficheros
-        $nombres_ficheros = $ficheros['name'];
-       
-              
+            $data['uploadSuccess'] = $this->upload->data();
+            $datos['photo'] =$data['uploadSuccess']['file_name'];
+        }
         $result=$this->Pacientes_model->savePacientes($datos);
         if($result==-1){
             $mi_archivo = $nombres_ficheros[0];
@@ -323,8 +350,9 @@ class Pacientes extends CI_Controller{
     $query = $this->db->get();
     $query = $query->result_array();
     $totalRecords=count($query);
+
     if(!array_key_exists('order',$params)){
-        $params['order'][0]['column']='1';
+        $params['order'][0]['column']='2';
         $params['order'][0]['dir']='asc';
     }
 //var_dump($totalRecords);
@@ -345,7 +373,7 @@ class Pacientes extends CI_Controller{
     }
     $query = $this->db->get();
     $query = $query->result_array();
-    //var_dump($query);
+    
     foreach( $query AS $row) {         
         $data[] = $row;
     }   
