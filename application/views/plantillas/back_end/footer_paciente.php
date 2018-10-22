@@ -82,6 +82,7 @@ var arrPacientes=new Array();
         $('#txtapellidos').val('');
         $('#txtemail').val('');
         $('#txtdireccion').val('');
+        $('#txtciudad').val('');
         $('#txtfechanacimiento').val('');
         $('#txttelefonos').val('');   
         $('#estadocivil').val('');
@@ -103,8 +104,10 @@ var arrPacientes=new Array();
         $("#avatar-1").fileinput({
             overwriteInitial: true,
             maxFileSize: 1500,
+            showRemove: false,
             showClose: false,
             showCaption: false,
+            autoReplace: true,
             validateInitialCount: false,
             browseLabel: '',                                 
             browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
@@ -189,6 +192,7 @@ var arrPacientes=new Array();
                             $('#txtapellidos').val(pacienteEdit.apellidos);
                             $('#txtemail').val(pacienteEdit.email);
                             $('#txtdireccion').val(pacienteEdit.direccion);
+                            $('#txtciudad').val(pacienteEdit.ciudad);
                             $('#txtfechanacimiento').val(pacienteEdit.fechanacimiento);
                             $('#txttelefonos').val(pacienteEdit.telefono);   
                             $('#estadocivil').val(pacienteEdit.idestadocivil);
@@ -204,13 +208,12 @@ var arrPacientes=new Array();
                             
                             if(pacienteEdit.photo==null){
                                 foto="<?php print base_url();?>assets/images/profile-2.png";
+                                caption="profile-2.png";
                             }
                             else{
                                 foto="<?php print base_url();?>assets/images/"+pacienteEdit.photo;
+                                caption=pacienteEdit.photo;
                             }
-                                                                                 
-                            console.log("antes 2 de fileinput"+pacienteEdit.photo);
-                            
                             //$("#avatar-1").fileinput('refresh'); 
                             // refresh plugin with new options 
                             if ($("#avatar-1").data('fileinput')) {
@@ -220,8 +223,10 @@ var arrPacientes=new Array();
                             $("#avatar-1").fileinput({
                                 overwriteInitial: true,
                                 maxFileSize: 1500,
+                                showRemove: false,
                                 showClose: false,
                                 showCaption: false,
+                                autoReplace: true,
                                 validateInitialCount: false,
                                 browseLabel: '',                                 
                                 browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
@@ -232,8 +237,9 @@ var arrPacientes=new Array();
                                 allowedFileExtensions: ["jpg", "png", "gif"],
                                 initialPreviewAsData: true,  
                                 initialPreviewFileType: 'image', // image is the default and can be overridden in config below  
-                                initialPreview: [ foto], 
-                                uploadUrl:"C:\fakepath\escudo-xxx-lata.jpg",
+                                initialPreview: [ foto],                                
+                                uploadUrl:"<?php print base_url();?>assets/images/",
+                                defaultPreviewContent:foto,
                                 previewFileIconSettings: {                                    
                                     'jpg': '<i class="fa fa-file-photo-o text-warning"></i>',
                                     },
@@ -242,15 +248,9 @@ var arrPacientes=new Array();
                                             return ext.match(/(jp?g|png|gif|bmp)$/i);
                                         },
                                     }, 
-                                initialPreviewConfig: [ {caption: '',type:"image",  height: "120px", url: "", key:''}],                                                         
+                                initialPreviewConfig: [ {caption: caption,type:"image",  height: "120px", url: "", key:caption}],                                                         
                                 } 
-                            ); 
-
-
-       
-                            
-                            
-
+                            );
                             
                         }     
                        
@@ -324,10 +324,19 @@ var arrPacientes=new Array();
                         if(json.length>0){                    
                            
                             pacienteEdit=json[0];                         
-                            blanquear()
-                            
+                            blanquear()                            
                             if(confirm("Seguro desea eliminar el paciente "+json[0].nombres+"  "+json[0].apellidos)){
-                                  console.log("ACCION A ELIMINAR")  
+                                $.ajax({
+                                    type:'POST',
+                                    url:'<?php print base_url();?>pacientes/deletePaciente/'+json[0].id,
+                                    success:function(data){  
+                                        data=JSON.parse(data)
+                                        if(data.success){
+                                            console.log("PRUEBA");
+                                            location.href="<?php print base_url();?>pacientes";
+                                        }
+                                    }
+                                });
                                 
                             }
                         }

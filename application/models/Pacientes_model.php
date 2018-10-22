@@ -123,5 +123,16 @@ class Pacientes_model extends CI_Model{
         $query = $query->result();
         return $query;
     }
+
+
+    public function deletePaciente($id)
+    {        
+       
+        
+        $this->db->where('id',$id) ;
+        $result=$this->db->delete("pacientes");
+               
+        return $result;
+    }
 }
 ?>

@@ -40,7 +40,7 @@
                                 <div class="col-sm-4 text-center">                                
                                     <div class="kv-avatar col-sm-12">
                                         <div class="file-loading">
-                                            <input id="avatar-1" name="avatar-1" type="file" required>
+                                            <input id="avatar-1" name="avatar-1" type="file" >
                                         </div>
                                     </div>
                                     <div class="kv-avatar-hint"><small>Select file < 1500 KB</small></div>                                                                   
@@ -53,7 +53,7 @@
                                                 <div class="form-group">
                                                     <label class="control-label">Tipo Documento</label>
                                                     <input id="idpaciente" name="idpaciente" type="hidden"/>
-                                                    <select id="idtipodoc" class="form-control" name="idtipodoc">
+                                                    <select id="idtipodoc" class="form-control" name="idtipodoc" required>
                                                         <option value="">Seleccione..</option>
                                                         <?php foreach($tiposDocs AS $item):?>
                                                             <option value="<?php print $item["id"];?>"><?php print $item["descripcion"];?></option>
@@ -63,19 +63,19 @@
                                             </div>
                                             <div class="col-xs-6">
                                                 <div class="form-group"><label class=" control-label">Documento</label>
-                                                    <input id="txtiddocumento" name="txtiddocumento" type="number" class="form-control" maxlength="12">
+                                                    <input id="txtiddocumento" name="txtiddocumento" type="number" class="form-control" maxlength="12" required>
                                                 </div>
                                             </div>                        
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-6">
                                                 <div class="form-group"><label class=" control-label">Nombres</label>
-                                                    <input id="txtnombres" name="txtnombres" type="text" class="form-control" maxlength="255">
+                                                    <input id="txtnombres" name="txtnombres" type="text" class="form-control" maxlength="255" required>
                                                 </div>
                                             </div>   
                                             <div class="col-xs-6">
                                                 <div class="form-group"><label class=" control-label">Apellidos</label>
-                                                    <input id="txtapellidos" name="txtapellidos" type="text" class="form-control" maxlength="255">
+                                                    <input id="txtapellidos" name="txtapellidos" type="text" class="form-control" maxlength="255" required>
                                                 </div>
                                             </div>  
                                         </div>  
@@ -103,14 +103,14 @@
                                             
                                             <div class="col-xs-4">
                                                 <div class="form-group"><label class=" control-label">Email</label>
-                                                    <input id="txtemail" name="txtemail" type="text" class="form-control" maxlength="45">
+                                                    <input id="txtemail" name="txtemail" type="email" class="form-control" maxlength="45" required>
                                                 </div>                    
                                             </div> 
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-4">
                                                 <div class="form-group"><label class=" control-label">Estado Civil</label>
-                                                    <select id="estadocivil" class="form-control" name="estadocivil">
+                                                    <select id="estadocivil" class="form-control" name="estadocivil" required>
                                                         <option value="">Seleccione..</option>
                                                         <?php foreach($estadosCiviles AS $item):?>
                                                         <option value="<?php print $item["id"];?>"><?php print $item["descripcion"];?></option>
@@ -120,7 +120,7 @@
                                             </div>
                                             <div class="col-xs-4">
                                                 <div class="form-group"><label class=" control-label">Telefonos</label>
-                                                    <input id="txttelefonos" name="txttelefonos" type="text" class="form-control" maxlength="45">
+                                                    <input id="txttelefonos" name="txttelefonos" type="text" class="form-control" maxlength="45" required>
                                                 </div>
                                             </div>
                                             <div class="col-xs-4">
@@ -137,47 +137,41 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-xs-12">                         
-                                                <div class="col-xs-6">
-                                                    <div class="form-group"><label class=" control-label">Lugar Nacimiento</label>
-                                                        <input id="txtlugarnacimiento" name="txtlugarnacimiento" type="text" class="form-control" maxlength="255">
-                                                    </div>
+                                        <div class="row">                                                                
+                                            <div class="col-xs-6">
+                                                <div class="form-group"><label class=" control-label">Lugar Nacimiento</label>
+                                                    <input id="txtlugarnacimiento" name="txtlugarnacimiento" type="text" class="form-control" maxlength="255">
                                                 </div>
-                                                <div class="col-xs-6">
-                                                    <div class="form-group"><label class=" control-label">Enfermedades</label>
-                                                        <input id="txtenfermedades" name="txtenfermedades" type="text" class="form-control" maxlength="45">
-                                                    </div>
-                                                </div>                                                
                                             </div>
-                                        </div>  
-                                        <div class="row">                      
-                                            <div class="col-xs-12">
-                                                <div class="col-xs-6">
-                                                    <div class="form-group"><label class=" control-label">Alergias</label>
-                                                        <input id="txtalergias" name="txtalergias" type="text" class="form-control" maxlength="45">
-                                                    </div>
+                                            <div class="col-xs-6">
+                                                <div class="form-group"><label class=" control-label">Enfermedades</label>
+                                                    <input id="txtenfermedades" name="txtenfermedades" type="text" class="form-control" maxlength="45">
                                                 </div>
-                                                <div class="col-xs-6">
-                                                    <div class="form-group"><label class=" control-label">Medicinas</label>
-                                                        <input id="txtenfermedades" name="txtenfermedades" type="text" class="form-control" maxlength="45">
-                                                    </div>
+                                            </div> 
+                                        </div>  
+                                        <div class="row">   
+                                            <div class="col-xs-6">
+                                                <div class="form-group"><label class=" control-label">Alergias</label>
+                                                    <input id="txtalergias" name="txtalergias" type="text" class="form-control" maxlength="45">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <div class="form-group"><label class=" control-label">Medicinas</label>
+                                                    <input id="txtenfermedades" name="txtenfermedades" type="text" class="form-control" maxlength="45">
                                                 </div>
                                             </div>
                                         </div>       
-                                        <div class="row">                      
-                                            <div class="col-xs-12">
-                                                <div class="col-xs-6">
-                                                    <div class="form-group"><label class=" control-label">Acudiente</label>
-                                                        <input id="txtacudiente" name="txtacudiente" type="text" class="form-control" maxlength="45">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    <div class="form-group"><label class=" control-label">Telefono Acudiente</label>
-                                                        <input id="txttelfacudiente name="txttelfacudiente" type="text" class="form-control" maxlength="45">
-                                                    </div>
+                                        <div class="row">  
+                                            <div class="col-xs-6">
+                                                <div class="form-group"><label class=" control-label">Acudiente</label>
+                                                    <input id="txtacudiente" name="txtacudiente" type="text" class="form-control" maxlength="45">
                                                 </div>
                                             </div>
+                                            <div class="col-xs-6">
+                                                <div class="form-group"><label class=" control-label">Telefono Acudiente</label>
+                                                    <input id="txttelfacudiente" name="txttelfacudiente" type="text" class="form-control" maxlength="45">
+                                                </div>
+                                            </div>                                            
                                         </div>                         
                                     </div>
                                 </div>

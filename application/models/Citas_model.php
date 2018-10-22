@@ -11,6 +11,8 @@ class Citas_model extends CI_Model{
     public function getCitas($mes)
     {
         $this->db->select("CONCAT(pacientes.nombres,' ',pacientes.apellidos) as title");
+        $this->db->select("acudiente");
+        $this->db->select("telfacudiente");
         $this->db->select("fechacita as start");   
         $this->db->select("fechafincita as end");    
         $this->db->select('idcita');
