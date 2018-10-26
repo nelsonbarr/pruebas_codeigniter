@@ -235,7 +235,7 @@ var arrPacientes=new Array();
         var tipocalendar='<?php print $tipocalendar;?>';
           
        /* if(tipocalendar!=''){*/
-            console.log(tipocalendar);
+            //console.log(tipocalendar);
             if(tipocalendar=='agendaWeek'){
                 $('#tipoagenda').text('AGENDA SEMANAL');
                 $("#tipoagenda").addClass("text-danger");
@@ -398,7 +398,7 @@ var arrPacientes=new Array();
                 } 
                 
             });           
-            console.log(citas)
+            //console.log(citas)
             $('#calendar').fullCalendar('addEventSource', citas); 
 
 

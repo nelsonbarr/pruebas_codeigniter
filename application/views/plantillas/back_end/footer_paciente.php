@@ -1,4 +1,9 @@
-    
+<?php
+header("Expires: Fri, 14 Mar 1980 20:53:00 GMT"); //la pagina expira en fecha pasada
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); //ultima actualizacion ahora cuando la cargamos
+header("Cache-Control: no-cache, must-revalidate"); //no guardar en CACHE
+header("Pragma: no-cache"); //PARANOIA, NO GUARDAR EN CACHE
+?>    
 <!--Footer-->
 <footer class="page-footer text-center font-small mt-4 wow fadeIn">
 
@@ -70,7 +75,7 @@ var arrPacientes=new Array();
         blanquear()  
     });
 
-
+    $('#txtiddocumento').attr('readonly',false);       
     function blanquear() { 
         limpiarMensaje()
         $('#txtiddocumento').attr('readonly',false);       
@@ -184,10 +189,7 @@ var arrPacientes=new Array();
                             $('#idpaciente').val(pacienteEdit.id);      
                             $('#idtipodoc').val(pacienteEdit.idtipodocumento);
                             $('#idtipodoc').attr('disabled','disabled');
-                            $('#txtiddocumento').val(pacienteEdit.documento);                        
-                            if(pacienteEdit.documento.trim()!=""){
-                                $('#txtiddocumento').attr('readonly',true);
-                            }                                            
+                            $('#txtiddocumento').val(pacienteEdit.documento.trim());                                                                                                                       
                             $('#txtnombres').val(pacienteEdit.nombres);
                             $('#txtapellidos').val(pacienteEdit.apellidos);
                             $('#txtemail').val(pacienteEdit.email);
@@ -296,8 +298,8 @@ var arrPacientes=new Array();
                                         else
                                             descripcion=fila.descripcion;
 
-                                        html+='<small><div><b>Fecha:</b> '+fila.fechacita+'</div>'; 
-                                        html+='<div><b>Motivo Cita:</b> '+motivocita+'</div>';
+                                        html+='<small><div class="col-xs-6"><b>Fecha:</b> '+fila.fechacita+'</div>'; 
+                                        html+='<div class="col-xs-6"><div class"clearfix"></div><b>Motivo Cita:</b> '+motivocita+'</div>';
                                         html+='<div><b>Sintomas:</b> '+sintomas+'</div>';            
                                         html+='<div><b>Descripcion:</b> '+descripcion+'</div></small><hr/>';
                                     }

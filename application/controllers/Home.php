@@ -74,8 +74,14 @@ class Home extends CI_Controller {
                     }
                     else{
                         //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  PAGO: ".$pago );
-                        $citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$row['fechanacimiento']." | GEN: ".$row["genero"]." | ACUDIENTE:".$row["acudiente"]." | TELF ACUDIENTE:".$row["telfacudiente"]);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title'] );
+                        $citas[$i]['description'] = str_replace($replace_array, "",$row['descripcion']);
+                        if($row['telefonos']!=""){
+                            $citas[$i]['description'].=" | Telf: ".$row['telefonos']; 
+                        }
+                        if($row['telfacudiente']!=""){
+                            $citas[$i]['description'].=" | Telf Acudiente: ".$row['telfacudiente']; 
+                        }
                     } 
 
                    //$citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
@@ -240,8 +246,15 @@ class Home extends CI_Controller {
                     }
                     else{
                         //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  PAGO: ".$pago );
-                        $citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$fechanacimiento." | GEN: ".$row["genero"]." | ACUDIENTE:".$row["acudiente"]." | TELF ACUDIENTE:".$row["telfacudiente"]);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']);
+                        //$citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$fechanacimiento." | GEN: ".$row["genero"]." | ACUDIENTE:".$row["acudiente"]." | TELF ACUDIENTE:".$row["telfacudiente"]);
+                        $citas[$i]['description'] = str_replace($replace_array, "",$row['descripcion']);
+                        if($row['telefonos']!=""){
+                            $citas[$i]['description'].=" | Telf: ".$row['telefonos']; 
+                        }
+                        if($row['telfacudiente']!=""){
+                            $citas[$i]['description'].=" | Telf Acudiente: ".$row['telfacudiente']; 
+                        }
                     } 
 
                     //$citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);

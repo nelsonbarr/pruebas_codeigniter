@@ -1,4 +1,9 @@
-
+<?php
+header("Expires: Fri, 14 Mar 1980 20:53:00 GMT"); //la pagina expira en fecha pasada
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); //ultima actualizacion ahora cuando la cargamos
+header("Cache-Control: no-cache, must-revalidate"); //no guardar en CACHE
+header("Pragma: no-cache"); //PARANOIA, NO GUARDAR EN CACHE
+?>
 <!-- some CSS styling changes and overrides -->
 <style>
 .kv-avatar .krajee-default.file-preview-frame,.kv-avatar .krajee-default.file-preview-frame:hover {
@@ -63,7 +68,7 @@
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="form-group"><label class=" control-label">Documento</label>
-                                                <input id="txtiddocumento" name="txtiddocumento" type="number" class="form-control" maxlength="12" required>
+                                                <input id="txtiddocumento" name="txtiddocumento" type="text" class="form-control" maxlength="12" required>
                                             </div>
                                         </div>                        
                                     </div>

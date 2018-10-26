@@ -249,7 +249,7 @@ var arrPacientes=new Array();
                 }                
                 
             });            
-            console.log(citas)
+            //console.log(citas)
             $('#calendar').fullCalendar('addEventSource', citas); 
 
 
