@@ -43,13 +43,19 @@ class Access extends CI_Controller {
                         //$citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
                     //   $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
                     if($this->session->userdata('perfil') ==1){                  
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]."  |  PAGO: ".$pago);
-
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['documento']." | ".$row['title']."  | ".$pago." | ".$row['motivocita']." | ".$row['descripcion']." | ".$row["acudiente"]." | ".$row["telfacudiente"]);
                     }
                     else{
                         //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  PAGO: ".$pago );
-                        $citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$row['fechanacimiento']." | GEN: ".$row["genero"]);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']);
+                        //$citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$row['fechanacimiento']." | GEN: ".$row["genero"]." | ACUDIENTE:".$row["acudiente"]." | TELF ACUDIENTE:".$row["telfacudiente"]);
+                        $citas[$i]['description'] = str_replace($replace_array, "",$row['descripcion']);
+                        if($row['telefonos']!=""){
+                            $citas[$i]['description'].=" | Telf: ".$row['telefonos']; 
+                        }
+                        if($row['telfacudiente']!=""){
+                            $citas[$i]['description'].=" | Telf Acudiente: ".$row['telfacudiente']; 
+                        }
                     }   
                     /*$citas[$i]['title'] = str_replace($replace_array, "", $row['title']."  ID: ".$row['documento']." NAC.:");
                      $citas[$i]['description'] = str_replace($replace_array, "",$row['fechanacimiento']."  ".$row["genero"]);*/
@@ -62,7 +68,7 @@ class Access extends CI_Controller {
                         $citas[$i]['backgroundColor'] = "#DF0101";
                     }                  
                     elseif($row['estadocita']=='En camino'){
-                        $citas[$i]['backgroundColor'] = "rgb(10, 170,90)";
+                        $citas[$i]['backgroundColor'] = "rgb(102, 255, 153)";
                         $citas[$i]['textColor']="#000000";
                     } 
                     elseif($row['estadocita']=='En Sala'){
@@ -71,7 +77,10 @@ class Access extends CI_Controller {
                     } 
                     elseif($row['estadocita']=='Visto'){
                         $citas[$i]['backgroundColor'] = "#0066ff";
-                    }    
+                    } 
+                    elseif($row['estadocita']=='Confirmado'){
+                        $citas[$i]['backgroundColor'] = "green";
+                    }   
                     $i++;
                 }               
                 $citas = json_encode($citas);
@@ -89,7 +98,7 @@ class Access extends CI_Controller {
                 'estadosCiviles'=>$estadosCiviles, 
                 'medicosEspecialidades'=>$medicosEspecialidades,                             
                 'citas'=>$citas,
-                //'pacientes'=>$pacientes, 
+                'pacientes'=>array(), 
                 'vista'=>'calendario'
             );
             $this->load->view("plantillas/plantilla", $data);
@@ -157,12 +166,18 @@ class Access extends CI_Controller {
                             $pago="Transferencia";    
                         } 
                         if($valid_user['perfil']==1){                  
-                            $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  FECHA NAC: ".$row['fechanacimiento']."  |  GENERO: ".$row["genero"]."  |  PAGO: ".$pago);                
-
+                            $citas[$i]['title'] = str_replace($replace_array, "", $row['documento']." | ".$row['title']."  | ".$pago." | ".$row['motivocita']." | ".$row['descripcion']." | ".$row["acudiente"]." | ".$row["telfacudiente"]);
                         }
                         else{
-                            $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." | ID: ".$row['documento']."  |  PAGO: ".$pago );
-                            $citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$row['fechanacimiento']." | GEN: ".$row["genero"]);
+                            $citas[$i]['title'] = str_replace($replace_array, "", $row['title']);
+                            //$citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$row['fechanacimiento']." | GEN: ".$row["genero"]." | ACUDIENTE:".$row["acudiente"]." | TELF ACUDIENTE:".$row["telfacudiente"]);
+                            $citas[$i]['description'] = str_replace($replace_array, "",$row['descripcion']);
+                            if($row['telefonos']!=""){
+                                $citas[$i]['description'].=" | Telf: ".$row['telefonos']; 
+                            }
+                            if($row['telfacudiente']!=""){
+                                $citas[$i]['description'].=" | Telf Acudiente: ".$row['telfacudiente']; 
+                            }
                         }
                         //$citas[$i]['url'] = base_url('home_eventos/eventos_detalle')."/".$row['idcita'];
                         if($row['estadocita']=='No Confirmada'){
@@ -172,7 +187,7 @@ class Access extends CI_Controller {
                             $citas[$i]['backgroundColor'] = "#DF0101";
                         }                  
                         elseif($row['estadocita']=='En camino'){
-                            $citas[$i]['backgroundColor'] = "rgb(10, 170,90)";
+                            $citas[$i]['backgroundColor'] = "rgb(102, 255, 153)";
                             $citas[$i]['textColor']="#000000";
                         } 
                         elseif($row['estadocita']=='En Sala'){
@@ -181,6 +196,9 @@ class Access extends CI_Controller {
                         } 
                         elseif($row['estadocita']=='Visto'){
                             $citas[$i]['backgroundColor'] = "#0066ff";
+                        } 
+                        elseif($row['estadocita']=='Confirmado'){
+                            $citas[$i]['backgroundColor'] = "green";
                         }    
                         $i++;
                     }               
@@ -200,7 +218,7 @@ class Access extends CI_Controller {
                 'tiposDocs'=>$tiposDocs,
                 'estadosCiviles'=>$estadosCiviles,
                 'medicosEspecialidades'=>$medicosEspecialidades,
-               // 'pacientes'=>$pacientes,                              
+                'pacientes'=>array(),                              
                 'citas'=>$citas,
                 'vista'=>'calendario'
             );

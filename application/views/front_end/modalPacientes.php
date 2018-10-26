@@ -9,114 +9,124 @@
                 <small class="font-bold"></small>
             </div>            
             <div class="modal-body ">
-                <div class="container col-xs-12">                    
-                    <div class="row ">
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label class="control-label">Tipo Documento</label>
-                                <input id="idpaciente" name="idpaciente" type="hidden"/>
-                                <select id="idtipodoc" class="form-control" name="idtipodoc">
-                                    <option value="">Seleccione..</option>
-                                    <?php foreach($tiposDocs AS $item):?>
-                                          <option value="<?php print $item["id"];?>"><?php print $item["descripcion"];?></option>
-                                    <?php endforeach;?>
-                                </select>
-                            </div>
+                <div class="container col-xs-12">                
+                <!-- left column -->
+                    <div class="col-md-4">
+                        <div class="text-center col-md-12">
+                        <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+                        <h6>Upload a different photo...</h6>                        
+                        <input class="btn btn-default col-md-12" type="file" class="form-control">
                         </div>
-                        <div class="col-xs-6">
-                            <div class="form-group"><label class=" control-label">Documento</label>
-                                <input id="txtiddocumento" name="txtiddocumento" type="number" class="form-control" maxlength="12">
+                    </div>                
+                    <!-- edit form column -->
+                    <div class="col-md-8 personal-info">                    
+                        <div class="row ">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label">Tipo Documento</label>
+                                    <input id="idpaciente" name="idpaciente" type="hidden"/>
+                                    <select id="idtipodoc" class="form-control" name="idtipodoc">
+                                        <option value="">Seleccione..</option>
+                                        <?php foreach($tiposDocs AS $item):?>
+                                            <option value="<?php print $item["id"];?>"><?php print $item["descripcion"];?></option>
+                                        <?php endforeach;?>
+                                    </select>
+                                </div>
                             </div>
-                        </div>                        
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="form-group"><label class=" control-label">Nombres</label>
-                                <input id="txtnombres" name="txtnombres" type="text" class="form-control" maxlength="255">
-                            </div>
-                        </div>   
-                        <div class="col-xs-6">
-                            <div class="form-group"><label class=" control-label">Apellidos</label>
-                                <input id="txtapellidos" name="txtapellidos" type="text" class="form-control" maxlength="255">
-                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group"><label class=" control-label">Documento</label>
+                                    <input id="txtiddocumento" name="txtiddocumento" type="number" class="form-control" maxlength="12">
+                                </div>
+                            </div>                        
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group"><label class=" control-label">Nombres</label>
+                                    <input id="txtnombres" name="txtnombres" type="text" class="form-control" maxlength="255">
+                                </div>
+                            </div>   
+                            <div class="col-xs-6">
+                                <div class="form-group"><label class=" control-label">Apellidos</label>
+                                    <input id="txtapellidos" name="txtapellidos" type="text" class="form-control" maxlength="255">
+                                </div>
+                            </div>  
                         </div>  
-                    </div>  
-                    <div class="row">                       
-                        <div class="col-xs-4">
-                            <div class="form-group">
-                                <label class=" control-label">Genero</label>
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" id="checkbox1" name="genero" value="M">
-                                    <label for="checkbox1"><small>Masculino</small></label>
-                                    <input type="radio" class="form-check-input" id="checkbox2" name="genero" value="F" >
-                                    <label for="checkbox2"><small>Femenino</small></label>
-                                </div>                                  
-                            </div>
-                        </div>
-                        <div class="col-xs-4 form-group">
-                            <label class="control-label">Fecha Nacimiento</label>
-                            <div class="input-group date" data-provide="datepicker" data-date-format="dd-mm-yyyy">
-							    <div class="input-group-addon"><span class="fa fa-calendar"></span>
-                                <input type="text" id="txtfechanacimiento" name="txtfechanacimiento" class="form-control" readonly/>
+                        <div class="row">                       
+                            <div class="col-xs-4">
+                                <div class="form-group">
+                                    <label class=" control-label">Genero</label>
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="checkbox1" name="genero" value="M">
+                                        <label for="checkbox1"><small>Masculino</small></label>
+                                        <input type="radio" class="form-check-input" id="checkbox2" name="genero" value="F" >
+                                        <label for="checkbox2"><small>Femenino</small></label>
+                                    </div>                                  
                                 </div>
                             </div>
-                        </div>
-                                                                 
-                        
-                        <div class="col-xs-4">
-                            <div class="form-group"><label class=" control-label">Email</label>
-                                <input id="txtemail" name="txtemail" type="text" class="form-control" maxlength="45">
-                            </div>                    
-                        </div> 
-                    </div>
-                    <div class="row">
-                         <div class="col-xs-6">
-                            <div class="form-group"><label class=" control-label">Estado Civil</label>
-                                <select id="estadocivil" class="form-control" name="estadocivil">
-                                    <option value="">Seleccione..</option>
-                                    <?php foreach($estadosCiviles AS $item):?>
-                                    <option value="<?php print $item["id"];?>"><?php print $item["descripcion"];?></option>
-                                    <?php endforeach;?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="form-group"><label class=" control-label">Telefonos</label>
-                                <input id="txttelefonos" name="txttelefonos" type="text" class="form-control" maxlength="45">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label class=" control-label">Direccion</label>
-                                <input id="txtdireccion" name="txtdireccion" type="text" class="form-control" maxlength="45">
-                            </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="row ">
-                                <div class="col-xs-6">
-                                    <div class="form-group"><label class=" control-label">Alergias</label>
-                                        <input id="txtalergias" name="txtalergias" type="text" class="form-control" maxlength="45">
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group"><label class=" control-label">Enfermedades</label>
-                                        <input id="txtenfermedades" name="txtenfermedades" type="text" class="form-control" maxlength="45">
+                            <div class="col-xs-4 form-group">
+                                <label class="control-label">Fecha Nacimiento</label>
+                                <div class="input-group date" data-provide="datepicker" data-date-format="dd-mm-yyyy">
+                                    <div class="input-group-addon"><span class="fa fa-calendar"></span>
+                                    <input type="text" id="txtfechanacimiento" name="txtfechanacimiento" class="form-control" readonly/>
                                     </div>
                                 </div>
                             </div>
-                        </div>                        
-                        <div class="col-xs-12">
-                            <div class="form-group"><label class=" control-label">Medicinas</label>
-                                <input id="txtmedicinas" name="txtmedicinas" type="text" class="form-control" maxlength="45">
+                                                                    
+                            
+                            <div class="col-xs-4">
+                                <div class="form-group"><label class=" control-label">Email</label>
+                                    <input id="txtemail" name="txtemail" type="text" class="form-control" maxlength="45">
+                                </div>                    
+                            </div> 
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group"><label class=" control-label">Estado Civil</label>
+                                    <select id="estadocivil" class="form-control" name="estadocivil">
+                                        <option value="">Seleccione..</option>
+                                        <?php foreach($estadosCiviles AS $item):?>
+                                        <option value="<?php print $item["id"];?>"><?php print $item["descripcion"];?></option>
+                                        <?php endforeach;?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group"><label class=" control-label">Telefonos</label>
+                                    <input id="txttelefonos" name="txttelefonos" type="text" class="form-control" maxlength="45">
+                                </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class=" control-label">Direccion</label>
+                                    <input id="txtdireccion" name="txtdireccion" type="text" class="form-control" maxlength="45">
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="row ">
+                                    <div class="col-xs-6">
+                                        <div class="form-group"><label class=" control-label">Alergias</label>
+                                            <input id="txtalergias" name="txtalergias" type="text" class="form-control" maxlength="45">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group"><label class=" control-label">Enfermedades</label>
+                                            <input id="txtenfermedades" name="txtenfermedades" type="text" class="form-control" maxlength="45">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                        
+                            <div class="col-xs-12">
+                                <div class="form-group"><label class=" control-label">Medicinas</label>
+                                    <input id="txtmedicinas" name="txtmedicinas" type="text" class="form-control" maxlength="45">
+                                </div>
+                            </div>
+                        </div>
+                    
                     </div>
-                
-                </div>
                
-
+                </div>
                 <div class"row ">
                     <div class="col-lg-12">
                         <div class="hr-line-dashed"></div>
@@ -126,9 +136,9 @@
                 </div>
             </div>
 
-            <div class="modal-footer">
+            <div class="modal-footer">                
+                <button type="submit" class="btn btn-info" id="btn_send">Guardar</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-danger" id="btn_send">Guardar</button>
             </div>
             </form>
         </div>

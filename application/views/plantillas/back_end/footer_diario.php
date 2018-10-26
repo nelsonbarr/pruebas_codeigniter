@@ -108,11 +108,15 @@ var arrPacientes=new Array();
                     descripcion="";                
                 else
                     descripcion=fila.descripcion;
-
-                html+='<small><div><b>Fecha:</b> '+fila.fechacita+'</div>'; 
-                html+='<div><b>Motivo Cita:</b> '+motivocita+'</div>';
-                html+='<div><b>Sintomas:</b> '+sintomas+'</div>';            
-                html+='<div><b>Descripcion:</b> '+descripcion+'</div></small><hr/>';
+                if(fila.historiamedica==null)
+                    historia="";                
+                else
+                    historia=fila.historiamedica;
+                html+='<small><div class="row"><div class="col-lg-6"><b>Fecha:</b> '+fila.fechacita+'</div>'; 
+                html+='<div class="col-lg-6"><b>Motivo Cita:</b> '+motivocita+'</div>';
+                html+='<div class="col-lg-6"><b>Sintomas:</b> '+sintomas+'</div>';            
+                html+='<div class="col-lg-6"><b>Descripcion:</b> '+descripcion+'</div>';
+                html+='<div class="col-lg-12"><b>Historia Medica:</b> '+historia+'</div></div></small><hr/>';
             }
           }
           else{
@@ -174,14 +178,7 @@ var arrPacientes=new Array();
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
                 allDaySlot: false,
-                defaultTimedEventDuration:'00:15:00',
-                windowResize: function(view) {
-                    if ($(window).width() < 514){
-                        $('#calendar').fullCalendar( 'changeView', 'listDay' );
-                    } else {
-                        $('#calendar').fullCalendar( 'changeView', 'agendaDay' );
-                    }
-                } ,
+                defaultTimedEventDuration:'00:15:00',                               
                 dayClick: function(date, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, LLAMA A LA VENTANA REGISTRAR CITA                    
                     blanquearCita();
                     this.start = date.format('D/M/Y HH:mm');
@@ -208,7 +205,8 @@ var arrPacientes=new Array();
                     $("#selEstadoCita").val(event.idestadocita);
                     $("#selEstadoPago").val(event.idestadopago);
                     $("#txtsintomas").val(event.sintomas);
-                    $("#txtdescripcion").val(event.descripcion);
+                    $("#txtdescripcion").val(event.descripcion);                    
+                    $("#txthistoria").val(event.historiamedica);
                     $("#txtmedicinastomadas").val(event.medicamentos);
 					$("#txtalergias").val(event.alergias);
                     $('#modalPacienteCita').modal('show')
@@ -240,11 +238,18 @@ var arrPacientes=new Array();
                     });
                 },
                 eventRender: function(event, element) { 
-                    element.find('.fc-title').append(" - " + event.description); 
-                } 
+                    element.find('.fc-title').append(" - " + event.description);  
+                    element.find('.fc-list-item-title fc-widget-content a').append("- "+event.historiamedica);   
+                    
+
+                } ,
+                eventAfterAllRender:function(){
+                    $("#calendar").find('.fc-widget-header').append("<div class='text-center'><span style='font-size:11px;'>&nbsp;&nbsp;&nbsp;Id &nbsp;&nbsp; |&nbsp;&nbsp; Paciente  &nbsp;&nbsp;| &nbsp;&nbsp;Estatus de pago&nbsp;&nbsp; |&nbsp;&nbsp; Motivo Cita&nbsp;&nbsp; | &nbsp;&nbsp;Observacion | &nbsp;&nbsp;Acudiente | &nbsp;&nbsp;Telf Acudiente</span></div>")
+                    
+                }                
                 
             });            
-            console.log(citas)
+            //console.log(citas)
             $('#calendar').fullCalendar('addEventSource', citas); 
 
 

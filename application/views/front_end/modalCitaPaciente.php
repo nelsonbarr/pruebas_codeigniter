@@ -49,6 +49,8 @@
                                             <option class="label-warning" value="<?php print $fila["id"];?>"><?php print $fila["descripcion"];?></option>
                                             <?php break; case 5:?>
                                             <option class="label-info" value="<?php print $fila["id"];?>"><?php print $fila["descripcion"];?></option>
+                                            <?php break; case 6:?>
+                                            <option class="label-confirm" value="<?php print $fila["id"];?>"><?php print $fila["descripcion"];?></option>
                                             <?php break; endswitch; ?>
                                         <?php endforeach;?>   
                                     </select>  
@@ -62,46 +64,35 @@
                                     </select>
                                 </div>
                             </div>                                                                       
-                        </div>  
-                                                  
+                        </div>                         
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-xs-6">
-                                    <label class=" control-label">Motivo Cita</label>
-                                    <input id="txtmotivocita" name="txtmotivocita" type="text" class="form-control" maxlength="100">
-                                </div>                            
-                                <div class="col-xs-6">
+                                <div class="col-xs-4">
                                     <label class=" control-label">Sintomas</label>
                                     <input id="txtsintomas" name="txtsintomas" type="text" class="form-control" maxlength="100">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-xs-6">
+                                <div class="col-xs-4">
                                     <label class="control-label">Medicinas</label>                            
                                     <input type="text" id="txtmedicinastomadas" name="txtmedicinastomadas" class="form-control" maxlength="100" readonly/>
                                 </div>                            
-                                <div class="col-xs-6">
+                                <div class="col-xs-4">
                                     <label class="control-label">Alergias</label>
                                     <input type="text" id="txtalergias" name="txtalergias" class="form-control" maxlength="100" readonly/>  
                                 </div>  
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label">Especialista</label>                            
-                            <select id="selMedico" name="selMedico" class="selectpicker form-control" data-show-subtext="true" data-live-search="true" >  
-                                <option value="" >Seleccione..</option>                 
-                                <?php foreach($medicosEspecialidades AS $fila):?>        
-                                <option data-subtext="<?php print $fila["descripcion"];?>" value="<?php print $fila["id"];?>"><?php print $fila["nombres"]." ".$fila['apellidos'];?></option>
-                                <?php endforeach;?>   
-                            </select>                            
+                        <div class="form-group">                        
+                            <label class=" control-label">Motivo Cita</label>
+                            <textarea id="txtmotivocita" name="txtmotivocita" class="form-control" maxlength="1000"></textarea>                    
                         </div>
                         <div class="form-group">
                             <label class=" control-label">Observaciones Cita</label>
-                            <input id="txtdescripcion" name="txtdescripcion" type="text" class="form-control" maxlength="255">
+                            <textarea id="txtdescripcion" name="txtdescripcion" class="form-control" maxlength="1000"></textarea>  
                         </div>
-                        
+                        <div class="form-group">
+                            <label class=" control-label">Historia Medica</label>                            
+                            <textarea id="txthistoria" name="txthistoria" class="form-control" maxlength="1000" ></textarea>
+                        </div>               
                       
                     </div>                        
                 </div>
