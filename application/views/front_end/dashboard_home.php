@@ -34,7 +34,7 @@
                     </div>
                     
                 </ul>
-            </div>   
+            </div>              
             <div class="content">
                 <div class="col-md-12">
                     <div class="panel panel-default">

@@ -60,6 +60,8 @@
 var arrPacientes=new Array();
     //TOMO EL ARREGLO DE CITAS DEL CONTROLADOR
     var citas='<?php echo is_array($citas); ?>';
+    var dateactual='<?php echo $mes; ?>';
+    
     if(citas!=-1){
         var citas = JSON.parse('<?php echo $citas ?>'.split('\t').join(''));        
         var meses = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
@@ -175,59 +177,143 @@ var arrPacientes=new Array();
             }
         });
 
-        $('#btn_add').on('click',function(){
-            blanquear();
+         
+        //HAGO SEGUIMIENTO AL onclick DE BOTON HISTORIA DEL PACIENTE
+        $('#btn_history').on('click',function () { 
+            limpiarMensaje()     
+            var idpaciente=$('select[name=selPaciente]').val() 
+            $('#txtnombrepaciente').val($('select[name=selPaciente] option:selected').text());             
+            $.ajax({
+                type:'POST',
+                url:'<?php print base_url();?>pacientes/carga_Historico/'+idpaciente,
+                success:function(data){
+                    data=JSON.parse(data);
+                    json=data.data;          
+                    html="";
+                    $("#historico").html('');
+                    if(json.length>0){
+                        
+                        for(i=0;i<json.length;i++){
+                            fila=json[i]; 
+                            if(fila.sintomas==null)
+                                sintomas="";                
+                            else
+                                sintomas=fila.sintomas;
+                            if(fila.motivocita==null)
+                                motivocita="";                
+                            else
+                                motivocita=fila.motivocita;
+                            if(fila.descripcion==null)
+                                descripcion="";                
+                            else
+                                descripcion=fila.descripcion;
+                            if(fila.historiamedica==null)
+                                historia="";                
+                            else
+                                historia=fila.historiamedica;    
+
+                            html+='<small><div><b>Fecha:</b> '+fila.fechacita+'</div>'; 
+                            html+='<div><b>Motivo Cita:</b> '+motivocita+'</div>';
+                            html+='<div><b>Sintomas:</b> '+sintomas+'</div>';            
+                            html+='<div><b>Observacion:</b> '+descripcion+'</div></small><hr/>';
+                            html+='<div><b>Historia Medica:</b> '+historia+'</div></small><hr/>';
+                        }
+                    }
+                    else{
+                        html+='<div>Paciente aun no tiene Historia</div>';
+                        //$('#modalPacienteHistory').modal('hide')
+                    }
+                    $("#historico").html(html);         
+                }
+            })//end ajax
         });
-    
-    //HAGO SEGUIMIENTO AL onclick DE BOTON HISTORIA DEL PACIENTE
-    $('#btn_history').on('click',function () { 
-        limpiarMensaje()     
-        var idpaciente=$('select[name=selPaciente]').val() 
-        $('#txtnombrepaciente').val($('select[name=selPaciente] option:selected').text());             
-        $.ajax({
-        type:'POST',
-        url:'<?php print base_url();?>pacientes/carga_Historico/'+idpaciente,
-        success:function(data){
-          data=JSON.parse(data);
-          json=data.data;          
-          html="";
-          $("#historico").html('');
-          if(json.length>0){
-            
-            for(i=0;i<json.length;i++){
-                fila=json[i]; 
-                if(fila.sintomas==null)
-                    sintomas="";                
-                else
-                    sintomas=fila.sintomas;
-                if(fila.motivocita==null)
-                    motivocita="";                
-                else
-                    motivocita=fila.motivocita;
-                if(fila.descripcion==null)
-                    descripcion="";                
-                else
-                    descripcion=fila.descripcion;
-                if(fila.historiamedica==null)
-                    historia="";                
-                else
-                    historia=fila.historiamedica;    
 
-                html+='<small><div><b>Fecha:</b> '+fila.fechacita+'</div>'; 
-                html+='<div><b>Motivo Cita:</b> '+motivocita+'</div>';
-                html+='<div><b>Sintomas:</b> '+sintomas+'</div>';            
-                html+='<div><b>Observacion:</b> '+descripcion+'</div></small><hr/>';
-                html+='<div><b>Historia Medica:</b> '+historia+'</div></small><hr/>';
-            }
-          }
-          else{
-            html+='<div>Paciente aun no tiene Historia</div>';
-            //$('#modalPacienteHistory').modal('hide')
-          }
-          $("#historico").html(html);         
-        }
-      })//end ajax
-
+        //HAGO SEGUIMIENTO AL onclick DE BOTON HISTORIA DEL PACIENTE
+        $('#btn_add').on('click',function () { 
+            blanquear();            
+            $('#datecita').val($("#date").val())
+            var idpaciente=$('select[name=selPaciente]').val() 
+            $.ajax({
+                type:'POST',
+                url:'<?php print base_url();?>pacientes/carga_Paciente/'+idpaciente,
+                success:function(data){                
+                    data=JSON.parse(data);   
+                    json=data.data;  
+                    if(json.length>0){                                  
+                        pacienteEdit=json[0];                         
+                        blanquear()
+                        $('#idpaciente').val(pacienteEdit.id);      
+                        $('#idtipodoc').val(pacienteEdit.idtipodocumento);
+                        $('#idtipodoc').attr('disabled','disabled');
+                        $('#txtiddocumento').val(pacienteEdit.documento.trim());                                                                                                                       
+                        $('#txtnombres').val(pacienteEdit.nombres);
+                        $('#txtapellidos').val(pacienteEdit.apellidos);
+                        $('#txtemail').val(pacienteEdit.email);                       
+                        $('#txtdireccion').val(pacienteEdit.direccion);
+                        $('#txtciudad').val(pacienteEdit.ciudad);
+                        $('#txtfechanacimiento').val(pacienteEdit.fechanacimiento);
+                        $('#txttelefonos').val(pacienteEdit.telefono);   
+                        $('#estadocivil').val(pacienteEdit.idestadocivil);
+                        $('#txtalergias').val(pacienteEdit.alergias);   
+                        $('#txtenfermedades').val(pacienteEdit.enfermedadesprevias);   
+                        $('#txtmedicinas').val(pacienteEdit.medicamentos);   
+                        $('#txtlugarnacimiento').val(pacienteEdit.lugarnacimiento);
+                        $('#txtacudiente').val(pacienteEdit.acudiente);   
+                        $('#txttelfacudiente').val(pacienteEdit.telfacudiente);                             
+                        if(pacienteEdit.genero.trim()!=""){
+                            $('input:radio[name="genero"][value="'+pacienteEdit.genero+'"]').prop('checked', true); 
+                        }
+                        
+                        if(pacienteEdit.photo==null){
+                            foto="<?php print base_url();?>assets/images/profile-2.png";
+                            caption="profile-2.png";
+                        }
+                        else{
+                            foto="<?php print base_url();?>assets/images/"+pacienteEdit.photo;
+                            caption=pacienteEdit.photo;
+                        }
+                        //$("#avatar-1").fileinput('refresh'); 
+                        // refresh plugin with new options 
+                        if ($("#avatar-1").data('fileinput')) {
+                            $("#avatar-1").fileinput('destroy');
+                        }
+                        
+                        $("#avatar-1").fileinput({
+                            overwriteInitial: true,
+                            maxFileSize: 1500,
+                            showRemove: false,
+                            showClose: false,
+                            showCaption: false,
+                            autoReplace: true,
+                            validateInitialCount: false,
+                            browseLabel: '',                                 
+                            browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+                            removeTitle: 'Cancel or reset changes',
+                            elErrorContainer: '#kv-avatar-errors-1',
+                            msgErrorClass: 'alert alert-block alert-danger',
+                            layoutTemplates: {main2: '{preview} ' + ' {browse}'},
+                            allowedFileExtensions: ["jpg", "png", "gif"],
+                            initialPreviewAsData: true,  
+                            initialPreviewFileType: 'image', // image is the default and can be overridden in config below  
+                            initialPreview: [ foto],                                
+                            uploadUrl:"<?php print base_url();?>assets/images/",
+                            defaultPreviewContent:foto,
+                            previewFileIconSettings: {                                    
+                                'jpg': '<i class="fa fa-file-photo-o text-warning"></i>',
+                                },
+                            previewFileExtSettings: {
+                                    'jpg': function(ext) {
+                                        return ext.match(/(jp?g|png|gif|bmp)$/i);
+                                    },
+                                }, 
+                            initialPreviewConfig: [ {caption: caption,type:"image",  height: "120px", url: "", key:caption}],                                                         
+                            } 
+                        );
+                        
+                    }     
+                    
+                }
+            }); 
     });
         //BLOQUE DE INICIALIZACION DE CALENDARIO        
         var initialLocaleCode = 'en';
@@ -273,6 +359,7 @@ var arrPacientes=new Array();
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
                 allDaySlot: false,
+                defaultDate: dateactual,
                 defaultTimedEventDuration:'00:15:00',                            
                 dayClick: function(date, jsEvent, view) {//DETECCION DEL EVENTO SELECCIONAR DIA, LLAMA A LA VENTANA REGISTRAR CITA 
                     limpiarMensaje()
@@ -309,7 +396,7 @@ var arrPacientes=new Array();
                     $("#selPaciente").prop("disabled", true);
                     $("select[name=selMedico]").val(event.idmedico);
                     $('.selectpicker').selectpicker('refresh') 
-                    $('#btn_add').hide()
+                    //$('#btn_add').hide()
                     $("#idcita").val(event.idcita)                  
                     $("#date").val(event.start.format('D/M/Y HH:mm'));
                     $("#dateend").val(event.end.format('D/M/Y HH:mm'));
@@ -425,12 +512,8 @@ var arrPacientes=new Array();
         $(".push_menu").click(function(){
              $(".wrapper").toggleClass("active");
         });
-
         
-    });
-
-
-           
+    });           
 
 </script>
 

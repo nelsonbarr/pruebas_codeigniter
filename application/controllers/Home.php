@@ -105,6 +105,7 @@ class Home extends CI_Controller {
                 'estadosCiviles'=>$estadosCiviles,
                 'medicosEspecialidades'=>$medicosEspecialidades,               
                 'citas'=>$citas,
+                'mes'=>date("Y-m-d"),
                 'pacientes'=>array(), 
                 'vista'=>'calendario'
             );
@@ -199,6 +200,7 @@ class Home extends CI_Controller {
                 'estadosCiviles'=>$estadosCiviles, 
                 'medicosEspecialidades'=>$medicosEspecialidades,             
                 'citas'=>$citas,
+                'mes'=>date("Y-m-d"),
                 //'pacientes'=>$pacientes, 
                 'vista'=>'calendario'
             );
@@ -211,7 +213,7 @@ class Home extends CI_Controller {
     }
     
 
-    public function semanal(){
+    public function semanal($mesactual=NULL){
         
         $user_login = $this->session->userdata('login')[0] ? $this->session->userdata('login')[0] : false;
              
@@ -285,6 +287,13 @@ class Home extends CI_Controller {
             }
             $this->load->model('Pacientes_model');
             //$pacientes=$this->Pacientes_model->getPacientes();
+            if($mesactual!=NULL){
+                $date=$mesactual;
+            }
+            else{
+                $date=date("Y-m-01");
+            }
+
             $data = array(
                 'user_login' => $user_login,
                 'user_name' => $this->user_name,
@@ -297,6 +306,7 @@ class Home extends CI_Controller {
                 'medicosEspecialidades'=>$medicosEspecialidades,
                // 'pacientes'=>$pacientes,                          
                 'citas'=>$citas,
+                'mes'=>$date,
                 'vista'=>'calendario'
             );
             $this->load->view("plantillas/plantilla", $data);
@@ -326,7 +336,8 @@ class Home extends CI_Controller {
         
         if($action!="NO"){            
             $start_date = new DateTime(str_replace("/","-",$start_date));
-            $start_date =$start_date->format('Y-m-d H:i:s');            
+            $start_date =$start_date->format('Y-m-d H:i:s');             
+            $mesactual=$start_date;
             $end_date = new DateTime(str_replace("/","-",$end_date));
             $end_date =$end_date->format('Y-m-d H:i:s');
         }
@@ -343,7 +354,7 @@ class Home extends CI_Controller {
            'idestadopago'=>$estadopago,
            "fechacita" => $start_date,
            "fechafincita" => $end_date,
-           "idmedico"=>$idmedico,
+           "idmedico"=>$idmedico,           
            'statuscita'=>1
         );
         if($action=="NO"){//CUANDO PROVIENE EL LLAMADO DE DRAG O RESIZE DEL CALENDAR
@@ -359,10 +370,10 @@ class Home extends CI_Controller {
         }
         if($action!="NO"){//CUANDO NO PROVIENE EL LLAMADO DE DRAG O RESIZE DEL CALENDAR, LLAMO A LA VISTA CON LOS CAMBIOS
             if($this->session->userdata('profile')==1){
-                $this->diario();                
+                $this->diario();               
             }
             else{
-                $this->semanal();               
+                $this->semanal($mesactual);               
             }            
         }
     }

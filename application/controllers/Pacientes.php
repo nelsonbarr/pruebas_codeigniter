@@ -157,12 +157,18 @@ class Pacientes extends CI_Controller{
         $datos['enfermedadesprevias']=$this->input->post("txtenfermedades");
         $datos['medicamentos']=$this->input->post("txtmedicinas");
         $datos['genero']=$this->input->post("genero"); 
-        $date = new DateTime($datos['fechanacimiento']);
+        $date = new DateTime($datos['fechanacimiento']);        
         $datos['fechanacimiento'] =$date->format('Y-m-d');
         $datos['lugarnacimiento'] =$this->input->post("txtlugarnacimiento");
         $datos['ciudad'] =$this->input->post("txtciudad");
         $datos['acudiente'] =$this->input->post("txtacudiente");
         $datos['telfacudiente'] =$this->input->post("txttelfacudiente");
+        $start_date = $this->input->post("datecita");
+        $start_date = new DateTime(str_replace("/","-",$start_date));
+        $start_date =$start_date->format('Y-m-d H:i:s');             
+        $mesactual=$start_date;       
+        
+
          //METODO ENCARGADO DE REALIZAR EL LA SUBIDA DE LOS ARCHIVOS EN FISICO Y DE EL REGISTRO DEL NOMBRE DEL ARCHIVO EN EL CAMPO files_inspection TABLA inspection_files
         
         if (empty($_FILES['avatar-1'])) {
@@ -224,7 +230,7 @@ class Pacientes extends CI_Controller{
             $this->session->set_flashdata('error', "Error al guardar paciente");
         }
 
-
+var_dump($mesactual);
         //$pacientes=$this->Pacientes_model->getPacientes();
         $this->load->model("Citas_model");
         $citas=$this->Citas_model->getCitas(date('m')); 
@@ -301,6 +307,7 @@ class Pacientes extends CI_Controller{
             'estadosCiviles'=>$estadosCiviles,
             'medicosEspecialidades'=>$medicosEspecialidades,               
             'citas'=>$citas,
+            'mes'=>$mesactual,
             'tipocalendar'=>'agendaWeek',            
             'vista'=>'calendario'          
         );
