@@ -182,8 +182,7 @@ var arrPacientes=new Array();
                     success:function(data){                
                         data=JSON.parse(data);   
                         json=data.data;  
-                        if(json.length>0){                    
-                           
+                        if(json.length>0){                                  
                             pacienteEdit=json[0];                         
                             blanquear()
                             $('#idpaciente').val(pacienteEdit.id);      

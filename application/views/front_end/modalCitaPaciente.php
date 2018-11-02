@@ -15,7 +15,7 @@
 
                         <div class="form-group">
                             <label class="control-label">Paciente</label>
-                            <small><button type="button" class="btn btn-info hiden btn_edit" id="btn_add" data-toggle="modal" data-target="#modalPacientes"><span class="fa fa-new pull-right"></span>Nuevo Paciente</button></small>
+                            <small><button type="button" class="btn btn-info hiden btn_edit" id="btn_add" data-toggle="modal" data-target="#modalPacientes"><span class="fa fa-new pull-right"></span>Paciente</button></small>
                             <input id="idcita" name="idcita" type="hidden"/>                            
                             <select id="selPaciente" name="selPaciente" class=" form-control" data-show-subtext="true" data-live-search="true" style="width:100%" >  
                                    

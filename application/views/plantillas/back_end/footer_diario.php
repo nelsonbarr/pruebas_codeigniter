@@ -41,6 +41,14 @@
     <script src="<?php echo base_url() ?>assets/js/material-dashboard.js"></script>
     <script src="<?php echo base_url() ?>assets/js/bootstrap-select.min.js"></script>
     <script src="<?php echo base_url() ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"?></script>
+    <!--REQUIRES FOR BOOTSTRAP FILEINPUT MASTER-->
+    <link  href="<?php echo base_url('assets/bootstrap_file_input/css/fileinput.css');?>" media="all" rel="stylesheet" type="text/css"/>
+    <link  href="<?php echo base_url('assets/bootstrap_file_input/themes/explorer-fa/theme.css');?>" media="all" rel="stylesheet" type="text/css"/>
+    <script src="<?php echo base_url('assets/bootstrap_file_input/js/plugins/sortable.js');?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/bootstrap_file_input/js/fileinput.js');?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/bootstrap_file_input/js/locales/es.js');?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/bootstrap_file_input/themes/explorer-fa/theme.js');?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/bootstrap_file_input/themes/fa/theme.js');?>" type="text/javascript"></script>   
 <script>
 var arrPacientes=new Array();
     //TOMO EL ARREGLO DE CITAS DEL CONTROLADOR
@@ -78,6 +86,156 @@ var arrPacientes=new Array();
             todayHighlight: true,
             autoclose: true
         });
+
+         function blanquear() { 
+        limpiarMensaje()
+        $('#txtiddocumento').attr('readonly',false);       
+        $('#idtipodoc').removeAttr('disabled'); 
+        $('#idpaciente').val('');
+        $('#idtipodoc').val('');
+        $('#txtiddocumento').val('');
+        $('#txtnombres').val('');
+        $('#txtapellidos').val('');
+        $('#txtemail').val('');
+        $('#txtdireccion').val('');
+        $('#txtciudad').val('');
+        $('#txtfechanacimiento').val('');
+        $('#txttelefonos').val('');   
+        $('#estadocivil').val('');
+        $('#txtalergias').val('');   
+        $('#txtenfermedades').val('');   
+        $('#txtmedicinas').val(''); 
+        $("#txtlugarnacimiento").val("");
+        $("#txtacudiente").val("");
+        $("#txttelfacudiente").val("");  
+        $('input:radio[name="genero"][value=M]').prop('checked', true);  
+        foto="<?php print base_url();?>assets/images/profile-2.png";
+                                  
+        //$("#avatar-1").fileinput('refresh'); 
+        // refresh plugin with new options 
+        if ($("#avatar-1").data('fileinput')) {
+            $("#avatar-1").fileinput('destroy');
+        }
+        
+        $("#avatar-1").fileinput({
+            overwriteInitial: true,
+            maxFileSize: 1500,
+            showRemove: false,
+            showClose: false,
+            showCaption: false,
+            autoReplace: true,
+            validateInitialCount: false,
+            browseLabel: '',                                 
+            browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+            removeTitle: 'Cancel or reset changes',
+            elErrorContainer: '#kv-avatar-errors-1',
+            msgErrorClass: 'alert alert-block alert-danger',
+            layoutTemplates: {main2: '{preview} ' + ' {browse}'},
+            allowedFileExtensions: ["jpg", "png", "gif"],
+            initialPreviewAsData: true,  
+            initialPreviewFileType: 'image', // image is the default and can be overridden in config below  
+            initialPreview: [ foto], 
+            uploadUrl:"C:\fakepath\escudo-xxx-lata.jpg",
+            previewFileIconSettings: {                                    
+                'jpg': '<i class="fa fa-file-photo-o text-warning"></i>',
+                },
+            previewFileExtSettings: {
+                    'jpg': function(ext) {
+                        return ext.match(/(jp?g|png|gif|bmp)$/i);
+                    },
+                }, 
+            initialPreviewConfig: [ {caption: '',type:"image",  height: "120px", url: "", key:''}],                                                         
+            } 
+        ); 
+    }
+
+        //HAGO SEGUIMIENTO AL onclick DE BOTON HISTORIA DEL PACIENTE
+        $('#btn_add').on('click',function () { 
+            blanquear();            
+            $('#datecita').val($("#date").val())
+            var idpaciente=$('select[name=selPaciente]').val() 
+            $.ajax({
+                type:'POST',
+                url:'<?php print base_url();?>pacientes/carga_Paciente/'+idpaciente,
+                success:function(data){                
+                    data=JSON.parse(data);   
+                    json=data.data;  
+                    if(json.length>0){                                  
+                        pacienteEdit=json[0];                         
+                        blanquear()
+                        $('#idpaciente').val(pacienteEdit.id);      
+                        $('#idtipodoc').val(pacienteEdit.idtipodocumento);
+                        $('#idtipodoc').attr('disabled','disabled');
+                        $('#txtiddocumento').val(pacienteEdit.documento.trim());                                                                                                                       
+                        $('#txtnombres').val(pacienteEdit.nombres);
+                        $('#txtapellidos').val(pacienteEdit.apellidos);
+                        $('#txtemail').val(pacienteEdit.email);                       
+                        $('#txtdireccion').val(pacienteEdit.direccion);
+                        $('#txtciudad').val(pacienteEdit.ciudad);
+                        $('#txtfechanacimiento').val(pacienteEdit.fechanacimiento);
+                        $('#txttelefonos').val(pacienteEdit.telefono);   
+                        $('#estadocivil').val(pacienteEdit.idestadocivil);
+                        $('#txtalergias').val(pacienteEdit.alergias);   
+                        $('#txtenfermedades').val(pacienteEdit.enfermedadesprevias);   
+                        $('#txtmedicinas').val(pacienteEdit.medicamentos);   
+                        $('#txtlugarnacimiento').val(pacienteEdit.lugarnacimiento);
+                        $('#txtacudiente').val(pacienteEdit.acudiente);   
+                        $('#txttelfacudiente').val(pacienteEdit.telfacudiente);                             
+                        if(pacienteEdit.genero.trim()!=""){
+                            $('input:radio[name="genero"][value="'+pacienteEdit.genero+'"]').prop('checked', true); 
+                        }
+                        
+                        if(pacienteEdit.photo==null){
+                            foto="<?php print base_url();?>assets/images/profile-2.png";
+                            caption="profile-2.png";
+                        }
+                        else{
+                            foto="<?php print base_url();?>assets/images/"+pacienteEdit.photo;
+                            caption=pacienteEdit.photo;
+                        }
+                        //$("#avatar-1").fileinput('refresh'); 
+                        // refresh plugin with new options 
+                        if ($("#avatar-1").data('fileinput')) {
+                            $("#avatar-1").fileinput('destroy');
+                        }
+                        
+                        $("#avatar-1").fileinput({
+                            overwriteInitial: true,
+                            maxFileSize: 1500,
+                            showRemove: false,
+                            showClose: false,
+                            showCaption: false,
+                            autoReplace: true,
+                            validateInitialCount: false,
+                            browseLabel: '',                                 
+                            browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+                            removeTitle: 'Cancel or reset changes',
+                            elErrorContainer: '#kv-avatar-errors-1',
+                            msgErrorClass: 'alert alert-block alert-danger',
+                            layoutTemplates: {main2: '{preview} ' + ' {browse}'},
+                            allowedFileExtensions: ["jpg", "png", "gif"],
+                            initialPreviewAsData: true,  
+                            initialPreviewFileType: 'image', // image is the default and can be overridden in config below  
+                            initialPreview: [ foto],                                
+                            uploadUrl:"<?php print base_url();?>assets/images/",
+                            defaultPreviewContent:foto,
+                            previewFileIconSettings: {                                    
+                                'jpg': '<i class="fa fa-file-photo-o text-warning"></i>',
+                                },
+                            previewFileExtSettings: {
+                                    'jpg': function(ext) {
+                                        return ext.match(/(jp?g|png|gif|bmp)$/i);
+                                    },
+                                }, 
+                            initialPreviewConfig: [ {caption: caption,type:"image",  height: "120px", url: "", key:caption}],                                                         
+                            } 
+                        );
+                        
+                    }     
+                    
+                }
+            }); 
+    });
 
 //HAGO SEGUIMIENTO AL onclick DE BOTON HISTORIA DEL PACIENTE
     $('#btn_history').on('click',function () { 
@@ -196,7 +354,7 @@ var arrPacientes=new Array();
                     
                     $("select[name=selMedico]").val(event.idmedico);
                     $('.selectpicker').selectpicker('refresh')  
-                    $('#btn_add').hide()
+                    //$('#btn_add').hide()
                     $("#txtnombrepaciente").val(event.nombre_paciente+"  ID: "+event.documento);
                     $("#idcita").val(event.idcita)                  
                     $("#date").val(event.start.format('D/M/Y HH:mm'));

@@ -89,7 +89,7 @@ class Pacientes_model extends CI_Model{
                 $result=$this->db->insert('pacientes',$datos);
             }
             else{
-                print "EXISTE INSERTAR";    
+                return false;    
             }            
         }        
        /* if ($this->db->affected_rows() == 1)

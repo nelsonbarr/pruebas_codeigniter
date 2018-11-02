@@ -58,6 +58,7 @@ header("Pragma: no-cache"); //PARANOIA, NO GUARDAR EN CACHE
                                             <div class="form-group">
                                                 <label class="control-label">Tipo Documento</label>
                                                 <input id="idpaciente" name="idpaciente" type="hidden"/>
+                                                <input id="datecita" name="datecita" type="hidden"/>
                                                 <select id="idtipodoc" class="form-control" name="idtipodoc" required>
                                                     <option value="">Seleccione..</option>
                                                     <?php foreach($tiposDocs AS $item):?>

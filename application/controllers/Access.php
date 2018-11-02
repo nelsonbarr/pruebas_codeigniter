@@ -98,6 +98,7 @@ class Access extends CI_Controller {
                 'estadosCiviles'=>$estadosCiviles, 
                 'medicosEspecialidades'=>$medicosEspecialidades,                             
                 'citas'=>$citas,
+                'mes'=>date("Y-m-d"),
                 'pacientes'=>array(), 
                 'vista'=>'calendario'
             );
@@ -220,6 +221,7 @@ class Access extends CI_Controller {
                 'medicosEspecialidades'=>$medicosEspecialidades,
                 'pacientes'=>array(),                              
                 'citas'=>$citas,
+                'mes'=>date("Y-m-d"),
                 'vista'=>'calendario'
             );
             $this->load->view("plantillas/plantilla", $data);           
