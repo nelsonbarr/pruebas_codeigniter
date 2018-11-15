@@ -1762,7 +1762,7 @@ output {
   background-color: #ff9800;
 }
 .label.label-danger {
-  background-color: #f44336;
+  background-color: #cc2127; 
 }
 .label.label-rose {
   background-color: #e91e63;
@@ -1771,7 +1771,10 @@ output {
   background-color: green;
   color: white;
 }
-
+.label-orange{
+  background-color: #da541f;
+  color: white;
+}
 .form-control,
 .form-group .form-control {
   border: 0;

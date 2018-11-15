@@ -35,7 +35,7 @@ class Pacientes_model extends CI_Model{
     {   
 
 
-        $this->db->select("id,CONCAT(nombres,' ',apellidos,'| Fecha Nac:',fechanacimiento,'| Id:',documento,'| Genero:',genero) as text");        
+        $this->db->select("id,CONCAT(nombres,' ',apellidos,'| Edad:',TIMESTAMPDIFF(YEAR,pacientes.fechanacimiento,CURDATE()),'| Id:',documento,'| Genero:',genero) as text");        
         $this->db->from('pacientes');
         $this->db->limit(40); 
         if($datos!="")

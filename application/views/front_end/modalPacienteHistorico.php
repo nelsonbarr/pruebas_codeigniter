@@ -9,9 +9,9 @@
                 <small class="font-bold"></small>
             </div>            
             <div class="modal-body ">
-                <div class="container col-xs-12">                    
+                <div class="container col-lg-12">                    
                     <div class="row">
-                        <div class="col-xs-12">
+                        <div class="col-lg-12">
                             <div class="form-group">
                                 <label class=" control-label">Paciente</label>
                                 <input id="txtnombrepaciente" name="txtnombrepaciente" type="text" class="form-control" readonly maxlength="255">
@@ -19,7 +19,9 @@
                         </div>                           
                     </div> 
                     <div class="row">
-                        <div id="historico" style="overflow-y: true"><!--ACA SE CARGARA LA HISTORIA DEL PACIENTE--></div>
+                        <div class="col-lg-12">
+                            <div id="historico" style="overflow-y: auto"><!--ACA SE CARGARA LA HISTORIA DEL PACIENTE--></div>
+                        </div>
                     </div>
                 </div>              
 

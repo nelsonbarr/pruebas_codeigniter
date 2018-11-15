@@ -57,6 +57,7 @@
                                                 <th scope="col">Apellidos</th>
                                                 <th scope="col">Sexo</th>
                                                 <th scope="col">Fecha Nacimiento</th> 
+                                                <th scope="col">Edad</th> 
                                                 <th class="no-sort">Acciones</th>     
                                                 </tr>
                                             </thead>
@@ -71,6 +72,7 @@
                                                 <th scope="col">Apellidos</th>
                                                 <th scope="col">Sexo</th>
                                                 <th scope="col">Fecha Nacimiento</th> 
+                                                <th scope="col">Edad</th> 
                                                 <th class="no-sort">Acciones</th>     
                                                 </tr>
                                             </tfoot>

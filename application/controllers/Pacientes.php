@@ -230,7 +230,7 @@ class Pacientes extends CI_Controller{
             $this->session->set_flashdata('error', "Error al guardar paciente");
         }
 
-var_dump($mesactual);
+//
         //$pacientes=$this->Pacientes_model->getPacientes();
         $this->load->model("Citas_model");
         $citas=$this->Citas_model->getCitas(date('m')); 
@@ -287,6 +287,9 @@ var_dump($mesactual);
                 } 
                 elseif($row['estadocita']=='Confirmado'){
                     $citas[$i]['backgroundColor'] = "green";
+                }  
+                elseif($row['estadocita']=='No Show'){
+                    $citas[$i]['backgroundColor'] = "#da541f";
                 }      
                 $i++;
             }               
@@ -361,7 +364,8 @@ var_dump($mesactual);
             2 => 'nombres',
             3 => 'apellidos',
             4 => 'genero',
-            5 => 'fechanacimiento'
+            5 => 'fechanacimiento',
+            6 =>'edad',
         );
 
         $where = $sqlTot = $sqlRec = "";
@@ -389,7 +393,7 @@ var_dump($mesactual);
         }
     //var_dump($totalRecords);
         // getting total number records without any search
-        $this->db->select("id AS '0',documento AS '1',nombres AS '2',apellidos AS '3',genero AS '4',fechanacimiento AS '5',CONCAT('<button type=\"button\" id=\"btn_edit\" alt=\"Editar\" title=\"Editar\" class=\"btn btn-danger btn_edit\" data-toggle=modal data-id=\"',id,'\" data-target=#modalPacientes><span class=\"fa fa-edit pull-right\"></span></button>','<button type=\"button\" id=\"btn_history\" alt=\"Historia\" title=\"Historia\" class=\"btn btn-default\" data-toggle=\"modal\" data-id=\"',id,'\" data-target=\"#modalPacienteHistory\"><span class=\"fa fa-align-justify pull-right\"></span></button>') AS '6' ");
+        $this->db->select("id AS '0',documento AS '1',nombres AS '2',apellidos AS '3',genero AS '4',fechanacimiento AS '5', TIMESTAMPDIFF(YEAR,pacientes.fechanacimiento,CURDATE()) AS '6',CONCAT('<button type=\"button\" id=\"btn_edit\" alt=\"Editar\" title=\"Editar\" class=\"btn btn-danger btn_edit\" data-toggle=modal data-id=\"',id,'\" data-target=#modalPacientes><span class=\"fa fa-edit pull-right\"></span></button>','<button type=\"button\" id=\"btn_history\" alt=\"Historia\" title=\"Historia\" class=\"btn btn-default\" data-toggle=\"modal\" data-id=\"',id,'\" data-target=\"#modalPacienteHistory\"><span class=\"fa fa-align-justify pull-right\"></span></button>') AS '7' ");
         $this->db->from('pacientes');
         if($where!="")
             $this->db->where($where);

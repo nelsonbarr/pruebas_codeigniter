@@ -11,6 +11,7 @@ class Citas_model extends CI_Model{
     public function getCitas($mes)
     {
         $this->db->select("CONCAT(pacientes.nombres,' ',pacientes.apellidos) as title");
+        $this->db->select("TIMESTAMPDIFF(YEAR,pacientes.fechanacimiento,CURDATE()) AS edad");
         $this->db->select("acudiente");
         $this->db->select("pacientes.telefono AS telefonos");
         $this->db->select("telfacudiente");
@@ -41,6 +42,7 @@ class Citas_model extends CI_Model{
         $this->db->join('medicos','citas.idmedico=medicos.id','left outer ');
         $this->db->where("statuscita", 1);
         //$this->db->where("DATE_FORMAT(fechacita,'%m')", $mes);
+        
 
         $query = $this->db->get();
         $query = $query->result_array();

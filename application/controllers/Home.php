@@ -68,13 +68,16 @@ class Home extends CI_Controller {
                     elseif($row['estadocita']=='Confirmado'){
                         $citas[$i]['backgroundColor'] = "green";
                     }
+                    elseif($row['estadocita']=='No Show'){
+                        $citas[$i]['backgroundColor'] = "#da541f";
+                    } 
                    // $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
                    if($this->session->userdata('perfil') ==1){                  
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['documento']." | ".$row['title']."  | ".$pago." | ".$row['motivocita']." | ".$row['descripcion']." | ".$row["acudiente"]." | ".$row["telfacudiente"] );
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['documento']." | ".$row['title']." | ".$row['edad']."  | ".$pago." | ".$row['motivocita']." | ".$row['descripcion']." | ".$row["acudiente"]." | ".$row["telfacudiente"] );
                     }
                     else{
                         //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title'] );
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title'] )." | ".$row['edad'];
                         $citas[$i]['description'] = str_replace($replace_array, "",$row['descripcion']);
                         if($row['telefonos']!=""){
                             $citas[$i]['description'].=" | Telf: ".$row['telefonos']; 
@@ -152,7 +155,7 @@ class Home extends CI_Controller {
                     //if($this->session->userdata('perfil') ==1){      
 					$date = new DateTime($row['fechanacimiento']);
 					$fechanacimiento =$date->format('d-m-Y');            
-                    $citas[$i]['title'] = str_replace($replace_array, "", $row['documento']." | ".$row['title']."  | ".$pago." | ".$row['motivocita']." | ".$row['descripcion']." | ".$row["acudiente"]." | ".$row["telfacudiente"]);
+                    $citas[$i]['title'] = str_replace($replace_array, "", $row['documento']." | ".$row['title']." | ".$row['edad']."  | ".$pago." | ".$row['motivocita']." | ".$row['descripcion']." | ".$row["acudiente"]." | ".$row["telfacudiente"]);
 
                    /* }
                     else{
@@ -182,6 +185,9 @@ class Home extends CI_Controller {
                     } 
                     elseif($row['estadocita']=='Confirmado'){
                         $citas[$i]['backgroundColor'] = "green";
+                    } 
+                    elseif($row['estadocita']=='No Show'){
+                        $citas[$i]['backgroundColor'] = "#da541f";
                     }     
                     $i++;
                 }       
@@ -244,11 +250,11 @@ class Home extends CI_Controller {
 					$date = new DateTime($row['fechanacimiento']);
 					$fechanacimiento =$date->format('d-m-Y');						
                     if($this->session->userdata('perfil') ==1){                  
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['documento']." | ".$row['title']."  | ".$pago." | ".$row['motivocita']." | ".$row['descripcion']." | ".$row["acudiente"]." | ".$row["telfacudiente"]);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['documento']." | ".$row['title']." | ".$row['edad']."  | ".$pago." | ".$row['motivocita']." | ".$row['descripcion']." | ".$row["acudiente"]." | ".$row["telfacudiente"]);
                     }
                     else{
                         //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title'])." | ".$row['edad'];
                         //$citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$fechanacimiento." | GEN: ".$row["genero"]." | ACUDIENTE:".$row["acudiente"]." | TELF ACUDIENTE:".$row["telfacudiente"]);
                         $citas[$i]['description'] = str_replace($replace_array, "",$row['descripcion']);
                         if($row['telefonos']!=""){
@@ -280,6 +286,9 @@ class Home extends CI_Controller {
                     } 
                     elseif($row['estadocita']=='Confirmado'){
                         $citas[$i]['backgroundColor'] = "green";
+                    } 
+                    elseif($row['estadocita']=='No Show'){
+                        $citas[$i]['backgroundColor'] = "#da541f";
                     }      
                     $i++;
                 }               
@@ -291,7 +300,7 @@ class Home extends CI_Controller {
                 $date=$mesactual;
             }
             else{
-                $date=date("Y-m-01");
+                $date=date("Y-m-d");
             }
 
             $data = array(

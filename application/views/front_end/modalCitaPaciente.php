@@ -51,6 +51,8 @@
                                             <option class="label-info" value="<?php print $fila["id"];?>"><?php print $fila["descripcion"];?></option>
                                             <?php break; case 6:?>
                                             <option class="label-confirm" value="<?php print $fila["id"];?>"><?php print $fila["descripcion"];?></option>
+                                            <?php break; case 7:?>
+                                            <option class="label-orange" value="<?php print $fila["id"];?>"><?php print $fila["descripcion"];?></option>
                                             <?php break; endswitch; ?>
                                         <?php endforeach;?>   
                                     </select>  

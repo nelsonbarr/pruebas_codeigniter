@@ -54,8 +54,15 @@ var arrPacientes=new Array();
     //TOMO EL ARREGLO DE CITAS DEL CONTROLADOR
     var citas='<?php echo is_array($citas); ?>';
     
-    if(citas!=-1){
-        var citas = JSON.parse('<?php echo $citas ?>'.split('\t').join(''));        
+    if(citas!=-1){        
+        var citas='<?php echo $citas ?>'        
+        //while(citas.search('\n')>=0){
+          citas = citas.split('\n').join('');
+          citas = citas.split('\t').join(''); 
+          citas = citas.split('\r').join('<br>'); 
+        //} 
+          
+        citas = JSON.parse(citas); 
         var meses = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
     }
     else{
@@ -270,11 +277,29 @@ var arrPacientes=new Array();
                     historia="";                
                 else
                     historia=fila.historiamedica;
-                html+='<small><div class="row"><div class="col-lg-6"><b>Fecha:</b> '+fila.fechacita+'</div>'; 
-                html+='<div class="col-lg-6"><b>Motivo Cita:</b> '+motivocita+'</div>';
-                html+='<div class="col-lg-6"><b>Sintomas:</b> '+sintomas+'</div>';            
-                html+='<div class="col-lg-6"><b>Descripcion:</b> '+descripcion+'</div>';
-                html+='<div class="col-lg-12"><b>Historia Medica:</b> '+historia+'</div></div></small><hr/>';
+                //html+='<div class="col-lg-12">'                  
+                historia = historia.split('<br>').join('\n');              
+                while( historia.indexOf('<') > -1)
+                {
+                    historia = historia.replace('<','&lt;');
+                }
+                while( historia.indexOf('>') > -1)
+                {
+                    historia = historia.replace('>','&gt;');
+                }      
+                              
+               
+                html+='<div class="row"><small>'
+                html+='<div class="col-lg-6"><b>Fecha:</b> '+fila.fechacita+'</div>' 
+                html+='<div class="col-lg-6"><b>Motivo Cita:</b> '+motivocita+'</div>'
+                html+='<div class="col-lg-6"><b>Sintomas:</b> '+sintomas+'</div>'            
+                html+='<div class="col-lg-6"><b>Descripcion:</b> '+descripcion+'</div>'
+                html+='<div class="col-lg-12"><b>Historia Medica:</b> '+historia+'</div>'
+                //html+='</div>'                
+                               
+                html+='</small></div>'
+                html+='<div class="clearfix"><hr></hr></div>' 
+                
             }
           }
           else{
@@ -363,8 +388,10 @@ var arrPacientes=new Array();
                     $("#selEstadoCita").val(event.idestadocita);
                     $("#selEstadoPago").val(event.idestadopago);
                     $("#txtsintomas").val(event.sintomas);
-                    $("#txtdescripcion").val(event.descripcion);                    
-                    $("#txthistoria").val(event.historiamedica);
+                    $("#txtdescripcion").val(event.descripcion);
+                    historia=event.historiamedica
+                    historia = historia.split('<br>').join('\n');                                  
+                    $("#txthistoria").val(historia);
                     $("#txtmedicinastomadas").val(event.medicamentos);
 					$("#txtalergias").val(event.alergias);
                     $('#modalPacienteCita').modal('show')
@@ -402,7 +429,7 @@ var arrPacientes=new Array();
 
                 } ,
                 eventAfterAllRender:function(){
-                    $("#calendar").find('.fc-widget-header').append("<div class='text-center'><span style='font-size:11px;'>&nbsp;&nbsp;&nbsp;Id &nbsp;&nbsp; |&nbsp;&nbsp; Paciente  &nbsp;&nbsp;| &nbsp;&nbsp;Estatus de pago&nbsp;&nbsp; |&nbsp;&nbsp; Motivo Cita&nbsp;&nbsp; | &nbsp;&nbsp;Observacion | &nbsp;&nbsp;Acudiente | &nbsp;&nbsp;Telf Acudiente</span></div>")
+                    $("#calendar").find('.fc-widget-header').append("<div class='text-center'><span style='font-size:11px;'>&nbsp;&nbsp;&nbsp;Id &nbsp;&nbsp; |&nbsp;&nbsp; Paciente  &nbsp;&nbsp; |&nbsp;&nbsp; Edad  &nbsp;&nbsp;| &nbsp;&nbsp;Estatus de pago&nbsp;&nbsp; |&nbsp;&nbsp; Motivo Cita&nbsp;&nbsp; | &nbsp;&nbsp;Observacion | &nbsp;&nbsp;Acudiente | &nbsp;&nbsp;Telf Acudiente</span></div>")
                     
                 }                
                 

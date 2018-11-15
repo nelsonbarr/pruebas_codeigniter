@@ -43,11 +43,11 @@ class Access extends CI_Controller {
                         //$citas[$i]['motivocita'] = str_replace($replace_array, "", $row['motivocita']);
                     //   $citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']."<br>".$row['fechanacimiento']."  ".$row["genero"]);
                     if($this->session->userdata('perfil') ==1){                  
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['documento']." | ".$row['title']."  | ".$pago." | ".$row['motivocita']." | ".$row['descripcion']." | ".$row["acudiente"]." | ".$row["telfacudiente"]);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['documento']." | ".$row['title']." | ".$row['edad']." | ".$pago." | ".$row['motivocita']." | ".$row['descripcion']." | ".$row["acudiente"]." | ".$row["telfacudiente"]);
                     }
                     else{
                         //$citas[$i]['title'] = str_replace($replace_array, "", $row['title']." - ".$row['documento']);
-                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title']);
+                        $citas[$i]['title'] = str_replace($replace_array, "", $row['title'])." | ".$row['edad'];
                         //$citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$row['fechanacimiento']." | GEN: ".$row["genero"]." | ACUDIENTE:".$row["acudiente"]." | TELF ACUDIENTE:".$row["telfacudiente"]);
                         $citas[$i]['description'] = str_replace($replace_array, "",$row['descripcion']);
                         if($row['telefonos']!=""){
@@ -81,6 +81,9 @@ class Access extends CI_Controller {
                     elseif($row['estadocita']=='Confirmado'){
                         $citas[$i]['backgroundColor'] = "green";
                     }   
+                    elseif($row['estadocita']=='No Show'){
+                        $citas[$i]['backgroundColor'] = "#da541f";
+                    } 
                     $i++;
                 }               
                 $citas = json_encode($citas);
@@ -167,10 +170,10 @@ class Access extends CI_Controller {
                             $pago="Transferencia";    
                         } 
                         if($valid_user['perfil']==1){                  
-                            $citas[$i]['title'] = str_replace($replace_array, "", $row['documento']." | ".$row['title']."  | ".$pago." | ".$row['motivocita']." | ".$row['descripcion']." | ".$row["acudiente"]." | ".$row["telfacudiente"]);
+                            $citas[$i]['title'] = str_replace($replace_array, "", $row['documento']." | ".$row['title']." | ".$row['edad']."  | ".$pago." | ".$row['motivocita']." | ".$row['descripcion']." | ".$row["acudiente"]." | ".$row["telfacudiente"]);
                         }
                         else{
-                            $citas[$i]['title'] = str_replace($replace_array, "", $row['title']);
+                            $citas[$i]['title'] = str_replace($replace_array, "", $row['title'])." | ".$row['edad'];
                             //$citas[$i]['description'] = str_replace($replace_array, "","FEC.NAC.: ".$row['fechanacimiento']." | GEN: ".$row["genero"]." | ACUDIENTE:".$row["acudiente"]." | TELF ACUDIENTE:".$row["telfacudiente"]);
                             $citas[$i]['description'] = str_replace($replace_array, "",$row['descripcion']);
                             if($row['telefonos']!=""){
@@ -200,7 +203,10 @@ class Access extends CI_Controller {
                         } 
                         elseif($row['estadocita']=='Confirmado'){
                             $citas[$i]['backgroundColor'] = "green";
-                        }    
+                        }   
+                        elseif($row['estadocita']=='No Show'){
+                            $citas[$i]['backgroundColor'] = "#da541f";
+                        }  
                         $i++;
                     }               
                     $citas = json_encode($citas);

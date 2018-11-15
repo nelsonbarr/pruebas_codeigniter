@@ -159,7 +159,7 @@ var arrPacientes=new Array();
                 $("#tablepacientes").css("display","none");
                 }
             } ,
-            "columns": [{'data':'0'},{'data':'1'},{'data':'2'},{'data':'3'},{'data':'4'},{'data':'5'},
+            "columns": [{'data':'0'},{'data':'1'},{'data':'2'},{'data':'3'},{'data':'4'},{'data':'5'},{'dada':'6'},
                     {
                     "render": function (data, type, row) {
                     return '<button type="button" id="btn_edit" alt="Editar" title="Editar" class="btn btn-info btn_edit" data-toggle="modal" data-id="'+row[0]+'" data-target="#modalPacientes"><span class="fa fa-edit pull-right"></span></button>'
@@ -168,7 +168,7 @@ var arrPacientes=new Array();
                     +
                         '<button type="button" id="btn_delete" alt="Borrar" title="Borrar" class="btn btn-danger" data-id="'+row[0]+'" ><span class="fa fa-close pull-right"></span></button>'    
                 }}],
-            columnDefs: [ { orderable: false, targets: [6] } ],
+            columnDefs: [ { orderable: false, targets: [7] } ],
         });
         
         //ACTIVO LAS ACCIONES PARA LOS BOTONES EDIT E HISTORIA
@@ -296,11 +296,30 @@ var arrPacientes=new Array();
                                             descripcion="";                
                                         else
                                             descripcion=fila.descripcion;
-
-                                        html+='<small><div class="col-xs-6"><b>Fecha:</b> '+fila.fechacita+'</div>'; 
-                                        html+='<div class="col-xs-6"><div class"clearfix"></div><b>Motivo Cita:</b> '+motivocita+'</div>';
-                                        html+='<div><b>Sintomas:</b> '+sintomas+'</div>';            
-                                        html+='<div><b>Descripcion:</b> '+descripcion+'</div></small><hr/>';
+                                        if(fila.historiamedica==null)
+                                            historia="";                
+                                        else
+                                            historia=fila.historiamedica;
+                                        historia = historia.split('<br>').join('\n');              
+                                        while( historia.indexOf('<') > -1)
+                                        {
+                                            historia = historia.replace('<','&lt;');
+                                        }
+                                        while( historia.indexOf('>') > -1)
+                                        {
+                                            historia = historia.replace('>','&gt;');
+                                        }                   
+                                                            
+                                        html+='<div class="row"><small>'
+                                        html+='<div class="col-lg-6"><b>Fecha:</b> '+fila.fechacita+'</div>' 
+                                        html+='<div class="col-lg-6"><b>Motivo Cita:</b> '+motivocita+'</div>'
+                                        html+='<div class="col-lg-6"><b>Sintomas:</b> '+sintomas+'</div>'            
+                                        html+='<div class="col-lg-6"><b>Descripcion:</b> '+descripcion+'</div>'
+                                        html+='<div class="col-lg-12"><b>Historia Medica:</b> '+historia+'</div>'
+                                        //html+='</div>'                
+                                                    
+                                        html+='</small></div>'
+                                        html+='<div class="clearfix"><hr></hr></div>'
                                     }
                                   }
                                   else{
@@ -333,7 +352,7 @@ var arrPacientes=new Array();
                                     success:function(data){  
                                         data=JSON.parse(data)
                                         if(data.success){
-                                            console.log("PRUEBA");
+                                            //console.log("PRUEBA");
                                             location.href="<?php print base_url();?>pacientes";
                                         }
                                     }
