@@ -55,7 +55,7 @@
                         </div>                        
                         <div class="col-xs-6 text-center">
                             <div class="form-group"><label class=" control-label">Contraseña</label>
-                                <input id="txtpassword" name="txtpassword" type="text" class="form-control" placeholder="Contraseña" type="password" maxlength="10" value="">
+                                <input id="txtpassword" name="txtpassword" type="password" class="form-control" placeholder="Contraseña" type="password" maxlength="10" value="">
                             </div>                    
                         </div> 
                     </div>  

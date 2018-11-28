@@ -451,6 +451,7 @@ var arrPacientes=new Array();
             $("#txtsintomas").val('');
             $("#txtdescripcion").val('');
             $("#txtmedicinastomadas").val('')
+            $("#txthistoria").val('');
             $('select[name=selMedico]').val('');
             $('.selectpicker').selectpicker('refresh') 
         }    
